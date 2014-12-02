@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+
+
+<body onload="WebSocketTest()">
+
+<h3 id="gehts">WebSocket Test</h3>
+
+<strong>Location:</strong><br>
+<input id="wsUri" size="35">
+<br>
+<input id="secureCb" type="checkbox" onclick="toggleTls();">
+<span id="secureCbLabel" style="font-size: smaller; color: black;">Use secure WebSocket (TLS)</span>
+<br>
+<button id="connect" onclick="start()" disabled="">Connect</button>
+<button id="disconnect" onclick="stop()">Disconnect</button>
+<br>
+<br>
+
+<div id="echo-config" style="float: left;" abineguid="04227446DB3A486D88571AD2B4FE4A74">
+
+      <strong>Message:</strong>
+      <br>
+      <input id="sendMessage" name="message" value="Rock it with HTML5 WebSocket" size="35" disabled="">
+      <br>
+      <button id="send" onclick="doSend()" class="wsButton" disabled="">Send</button>
+
+</div>
+
+<div id="echo-log" style="float: left; margin-left: 20px; padding-left: 20px; width: 350px; border-left: solid 1px #cccccc;">
+  <strong>Log:</strong>
+  <div id="consoleLog"></div>
+  <button id="clearLogBut" style="position: relative; top: 3px;">Clear log</button>
+</div>
+<div class="clearfix"></div>
+
+<br><br>
+<div style="clear: both" id="output"></div>
+<br><br>
+<div id="anzeige"></div>
+<br><br>
+<div id="status"></div>
+
+
+</body>
+</html>

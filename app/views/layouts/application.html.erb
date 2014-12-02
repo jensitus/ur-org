@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatty</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="viewport" content="widht=device-width, initial-scale=1" />
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta content="<%= user_signed_in? ? current_user.id : '' %>" name="user-id" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <b><%= link_to 'receta::hacker::partie', root_path, class: 'navbar-brand' %></b>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+          Hi, <li><%= link_to current_user.name, edit_user_registration_path %></li>
+          <li><%= link_to 'logout', destroy_user_session_path, :method => :delete %> </li>
+      <% else %>
+          <li><%= link_to 'login', new_user_session_path %></li>
+          <li><%= link_to 'register', new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>">
+        <%= value %>
+      </div>
+  <% end %>
+
+  <%= yield %>
+</div>
+
+</body>
+</html>
