@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chatty</title>
+  <title>hacker::partie::chatty</title>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
-  <meta name="viewport" content="widht=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="">
   <meta name="author" content="">
   <meta content="<%= user_signed_in? ? current_user.id : '' %>" name="user-id" />
@@ -26,9 +26,15 @@
 <div class="navbar navbar-inverse navbar-static-top">
   <div class="container">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <b><%= link_to 'receta::hacker::partie', root_path, class: 'navbar-brand' %></b>
     </div>
-
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
           Hi, <li><%= link_to current_user.name, edit_user_registration_path %></li>
@@ -38,6 +44,7 @@
           <li><%= link_to 'register', new_user_registration_path %></li>
       <% end %>
     </ul>
+    </div>
   </div>
 </div>
 

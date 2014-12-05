@@ -47,8 +47,6 @@ gem 'private_pub'
 
 gem 'devise'
 
-gem 'bootstrap-sass'
-
 gem 'omniauth-twitter'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
