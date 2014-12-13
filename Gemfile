@@ -7,9 +7,7 @@ ruby '2.1.4'
 
 # Use sqlite3 as the database for Active Record
 
-
 gem 'gravtastic'
-
 
 gem 'pg'
 gem 'will_paginate'
