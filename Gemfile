@@ -6,10 +6,10 @@ gem 'rails', '4.1.5'
 ruby '2.1.4'
 
 # Use sqlite3 as the database for Active Record
-group :development, :test do
 
-  gem 'gravtastic'
-end
+
+gem 'gravtastic'
+
 
 gem 'pg'
 gem 'will_paginate'
