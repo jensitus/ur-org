@@ -1,12 +1,19 @@
 class User < ActiveRecord::Base
+
+  include Gravtastic
+  gravtastic :secure => true,
+             :filetype => :jpg,
+             :size => 120
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  devise :omniauthable, :omniauth_providers => [:twitter]
+  devise  :omniauthable, :omniauth_providers => [:twitter]
 
   has_many :conversations, :foreign_key => :sender_id
+  has_many :microposts, dependent: :destroy
 
   after_create :create_default_conversation
 
@@ -25,6 +32,10 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def feed
+    Micropost.where('user_id = ?', id)
   end
 
   private

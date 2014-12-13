@@ -1,0 +1,25 @@
+<% if user_signed_in? %>
+    <div class="row">
+      <aside class="col-md-5">
+        <section class="user_info">
+          <%= render 'shared/user_info' %>
+        </section>
+        <section class="micropost_form">
+          <%= render 'shared/micropost_form' %>
+        </section>
+      </aside>
+      <div class="col-md-7">
+        <h4>Micro Feed</h4>
+        <%= render 'shared/feed' %>
+      </div>
+    </div>
+<% else %>
+    <div class="center jumbotron">
+
+        <h2>hacker::partie</h2>
+        <p>Welcome to the hacker::partie.ist-ur.org</p>
+        <%= link_to 'sign up', new_user_registration_path, class: 'btn btn-lg btn-warning' %>
+        &nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
+        <%= link_to 'sign in', new_user_session_path, class: 'btn btn-lg btn-success' %>
+    </div>
+<% end %>

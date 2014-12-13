@@ -6,13 +6,27 @@ gem 'rails', '4.1.5'
 ruby '2.1.4'
 
 # Use sqlite3 as the database for Active Record
-group :development do
-  gem 'sqlite3'
+group :development, :test do
+
+  gem 'gravtastic'
 end
 
+gem 'pg'
+gem 'will_paginate'
+gem 'faker'
+gem 'will_paginate-bootstrap'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
+end
+
+group :test do
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
+  gem 'guard-minitest'
 end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -44,8 +58,11 @@ gem 'puma'
 # gem 'thin'
 
 gem 'private_pub'
-
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
 gem 'devise'
+
+
 
 gem 'omniauth-twitter'
 # Use Capistrano for deployment

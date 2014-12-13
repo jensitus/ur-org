@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'static_pages/home'
+
+  get 'static_pages/help'
+
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks'}
   # root 'public#index'
 
@@ -16,5 +20,8 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+
+  resources :users
+  resources :microposts
 
 end

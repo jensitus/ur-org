@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>hacker::partie::chatty</title>
+  <title><%= full_title yield(:title) %></title>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,7 +36,9 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to 'Home', static_pages_home_path %></li>
       <% if user_signed_in? %>
+          <li><%= image_tag current_user.gravatar_url, class: 'img-rounded', width: 47 %></li>
           Hi, <li><%= link_to current_user.name, edit_user_registration_path %></li>
           <li><%= link_to 'logout', destroy_user_session_path, :method => :delete %> </li>
       <% else %>
@@ -49,11 +51,24 @@
 </div>
 
 <div class="container">
-  <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>">
-        <%= value %>
-      </div>
-  <% end %>
+  <div class="row">
+      <% flash.each do |key, value| %>
+          <% if key == 'notice' %>
+            <div class="alert alert-success col-md-5">
+              <b><%= value %></b>
+            </div>
+          <% elsif key == 'alert' %>
+            <div class="alert alert-danger col-md-5">
+              <b><%= value %></b>
+            </div>
+          <% else %>
+            <div class="alert alert-warning col-md-5">
+              <b><%= value %></b>
+            </div>
+          <% end %>
+
+      <% end %>
+  </div>
 
   <%= yield %>
 </div>

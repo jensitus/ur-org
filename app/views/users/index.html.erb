@@ -1,3 +1,4 @@
+<%	 provide(:title, 'registered users') %>
 <div class="row">
   <div class="col-md-6">
     <div style="height: 300px; overflow-y: auto;">
@@ -9,7 +10,8 @@
                 <thead>
                 <tr>
                   <th>index</th>
-                  <th>id</th>
+                  <th>avatar</th>
+
                   <th>name</th>
                   <th>email</th>
                   <th></th>
@@ -19,7 +21,8 @@
                 <% @users.each_with_index do |user, index| %>
                 <tr>
                   <td><%= index +=1 %></td>
-                  <td><%= user.id %></td>
+                  <td><%= image_tag user.gravatar_url, class: 'img-rounded', width: 40 %></td>
+
                   <td><%= user.name %></td>
                   <td><%= user.email %></td>
                   <td>

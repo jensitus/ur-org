@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+orange:
+  content: 'i just peeled an orange'
+  created_at: <%= 10.minutes.ago %>
+  user: jens
+
+one:
+  content: 'I just ate an orange'
+  created_at: <%= 1.year.ago %>
+  user: emil
+
+two:
+  content: 'MyText'
+  created_at: <%= 29.minutes.ago %>
+  user: jens
+
+most_recent:
+  content: 'That is a really shitty world'
+  created_at: <%= Time.now %>
+  user: emil
