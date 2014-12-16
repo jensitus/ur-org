@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   # root 'public#index'
 
   authenticated :user do
-    root 'users#index'
+    # root 'users#index'
+    root 'static_pages#home'
   end
 
   unauthenticated :user do
@@ -21,7 +22,13 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :microposts
+  resources :relationships, only: [:create, :destroy]
+
 
 end

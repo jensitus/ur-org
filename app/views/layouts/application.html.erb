@@ -39,7 +39,7 @@
       <li><%= link_to 'Home', static_pages_home_path %></li>
       <% if user_signed_in? %>
           <li><%= image_tag current_user.gravatar_url, class: 'img-rounded', width: 47 %></li>
-          Hi, <li><%= link_to current_user.name, edit_user_registration_path %></li>
+          <li><%= link_to current_user.name, edit_user_registration_path %></li>
           <li><%= link_to 'logout', destroy_user_session_path, :method => :delete %> </li>
       <% else %>
           <li><%= link_to 'login', new_user_session_path %></li>
@@ -54,15 +54,15 @@
   <div class="row">
       <% flash.each do |key, value| %>
           <% if key == 'notice' %>
-            <div class="alert alert-success col-md-5">
+            <div class="alert alert-success col-md-4">
               <b><%= value %></b>
             </div>
           <% elsif key == 'alert' %>
-            <div class="alert alert-danger col-md-5">
+            <div class="alert alert-danger col-md-4">
               <b><%= value %></b>
             </div>
           <% else %>
-            <div class="alert alert-warning col-md-5">
+            <div class="alert alert-warning col-md-4">
               <b><%= value %></b>
             </div>
           <% end %>
@@ -70,7 +70,8 @@
       <% end %>
   </div>
 
-  <%= yield %>
+    <%= yield %>
+
 </div>
 
 </body>

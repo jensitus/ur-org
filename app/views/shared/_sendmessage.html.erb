@@ -1,0 +1,4 @@
+<% unless current_user == @user %>
+    <%= link_to "Send Message", "#", class: "btn btn-success start-conversation",
+                "data-sid" => current_user.id, "data-rip" => @user.id %>
+<% end %>

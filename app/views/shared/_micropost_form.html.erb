@@ -2,13 +2,14 @@
     <div class="form-group">
       <%= render 'shared/error_messages', object: f.object  %>
       <div class="field">
-        <%= f.text_area :content, :rows => '5', placeholder: 'Compose your message to the world ...', class: 'form-control' %>
+        <%= f.text_area :content, :rows => '5', id: 'content_field', placeholder: 'Compose your message to the world ...', class: 'form-control' %>
+        <span id="content_count" class="well-sm">0</span> characters
       </div>
       <%= f.submit 'Post', class: 'btn btn-success' %>
     </div>
 
     <span class="picture">
-      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'well' %>
     </span>
 
 <% end %>
@@ -20,4 +21,8 @@
           alert('it must be smaller than 3MB');
       }
   });
+  $('#content_field').on('keyup', function(){
+      length = $(this).val().length;
+      $('#content_count').html(length);
+  })
 </script>
