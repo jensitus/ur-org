@@ -7,10 +7,12 @@
       </div>
       <span class="picture">
         <%= f.label :picture %>
-        <%= f.file_field :picture, name: 'image', accept: 'image/jpeg,image/gif,image/png', class: 'well' %>
+            <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'well' %>
       </span>
       <%= f.submit 'Post', class: 'btn btn-lg btn-success' %>
     </div>
+
+
 
 
 
@@ -19,8 +21,8 @@
 <script type="text/javascript">
   $('#micropost_picture').bind('change', function() {
       size_in_megabytes = this.files[0].size/1024/1024;
-      if (size_in_megabytes > 3) {
-          alert('it must be smaller than 3MB');
+      if (size_in_megabytes > 5) {
+          alert('it must be smaller than 5MB');
       }
   });
   $('#content_field').on('keyup', function(){
