@@ -3,14 +3,16 @@
       <%= render 'shared/error_messages', object: f.object  %>
       <div class="field">
         <%= f.text_area :content, :rows => '5', id: 'content_field', placeholder: 'Compose your message to the world ...', class: 'form-control' %>
-        <span id="content_count" class="well-sm">0</span> characters
+        <div class="well well-sm"><span id="content_count">0</span> characters</div>
       </div>
-      <%= f.submit 'Post', class: 'btn btn-success' %>
+      <span class="picture">
+        <%= f.label :picture %>
+        <%= f.file_field :picture, name: 'image', accept: 'image/jpeg,image/gif,image/png', class: 'well' %>
+      </span>
+      <%= f.submit 'Post', class: 'btn btn-lg btn-success' %>
     </div>
 
-    <span class="picture">
-      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'well' %>
-    </span>
+
 
 <% end %>
 

@@ -16,6 +16,7 @@ gem 'will_paginate-bootstrap'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem 'rails_autolink'
 
 group :production do
   gem 'rails_12factor'

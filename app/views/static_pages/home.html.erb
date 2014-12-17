@@ -1,26 +1,18 @@
 <% if user_signed_in? %>
-    <!--<div class="row">-->
-      <aside class="col-md-4">
-        <section class="user_info">
-          <%= render 'shared/user_info' %>
-        </section>
-        <section class="stats">
-          <%= render 'shared/stats' %>
-        </section>
-        <section class="micropost_form">
-          <%= render 'shared/micropost_form' %>
-        </section>
-      </aside>
+    <div class="row">
+
+      <%= render 'shared/sidebar' %>
+
       <div class="col-md-8">
-        <h4>the Postings</h4>
+        <h4>the postings</h4>
         <%= render 'shared/feed' %>
       </div>
-    <!--</div>-->
+    </div>
 <% else %>
     <div class="center jumbotron">
 
-        <h2>hacker::partie</h2>
-        <p>Welcome to the hacker::partie.ist-ur.org</p>
+        <h2>ist - ur . org</h2>
+        <p>welcome to ist - ur . org</p>
         <%= link_to 'sign up', new_user_registration_path, class: 'btn btn-lg btn-warning' %>
         &nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
         <%= link_to 'sign in', new_user_session_path, class: 'btn btn-lg btn-success' %>

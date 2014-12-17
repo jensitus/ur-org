@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: [:index]
 
   def index
     @users = User.where.not('id = ?', current_user.id).order('created_at DESC')
@@ -12,14 +12,14 @@ class UsersController < ApplicationController
   end
 
   def following
-    @title = 'Following'
+    @title = 'I am connected with:'
     @user = User.find(params[:id])
     @users = @user.following.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
-    @title = 'Followers'
+    @title = 'They connected me:'
     @user = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'static_pages/home'
+  get 'home' => 'static_pages#home'
 
+  root 'static_pages#home'
   get 'static_pages/help'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks'}
@@ -9,12 +10,13 @@ Rails.application.routes.draw do
 
   authenticated :user do
     # root 'users#index'
-    root 'static_pages#home'
+    :root
   end
 
   unauthenticated :user do
     devise_scope :user do
-      get '/' => 'devise/sessions#new'
+      # get '/' => 'devise/sessions#new'
+      :root
     end
   end
 

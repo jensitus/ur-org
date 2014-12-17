@@ -4,7 +4,7 @@ class Micropost < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
   validates :content, presence: true,
-            :length => { maximum: 140, :too_long => '%{count} characters is the maximum allowed'},
+            :length => { maximum: 540, :too_long => '%{count} characters is the maximum allowed'},
             :allow_nil => false
   validate :picture_size
 
