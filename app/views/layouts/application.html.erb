@@ -36,6 +36,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
       <li><%= link_to 'Home', home_path %></li>
+      <li><%= link_to 'Kontakt', new_contact_path %></li>
       <% if user_signed_in? %>
           <li><%= image_tag current_user.gravatar_url, class: 'img-rounded', width: 47 %></li>
           <li><%= link_to current_user.name, edit_user_registration_path %></li>
@@ -70,6 +71,10 @@
   </div>
 
     <%= yield %>
+
+</div>
+
+<div class="">
 
 </div>
 

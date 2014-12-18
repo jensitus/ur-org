@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :contacts
+
   get 'home' => 'static_pages#home'
 
   root 'static_pages#home'
