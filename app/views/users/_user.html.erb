@@ -1,6 +1,6 @@
 <ul>
   <%= image_tag user.gravatar_url, width: 52, class: 'img-circle' %>
-  <%= link_to user.name, user %>
+  <h4><%= link_to user.name, user %></h4>
 
   <%#= if current_user.admin? && !current_user == user %>
     <%#= link_to 'delete', user, method: :delete, confirm: 'you sure?' %>

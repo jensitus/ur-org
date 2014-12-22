@@ -2,10 +2,9 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user-info">
-      <h4>
-        <%= image_tag @user.gravatar_url, class: 'img-rounded'  %>
-        <%= @user.name %>
-      </h4>
+
+        <%= image_tag @user.gravatar_url, class: 'img-rounded', width: 55  %>
+      <h4><%= @user.name %></h4>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
