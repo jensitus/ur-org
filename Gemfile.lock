@@ -154,6 +154,8 @@ GEM
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
+    friendly_id (5.0.4)
+      activerecord (>= 4.0.0)
     gravtastic (3.2.6)
     guard (2.10.4)
       formatador (>= 0.2.4)
@@ -317,6 +319,7 @@ DEPENDENCIES
   devise
   faker
   fog
+  friendly_id
   gravtastic
   guard-minitest
   jbuilder (~> 2.0)

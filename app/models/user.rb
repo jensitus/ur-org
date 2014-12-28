@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
 
   devise  :omniauthable, :omniauth_providers => [:twitter]
 
+  validates_uniqueness_of :name
+
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   has_many :conversations, :foreign_key => :sender_id
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name: 'Relationship',
