@@ -19,11 +19,17 @@ class MicropostsController < ApplicationController
   end
 
   def edit
-    @micropost = Micropost.find(params[:id])
+    if current_user == @micropost.user
+      @micropost = Micropost.find(params[:id])
+    else
+      flash[:alert] = "you don't have the permission to do what you want to, sorry for that"
+      redirect_to request.referrer || root_url
+    end
   end
 
   def update
     # respond_to do |format|
+    if current_user == @micropost.user
       if @micropost.update(micropost_params)
         #format.html { redirect_to request.referrer || root_url, flash[:success] = 'yeah!!' }
         #format.json
@@ -33,13 +39,22 @@ class MicropostsController < ApplicationController
         flash[:alert] = 'so nicht'
         render 'static_pages/home'
       end
+    else
+      flash[:alert] = "you don't have the permission to do what you want to, sorry for that"
+      redirect_to request.referrer || root_url
+    end
     # end
   end
 
   def destroy
+    if current_user == @micropost.user
     @micropost.destroy
-    flash[:success] = "Oh no, it's deleted"
-    redirect_to request.referrer || root_url
+      flash[:success] = "Oh no, it's deleted"
+      redirect_to request.referrer || root_url
+    else
+      flash[:alert] = "you don't have the permission to do what you want to, sorry for that"
+      redirect_to request.referrer || root_url
+    end
   end
 
   private
