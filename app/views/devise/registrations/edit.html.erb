@@ -14,7 +14,7 @@
     <%= f.email_field :email, class: 'form-control' %>
     <br>
     <%= f.label :avatar %>
-    <%= f.file_field :avatar %>
+    <%= f.file_field :avatar, class: 'well' %>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

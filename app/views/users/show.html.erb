@@ -3,7 +3,7 @@
   <aside class="col-md-4">
     <section class="user-info">
 
-        <%= render 'shared/avatar_profile' %>
+        <%= render 'shared/post_avatar' %>
       <h4><%= @user.name %></h4>
     </section>
     <section class="stats">
@@ -16,7 +16,7 @@
         </section>
     <% end %>
   </aside>
-  <div class="col-md-8">
+  <div class="col-md-6">
 
     <% if @user.microposts.any? %>
         <h4> posts (<%= @user.microposts.count %>) </h4>

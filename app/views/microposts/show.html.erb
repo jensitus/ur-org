@@ -1,12 +1,10 @@
+
 <div class="row">
-  <aside class="col-md-4">
-    <% if user_signed_in? %>
-        <%= render 'shared/sidebar' %>
-    <% else %>
-        <%= render :text => 'meine herren' %>
-    <% end %>
-  </aside>
-  <div class="col-md-8">
+  <div class="col-md-4">
+        <%#= render 'shared/user_info' %>
+  </div>
+
+  <div class="col-md-6">
     <ol class="microposts">
       <%= render @micropost %>
     </ol>
