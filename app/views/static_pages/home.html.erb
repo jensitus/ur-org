@@ -3,18 +3,30 @@
 
       <%= render 'shared/sidebar' %>
 
-      <div class="col-md-8">
+      <div class="col-md-6">
         <h4>the postings</h4>
         <%= render 'shared/feed' %>
       </div>
     </div>
 <% else %>
-    <div class="center jumbotron">
+    <div class="row">
+      <div class="col-md-4">
 
-        <h2>ist - ur . org</h2>
-        <p>welcome to ist - ur . org</p>
-        <%= link_to 'sign up', new_user_registration_path, class: 'btn btn-lg btn-warning' %>
-        &nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
-        <%= link_to 'sign in', new_user_session_path, class: 'btn btn-lg btn-danger' %>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="center jumbotron">
+
+          <h2>ist - ur . org</h2>
+          <p>welcome to ist - ur . org</p>
+          <p>This is the further development of a former course and examination project of the <%= link_to 'HackerPartie', 'https://github.com/HackerPartie' %></p>
+          <p></p>
+          <%= link_to 'sign up', new_user_registration_path, class: 'btn btn-lg btn-warning' %>
+          &nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
+          <%= link_to 'sign in', new_user_session_path, class: 'btn btn-lg btn-danger' %>
+        </div>
+      </div>
+    </div>
+
 <% end %>
