@@ -1,4 +1,5 @@
-<%= link_to image_tag(current_user.gravatar_url, width: 80, class: 'img-rounded'), current_user %>
+<%= render 'shared/avatar_profile' %>
+
 <h3><%= current_user.name %></h3>
 <div><%= pluralize(current_user.microposts.count, 'post') %></div>
 <div><%= link_to 'view my profile', current_user %></div>

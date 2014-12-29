@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
              :filetype => :jpg,
              :size => 120
 
+  mount_uploader :avatar, AvatarUploader
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -13,6 +15,9 @@ class User < ActiveRecord::Base
   devise  :omniauthable, :omniauth_providers => [:twitter]
 
   validates_uniqueness_of :name
+  #validates_presence_of :avatar
+  #validates_integrity_of :avatar
+  #validates_processing_of :avatar
 
   extend FriendlyId
   friendly_id :name, use: :slugged

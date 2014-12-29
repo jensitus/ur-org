@@ -2,7 +2,11 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <%= image_tag @user.gravatar_url %>
+      <% if @user.avatar_url.nil? %>
+        <%= image_tag @user.gravatar_url %>
+      <% else %>
+        <%= image_tag @user.avatar %>
+      <% end %>
       <h4><%= @user.name %></h4>
       <span><%= link_to 'view my profile', @user %></span>
       <span><b>posts:</b> <%= @user.microposts.count %></span>

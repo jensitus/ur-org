@@ -1,5 +1,11 @@
 <li id="micropost-<%= micropost.id %>">
-    <span class="gravatar"><%= link_to image_tag(micropost.user.gravatar_url, width: 50), micropost.user %></span>
+    <span class="gravatar">
+      <% if micropost.user.avatar_url.nil? %>
+        <%= link_to image_tag(micropost.user.gravatar_url, width: 50), micropost.user %>
+      <% else %>
+        <%= link_to image_tag(micropost.user.avatar, width: 50), micropost.user %>
+      <% end %>
+    </span>
     <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
     <span class="content">
       <%= auto_link(micropost.content) %>

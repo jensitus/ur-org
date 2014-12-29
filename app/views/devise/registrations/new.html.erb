@@ -4,7 +4,16 @@
 
 <h3>Sign up</h3>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<!--
+    = form_for(resource, :as => resource_name,
+    :url => registration_path(resource_name), :html => {:multipart => true}) do |f|
+    - # ...other form fields
+    = f.label :avatar do
+    = f.file_field :avatar
+    = f.hidden_field :avatar_cache
+-->
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => { :multipart => true }) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="form-group">
@@ -14,7 +23,10 @@
     <%= f.label :email %><br />
     <%= f.email_field :email, class: 'form-control' %>
 
-
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+        <%#= f.hidden_field :avatar_cache %>
+    <%# end %>
 
     <%= f.label :password %>
     <% if @validatable %>
