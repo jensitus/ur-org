@@ -19,6 +19,7 @@ gem 'fog'
 gem 'rails_autolink'
 # gem 'websocket-rails'
 gem 'friendly_id'
+gem 'rails-observers'
 
 group :production do
   gem 'rails_12factor'
