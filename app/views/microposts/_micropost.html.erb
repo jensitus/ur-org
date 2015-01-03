@@ -9,7 +9,7 @@
     <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
     <span class="content">
       <%= auto_link(micropost.content) %>
-      <%= image_tag micropost.picture.url, width: '100%' if micropost.picture? %>
+      <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
     </span>
     <span class="timestamp">
       <small>
