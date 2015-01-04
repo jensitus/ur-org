@@ -1,0 +1,20 @@
+<div style="font-family: sans-serif; font-size: 12px; width: 290px;">
+    <p style="padding: 15px; border-radius: 5px; background: #eee;">
+        <b><%= @user.follower.name %> is your new relationship</b>
+    </p>
+    <p style="padding: 15px; border-radius: 5px; background: #eee;">
+        Hi, <%= @user.followed.name %>! <br>
+        You've got a new connection!      <br>
+        Don't worry, it's just <%= @user.follower.name %>.  <br>
+    </p>
+
+    <p style="padding: 15px; border-radius: 5px; background: #eee;">
+        checkout what <%= @user.follower.name %> has to say: <br>
+        <a href="https://ist-ur.org/users/<%= @user.follower.slug %>">https://ist-ur.org/users/<%= @user.follower.slug %></a>
+    </p>
+
+  <p style="padding: 15px; border-radius: 5px; background: #eee;">
+    Kind regards <br>
+    <b>ist-ur.org</b>
+  </p>
+</div>
