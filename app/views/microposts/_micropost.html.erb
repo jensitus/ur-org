@@ -6,7 +6,7 @@
         <%= link_to image_tag(micropost.user.avatar, width: 50), micropost.user %>
       <% end %>
     </span>
-    <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+    <span class="user"><%= link_to micropost.user.name, single_user_path(micropost.user) %></span>
     <span class="content">
       <%= auto_link strip_tags(micropost.content) %>
       <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>

@@ -32,8 +32,9 @@ Rails.application.routes.draw do
     end
   end
   resources :microposts
-  get ':id' => 'microposts#show', as: 'user_post'
+  get '/:slug/:id' => 'microposts#show', as: 'user_post'
   resources :relationships, only: [:create, :destroy]
 
+  get '/:id' => 'users#show', as: 'single_user'
 
 end
