@@ -10,7 +10,11 @@
     <ol class="comments">
       <% @comments.each do |comment| %>
           <%= comment.body %><br>
-          <%= link_to comment.user.name, comment.user %><br><br>
+          <small>
+            <%= link_to comment.user.name, comment.user %> am
+            <%= comment.created_at.strftime('%d.%m.') %> um
+            <%= comment.created_at.strftime('%H:%M') %>
+          </small><br><br>
       <% end %>
     </ol>
   </div>
