@@ -8,6 +8,9 @@ class Micropost < ActiveRecord::Base
             :allow_nil => false
   validate :picture_size
 
+  has_many :answers
+  has_many :comments, through: :answers
+
   private
 
   # Validates the size of an uploaded picture

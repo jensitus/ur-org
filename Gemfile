@@ -21,6 +21,10 @@ gem 'rails_autolink'
 gem 'friendly_id'
 gem 'rails-observers'
 
+group :development do
+  gem 'byebug'
+end
+
 group :production do
   gem 'rails_12factor'
 end

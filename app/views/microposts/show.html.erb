@@ -7,6 +7,24 @@
     <ol class="microposts">
       <%= render @micropost %>
     </ol>
+    <ol class="comments">
+      <% @comments.each do |comment| %>
+          <%= comment.body %><br>
+          <%= link_to comment.user.name, comment.user %><br><br>
+      <% end %>
+    </ol>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
 
+  </div>
+
+  <div class="col-md-6">
+    <% if user_signed_in? %>
+        <ol class="">
+          <%= render 'shared/comments_form' %>
+        </ol>
+    <% end %>
   </div>
 </div>
