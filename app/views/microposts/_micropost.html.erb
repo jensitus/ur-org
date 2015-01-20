@@ -19,7 +19,7 @@
             <%= link_to 'delete', micropost, method: :delete, data: { confirm: 'you sure?' } %> |
 
         <% end %>
-        <%= link_to 'comment (' + micropost.comments.count.to_s + ')', user_post_path(:slug => micropost.user, :id => micropost.id) %>
+        <%= link_to pluralize(micropost.comments.count.to_s, 'comment'), user_post_path(:slug => micropost.user, :id => micropost.id) %>
 
       </small>
 
