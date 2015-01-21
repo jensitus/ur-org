@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, :touch => true
   validates :user_id, presence: true
   validates :body, presence: true,
             :length => { maximum: 2480, :too_long => '%{count} characters is the maximum allowed'},

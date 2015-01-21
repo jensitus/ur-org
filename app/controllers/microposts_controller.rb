@@ -18,6 +18,7 @@ class MicropostsController < ApplicationController
     @comment = Comment.new
     @micropost = Micropost.find(params[:id])
     @comments = @micropost.comments
+    fresh_when etag: [@comments, @micropost, current_user]
   end
 
   def edit
