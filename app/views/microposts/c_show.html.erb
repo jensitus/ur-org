@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4">
-        <%#= render 'shared/user_info' %>
+    <%#= render 'shared/user_info' %>
   </div>
 
   <div class="col-md-6">
@@ -8,7 +8,14 @@
       <%= render @micropost %>
     </ol>
     <ol class="comments">
-      <%= render @comments %>
+      <% @comments.each do |comment| %>
+          <%= comment.body %><br>
+          <small>
+            <%= link_to comment.user.name, comment.user %> am
+            <%= comment.created_at.strftime('%d.%m.') %> um
+            <%= comment.created_at.strftime('%H:%M') %>
+          </small><br><br>
+      <% end %>
     </ol>
   </div>
 </div>
@@ -21,7 +28,7 @@
     <div id="new-comment"></div>
     <% if user_signed_in? %>
         <ol class="">
-          <%= render 'comments_form' %>
+          <%= render 'comments/form' %>
         </ol>
     <% end %>
   </div>

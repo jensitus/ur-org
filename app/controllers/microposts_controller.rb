@@ -3,6 +3,8 @@ class MicropostsController < ApplicationController
   before_action :correct_user, only: :destroy
   before_action :set_micropost, only: [:edit, :update, :destroy, :show]
 
+  respond_to :html, :js
+
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save

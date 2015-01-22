@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @comments = Comment.all
@@ -22,17 +22,16 @@ class CommentsController < ApplicationController
   end
 
   def create
-    #@micropost = Micropost.find(params[:micropost_id])
     @comment = current_user.comments.build(comment_params)
     if @comment.save
       flash[:success] = 'cool'
       @answer = Answer.create!(:micropost_id => answer_params,
                                :comment_id => @comment.id)
-      redirect_to request.referrer || root_url
     else
       @feed_items = []
       render 'static_pages/home'
     end
+    #end
     # respond_with(@comment)
   end
 

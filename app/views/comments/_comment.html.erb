@@ -1,0 +1,8 @@
+<%= content_tag_for :span, comment do %>
+    <%= simple_format comment.body %>
+    <small>
+      <%= link_to comment.user.name, comment.user %> am
+      <%= comment.created_at.strftime('%d.%m.') %> um
+      <%= comment.created_at.strftime('%H:%M') %>
+    </small><br><br>
+<% end %>
