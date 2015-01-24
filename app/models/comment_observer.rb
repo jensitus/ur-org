@@ -2,7 +2,7 @@ class CommentObserver < ActiveRecord::Observer
   observe :answer
   def after_save(answer)
 
-    ua = user_array(answer)
+    ua = get_user_array(answer)
 
     ua.each do |u_a|
       puts u_a
@@ -18,8 +18,10 @@ class CommentObserver < ActiveRecord::Observer
 
   private
 
-  def user_array(answer)
+  def get_user_array(answer)
+
     user_array = []
+
     also_answer = answer.micropost.comments
 
     also_answer.each do |aa|
@@ -27,7 +29,8 @@ class CommentObserver < ActiveRecord::Observer
     end
 
     user_array = user_array.uniq
-
+    user_array.delete(answer.comment.user.email)
+    user_array
   end
 
 end
