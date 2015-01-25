@@ -3,7 +3,7 @@ class CommentObserver < ActiveRecord::Observer
   def after_save(answer)
 
     ua = get_user_array(answer)
-
+    #byebug
     ua.each do |u_a|
       puts u_a
       sleep 1

@@ -1,5 +1,5 @@
 class RelationshipMailer < ActionMailer::Base
-  default from: 'info@service-b.org'
+  default from: 'info@ist-ur.org'
 
   def relationship_mail(user)
     @user = user
