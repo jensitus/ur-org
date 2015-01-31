@@ -11,9 +11,9 @@ default: &default
 
 development:
   <<: *default
-  database: receta
-  username: receta
-  password: receta
+  database: <%= ENV["IST_UR_ORG_DEV_DB"] %>
+  username: <%= ENV["IST_UR_ORG_DEV_USR"] %>
+  password: <%= ENV["IST_UR_ORG_DEV_PW"] %>
   host: localhost
   port: 5432
 
@@ -22,12 +22,16 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: receta_test
-  username: receta
-  password: receta
+  database: <%= ENV["IST_UR_ORG_TEST_DB"] %>
+  username: <%= ENV["IST_UR_ORG_DEV_USR"] %>
+  password: <%= ENV["IST_UR_ORG_DEV_PW"] %>
   host: localhost
   port: 5432
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: <%= ENV["IST_UR_ORG_PROD_DB"] %>
+  username: <%= ENV["IST_UR_ORG_PROD_USR"] %>
+  password: <%= ENV["IST_UR_ORG_PROD_PW"] %>
+  host: localhost
+  port: 5432

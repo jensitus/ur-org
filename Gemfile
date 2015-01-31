@@ -20,6 +20,11 @@ gem 'rails_autolink'
 # gem 'websocket-rails'
 gem 'friendly_id'
 gem 'rails-observers'
+gem 'capistrano'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
+gem 'capistrano-rvm'
+gem 'capistrano-passenger'
 
 group :development do
   gem 'byebug'
