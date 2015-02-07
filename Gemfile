@@ -28,6 +28,7 @@ gem 'capistrano-passenger'
 
 group :development do
   gem 'byebug'
+  gem 'capistrano-secrets-yml'
 end
 
 group :production do
