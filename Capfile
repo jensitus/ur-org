@@ -1,11 +1,11 @@
 # Load DSL and set up stages
 require 'capistrano/deploy'
-#require 'capistrano/rvm'
 require 'capistrano/setup'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/rvm'
 require 'capistrano/passenger'
+require 'capistrano/secrets_yml'
 
 # Include default deployment tasks
 
