@@ -5,8 +5,12 @@ class CommentsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @comments = Comment.all
-    respond_with(@comments)
+    if current_user.admin?
+      @comments = Comment.all
+      respond_with(@comments)
+    else
+      redirect_to request.referrer || root_url
+    end
   end
 
   def show
