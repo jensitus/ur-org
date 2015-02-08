@@ -3,8 +3,12 @@ class UsersController < ApplicationController
   around_filter :catch_not_found
 
   def index
-    @users = User.where.not('id = ?', current_user.id).order('created_at DESC')
-    @conversations = Conversation.involving(current_user).order('created_at DESC')
+    if current_user.admin?
+      @users = User.where.not('id = ?', current_user.id).order('created_at DESC')
+      @conversations = Conversation.involving(current_user).order('created_at DESC')
+    else
+      redirect_to request.referrer || root_url
+    end
   end
 
   def show

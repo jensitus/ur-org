@@ -5,12 +5,20 @@ class ContactsController < ApplicationController
   respond_to :html
 
   def index
-    @contacts = Contact.all
-    respond_with(@contacts)
+    if current_user.admin?
+      @contacts = Contact.all
+      respond_with(@contacts)
+    else
+      redirect_to request.referrer || root_url
+    end
   end
 
   def show
-    respond_with(@contact)
+    if current_user.admin?
+      respond_with(@contact)
+    else
+      redirect_to request.referrer || root_url
+    end
   end
 
   def new
@@ -19,6 +27,10 @@ class ContactsController < ApplicationController
   end
 
   def edit
+    if current_user.try(:admin?)
+    else
+      redirect_to request.referrer || root_url
+    end
   end
 
   def create
@@ -34,13 +46,21 @@ class ContactsController < ApplicationController
   end
 
   def update
-    @contact.update(contact_params)
-    respond_with(@contact)
+    if current_user.admin?
+      @contact.update(contact_params)
+      respond_with(@contact)
+    else
+      redirect_to request.referrer || root_url
+    end
   end
 
   def destroy
-    @contact.destroy
-    respond_with(@contact)
+    if current_user.admin?
+      @contact.destroy
+      respond_with(@contact)
+    else
+      redirect_to request.referrer || root_url
+    end
   end
 
   private
