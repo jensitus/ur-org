@@ -23,6 +23,13 @@
         <ol class="">
           <%= render 'comments_form' %>
         </ol>
+    <% else %>
+        <ol class="">
+          <%= link_to 'sign in', new_user_session_path %>
+          or
+          <%= link_to 'sign up', new_user_registration_path %><br>
+          for leaving a comment
+        </ol>
     <% end %>
   </div>
 </div>
