@@ -1,24 +1,17 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :show, :update, :destroy]
+  before_action :require_admin, only: [:index, :show, :edit, :update, :destroy]
 
   respond_to :html
 
   def index
-    if current_user.admin?
-      @contacts = Contact.all
-      respond_with(@contacts)
-    else
-      redirect_to request.referrer || root_url
-    end
+    @contacts = Contact.all
+    respond_with(@contacts)
   end
 
   def show
-    if current_user.admin?
-      respond_with(@contact)
-    else
-      redirect_to request.referrer || root_url
-    end
+    respond_with(@contact)
   end
 
   def new
@@ -27,10 +20,6 @@ class ContactsController < ApplicationController
   end
 
   def edit
-    if current_user.try(:admin?)
-    else
-      redirect_to request.referrer || root_url
-    end
   end
 
   def create
@@ -46,21 +35,13 @@ class ContactsController < ApplicationController
   end
 
   def update
-    if current_user.admin?
-      @contact.update(contact_params)
-      respond_with(@contact)
-    else
-      redirect_to request.referrer || root_url
-    end
+    @contact.update(contact_params)
+    respond_with(@contact)
   end
 
   def destroy
-    if current_user.admin?
-      @contact.destroy
-      respond_with(@contact)
-    else
-      redirect_to request.referrer || root_url
-    end
+    @contact.destroy
+    respond_with(@contact)
   end
 
   private
@@ -71,4 +52,12 @@ class ContactsController < ApplicationController
     def contact_params
       params.require(:contact).permit(:name, :email, :message)
     end
+
+  def require_admin
+    if !current_user.try(:admin?)
+      flash[:alert] = 'muss das sein?'
+      redirect_to request.referrer || root_url
+    end
+  end
+
 end

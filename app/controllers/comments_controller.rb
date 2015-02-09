@@ -1,16 +1,13 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :require_admin, only: [:index, :show, :edit, :new]
 
   respond_to :html, :js
 
   def index
-    if current_user.admin?
-      @comments = Comment.all
-      respond_with(@comments)
-    else
-      redirect_to request.referrer || root_url
-    end
+    @comments = Comment.all
+    respond_with(@comments)
   end
 
   def show
@@ -63,4 +60,12 @@ class CommentsController < ApplicationController
       #byebug
       p[:micropost_id].to_i
     end
+
+  def require_admin
+    if !current_user.admin?
+      flash[:alert] = 'finger weg!!'
+      redirect_to request.referrer || root_url
+    end
+  end
+
 end

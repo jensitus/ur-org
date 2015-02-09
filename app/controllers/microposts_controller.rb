@@ -27,7 +27,7 @@ class MicropostsController < ApplicationController
     if current_user == @micropost.user
       @micropost = Micropost.find(params[:id])
     else
-      flash[:alert] = "you don't have the permission to do what you want to, sorry for that"
+      flash[:alert] = "you don't have the permission to do that, we are dreadfully sorry "
       redirect_to request.referrer || root_url
     end
   end
