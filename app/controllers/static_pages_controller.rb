@@ -6,6 +6,9 @@ class StaticPagesController < ApplicationController
       @feed_items = current_user.feed.paginate(page: params[:page], :per_page => 5)
 
       fresh_when :etag => [@feed_items, current_user]
+    else
+      @static_page_image = Micropost.where('picture IS NOT NULL').sample(1)[0].picture.url
+      # redirect_to new_user_session_url
     end
   end
 
