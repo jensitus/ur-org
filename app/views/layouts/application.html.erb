@@ -27,33 +27,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <b><%= link_to 'ist - ur . org', root_path, class: 'navbar-brand' %></b>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to 'Home', home_path %></li>
-      <li><%= link_to 'Kontakt', new_contact_path %></li>
-      <% if user_signed_in? %>
-          <li><%= render 'shared/avatar_nav' %> <%#= image_tag current_user.gravatar_url, class: 'img-rounded', width: 47 %></li>
-          <li><%= link_to current_user.name, edit_user_registration_path %></li>
-          <li><%= link_to 'logout', destroy_user_session_path, :method => :delete %> </li>
-      <% else %>
-          <li><%= link_to 'login', new_user_session_path %></li>
-          <li><%= link_to 'register', new_user_registration_path %></li>
-      <% end %>
-    </ul>
-    </div>
-  </div>
-</div>
+<%= render 'shared/nav' %>
 
 <div class="container">
   <div class="row">
