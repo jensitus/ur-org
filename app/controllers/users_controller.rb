@@ -1,14 +1,11 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:index]
   around_filter :catch_not_found
+  before_action :require_admin, only: :index
 
   def index
-    if current_user.admin?
-      @users = User.where.not('id = ?', current_user.id).order('created_at DESC')
-      @conversations = Conversation.involving(current_user).order('created_at DESC')
-    else
-      redirect_to request.referrer || root_url
-    end
+    @users = User.where.not('id = ?', current_user.id).order('created_at DESC')
+    @conversations = Conversation.involving(current_user).order('created_at DESC')
   end
 
   def show
@@ -40,5 +37,11 @@ class UsersController < ApplicationController
       redirect_to root_url
   end
 
+  def require_admin
+    if !current_user.admin?
+      redirect_to request.referrer || root_url
+    end
+
+  end
 
 end

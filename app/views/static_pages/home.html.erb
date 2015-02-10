@@ -16,15 +16,24 @@
     </div>
     <div class="row">
       <div class="col-md-7">
-        <div class="center jumbotron">
-
-          <h2>ist - ur . org</h2>
-          <p>welcome to ist - ur . org</p>
-          <p>This is the further development of a former course and examination project of the <%= link_to 'HackerPartie', 'https://github.com/HackerPartie' %></p>
+        <div class="back"><!-- style="background-image: url(<%#= @static_page_image %>);">-->
+          <%= image_tag @static_page_image, width: '100%', class: 'static_page_image' %>
+          <span>
+          welcome to ist - ur . org
+          <p>
+            This is the further development of a<br>
+            former course and examination project<br>
+            of the <%= link_to 'HackerPartie', 'https://github.com/HackerPartie' %>
+          </p>
           <p></p>
           <%= link_to 'sign up', new_user_registration_path, class: 'btn btn-warning' %>
           &nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
           <%= link_to 'sign in', new_user_session_path, class: 'btn btn-success' %>
+          <br>
+          </span>
+        </div>
+        <div>
+
         </div>
       </div>
     </div>
