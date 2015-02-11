@@ -6,9 +6,13 @@
         <%= render 'shared/post_avatar' %>
       <h4><%= @user.name %></h4>
     </section>
+    <section>
+      <strong>posts: <%= @user.microposts.count %></strong>
+    </section>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
+
     <% if user_signed_in? %>
         <section class="well-lg">
           <%= render 'follow_form' %>
