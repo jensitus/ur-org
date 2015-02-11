@@ -1,0 +1,27 @@
+<% if @micropost.user.avatar_url.nil? %>
+    <%= image_tag(@micropost.user.gravatar_url, width: 80, class: 'img-rounded') %>
+<% else %>
+    <%= image_tag(@micropost.user.avatar, width: 80, class: 'img-rounded') %>
+<% end %>
+<h4><%= @micropost.user.name %></h4>
+<div class="">
+    <strong>posts: <%= @micropost.user.microposts.count %></strong>
+</div>
+<div class="stats">
+    connections
+    <a href="<%= following_user_path(@micropost.user) %>">
+        <strong id="following" class="stat">
+            <%= @micropost.user.following.count %>
+        </strong>
+        <!-- connected with  -->
+    </a>
+    <a href="<%= followers_user_path(@micropost.user) %>">
+        <strong id="followers" class="stat">
+            <%= @micropost.user.followers.count %>
+        </strong>
+        <!--  connected by -->
+    </a>
+
+
+
+</div>

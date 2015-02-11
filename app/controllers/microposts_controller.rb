@@ -57,7 +57,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "Oh no, it's deleted"
       redirect_to request.referrer || root_url
     else
-      flash[:alert] = "you don't have the permission to do what you want to, sorry for that"
+      flash[:alert] = "you don't have the permission to do that shit, sorry for that"
       redirect_to request.referrer || root_url
     end
   end
