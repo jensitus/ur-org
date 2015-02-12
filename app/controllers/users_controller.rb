@@ -39,6 +39,7 @@ class UsersController < ApplicationController
 
   def require_admin
     if !current_user.admin?
+      flash[:danger] = 'NEIN!!'
       redirect_to request.referrer || root_url
     end
 

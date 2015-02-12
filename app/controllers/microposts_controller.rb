@@ -36,10 +36,10 @@ class MicropostsController < ApplicationController
     # respond_to do |format|
     if current_user == @micropost.user
       if @micropost.update(micropost_params)
-        #format.html { redirect_to request.referrer || root_url, flash[:success] = 'yeah!!' }
-        #format.json
         flash[:success] = 'yeah!!'
-        redirect_to :root
+        redirect_to micropost_url
+        #flash[:success] = 'yeah!!'
+        #redirect_to request.referrer || root_url
       else
         flash[:alert] = 'so nicht'
         render 'static_pages/home'

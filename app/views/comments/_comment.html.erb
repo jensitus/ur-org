@@ -1,8 +1,16 @@
-<%= content_tag_for :span, comment do %>
-    <%= simple_format(auto_link(strip_tags(comment.body))) %>
-    <small>
-      <%= link_to comment.user.name, comment.user %> am
-      <%= comment.created_at.strftime('%d.%m.') %> um
-      <%= comment.created_at.strftime('%H:%M') %>
-    </small><br><br>
+<%= content_tag_for :div, comment do %>
+    <span class="gravatar">
+      <%= image_tag comment.user.avatar.thumb, width: '32', class: 'img-rounded' %>
+    </span>
+    <span class="content">
+      <%= simple_format(auto_link(strip_tags(comment.body))) %>
+    </span>
+    <span class="timestamp">
+        <small>
+          <%= link_to comment.user.name, comment.user %> am
+          <%= comment.created_at.strftime('%d.%m.') %> um
+          <%= comment.created_at.strftime('%H:%M') %>
+        </small>
+    </span>
+    <hr>
 <% end %>
