@@ -29,37 +29,19 @@
 
 <%= render 'shared/nav' %>
 
+
+
 <div class="container">
   <div class="row">
-      <% flash.each do |key, value| %>
-          <% if key == 'notice' %>
-            <div class="alert alert-info col-md-4" id="<%= key %>">
-                <b><%= value %></b>
-            </div>
-          <% elsif key == 'alert' %>
-            <div class="alert alert-danger col-md-4" id="<%= key %>">
-              <b><%= value %></b>
-            </div>
-          <% elsif key == 'success' %>
-            <div class="alert alert-success col-md-4" id="<%= key %>">
-              <b><%= value %></b>
-            </div>
-          <% else %>
-            <div class="alert alert-warning col-md-4" id="<%= key %>">
-              <b><%= value %></b>
-            </div>
-          <% end %>
-
-      <% end %>
+    <div class="unobtrusive-flash-container col-md-4"></div>
   </div>
 
     <%= yield %>
 
-</div>
-
-<div class="">
 
 </div>
+
+
 
 </body>
 </html>

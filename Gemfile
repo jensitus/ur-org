@@ -26,6 +26,8 @@ gem 'capistrano-rails'
 gem 'capistrano-rvm'
 gem 'capistrano-passenger'
 
+gem 'unobtrusive_flash'
+
 group :development do
   gem 'byebug'
   gem 'capistrano-secrets-yml'

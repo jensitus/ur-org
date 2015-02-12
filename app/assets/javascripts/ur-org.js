@@ -18,3 +18,11 @@ $(document).ready(function() {
         }
     });
 });
+
+/* * * * * * * * * * * * * * * *
+ *
+ *  UnobtrusiveFlash
+ *
+ * * * * * * * * * * * * * * * */
+
+UnobtrusiveFlash.flashOptions['timeout'] = 4000;

@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require unobtrusive_flash
+//= require unobtrusive_flash_bootstrap
 //= require private_pub
 //= require chat
 //= require ur-org
