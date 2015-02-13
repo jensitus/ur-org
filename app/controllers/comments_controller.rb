@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comment_params)
     if @comment.save
-      flash[:success] = 'cool'
+      flash[:success] = 'i wer narrisch!!'
       @answer = Answer.create!(:micropost_id => answer_params,
                                :comment_id => @comment.id)
     else
