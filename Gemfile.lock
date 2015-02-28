@@ -180,6 +180,8 @@ GEM
     fog-xml (0.1.1)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
+    foreigner (1.7.2)
+      activerecord (>= 3.0.0)
     formatador (0.2.5)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
@@ -216,6 +218,10 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailboxer (0.12.5)
+      carrierwave (>= 0.5.8)
+      foreigner (>= 0.9.1)
+      rails (>= 3.2.0)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_backtrace (0.1.3)
@@ -366,6 +372,7 @@ DEPENDENCIES
   guard-minitest
   jbuilder (~> 2.0)
   jquery-rails
+  mailboxer
   mini_backtrace
   mini_magick
   minitest-reporters

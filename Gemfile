@@ -28,6 +28,8 @@ gem 'capistrano-passenger'
 
 gem 'unobtrusive_flash'
 
+gem 'mailboxer'
+
 group :development do
   gem 'byebug'
   gem 'capistrano-secrets-yml'
