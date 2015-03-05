@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
 
   has_many :comments
 
+  acts_as_messageable
+
   after_create :create_default_conversation
 
   def self.from_omniauth(auth)
@@ -72,6 +74,14 @@ class User < ActiveRecord::Base
   # return true if the current user is following the other user
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def mailboxer_email(object)
+     if object.class == Mailboxer::Notification
+       nil
+     else
+       email
+     end
   end
 
   private

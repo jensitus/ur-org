@@ -1,24 +1,7 @@
 <% provide(:title, @user.name) %>
 <div class="row">
   <aside class="col-md-4">
-    <section class="user-info">
-
-        <%= render 'shared/post_avatar' %>
-      <h4><%= @user.name %></h4>
-    </section>
-    <section>
-      <strong>posts: <%= @user.microposts.count %></strong>
-    </section>
-    <section class="stats">
-      <%= render 'shared/stats' %>
-    </section>
-
-    <% if user_signed_in? %>
-        <section class="well-lg">
-          <%= render 'follow_form' %>
-          <%#= render 'shared/sendmessage' %>
-        </section>
-    <% end %>
+    <%= render 'shared/user_show_sidebar' %>
   </aside>
   <div class="col-md-6">
 
@@ -28,7 +11,7 @@
           <%= render @microposts %>
         </ol>
 
-        <%= will_paginate @microposts, :renderer => BootstrapPagination::Rails %>
+        <%= paginate @microposts %>
     <% end %>
   </div>
 </div>

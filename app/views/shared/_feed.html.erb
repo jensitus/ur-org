@@ -2,5 +2,6 @@
     <ol class="microposts">
       <%= render @feed_items %>
     </ol>
-    <%= will_paginate @feed_items, :renderer => BootstrapPagination::Rails %>
+
+    <%= paginate @feed_items %>  <!-- :renderer => BootstrapPagination::Rails %> -->
 <% end %>

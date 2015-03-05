@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-4">
+
+    <%= render 'inbox_trash' %>
+
+
+
+    <% if @trash.nil? || @trash.empty? %>
+        <p>
+          your trash folder is currently empty
+        </p>
+    <% end %>
+
+  </div>
+  <div class="col-md-5">
+
+    <h4>trash bin:</h4>
+
+    <% @trash.each do |conversation| %>
+
+        <%= link_to conversation.subject, conversation_path(conversation) %><br>
+
+
+        <% conversation.participants.each do |participant| %>
+            <% if participant != current_user %>
+            <% end %>
+            <% if participant != current_user %>
+                <b><%= participant.name %></b>
+            <% end %>
+        <% end %>
+
+        <%= link_to '<span class="glyphicon glyphicon-inbox"></span>'.html_safe, {:controller => 'conversations', :action => 'untrash', :id => conversation.id}, :title => 'back to inbox!!', method: 'post' %>
+        <small><%= conversation.updated_at.strftime('%e.%m.%Y at %I:%M') %></small>
+
+        <br><br>
+    <% end %>
+
+    <%= paginate @trash %>
+    <p>
+        <% if @trashcount.count > 0 %>
+            <%= button_to 'empty trash', 'empty_trash', data: {:confirm => 'Empty Trash? These conversations will be roasting forever in the purgatory!'}, class: 'btn btn-primary btn-danger' %>
+        <% end %>
+    </p>
+
+  </div>
+</div>

@@ -3,3 +3,4 @@
 <h3><%= current_user.name %></h3>
 <div><%= pluralize(current_user.microposts.count, 'post') %></div>
 <div><%= link_to 'view my profile', current_user %></div>
+<div><%= link_to '<span class="glyphicon glyphicon-envelope"></span> messages'.html_safe, conversations_path %></div>

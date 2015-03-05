@@ -1,0 +1,18 @@
+<section class="user-info">
+
+  <%= render 'shared/post_avatar' %>
+  <h4><%= @user.name %></h4>
+</section>
+<section class="well well-sm">
+  <strong>posts: <%= @user.microposts.count %></strong>
+
+  <%= render 'shared/stats' %>
+  <% if user_signed_in? %>
+
+
+
+
+      <%= render 'users/follow_form' %>
+      <%= render 'shared/sendmessage' %>
+</section>
+<% end %>

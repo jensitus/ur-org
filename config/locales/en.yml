@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+  mailboxer:
+    message_mailer:
+      subject_new: 'Hey you, out there in the cold!!'
+      subject_reply: "He, oida, you've got a reply!!"

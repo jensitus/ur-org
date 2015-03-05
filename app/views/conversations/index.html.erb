@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-4">
+
+     <%= render 'inbox_trash' %>
+
+    <% if @conversations.nil? || @conversations.empty? %>
+        <p>
+          your inbox folder is currently empty
+        </p>
+    <% end %>
+
+  </div>
+  <div class="col-md-5">
+
+
+    <h4>inbox:</h4>
+
+    <% @conversations.each do |conversation| %>
+
+
+        <% if conversation.is_read?(current_user) %>
+             <%= link_to conversation.subject, conversation_path(conversation) %>
+        <% else %>
+            <b><%= link_to conversation.subject, conversation_path(conversation) %></b>
+        <% end %>
+
+        <br> von:
+        <% conversation.participants.each do |participant| %>
+            <% if participant != current_user %>
+                <%# if conversation.is_read?(current_user) %>
+                    <%= participant.name %>
+                <%# else %>
+                    <b><%#= participant.name %></b>
+                <%# end %>
+            <% end %>
+        <% end %>
+
+        <%# if conversation.is_read?(current_user) %>
+            <small><%= conversation.updated_at.strftime('%e.%m.%Y at %H:%M') %></small>
+        <%# else %>
+            <b><%#= conversation.updated_at.strftime('%a, %m/%e/%Y %I:%M %p') %></b>
+        <%# end %>
+
+        <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, { :controller => 'conversations', :action => 'trash', :id => conversation.id }, :title => 'move to trash', :method => 'post' %>
+
+        <br><br>
+    <% end %>
+
+    <%= paginate @conversations %>
+
+
+  </div>
+</div>
