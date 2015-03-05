@@ -1,6 +1,10 @@
 <%= content_tag_for :div, comment do %>
     <span class="gravatar">
-      <%= image_tag comment.user.avatar.thumb, width: '32', class: 'img-rounded' %>
+      <% if comment.user.avatar_url.nil? %>
+        <%= image_tag comment.user.gravatar_url, width: '32', class: 'img-rounded' %>
+      <% else %>
+        <%= image_tag comment.user.avatar.thumb, width: '32', class: 'img-rounded' %>
+      <% end %>
     </span>
     <span class="content">
       <%= simple_format(auto_link(strip_tags(comment.body))) %>

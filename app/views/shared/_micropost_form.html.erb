@@ -7,6 +7,7 @@
       </div>
       <span class="picture">
         <%= f.label :picture %>
+        <span class="glyphicon glyphicon-picture"></span>
         <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'well' %>
       </span>
       <%= f.submit 'Post', class: 'btn btn-success' %>

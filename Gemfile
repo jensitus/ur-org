@@ -10,9 +10,14 @@ ruby '2.1.4'
 gem 'gravtastic'
 
 gem 'pg'
-gem 'will_paginate'
+
 gem 'faker'
-gem 'will_paginate-bootstrap'
+
+#gem 'kaminari'
+gem 'kaminari-bootstrap'
+
+#gem 'will_paginate'
+# gem 'will_paginate-bootstrap'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
@@ -73,10 +78,11 @@ gem 'spring',        group: :development
 gem 'puma'
 # gem 'thin'
 
-gem 'private_pub'
+#gem 'private_pub'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'devise'
+
 
 
 

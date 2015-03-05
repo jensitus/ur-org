@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
+//= require bootstrap
+//= require bootstrap/modal
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
-//= require private_pub
 //= require chat
 //= require ur-org
 //= require turbolinks

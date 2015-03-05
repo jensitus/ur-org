@@ -24,9 +24,31 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :conversations do
-    resources :messages
+
+  get '/messages' => redirect('/conversations')
+  resources :messages do
+    member do
+      post :new
+    end
   end
+
+  resources :conversations do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+    collection do
+      get :trashbin
+      post :empty_trash
+    end
+  end
+
+  #get 'conversations/index' => 'conversations#index', as: 'conversations'
+  #get 'conversations/reply_form' => 'conversations#reply_form', :as => 'reply_form'
+  #get 'conversations/:id' => 'conversations#show', as: 'conversation'
+  #put 'conversations/:id' => 'conversations#reply'
+  #get 'conversations/new_release' => 'conversations#new_release', as: 'new_release'
 
   resources :users do
     member do

@@ -1,0 +1,6 @@
+<%= form_tag reply_conversation_path(conversation), method: :post do %>
+
+    <%= text_area_tag :body, nil, col: 2, class: 'form-control', placeholder: 'type your response here', required: true %>
+
+    <%= submit_tag 'vamos!', class: 'btn' %>
+<% end %>

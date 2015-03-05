@@ -3,18 +3,18 @@
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
-  <body>
-    <h1>You have a new message: <%= @subject %></h1>
+  <body style="font-family: sans-serif; font-size: 12px;">
     <p>
-      You have received a new message:
+      subject: <%= @subject %>
     </p>
+
     <blockquote>
-      <p>
+      <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
         <%= raw @message.body %>
       </p>
     </blockquote>
     <p>
-      Visit <%= link_to root_url, root_url %> and go to your inbox for more info.
+      Visit <%= link_to messages_url, messages_url %> and have a look!!
     </p>
   </body>
 </html>

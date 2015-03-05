@@ -3,13 +3,14 @@
       <%= render 'shared/error_messages', object: f.object  %>
 
       <div class="field">
+        <span class="glyphicon glyphicon-comment"></span>
         <%= f.label :comment %><br>
         <%= f.text_area :body, class: 'form-control' %>
       </div>
       <div>
-        <%= @micropost.id %>
+
         <%= f.hidden_field :micropost_id, :value => @micropost.id %>
-        <%= current_user.id %>
+
       </div>
       <div class="actions">
         <%= f.submit 'Hopp', class: 'btn btn-default' %>

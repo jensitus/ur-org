@@ -4,7 +4,7 @@ Mailboxer.setup do |config|
   config.uses_emails = true
 
   #Configures the default from for emails sent for Messages and Notifications
-  config.default_from = 'info@ist-ur.org'
+  config.default_from = "info@service-b.org"
 
   #Configures the methods needed by mailboxer
   config.email_method = :mailboxer_email
@@ -18,4 +18,7 @@ Mailboxer.setup do |config|
   #Configures maximum length of the message subject and body
   config.subject_max_length = 255
   config.body_max_length = 32000
+
+  # config.message_mailer = CustomMessageMailer
+
 end

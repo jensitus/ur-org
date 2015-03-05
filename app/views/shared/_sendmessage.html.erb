@@ -1,4 +1,3 @@
 <% unless current_user == @user %>
-    <%= link_to "Send Message", "#", class: "btn btn-success start-conversation",
-                "data-sid" => current_user.id, "data-rip" => @user.id %>
+    <%= link_to '<span class="glyphicon glyphicon-envelope"></span>'.html_safe, new_message_path(:user => @user.id), class: 'btn btn-default', :title => "send a message to #{@user.name}" %>
 <% end %>

@@ -1,26 +1,44 @@
-<div class="chatboxhead">
-  <div class="chatboxtitle">
-    <i class="fa fa-comments"></i>
-
-    <h1><%= @reciever.name %></h1>
-
+<div class="row">
+  <div class="col-md-4">
+    <%= render 'inbox_trash' %>
   </div>
 
-  <div class="chatboxoptions">
-    <%= link_to "<i class='fa fa-minus'></i>".html_safe, '#', class: 'toggleChatBox', 'data-cid' => @conversation.id %>
-    &nbsp;&nbsp;
-    <%= link_to "<i class='fa fa-times'></i>".html_safe, '#', class: 'closeChat', 'data-cid' => @conversation.id %>
-  </div>
-</div>
-<div class="chatboxcontent">
-  <% if @messages.any? %>
-    <%= render @messages %>
-  <% end %>
-</div>
-<div class="chatboxinput">
-  <%= form_for([@conversation, @message], :remote => true, :html => {id: "conversation_form_#{@conversation.id}"}) do |f| %>
-    <%= f.text_area :body, class: "chatboxtextarea", "data-cid" => @conversation.id %>
-  <% end %>
-</div>
+    <div class="col-md-5">
 
-<%= subscribe_to conversation_path(@conversation) %>
+      <% @conversation.participants.each do |participant| %>
+        <% if participant != current_user %>
+          conversation with: <%= participant.name %>
+        <% end %>
+      <% end %>
+
+
+      <h3><%= @conversation.subject %></h3>
+
+      <div class="conversation_box">
+
+      <%= content_tag_for(:div, @conversation.receipts_for(current_user).order(:created_at => :desc)) do |receipt| %>
+        <% message = receipt.message %>
+          <div class="conversation_content">
+              <span class="gravatar">
+                    <%# if message.sender.avatar_url.nil? %>
+                        <%#= image_tag message.sender.gravatar_url, width: '32', class: 'img-rounded' %>
+                    <%# else %>
+                        <%#= image_tag message.sender.avatar.thumb, width: '32', class: 'img-rounded' %>
+                    <%# end %>
+              </span>
+
+                <%= simple_format(auto_link(strip_tags(message.body))) %>
+
+                  <small>
+                    <%= link_to message.sender.name, single_user_path(message.sender.name) %>
+                    <%= message.created_at.strftime('%e.%m.%Y at %H:%M') %>
+                  </small>
+          </div>
+
+      <% end %>
+    </div>
+      <br><br>
+      <%= render 'messages/form', :conversation => @conversation %>
+
+    </div>
+</div>

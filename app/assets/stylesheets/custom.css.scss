@@ -53,6 +53,16 @@ span.picture {
   margin-right: 10px;
 }
 
+.conversation_content {
+  padding: 7px;
+  border-bottom: 1px solid #ccc;
+}
+
+.conversation_box {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
 .gravatar_edit {
   margin-top: 15px;
 }

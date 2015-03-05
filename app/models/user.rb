@@ -76,12 +76,12 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
-  def name
-
-  end
-
   def mailboxer_email(object)
-
+     if object.class == Mailboxer::Notification
+       nil
+     else
+       email
+     end
   end
 
   private
