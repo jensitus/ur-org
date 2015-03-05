@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
     @recipient = User.find(params[:user])
     current_user.send_message(@recipient, params[:body], params[:subject])
     flash[:notice] = "message has been sent, isn't it great?"
-    byebug
+    #byebug
     redirect_to :conversations
   end
 
