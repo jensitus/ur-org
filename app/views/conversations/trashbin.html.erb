@@ -37,7 +37,7 @@
 
     <%= paginate @trash %>
     <p>
-        <% if @trashcount.count > 0 %>
+        <% if @trashcount > 0 %>
             <%= button_to 'empty trash', 'empty_trash', data: {:confirm => 'Empty Trash? These conversations will be roasting forever in the purgatory!'}, class: 'btn btn-primary btn-danger' %>
         <% end %>
     </p>
