@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comment_params)
     if @comment.save
-      flash[:success] = 'i wer narrisch!!'
+      flash[:success] = '<b>cool, ein neuer kommentar</b>'.html_safe
       @answer = Answer.create!(:micropost_id => answer_params,
                                :comment_id => @comment.id)
     else
@@ -63,7 +63,7 @@ class CommentsController < ApplicationController
 
   def require_admin
     if !current_user.admin?
-      flash[:alert] = 'finger weg!!'
+      flash[:alert] = '<b>finger weg!!</b>'.html_safe
       redirect_to request.referrer || root_url
     end
   end

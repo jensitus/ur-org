@@ -1,5 +1,14 @@
 <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
              html: { method: :delete }, remote: true) do |f| %>
-    <%= f.submit 'disconnect', class: 'btn btn-default' %>
+
+    <%= f.submit 'disconnect', class: 'btn btn-default', id: 'disconnect_button' %>
+
 <% end %>
 
+
+<style>
+  #disconnect_button:hover {
+      background: #d00;
+      color: #eee;
+  }
+</style>
