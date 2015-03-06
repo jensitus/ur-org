@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     end
     collection do
       get :trashbin
+      get :sentbox
       post :empty_trash
     end
   end

@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   before_filter :authenticate_user!
   helper_method :mailbox, :conversation
-
+  around_action :catch_not_found
   before_action :mailbox
   before_action :inbox_trash_count
 
@@ -14,7 +14,11 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations ||= @mailbox.inbox.page(params[:page]).per(5)
-    @trash ||= current_user.mailbox.trash.all
+    #@trash ||= current_user.mailbox.trash.all
+  end
+
+  def sentbox
+    @sentbox ||= @mailbox.sentbox.page(params[:page]).per 5
   end
 
   def reply
@@ -24,7 +28,7 @@ class ConversationsController < ApplicationController
 
   def trash
     conversation.move_to_trash(current_user)
-    redirect_to :conversations
+    redirect_to request.referrer
   end
 
   def show
@@ -39,8 +43,8 @@ class ConversationsController < ApplicationController
 
   def trashbin
     @conversations ||= @mailbox.inbox.page(params[:page]).per(25)
-    @conversationscount ||= current_user.mailbox.inbox.all
-    @trash ||= current_user.mailbox.trash.page(params[:page]).per(25)
+    @conversationscount ||= @mailbox.inbox.all
+    @trash ||= @mailbox.trash.page(params[:page]).per(25)
   end
 
   def empty_trash
@@ -61,8 +65,16 @@ class ConversationsController < ApplicationController
   end
 
   def inbox_trash_count
-    @conversationscount ||= current_user.mailbox.inbox.count
+    @conversationscount ||= @mailbox.inbox.count
     @trashcount ||= @mailbox.trash.count
+    @sentcount ||= @mailbox.sentbox.count
+  end
+
+  def catch_not_found
+    yield
+  rescue ActiveRecord::RecordNotFound
+    flash[:danger] = '<b>muss das sein?</b>'.html_safe
+    redirect_to root_path
   end
 
   # def conversation_params(*keys)

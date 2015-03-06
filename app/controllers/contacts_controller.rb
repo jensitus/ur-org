@@ -27,7 +27,7 @@ class ContactsController < ApplicationController
     if @contact.save
       ContactMailer.confirmation(@contact).deliver
       ContactMailer.inquiry(@contact).deliver
-      flash[:success] = 'We got a message from you, we appreciate that!!'
+      flash[:success] = '<b>We got a message from you, we appreciate that!!</b>'.html_safe
       redirect_to root_url
     else
       respond_with(@contact)
@@ -55,7 +55,7 @@ class ContactsController < ApplicationController
 
   def require_admin
     if !current_user.try(:admin?)
-      flash[:alert] = 'muss das sein?'
+      flash[:alert] = '<b>muss das sein?</b>'.html_safe
       redirect_to request.referrer || root_url
     end
   end

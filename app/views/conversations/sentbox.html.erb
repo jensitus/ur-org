@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-4">
+
+    <%= render 'inbox_trash' %>
+
+    <% if @sentbox.nil? || @sentbox.empty? %>
+        <p>
+          unfortunately your sent box is currently empty, maybe you would like to write someone a letter?
+        </p>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <h4>Sent Box:</h4>
+    <% @sentbox.each do |conversation| %>
+
+        <% if conversation.is_read?(current_user) %>
+            <%= link_to conversation.subject, conversation_path(conversation) %>
+        <% else %>
+            <b><%= link_to conversation.subject, conversation_path(conversation) %> </b>
+        <% end %>
+
+        <br>an:
+        <% conversation.participants.each do |p| %>
+            <% if p != current_user %>
+                <%= link_to p.name, single_user_path(p.name) %>
+            <% end %>
+        <% end %>
+        <small>
+          <%= conversation.updated_at.strftime('%e.%m.%Y at %H:%M') %>
+        </small>
+        <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, { :controller => 'conversations', :action => 'trash', :id => conversation.id }, :title => 'move to trash', :method => 'post' %>
+            <br><br>
+
+    <% end %>
+    <%= paginate @sentbox %>
+  </div>
+</div>

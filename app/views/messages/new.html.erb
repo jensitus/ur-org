@@ -16,22 +16,23 @@
       <%= form_tag( { :controller => 'messages', :action => 'create' }, method: :post ) do %>
 
           <div>
-          <%= label_tag :subject %><br>
-          <%= text_field_tag :subject, nil, class: 'form-control' %>
+            <%= label_tag :subject %><br>
+            <%= text_field_tag :subject, nil, class: 'form-control' %>
           </div>
 
           <div>
-          <%= label :body, 'message text' %><br>
-          <%= text_area_tag :body, nil, class: 'form-control' %>
+            <%= label :body, 'message text' %><br>
+            <%= text_area_tag :body, nil, class: 'form-control' %>
           </div>
 
           <div>
-          <%= hidden_field_tag(:user, @user.id) %>
+            <%= hidden_field_tag(:user, @user.id) %>
           </div>
 
           <div>
-          <%= submit_tag 'vamos!!', class: 'btn btn-primary' %>
+            <%= submit_tag 'vamos!!', class: 'btn btn-primary' %>
           </div>
+
       <% end %>
     </section>
   </div>
