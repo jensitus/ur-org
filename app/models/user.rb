@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 
   acts_as_messageable
 
-  after_create :create_default_conversation
+  #after_create :create_default_conversation
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.id).first_or_create do |user|
