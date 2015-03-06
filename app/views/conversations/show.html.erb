@@ -30,7 +30,7 @@
                 <%= simple_format(auto_link(strip_tags(message.body))) %>
 
                   <small>
-                    <%= link_to message.sender.name, single_user_path(message.sender) %>
+                    <%= link_to message.sender.name, single_user_path(message.sender.slug) %>
                     <%= message.created_at.strftime('%e.%m.%Y at %H:%M') %>
                   </small>
           </div>
