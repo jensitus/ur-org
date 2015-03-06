@@ -4,9 +4,14 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body style="font-family: sans-serif; font-size: 12px;">
-    <p>
+    <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
       subject: <%= @subject %>
     </p>
+
+    <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
+      from: <%= @message.sender.name %>
+    </p>
+
 
     <blockquote>
       <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
