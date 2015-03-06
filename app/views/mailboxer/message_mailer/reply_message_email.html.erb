@@ -5,8 +5,12 @@
   </head>
   <body style="font-family: sans-serif; font-size: 12px;">
     <h4>You have a new reply: </h4>
-    <p>
+    <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
       subject: <b><%= @subject %></b>
+    </p>
+
+    <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
+      from: <b><%= @message.sender.name %></b>
     </p>
 
     <blockquote>
