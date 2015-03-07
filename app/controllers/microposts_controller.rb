@@ -8,7 +8,7 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      flash[:success] = 'jesus christ, you did it!!'
+      flash[:success] = '<b>jesus christ, you did it!!</b>'.html_safe
       redirect_to request.referrer || root_url
     else
       @feed_items = []
