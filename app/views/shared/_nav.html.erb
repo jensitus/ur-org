@@ -11,14 +11,15 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="/messages">messages <span class="badge"><%= current_user.mailbox.inbox({ :read => false }).count.to_s %></span></a>
-          <%=  %>
-        </li>
+
         <li><%= link_to 'Home', home_path %></li>
         <li><%= link_to 'Kontakt', new_contact_path %></li>
         <% if user_signed_in? %>
             <li class="user_avatar"><%= render 'shared/avatar_nav' %> <%#= image_tag current_user.gravatar_url, class: 'img-rounded', width: 47 %></li>
+            <li>
+              <a href="/messages">messages <span class="badge"><%= current_user.mailbox.inbox({ :read => false }).count.to_s %></span></a>
+              <%=  %>
+            </li>
             <li><%= link_to current_user.name, edit_user_registration_path %></li>
             <li><%= link_to 'logout', destroy_user_session_path, :method => :delete %> </li>
         <% else %>
