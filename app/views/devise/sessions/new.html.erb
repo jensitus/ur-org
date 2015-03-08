@@ -15,10 +15,9 @@
 
             <% if devise_mapping.rememberable? -%>
 
-                  <%= f.check_box :remember_me %>
+                  <%= f.check_box :remember_me, :checked => true %>
                   <%= f.label :remember_me %>
             <% end -%>
-
 
             <div class="actions">
               <%= f.submit "Log in", class: 'btn btn-success' %>
