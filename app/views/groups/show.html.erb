@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-4">
+    <h4><%= @group.name %></h4>
+    <p>Here you find the details, enjoy it!</p>
+  </div>
+  <div class="col-md-6">
+    <span>
+        <b><%= @group.name %></b><br>
+        <%= @group.description %><br>
+        <span id="member_count">
+          <%= pluralize @group.users.count, 'member' %>
+        </span><br>
+        <%= render 'join_group' %>
+    </span>
+  </div>
+</div>

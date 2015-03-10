@@ -1,0 +1,4 @@
+<%= form_for(current_user.group_memberships.find_by(group_id: @group.id), html: {method: :delete}, remote: true) do |f| %>
+    <%#= raise current_user.group_memberships.find_by(group_id: @group.id).inspect %>
+    <%= f.submit 'kill that cat', class: 'btn btn-danger' %>
+<% end %>

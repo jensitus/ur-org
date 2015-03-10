@@ -1,0 +1,16 @@
+<div class="row">
+<div class="col-md-4">
+  <h4>Groups</h4>
+  <p>explore the existing groups or create a new one</p>
+  <p>
+    <%= link_to 'index', groups_path %><br>
+    <%= link_to 'new', new_group_path %>
+  </p>
+</div>
+  <div class="col-md-6">
+    <span id="index_new">
+      <%= render 'new' %>
+    </span>
+  </div>
+
+</div>

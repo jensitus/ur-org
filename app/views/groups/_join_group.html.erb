@@ -1,0 +1,7 @@
+<span id="join_group">
+    <% if @group.membership?(@group, current_user) %>
+        <%= render 'unjoin' %>
+    <% else %>
+        <%= render 'join' %>
+    <% end %>
+</span>

@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_relationships, source: :follower
 
   has_many :comments
+  has_many :group_memberships
+  has_many :groups, through: :group_memberships
 
   acts_as_messageable
 
