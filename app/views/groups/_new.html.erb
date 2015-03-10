@@ -1,0 +1,16 @@
+<%= form_for(@group, html: { multipart: true }) do |f| %>
+    <div class="form-group">
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+      <div class="submit">
+        <%= f.submit 'Jetzt klick halt endlich', class: 'btn btn-success' %>
+      </div>
+    </div>
+<% end %>

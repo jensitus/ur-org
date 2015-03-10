@@ -1,0 +1,2 @@
+$('#join_group').html("<%= escape_javascript(render 'groups/unjoin') %>");
+$('#member_count').html("<%= pluralize(@group.users.count, 'member') %>");

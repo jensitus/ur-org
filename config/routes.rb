@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
 
+  # get 'groups/index'
+  # get 'groups/show'
+  # get 'groups/new'
+  # get 'groups/edit'
+  # get 'groups/create'
+  # get 'groups/update'
+  # get 'groups/destroy'
+
+  resources :groups
+
+  resources 'group_memberships', only: [:create, :destroy]
+=begin
+  post 'group_memberships/create'
+  post 'group_memberships/destroy'
+=end
+
   resources :comments
 
   resources :contacts
