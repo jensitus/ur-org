@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap/modal
+//= require jquery.atwho
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
 //= require chat

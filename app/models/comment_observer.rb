@@ -7,7 +7,7 @@ class CommentObserver < ActiveRecord::Observer
     ua.each do |u_a|
       puts u_a
       sleep 1
-      CommentMailer.also_comment_mail( answer, u_a).deliver
+      CommentMailer.also_comment_mail(answer, u_a).deliver
     end
 
     if !ua.include?(answer.micropost.user.email)

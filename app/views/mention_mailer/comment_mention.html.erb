@@ -1,0 +1,9 @@
+<h5>Sie wurden erwähnt, wohoo!!</h5>
+
+<p>
+  Hi, <%= @user.name %>,
+  <%= @post_writer.name %>
+  mentioned you in a comment on this posting:<br>
+  <a href="<%= root_url %><%= @post_writer.slug %>/<%= @post.id %>"><%= root_url %><%= @post_writer.slug %>/<%= @post.id %></a>
+</p>
+

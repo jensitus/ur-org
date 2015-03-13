@@ -17,3 +17,13 @@
       </div>
     </div>
 <% end %>
+
+<script>
+    $(function(){
+        data = [];
+        <% User.find_each do |user| %>
+            data.push('<%= user.slug %>');
+        <% end %>
+        $('textarea').atwho({at:"@", 'data':data});
+    });
+</script>
