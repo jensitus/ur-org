@@ -7,7 +7,7 @@
       <% end %>
     </span>
     <span class="content">
-      <%= simple_format(auto_link(strip_tags(comment.body))) %>
+      <%= mention_link simple_format(auto_link(strip_tags(comment.body))) %>
     </span>
     <span class="timestamp">
         <small>

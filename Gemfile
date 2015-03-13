@@ -83,7 +83,9 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'devise'
 
-
+# gem 'twitter-text'
+gem 'jquery-atwho-rails'
+gem 'socialization', :git => 'https://github.com/HackerPartie/socialization.git'
 
 
 gem 'omniauth-twitter'

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   #validates_processing_of :avatar
 
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: :slugged, :sequence_separator => '_'
 
   has_many :conversations, :foreign_key => :sender_id
   has_many :microposts, dependent: :destroy
@@ -38,8 +38,13 @@ class User < ActiveRecord::Base
   has_many :groups, through: :group_memberships
 
   acts_as_messageable
+  acts_as_mentionable
 
   #after_create :create_default_conversation
+
+  def normalize_friendly_id(string)
+    super.gsub('-', '_')
+  end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.id).first_or_create do |user|

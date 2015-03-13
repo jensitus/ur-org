@@ -8,4 +8,6 @@ class Comment < ActiveRecord::Base
   has_one :answer
   has_one :micropost, through: :answer
 
+  acts_as_mentioner
+
 end

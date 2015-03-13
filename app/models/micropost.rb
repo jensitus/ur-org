@@ -11,6 +11,8 @@ class Micropost < ActiveRecord::Base
   has_many :answers
   has_many :comments, through: :answers
 
+  acts_as_mentioner
+
   private
 
   # Validates the size of an uploaded picture

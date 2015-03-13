@@ -1,0 +1,5 @@
+Hi, <%= @user.name %>,
+<%= @writer.name %>
+mentioned you here:
+
+<a href="<%= root_url %><%= @writer.slug %>/<%= @mentioner.id %>"><%= root_url %><%= @writer.slug %>/<%= @mentioner.id %></a>
