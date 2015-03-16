@@ -8,6 +8,7 @@ class StaticPagesController < ApplicationController
       fresh_when :etag => [@feed_items, current_user]
     else
       @static_page_image = Micropost.where('picture IS NOT NULL').sample(1)[0].picture.url
+      @micropost = Micropost.where('picture IS NULL').sample(3)
       # redirect_to new_user_session_url
     end
   end
