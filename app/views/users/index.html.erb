@@ -1,6 +1,6 @@
 <%	 provide(:title, 'registered users') %>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-8">
     <div style="height: 300px; overflow-y: auto;">
       <div class="panel panel-default">
         <div class="panel-heading">Registered Users</div>
@@ -11,7 +11,7 @@
                 <tr>
                   <th>index</th>
                   <th>avatar</th>
-
+                  <th>id</th>
                   <th>name</th>
                   <th>email</th>
                   <th></th>
@@ -21,12 +21,16 @@
                 <% @users.each_with_index do |user, index| %>
                 <tr>
                   <td><%= index +=1 %></td>
-                  <td><%= image_tag user.gravatar_url, class: 'img-rounded', width: 40 %></td>
-
+                  <% if user.avatar_url.nil? %>
+                    <td><%= image_tag user.gravatar_url, class: 'img-rounded', width: 40 %></td>
+                  <% else %>
+                      <td><%= image_tag user.avatar.thumb, class: 'img-rounded', width: 40 %></td>
+                  <% end %>
+                  <td><%= user.id %></td>
                   <td><%= user.name %></td>
                   <td><%= user.email %></td>
                   <td>
-                    <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                    <%#= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
                                 "data-sid" => current_user.id, "data-rip" => user.id %>
                   </td>
                 </tr>
@@ -40,28 +44,7 @@
         <br clear="all" />
           <hr>
 
-          <div style="height: 400px; overflow-y: auto;">
-            <h4>your conversations</h4>
-            <% if @conversations.any? %>
-                <ul class="media-list">
-                  <% @conversations.each do |conversation| %>
-                      <li class="media">
-                        <%= image_tag('http://placehold.it/50x50', class: 'media-object pull-left') %>
-                        <div class="media-body">
-                          <%= link_to conversation_path(conversation), class: 'conversation', "data-cid" => conversation.id do %>
-                              <h4 class="media-heading"> <%= conversation_interlocutor(conversation).name %> </h4>
-                              <p><%= conversation.messages.last.nil? ? 'No messages' : truncate(conversation.messages.last.body, length: 45) %></p>
-                          <% end %>
 
-                        </div>
-                      </li>
-                  <% end %>
-                </ul>
-            <% else %>
-                <p>you have no conversations. click send message with any user to create one</p>
-            <% end %>
-
-          </div>
 
   </div>
 </div>
