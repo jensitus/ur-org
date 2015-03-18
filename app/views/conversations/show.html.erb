@@ -3,11 +3,11 @@
     <%= render 'inbox_trash' %>
   </div>
 
-    <div class="col-md-5">
+    <div class="col-md-6">
 
       <% @conversation.participants.each do |participant| %>
         <% if participant != current_user %>
-          conversation with: <%= participant.name %>
+          conversation with: <b><%= participant.name %></b>
         <% end %>
       <% end %>
 
@@ -19,22 +19,31 @@
       <%= content_tag_for(:div, @conversation.receipts_for(current_user).order(:created_at => :desc)) do |receipt| %>
         <% message = receipt.message %>
           <div class="conversation_content">
-              <span class="gravatar">
-                    <%# if message.sender.avatar_url.nil? %>
-                        <%#= image_tag message.sender.gravatar_url, width: '32', class: 'img-rounded' %>
-                    <%# else %>
-                        <%#= image_tag message.sender.avatar.thumb, width: '32', class: 'img-rounded' %>
-                    <%# end %>
-              </span>
+            <div class="row">
 
-                <%= simple_format(auto_link(strip_tags(message.body))) %>
+              <div class="gravatar col-md-1">
+                    <% if message.sender.avatar_url.nil? %>
+                        <%= image_tag message.sender.gravatar_url, width: '25', class: 'img-circle' %>
+                    <% else %>
+                        <%= image_tag message.sender.avatar.thumb, width: '25', class: 'img-circle' %>
+                    <% end %>
+              </div>
+              <div class="col-md-10">
+                    <small>
+                        <b><%= link_to message.sender.name, message.sender %></b>
+                        &nbsp;&nbsp;&nbsp;<%= message.created_at.strftime('%e.%m. at %H:%M') %>
+                    </small>
+              </div>
+            </div>
 
-                  <small>
-                    <%= link_to message.sender.name, message.sender %>
-                    <%= message.created_at.strftime('%e.%m.%Y at %H:%M') %>
-                  </small>
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-10" style="margin-top: 5px; margin-left: 10px;">
+                  <%= simple_format(auto_link(strip_tags(message.body))) %>
+              </div>
+
+            </div>
           </div>
-
       <% end %>
     </div>
       <br><br>

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'group_memberships/destroy'
 =end
 
+  resources 'likes', only: [:create, :destroy]
   resources :comments
 
   resources :contacts

@@ -1,0 +1,2 @@
+$('#like-<%= @micropost_id %>').html('<%= escape_javascript(render partial: 'microposts/like', locals: {m_id: @micropost_id}) %>');
+$('#likes_count-<%= @micropost_id %>').html('<%= render 'likes/likes_count' %>');
