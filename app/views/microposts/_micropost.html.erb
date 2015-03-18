@@ -1,4 +1,5 @@
 <li id="micropost-<%= micropost.id %>">
+  <%= micropost.id %>
     <span class="gravatar">
       <% if micropost.user.avatar_url.nil? %>
         <%= link_to image_tag(micropost.user.gravatar_url, width: 50), micropost.user %>
@@ -20,7 +21,17 @@
 
         <% end %>
         <%= link_to pluralize(micropost.comments.count.to_s, 'comment'), user_post_path(:slug => micropost.user, :id => micropost.id) %>
+        <% if user_signed_in? %>
+            <span id="like-<%= micropost.id %>">
+                <% if micropost.liked_by?(current_user) == true %>
+                    <%= render partial: 'microposts/unlike', locals: { m_id: micropost.id } %>
+                <% else %>
+                    <%= render partial: 'microposts/like', locals: { m_id: micropost.id } %>
+                <% end %>
+            </span>
 
+        <% end %>
+        | <span id="likes_count-<%= micropost.id %>"><%= pluralize micropost.likers(User).count, 'like' %></span>
       </small>
 
     </span>

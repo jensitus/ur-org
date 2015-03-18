@@ -5,6 +5,7 @@ class CommentObserver < ActiveRecord::Observer
     ua = get_user_array(answer)
     #byebug
     ua.each do |u_a|
+      puts 'u_a **** u_a **** : '
       puts u_a
       sleep 1
       CommentMailer.also_comment_mail(answer, u_a).deliver

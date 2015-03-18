@@ -12,6 +12,7 @@ class Micropost < ActiveRecord::Base
   has_many :comments, through: :answers
 
   acts_as_mentioner
+  acts_as_likeable
 
   private
 

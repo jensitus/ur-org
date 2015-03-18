@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
 
   acts_as_messageable
   acts_as_mentionable
+  acts_as_liker
 
   #after_create :create_default_conversation
 

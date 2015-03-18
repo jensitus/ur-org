@@ -1,0 +1,7 @@
+<span id="like">
+    <% if @liked_by_current_user == true %>
+        <%= render 'likes/unlike' %>
+    <% else %>
+        <%= render 'likes/like' %>
+    <% end %>
+</span>

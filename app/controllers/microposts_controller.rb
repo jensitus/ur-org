@@ -9,7 +9,7 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     mentions = Mention.get_the_mention(@micropost.content) #MentionModule.get_the_mention(@micropost.content)
     if @micropost.save
-      Mention.mention_it(mentions, @micropost) #MentionModule.mention_it(mentions, @micropost)
+      Mention.mention_it(mentions, @micropost)
       flash[:success] = '<b>jesus christ, you did it!!</b>'.html_safe
       redirect_to request.referrer || root_url
     else
@@ -21,6 +21,10 @@ class MicropostsController < ApplicationController
   def show
     @comment = Comment.new
     @micropost = Micropost.find(params[:id])
+    #@likes = @micropost.likers(User)
+    if !current_user.nil?
+      @liked_by_current_user = @micropost.liked_by?(current_user)
+    end
     @comments = @micropost.comments
     fresh_when etag: [@comments, @micropost, current_user]
   end
