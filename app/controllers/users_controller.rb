@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:index]
-  around_filter :catch_not_found
   before_action :require_admin, only: :index
 
   def index
@@ -29,13 +28,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def catch_not_found
-    yield
-    rescue ActiveRecord::RecordNotFound
-      flash[:notice] = 'gibt es nicht'
-      redirect_to root_url
-  end
 
   def require_admin
     if !current_user.admin?

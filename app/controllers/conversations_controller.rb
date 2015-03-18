@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   before_filter :authenticate_user!
   helper_method :mailbox, :conversation
-  around_action :catch_not_found
+  #around_action :catch_not_found
   before_action :mailbox
   before_action :inbox_trash_count
 
@@ -70,12 +70,12 @@ class ConversationsController < ApplicationController
     @sentcount ||= @mailbox.sentbox.count
   end
 
-  def catch_not_found
-    yield
-  rescue ActiveRecord::RecordNotFound
-    flash[:danger] = '<b>muss das sein?</b>'.html_safe
-    redirect_to root_path
-  end
+  # def catch_not_found
+  #   yield
+  # rescue ActiveRecord::RecordNotFound
+  #   flash[:danger] = '<b>muss das sein?</b>'.html_safe
+  #   redirect_to root_path
+  # end
 
   # def conversation_params(*keys)
   #   fetch_params(:conversation, *keys)
