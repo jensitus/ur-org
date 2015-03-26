@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
   has_many :group_memberships
   has_many :groups, through: :group_memberships
 
+  has_many :group_maintainers
+
   acts_as_messageable
   acts_as_mentionable
   acts_as_liker
@@ -58,15 +60,16 @@ class User < ActiveRecord::Base
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data = session["devise.twitter_data"] && session["devise.twitter_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
+      if data = session['devise.twitter_data'] && session["devise.twitter_data"]["extra"]["raw_info"]
+        user.email = data['email'] if user.email.blank?
       end
     end
   end
 
   def feed
     following_ids = 'select followed_id from relationships where follower_id = :user_id'
-    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+    group_or_not = 'select group_id from group_memberships where user_id = :user_id'
+    Micropost.where("group_id IS NULL AND user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 
   # connect a user

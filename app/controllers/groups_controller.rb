@@ -10,11 +10,15 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @micropost = Micropost.new # current_user.microposts.build(micropost_params)
+    @microposts = @group.microposts.page(params[:page]).per(8)
+    @placeholder = 'Schreib der Gruppe, was dir am Herzen liegt'
     respond_with(@group)
   end
 
   def new
     @group = Group.new
+
     respond_with(@group)
   end
 
@@ -24,6 +28,9 @@ class GroupsController < ApplicationController
   def create
     @group = current_user.groups.build(group_params)
     if @group.save
+      #byebug
+      GroupMembership.create!(group_id: @group.id, user_id: current_user.id)
+      GroupMaintainer.create!(group_id: @group.id, user_id: current_user.id)
       flash[:success] = '<b>cool</b>'.html_safe
       redirect_to groups_path
     else
@@ -49,6 +56,10 @@ class GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:name, :description)
+  end
+
+  def micropost_params
+
   end
 
 end

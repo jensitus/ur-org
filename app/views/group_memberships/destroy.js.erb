@@ -1,2 +1,4 @@
-$('#join_group').html("<%= escape_javascript(render('groups/join')) %>");
+$('.join_group').html("<%= escape_javascript(render('groups/join')) %>");
 $('#member_count').html("<%= pluralize @group.users.count, 'member' %>");
+$('#group_form').html("<%=  %>");
+$('#group_postings').html("<%= %>");

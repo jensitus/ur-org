@@ -1,20 +1,15 @@
 Rails.application.routes.draw do
 
-  # get 'groups/index'
-  # get 'groups/show'
-  # get 'groups/new'
-  # get 'groups/edit'
-  # get 'groups/create'
-  # get 'groups/update'
-  # get 'groups/destroy'
+  get 'notifications/index'
+  get 'notifications/:id' => 'notifications#show', as: 'notification'
+
+  resources 'group_maintainers', only: [:create, :destroy]
+  #get 'group_maintainers/create'
+  #get 'group_maintainers/destroy'
 
   resources :groups
 
   resources 'group_memberships', only: [:create, :destroy]
-=begin
-  post 'group_memberships/create'
-  post 'group_memberships/destroy'
-=end
 
   resources 'likes', only: [:create, :destroy]
   resources :comments

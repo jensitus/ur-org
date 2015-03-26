@@ -1,2 +1,5 @@
-$('#join_group').html("<%= escape_javascript(render 'groups/unjoin') %>");
-$('#member_count').html("<%= pluralize(@group.users.count, 'member') %>");
+$('.join_group').html("<%= escape_javascript(render 'groups/unjoin') %>");
+$('#member_count').html("<%#= pluralize(@group.users.count, 'member') %>");
+//var $mp = $("<%#=  %>");
+$('#group_form').html("<%= escape_javascript(render 'shared/micropost_form') %>");
+

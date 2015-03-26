@@ -13292,7 +13292,7 @@ var ready = function () {
         },
 
         /**
-         * Plays a notification sound when a new chat message arrives
+         * Plays a notifications sound when a new chat message arrives
          */
 
         notify: function () {

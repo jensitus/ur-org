@@ -2,17 +2,15 @@ class GroupMembershipsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @group = Group.find_by(params.require(:group_membership).permit[:group_id])
+    @group = Group.find(params[:group_membership][:group_id])
     GroupMembership.create!(gm_params)
-    respond_to do |format|
-      format.html { redirect_to @group }
-      format.js
-    end
+    redirect_to group_url(@group)
   end
 
   def destroy
-    @group = Group.find_by(params[:group_id])
-    GroupMembership.find(params[:id]).destroy
+    gm = GroupMembership.find(params[:id])
+    @group = Group.find gm.group_id
+    gm.destroy
     respond_to do |format|
       format.html { redirect_to @group }
       format.js

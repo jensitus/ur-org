@@ -1,7 +1,9 @@
 <span id="join_group">
-    <% if @group.membership?(@group, current_user) %>
+    <%# if @group.membership?(@group, current_user) %>
         <%= render 'unjoin' %>
-    <% else %>
+        <%= render 'shared/micropost_form' %>
+        <%= render 'group_microposts' %>
+    <%# else %>
         <%= render 'join' %>
-    <% end %>
+    <%# end %>
 </span>

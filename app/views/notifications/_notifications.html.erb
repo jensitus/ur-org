@@ -1,0 +1,15 @@
+
+<h4>notifications</h4>
+<% @notifications.each do |notification| %>
+
+    <% if notification.is_unread?(current_user) %>
+        <%= notification.id %><br>
+        <b><%= notification.subject %></b><br>
+        <b><%= notification.body.html_safe %></b><br>
+    <% else %>
+        <%= notification.subject %><br>
+        <%= notification.body.html_safe %><br>
+    <% end %>                       <br>
+
+    <%# notification.mark_as_read current_user %>
+<% end %>

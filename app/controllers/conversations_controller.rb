@@ -1,7 +1,6 @@
 class ConversationsController < ApplicationController
   before_filter :authenticate_user!
   helper_method :mailbox, :conversation
-  #around_action :catch_not_found
   before_action :mailbox
   before_action :inbox_trash_count
 
@@ -34,6 +33,10 @@ class ConversationsController < ApplicationController
   def show
     @conversation ||= @mailbox.conversations.find(params[:id])
     conversation.mark_as_read(current_user)
+  end
+
+  def show_notification
+    @notification ||= @mailbox.notifications.find(params[:id])
   end
 
   def untrash
@@ -69,58 +72,5 @@ class ConversationsController < ApplicationController
     @trashcount ||= @mailbox.trash.count
     @sentcount ||= @mailbox.sentbox.count
   end
-
-  # def catch_not_found
-  #   yield
-  # rescue ActiveRecord::RecordNotFound
-  #   flash[:danger] = '<b>muss das sein?</b>'.html_safe
-  #   redirect_to root_path
-  # end
-
-  # def conversation_params(*keys)
-  #   fetch_params(:conversation, *keys)
-  # end
-  #
-  # def message_params(*keys)
-  #   fetch_params(:message, *keys)
-  # end
-  #
-  # def fetch_params(key, *subkeys)
-  #   params[key].instance_eval do
-  #     case subkeys.size
-  #       when 0 then self
-  #       when 1 then self[subkeys.first]
-  #       else subkeys.map{|k| self[k] }
-  #     end
-  #   end
-  # end
-
-
-=begin
-    def index
-      @conversations = current_user.mailbox.conversations
-      @inbox = current_user.mailbox.inbox
-      @sentbox = current_user.mailbox.sentbox
-      @trash = current_user.mailbox.trash
-      c = current_user.mailbox.inbox.first
-      @receipt = c.receipts_for current_user
-      end
-=end
-
-  # def show
-  #   @conversation = current_user.mailbox.inbox.find(params[:id])
-  #   byebug
-  #   @receipts = @conversation.receipts_for current_user
-  #   byebug
-  # end
-
-=begin
-  def reply_form
-    # respond_to do |format|
-    #   format.html
-    #   format.js
-    # end
-  end
-=end
 
 end

@@ -13,13 +13,14 @@
     </span>
     <span class="timestamp">
       <small>
-        Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+        Posted <%= time_ago_in_words(micropost.created_at) %> ago |
         <% if current_user == micropost.user %>
             <%= link_to 'edit', edit_micropost_path(micropost.id) %> |
             <%= link_to 'delete', micropost, method: :delete, data: { confirm: 'you sure?' } %> |
 
         <% end %>
-        <%= link_to pluralize(micropost.comments.count.to_s, 'comment'), user_post_path(:slug => micropost.user, :id => micropost.id) %>
+
+        <%= link_to pluralize(micropost.comments.count.to_s, 'comment'), user_post_path(slug: micropost.user.slug, id: micropost.id) %>
         <% if user_signed_in? %>
             <span id="like-<%= micropost.id %>">
                 <% if micropost.liked_by?(current_user) == true %>

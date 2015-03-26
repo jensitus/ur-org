@@ -9,6 +9,10 @@
         <%= f.label :description %>
         <%= f.text_area :description, class: 'form-control' %>
       </div>
+      <div class="hidden">
+        <%#= f.hidden_field :user_id, user_id: current_user.id %>
+        <%#= f.hidden_field :group_id, group_id: @group.id %>
+      </div>
       <div class="submit">
         <%= f.submit 'Jetzt klick halt endlich', class: 'btn btn-success' %>
       </div>
