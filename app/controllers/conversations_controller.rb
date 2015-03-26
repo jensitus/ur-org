@@ -14,6 +14,7 @@ class ConversationsController < ApplicationController
   def index
     @conversations ||= @mailbox.inbox.page(params[:page]).per(5)
     #@trash ||= current_user.mailbox.trash.all
+
   end
 
   def sentbox
