@@ -1,16 +1,36 @@
 <div class="row">
   <div class="col-md-4">
     <h4><%= @group.name %></h4>
-    <p>Here you find the details, enjoy it!</p>
-  </div>
-  <div class="col-md-6">
-    <span>
-        <b><%= @group.name %></b><br>
-        <%= @group.description %><br>
+    <%= @group.description %><br>
+    <% if @group.membership?(@group, current_user) %>
+        <br>
+        <span>
+          <%#= @group.maintainer?(@group.id, current_user.id).inspect %>
+        </span>
+        <br>
+        <span id="group_form">
+            <%= render 'shared/micropost_form' %>
+        </span>
+        <span class="join_group">
+            <%= render 'groups/unjoin' %>
+        </span>
         <span id="member_count">
-          <%= pluralize @group.users.count, 'member' %>
-        </span><br>
-        <%= render 'join_group' %>
-    </span>
-  </div>
+            <%= pluralize @group.users.count, 'member' %>
+        </span>
+      </div>
+      <div class="col-md-6">
+        <span id="group_postings">
+            <b><%= @group.name %></b><br>
+            <ol class="microposts">
+                <%= render @microposts %>
+            </ol>
+        </span>
+        <%= paginate @microposts %>
+      </div>
+    <% else %>
+        <span class="join_group">
+            <%= render 'groups/join' %>
+        </span>
+    <% end %>
+    </div>
 </div>

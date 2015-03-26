@@ -1,0 +1,2 @@
+module GroupMaintainersHelper
+end

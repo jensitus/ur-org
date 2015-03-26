@@ -2,7 +2,9 @@
     <div class="form-group">
       <%= render 'shared/error_messages', object: f.object  %>
       <div class="field">
-        <%= f.text_area :content, :rows => '5', id: 'content_field', placeholder: 'Compose your message to the world ...', class: 'form-control' %>
+        <%#= @group.id unless @group.nil? %>
+        <%= f.hidden_field :group_id, :value => @group.id unless @group.nil? %>
+        <%= f.text_area :content, :rows => '5', id: 'content_field', placeholder: @placeholder, class: 'form-control' %>
         <div class="well well-sm"><span id="content_count">0</span> characters</div>
       </div>
       <span class="picture">

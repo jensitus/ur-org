@@ -11,8 +11,12 @@ class Micropost < ActiveRecord::Base
   has_many :answers
   has_many :comments, through: :answers
 
+  has_one :group
+
   acts_as_mentioner
   acts_as_likeable
+
+  after_commit :notify_user
 
   private
 
@@ -20,6 +24,23 @@ class Micropost < ActiveRecord::Base
   def picture_size
     if picture.size > 5.megabytes
       errors.add(:picture, 'should be less than 5MB')
+    end
+  end
+
+  def notify_user
+    if !group_id.nil?
+      sender = User.find user_id
+      recipients = []
+      group = Group.find(group_id)
+      group.users.each do |gu|
+        recipients << gu
+      end
+      Mailboxer::Notification.notify_all(
+          recipients,
+          sender.name + ' schrieb in ' + group.name + ':' ,
+          content + "<br><a href='/groups/#{group_id}'>view</a>",
+          self
+      )
     end
   end
 

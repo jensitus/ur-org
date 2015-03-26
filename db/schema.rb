@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312091156) do
+ActiveRecord::Schema.define(version: 20150323105236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,13 @@ ActiveRecord::Schema.define(version: 20150312091156) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "group_maintainers", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "group_memberships", force: true do |t|
     t.integer  "user_id"
@@ -170,6 +177,7 @@ ActiveRecord::Schema.define(version: 20150312091156) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "picture"
+    t.integer  "group_id"
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree

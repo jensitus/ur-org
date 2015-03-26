@@ -1,4 +1,4 @@
-<%= form_for(current_user.group_memberships.build(group_id: @group.id), remote: true) do |f| %>
+<%= form_for(current_user.group_memberships.build(group_id: @group.id)) do |f| %>
     <%= f.hidden_field :user_id, user_id: current_user.id %>
     <%= f.hidden_field :group_id, group_id: @group.id %>
     <%= f.submit 'join that group', class: 'btn btn-default' %>

@@ -3,8 +3,13 @@
 <h3><%= current_user.name %></h3>
 <div><%= pluralize(current_user.microposts.count, 'post') %></div>
 <div><%= link_to 'view my profile', current_user %></div>
-<div class="btn btn-default">
-  <a href="/messages">
+<b><%= 'My Groups:' %></b><br>
+<% current_user.groups.each do |my_group| %>
+    <%= link_to my_group.name, group_path(my_group) %><br>
+<% end %>
+
+<div>
+  <a href="/messages" class="btn btn-default">
     <span class="glyphicon glyphicon-envelope"></span>
     messages
     <% if current_user.mailbox.inbox({:read => false}).count != 0 %>
@@ -12,4 +17,11 @@
     <% end %>
   </a>
 </div>
-
+<div>
+  <%= link_to notifications_index_path, class: 'btn btn-default' do %>
+    notifications
+    <% if current_user.mailbox.notifications(:read => false ).count != 0 %>
+        <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
+    <% end %>
+  <% end %>
+</div>

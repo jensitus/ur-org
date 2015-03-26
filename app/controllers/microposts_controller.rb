@@ -1,9 +1,14 @@
 class MicropostsController < ApplicationController
-  before_filter :authenticate_user!, only: [:create, :destroy, :update, :edit]
+  before_filter :authenticate_user!, only: [:create, :new, :destroy, :update, :edit]
   before_action :correct_user, only: :destroy
-  before_action :set_micropost, only: [:edit, :update, :destroy, :show]
+  before_action :set_micropost, only: [:edit, :new, :update, :destroy, :show]
 
   respond_to :html, :js
+
+  def new
+    @micropost = Micropost.new
+    respond_with(@micropost)
+  end
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -43,7 +48,7 @@ class MicropostsController < ApplicationController
     if current_user == @micropost.user
       if @micropost.update(micropost_params)
         flash[:success] = 'yeah!!'
-        redirect_to micropost_url
+        redirect_to user_post_path :slug => @micropost.user.slug, :id => @micropost.id
         #flash[:success] = 'yeah!!'
         #redirect_to request.referrer || root_url
       else
@@ -71,7 +76,7 @@ class MicropostsController < ApplicationController
   private
 
   def micropost_params
-    params.require(:micropost).permit(:content, :picture)
+    params.require(:micropost).permit(:content, :picture, :group_id)
   end
 
   def correct_user

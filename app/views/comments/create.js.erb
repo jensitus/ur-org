@@ -1,2 +1,3 @@
-$("#new-comment").append("<%= j render @comment %>");
-$('textarea').val("");
+$('#new-comment').append("<%= j render @comment %>");
+$('textarea').val('');
+$('.create_comment').find("input[type='submit']").val('Hopp').prop('disabled', false);
