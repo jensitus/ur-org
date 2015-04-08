@@ -1,7 +1,5 @@
 class Mention < Socialization::ActiveRecordStores::Mention
 
-  #after_create :inform_the_mentionable
-
   def self.get_the_mention(men)
     mention = []
     men.split.each do |m|
