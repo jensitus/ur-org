@@ -27,10 +27,10 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     mentions = Mention.get_the_mention(@comment.body)
     if @comment.save
-      flash[:success] = '<b>cool, ein neuer kommentar</b>'.html_safe
       @answer = Answer.create!(:micropost_id => answer_params,
                                :comment_id => @comment.id)
       Mention.mention_it(mentions, @comment)
+      flash[:success] = '<b>cool, ein neuer kommentar</b>'.html_safe
     else
       @feed_items = []
       render 'static_pages/home'

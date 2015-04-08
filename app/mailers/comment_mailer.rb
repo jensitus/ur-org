@@ -7,6 +7,6 @@ class CommentMailer < ActionMailer::Base
 
   def also_comment_mail(answer, ua)
     @answer = answer
-    mail(:to => ua, subject: answer.comment.user.name +  ' hat auch noch so einen verdammten kommentar geschrieben')
+    mail(:to => ua, subject: answer.comment.user.name +  ' also auch')
   end
 end

@@ -11,7 +11,10 @@ class CommentObserver < ActiveRecord::Observer
       CommentMailer.also_comment_mail(answer, u_a).deliver
     end
 
-    if !ua.include?(answer.micropost.user.email)
+    if !ua.include?(answer.micropost.user.email) && answer.comment.user.email != answer.micropost.user.email
+      puts 'answer.micropost.user.email: '
+      puts answer.comment.user.email
+      puts answer.micropost.user.email
       CommentMailer.comment_mail(answer).deliver
     end
 
@@ -31,6 +34,7 @@ class CommentObserver < ActiveRecord::Observer
 
     user_array = user_array.uniq
     user_array.delete(answer.comment.user.email)
+    puts user_array
     user_array
   end
 
