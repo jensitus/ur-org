@@ -31,9 +31,13 @@ gem 'capistrano-rails'
 gem 'capistrano-rvm'
 gem 'capistrano-passenger'
 
+gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+
 gem 'unobtrusive_flash'
 
 gem 'mailboxer'
+
+gem 'sidekiq'
 
 group :development do
   gem 'byebug'
