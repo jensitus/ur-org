@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/seuros/capistrano-sidekiq.git
+  revision: e21647ceaaac5703acb2b668ac574ff71181dd23
+  specs:
+    capistrano-sidekiq (0.5.3)
+      capistrano
+      sidekiq
+
+GIT
   remote: https://github.com/HackerPartie/socialization.git
   revision: 019bdb21b26af46c10022ae49b7f8cd27544b335
   specs:
@@ -84,6 +92,7 @@ GEM
     coffee-script-source (1.8.0)
     colorize (0.7.5)
     columnize (0.9.0)
+    connection_pool (2.1.3)
     debugger-linecache (1.2.0)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -288,6 +297,9 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.0)
       json (~> 1.4)
+    redis (3.2.1)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     ruby-progressbar (1.7.0)
@@ -300,6 +312,12 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sidekiq (3.3.3)
+      celluloid (>= 0.16.0)
+      connection_pool (>= 2.1.1)
+      json
+      redis (>= 3.0.6)
+      redis-namespace (>= 1.3.1)
     slop (3.6.0)
     spring (1.2.0)
     sprockets (2.12.3)
@@ -348,6 +366,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capistrano-secrets-yml
+  capistrano-sidekiq!
   carrierwave
   coffee-rails (~> 4.0.0)
   devise
@@ -374,6 +393,7 @@ DEPENDENCIES
   rails_autolink
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  sidekiq
   socialization!
   spring
   turbolinks
