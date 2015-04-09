@@ -6,6 +6,8 @@ require 'capistrano/rails'
 require 'capistrano/rvm'
 require 'capistrano/passenger'
 require 'capistrano/secrets_yml'
+require 'capistrano/sidekiq'
+require 'capistrano/sidekiq/monit'
 
 # Include default deployment tasks
 
