@@ -27,6 +27,7 @@ class MentionMailer < ActionMailer::Base
     @greeting = 'Hi'
     @writer = mentioner.user
 
+
     mail to: user.email, :subject => 'hi ' + user.name + ', ' + @writer.name + ' mentioned you'
   end
 end
