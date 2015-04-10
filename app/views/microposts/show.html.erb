@@ -9,23 +9,14 @@
     </ol>
     <ol class="microposts">
       <%= render @comments %>
+      <div id="new-comment"></div>
     </ol>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-
-  </div>
-
-  <div class="col-md-6">
-    <div id="new-comment"></div>
     <% if user_signed_in? %>
         <ol class="create_comment">
           <%= render 'comments_form' %>
         </ol>
     <% else %>
         <ol class="">
-
           <%= link_to 'sign in', new_user_session_path %>
           or
           <%= link_to 'sign up', new_user_registration_path %><br>
