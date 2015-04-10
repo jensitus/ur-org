@@ -10,7 +10,7 @@
 
     <p style="padding: 15px; border-radius: 5px; background: #eee;">
         checkout what <%= @user.follower.name %> has to say: <br>
-        <a href="https://ist-ur.org/<%= @user.follower.slug %>">https://ist-ur.org/users/<%= @user.follower.slug %></a>
+        <a href="<%= root_url %><%= @user.follower.slug %>"><%= root_url %><%= @user.follower.slug %></a>
     </p>
 
   <p style="padding: 15px; border-radius: 5px; background: #eee;">
