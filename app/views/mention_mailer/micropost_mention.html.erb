@@ -1,10 +1,12 @@
-<h4>Mentions</h4>
 
-<p>
+<div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 400px;">
   Hi, <%= @user.name %>,
-  <%= @writer.name %>
+  <a href="<%= root_url %><%= @writer.slug %>"><%= @writer.name %></a>
   mentioned you here:<br>
   <a href="<%= root_url %><%= @writer.slug %>/<%= @mentioner.id %>"><%= root_url %><%= @writer.slug %>/<%= @mentioner.id %></a>
-</p>
+</div>
+<div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 400px;">
+  <%= @mentioner.content %>
+</div>
 
 
