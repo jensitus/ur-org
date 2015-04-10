@@ -1,4 +1,4 @@
-<%= content_tag_for :div, comment do %>
+<%= content_tag_for :li, comment do %>
     <span class="gravatar">
       <% if comment.user.avatar_url.nil? %>
         <%= image_tag comment.user.gravatar_url, width: '32', class: 'img-rounded' %>
@@ -16,5 +16,5 @@
           <%= comment.created_at.strftime('%H:%M') %>
         </small>
     </span>
-    <hr>
+
 <% end %>
