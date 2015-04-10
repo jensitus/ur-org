@@ -6,9 +6,9 @@ class StaticPagesController < ApplicationController
       @placeholder = 'Compose your message to the world ...'
       @feed_items = current_user.feed.page(params[:page]).per(5)
       @likes = @micropost.likers(User)
-      puts '########################################### :::::::    ++++     +*+*+*+'
-      puts current_user.inspect
-      puts '########################################### :::::::    ++++     +*+*+*+'
+      # puts '########################################### :::::::    ++++     +*+*+*+'
+      # puts current_user.inspect
+      # puts '########################################### :::::::    ++++     +*+*+*+'
       @liked_by_current_user = @micropost.liked_by?(current_user)
       fresh_when :etag => [@feed_items, current_user]
     else

@@ -30,13 +30,12 @@ class CommentsController < ApplicationController
       @answer = Answer.create!(:micropost_id => answer_params,
                                :comment_id => @comment.id)
       Mention.mention_it(mentions, @comment)
-      flash[:success] = '<b>cool, ein neuer kommentar</b>'.html_safe
+      #flash[:success] = '<b>cool, ein neuer kommentar</b>'.html_safe
     else
       @feed_items = []
       render 'static_pages/home'
+      flash[:alert] = '<b>that was an absolute disaster</b>'.html_safe
     end
-    #end
-    # respond_with(@comment)
   end
 
   def update

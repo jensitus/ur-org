@@ -23,9 +23,9 @@ class Mention < Socialization::ActiveRecordStores::Mention
     user
     mentioner
     if mentioner.class == Comment
-      MentionMailer.comment_mention(user, mentioner).deliver
+      MentionMailer.delay.comment_mention(user, mentioner)
     elsif mentioner.class == Micropost
-      MentionMailer.micropost_mention(user, mentioner).deliver
+      MentionMailer.delay.micropost_mention(user, mentioner)
     end
 
   end
