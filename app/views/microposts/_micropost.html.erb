@@ -1,4 +1,5 @@
-<li id="micropost-<%= micropost.id %>">
+<!--<li id="micropost-<%#= micropost.id %>">-->
+<%= content_tag_for :li, micropost do %>
     <span class="gravatar">
       <% if micropost.user.avatar_url.nil? %>
         <%= link_to image_tag(micropost.user.gravatar_url, width: 50), micropost.user %>
@@ -36,4 +37,5 @@
 
     </span>
 
-</li>
+<!--</li>-->
+<% end %>
