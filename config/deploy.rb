@@ -20,7 +20,7 @@ set :deploy_to, '/home/jens/receta'
 # set :log_level, :debug
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
 set :linked_files, %w{config/database.yml} #fetch(:linked_files, []).push('config/database.yml')
