@@ -1,12 +1,21 @@
-<h5>Sie wurden erwähnt, wohoo!!</h5>
+<div style="width: 100%;">
 
-<p>
-  Hi, <%= @user.name %>,
-  <%= @post_writer.name %>
-  mentioned you in a comment on this posting:<br>
-  <a href="<%= root_url %><%= @post_writer.slug %>/<%= @post.id %>"><%= root_url %><%= @post_writer.slug %>/<%= @post.id %></a>
-</p>
-<p>
-  <%= @mentioner.body %>
-</p>
+  <div style="align-content: center; width: 500px; background: #eee; padding: 4px; border-radius: 5px;">
+      <h5>
+        Sie wurden erwähnt, wohoo!!
+      </h5>
+  </div>
+
+  <p style="font-family: sans-serif; font-size: 13px; font-stretch: expanded;">
+    Hi, <%= @user.name %>,
+    <%= @mentioner.user.name %>
+    mentioned you in a comment on this posting:<br>
+    <a href="<%= root_url %><%= @post_writer.slug %>/<%= @post.id %>"><%= root_url %><%= @post_writer.slug %>/<%= @post.id %></a>
+  </p>
+  <p style="align-content: center; width: 500px; background: #eee; padding: 10px; border-radius: 5px; font-size: 13px; font-family: sans-serif;">
+    <%= @mentioner.body %>
+  </p>
+
+</div>
+
 
