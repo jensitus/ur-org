@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-4">
     <h4><%= @group.name %></h4>
+    <%#= @group.maintainer?(@group.id, current_user) %>
     <%= @group.description %><br>
     <% if @group.membership?(@group, current_user) %>
         <br>
