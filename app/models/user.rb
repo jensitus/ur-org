@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   def feed
     following_ids = 'select followed_id from relationships where follower_id = :user_id'
     group_or_not = 'select group_id from group_memberships where user_id = :user_id'
-    Micropost.where("group_id IS NULL AND user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id).where(group_id: nil)
   end
 
   # connect a user
