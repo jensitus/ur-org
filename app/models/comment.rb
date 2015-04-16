@@ -10,4 +10,12 @@ class Comment < ActiveRecord::Base
 
   acts_as_mentioner
 
+  auto_html_for :body do
+    html_escape
+    image
+    youtube(:width => 400, :height => 250, :autoplay => false)
+    link :target => '_blank', :rel => 'nofollow'
+    simple_format
+  end
+
 end

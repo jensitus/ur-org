@@ -13,6 +13,8 @@ gem 'pg'
 
 gem 'faker'
 
+gem 'auto_html'
+
 #gem 'kaminari'
 gem 'kaminari-bootstrap'
 
