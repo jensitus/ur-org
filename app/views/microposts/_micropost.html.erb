@@ -9,7 +9,8 @@
     </span>
     <span class="user"><small><%= link_to micropost.user.name, single_user_path(micropost.user) %></small></span>
     <span class="content">
-      <%= mention_link simple_format(auto_link(strip_tags(micropost.content))) %>
+      <%#= mention_link simple_format(auto_link(strip_tags(micropost.content))) %>
+      <%= mention_link micropost.content_html %>
       <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
     </span>
     <span class="timestamp">
