@@ -6,6 +6,7 @@ class CommentObserver < ActiveRecord::Observer
     ua.each do |u_a|
       CommentMailer.delay.also_comment_mail(answer, u_a)
     end
+    #Mailboxer::Notification.notify_all(ua, 'new comment', answer.to_s, self)
 
     if !ua.include?(answer.micropost.user.email) && answer.comment.user.email != answer.micropost.user.email
       CommentMailer.delay.comment_mail(answer)

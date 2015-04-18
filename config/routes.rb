@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'notifications/index'
   get 'notifications/:id' => 'notifications#show', as: 'notification'
+  get 'notifications/render_read'
 
   resources 'group_maintainers', only: [:create, :destroy]
   #get 'group_maintainers/create'
