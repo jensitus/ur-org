@@ -3,9 +3,12 @@
 <% @notifications.each do |notification| %>
 
     <% if notification.is_unread?(current_user) %>
-        <%= notification.id %><br>
-        <b><%= notification.subject %></b><br>
-        <b><%= notification.body.html_safe %></b><br>
+        <div id="notification_box" onmouseout="<%= notification.mark_as_read current_user %>">
+            <%= notification.id %><br>
+            <b><%= notification.subject %></b><br>
+            <b><%= notification.body.html_safe %></b><br>
+        </div>
+
     <% else %>
         <%= notification.subject %><br>
         <%= notification.body.html_safe %><br>
@@ -13,3 +16,13 @@
 
     <%# notification.mark_as_read current_user %>
 <% end %>
+
+<script>
+  //function the_unread() {
+      //$.ajax("/notifications/render_read");
+  //}
+
+  //$("#notification_box").live("mouseover", function() {
+      //$.ajax("/notifications/render_read")
+  //});
+</script>

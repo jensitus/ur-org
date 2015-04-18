@@ -24,8 +24,16 @@ class Mention < Socialization::ActiveRecordStores::Mention
     mentioner
     if mentioner.class == Comment
       MentionMailer.delay.comment_mention(user, mentioner)
+      user.notify(
+          'you were mentioned by ' + mentioner.user.name,
+          mentioner.body + "<br> <a href='/#{mentioner.micropost.user.slug}/#{mentioner.micropost.id}'>click this</a>!"
+      )
     elsif mentioner.class == Micropost
       MentionMailer.delay.micropost_mention(user, mentioner)
+      user.notify(
+          mentioner.user.name + ' mentioned you in this posting:',
+          mentioner.content + "<br> <a href='/#{mentioner.user.slug}/#{mentioner.id}'>right here</a>! It is so amazing"
+      )
     end
 
   end
