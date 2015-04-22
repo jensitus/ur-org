@@ -4,7 +4,7 @@
 
     <% if notification.is_unread?(current_user) %>
         <div id="notification_box" onmouseout="<%= notification.mark_as_read current_user %>">
-            <%= notification.id %><br>
+            <%#= notification.id %><br>
             <b><%= notification.subject %></b><br>
             <b><%= notification.body.html_safe %></b><br>
         </div>
