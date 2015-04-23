@@ -31,7 +31,50 @@
   <div class="row">
     <div class="unobtrusive-flash-container col-md-4"></div>
   </div>
-    <%= yield %>
+  <%= yield %>
 </div>
+
+<hr>
+
+<div class="container text-center">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+          © 2013 |
+          <%= link_to 'about us', static_pages_about_path %> |
+          <%= link_to 'contact us', new_contact_path %>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+          <li></li>
+
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+
+
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <hr>
+  <!--<div class="row">
+    <div class="col-lg-12">
+      <ul class="nav nav-pills nav-justified">
+        <li><a href="/">© 2013</a></li>
+        &lt;!&ndash;
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy</a></li>
+        &ndash;&gt;
+      </ul>
+    </div>
+  </div>-->
+</div>
+
 </body>
 </html>

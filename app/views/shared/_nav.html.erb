@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top" style="background: #fff; border-bottom: 1px solid #bbb; box-shadow: 0px 0px 3px 2px #eee">
+<div class="navbar navbar-default navbar-fixed-top" style="background: #fff; border-bottom: 1px solid #bbb;">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -14,19 +14,14 @@
 
         <li>
           <%= link_to home_path, :title => 'home' do %>
-              <span class="glyphicon glyphicon-home"></span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to new_contact_path, :title => 'contact' do %>
-            <span class="glyphicon glyphicon-briefcase"></span>
+              <span style="font-size: 1.5em;" class="glyphicon glyphicon-home"></span>
           <% end %>
         </li>
         <% if user_signed_in? %>
 
             <li>
               <%= link_to messages_path, :title => 'messages' do %>
-                <span class="glyphicon glyphicon-envelope"></span>
+                <span style="font-size: 1.5em;" class="glyphicon glyphicon-envelope"></span>
                 <% if current_user.mailbox.inbox({:read => false}).count != 0 %>
                     <span class="badge"><%= current_user.mailbox.inbox({ :read => false }).count.to_s %></span>
                 <% end %>
@@ -34,7 +29,7 @@
             </li>
             <li>
               <%= link_to notifications_index_path, :title => 'notifications' do %>
-                <span class="glyphicon glyphicon-bell"></span>
+                <span style="font-size: 1.5em;" class="glyphicon glyphicon-bell"></span>
                 <% if current_user.mailbox.notifications(:read => false ).count != 0 %>
                     <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
                 <% end %>
