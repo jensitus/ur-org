@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get 'home' => 'static_pages#home'
 
   root 'static_pages#home'
-  get 'static_pages/help'
+  get 'static_pages/about'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks'}
   # root 'public#index'
