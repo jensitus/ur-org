@@ -1,11 +1,18 @@
 <% if user_signed_in? %>
     <div class="row">
 
-      <%= render 'shared/sidebar' %>
-
-      <div class="col-md-6">
+      <div class="col-md-6 col-md-push-4">
+        <section class="micropost_form">
+          <%= render 'shared/micropost_form' %>
+        </section>
         <%= render 'shared/feed' %>
       </div>
+
+      <div class="col-md-4 col-md-pull-6">
+
+        <%= render 'shared/sidebar' %>
+      </div>
+
     </div>
 <% else %>
     <div class="row">
