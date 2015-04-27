@@ -12,11 +12,11 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
-    mentions = Mention.get_the_mention(@micropost.content) #MentionModule.get_the_mention(@micropost.content)
+    mentions = Mention.get_the_mention(@micropost.content)
     if @micropost.save
       Mention.mention_it(mentions, @micropost)
       flash[:success] = '<b>jesus christ, you did it!!</b>'.html_safe
-      redirect_to request.referrer || root_url
+      redirect_to root_url
     else
       @feed_items = []
       render 'static_pages/home'
@@ -56,7 +56,7 @@ class MicropostsController < ApplicationController
         render 'static_pages/home'
       end
     else
-      flash[:alert] = "you don't have the permission to do what you want to, sorry for that"
+      flash[:alert] = "you don't have the permission to do that shit, sorry for that"
       redirect_to request.referrer || root_url
     end
     # end

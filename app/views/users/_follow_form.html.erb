@@ -1,9 +1,11 @@
-<% unless current_user == @user %>
-    <span id="follow_form">
-      <% if current_user.following?(@user) %>
-        <%= render 'users/unfollow' %>
-      <% else %>
-        <%= render 'users/follow' %>
-      <% end %>
-    </span>
-<% end %>
+
+
+    <% unless current_user == @user %>
+        <span id="follow_form">
+          <% if current_user.following?(@user) %>
+            <%= render 'users/unfollow' %>
+          <% else %>
+            <%= render 'users/follow' %>
+          <% end %>
+        </span>
+    <% end %>

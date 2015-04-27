@@ -1,20 +1,48 @@
-<%= form_for(@micropost, html: { multipart: true }) do |f| %>
-    <div class="form-group">
-      <%= render 'shared/error_messages', object: f.object  %>
-      <div class="field">
-        <%#= @group.id unless @group.nil? %>
-        <%= f.hidden_field :group_id, :value => @group.id unless @group.nil? %>
-        <%= f.text_area :content, :rows => '5', id: 'content_field', placeholder: @placeholder, class: 'form-control' %>
-        <div class="well well-sm"><span id="content_count">0</span> characters</div>
-      </div>
-      <span class="picture">
-        <%= f.label :picture %>
-        <span class="glyphicon glyphicon-picture"></span>
-        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'well' %>
-      </span>
-      <%= f.submit 'Post', class: 'btn btn-success' %>
-    </div>
-<% end %>
+
+  <div class="">
+    <%= form_for(@micropost, html: { multipart: true }) do |f| %>
+        <div class="form-group">
+          <%= render 'shared/error_messages', object: f.object  %>
+          <div class="field">
+            <%= f.hidden_field :group_id, :value => @group.id unless @group.nil? %>
+
+            <div style="">
+                <%= f.text_area :content,
+                                :rows => '1',
+                                id: 'content_field',
+                                placeholder: @placeholder,
+                                class: 'form-control',
+                                :data => {
+                                    'min-rows' => 1,
+                                    toggle: 'collapse',
+                                    target: '#collapseExample'
+                                },
+                                :aria => {
+                                    expanded: 'false',
+                                    controls: 'collapseExample'
+                                }
+                %>
+                <div class="collapse" id="collapseExample">
+
+                    <span id="content_count">0</span> chars<br><br>
+                    <span class="picture">
+                        <%= f.label :picture %>
+                        <span class="glyphicon glyphicon-picture"></span>
+                      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'well well-sm' %>
+
+                    </span>
+
+                    <%= f.submit 'Post', class: 'btn btn-success' %>
+                  <hr>
+                </div>
+            </div>
+          </div>
+
+
+        </div>
+    <% end %>
+  </div>
+
 
 <script type="text/javascript">
     $('#micropost_picture').bind('change', function() {
@@ -36,4 +64,18 @@
         <% end %>
         $('textarea').atwho({at:"@", 'data':data});
     });
+
+   $(document).one('focus.textarea', '#content_field', function() {
+       var savedValue = this.value;
+       this.value = '';
+       this.baseScrollHeight = this.scrollHeight;
+       this.value = savedValue;
+   }).on('input.textarea', '#content_field', function() {
+       var minRows = this.getAttribute('data-min-rows')| 0, rows;
+       this.rows = minRows;
+       console.log(this.scrollHeight, this.baseScrollHeight);
+       rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 15);
+       this.rows = minRows + rows;
+   });
+
 </script>
