@@ -1,19 +1,68 @@
 <% @user ||= current_user %>
 
+    <table class="table">
+      <tr>
+        <th>
+          <small>posts</small>
+        </th>
+        <th>
+          <small>connected by</small>
+        </th>
+        <th>
+          <small>connected with</small>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <strong><%= @user.microposts.count %></strong>
+        </td>
+        <td>
+          <a href="<%= followers_user_path(@user) %>">
+            <strong id="followers" class="stat">
+              <%= @user.followers.count %>
+            </strong>
+          </a>
+        </td>
+        <td>
+          <a href="<%= following_user_path(@user) %>">
+            <strong id="following" class="stat">
+              <%= @user.following.count %>
+            </strong>
+          </a>
+        </td>
+      </tr>
+    </table>
 
-  <div class="stats">
-    connections
-    <a href="<%= following_user_path(@user) %>">
-      <strong id="following" class="stat">
-        <%= @user.following.count %>
+
+
+    <small>
+      <strong>
+        some connections:
       </strong>
-      <!-- connected with  -->
-    </a>
-    <a href="<%= followers_user_path(@user) %>">
-      <strong id="followers" class="stat">
-        <%= @user.followers.count %>
-      </strong>
+    </small>             <br>
+
+    <%# @following.each do |follow| %>
+      <%# if follow.avatar_url.nil? %>
+          <%#= link_to image_tag(follow.gravatar_url, width: 40, class: 'img-rounded'), single_user_path(follow) %>
+
+      <%# else %>
+          <%#= link_to image_tag(follow.avatar.thumb, width: 40, class: 'img-rounded'), single_user_path(follow) %>
+
+      <%# end %>
+    <%# end %>
+    <!-- connected with  -->
+
+      <% @followers.each do |follower| %>
+          <% if follower.avatar_url.nil? %>
+              <%= link_to image_tag(follower.gravatar_url, width: 40, class: 'img-rounded'), single_user_path(follower) %>
+
+          <% else %>
+              <%= link_to image_tag(follower.avatar.thumb, width: 40, class: 'img-rounded'), single_user_path(follower) %>
+          <% end %>
+      <% end %>
       <!--  connected by -->
-    </a>
-  </div>
+
+
+
+
 

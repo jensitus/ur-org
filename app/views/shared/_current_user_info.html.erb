@@ -1,27 +1,35 @@
+<section class="sidebar_kasten">
 <%= render 'shared/avatar_profile' %>
 
 <h3><%= current_user.name %></h3>
-<div><%= pluralize(current_user.microposts.count, 'post') %></div>
-<div><%= link_to 'view my profile', current_user %></div>
-<b><%= 'My Groups:' %></b><br>
-<% current_user.groups.each do |my_group| %>
-    <%= link_to my_group.name, group_path(my_group) %><br>
-<% end %>
+</section>
+<%#= link_to 'view my profile', current_user %>
+<b><%#= 'My Groups:' %></b><br>
 
-<div>
-  <a href="/messages" class="btn btn-default">
+<section class="sidebar_kasten">
+  <a href="/messages" style="color: #000;">
     <span class="glyphicon glyphicon-envelope"></span>
     messages
     <% if current_user.mailbox.inbox({:read => false}).count != 0 %>
         <span class="badge"><%= current_user.mailbox.inbox({ :read => false }).count.to_s %></span>
     <% end %>
   </a>
-</div>
-<div>
-  <%= link_to notifications_index_path, class: 'btn btn-default' do %>
+</section>
+
+<section class="sidebar_kasten">
+  <span class="glyphicon glyphicon-bell"></span>
+  <%= link_to notifications_index_path, style: 'color: #000' do %>
     notifications
     <% if current_user.mailbox.notifications(:read => false ).count != 0 %>
         <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
     <% end %>
   <% end %>
-</div>
+</section>
+
+<!--
+<section class="well well-sm">
+  <%# current_user.groups.each do |my_group| %>
+      <%#= link_to my_group.name, group_path(my_group) %><br>
+  <%# end %>
+</section>
+-->
