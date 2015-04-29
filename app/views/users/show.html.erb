@@ -1,16 +1,19 @@
 <% provide(:title, @user.name) %>
 <div class="row">
   <aside class="col-md-4">
-    <%= render 'shared/user_show_sidebar' %>
+    <% if @user == current_user %>
+        <%= render 'shared/sidebar' %>
+    <% else %>
+        <%= render 'shared/user_show_sidebar' %>
+    <% end %>
+
   </aside>
   <div class="col-md-6">
 
     <% if @user.microposts.any? %>
-        <h4> posts (<%= @user.microposts.count %>) </h4>
         <ol class="microposts">
           <%= render @microposts %>
         </ol>
-
         <%= paginate @microposts %>
     <% end %>
   </div>
