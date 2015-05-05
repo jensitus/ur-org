@@ -33,10 +33,69 @@
             </span>
 
         <% end %>
-        | <span id="likes_count-<%= micropost.id %>"><%= pluralize micropost.likers(User).count, 'like' %></span>
+        |
+        <span id="likes_count-<%= micropost.id %>" onmouseover="like(<%= micropost.id %>);" onmouseout="hideTheLikeBox(<%= micropost.id %>);">
+            <%= pluralize micropost.likers(User).count, 'like' %>
+        </span>
+        <% if micropost.likers(User).count != 0 %>
+        <span id="likeBox-<%= micropost.id %>">
+
+                <% micropost.likers(User).each do |l| %>
+
+                        <ul id="like">
+                          <li>
+                            <%= l.name %>
+                          </li>
+                        </ul>
+
+
+                <% end %>
+
+        </span>
+        <% end %>
+
       </small>
 
     </span>
 
 <!--</li>-->
 <% end %>
+
+<style type="text/css">
+    #likeBox-<%= micropost.id %> {
+        display: none;
+        z-index: 150;
+        position: inherit;
+        top: 0px;
+        left: 10px;
+        background: #ffc;
+        margin-left: 250px;
+        border: 1px solid #a6e1ec;
+        border-radius: 5px;
+    }
+
+    #likeBox-<%= micropost.id %> ul {
+        list-style: none;
+    }
+
+</style>
+
+<script>
+
+  var oInt;
+
+  function like(iX) {
+      clearInterval(oInt);
+      document.getElementById('likeBox-' + iX ).style.display = 'block';
+  }
+
+  function hideTheLikeBox(iX) {
+      document.getElementById('likeBox-' + iX).style.display = 'none';
+  }
+
+  function hideBox(iX) {
+      clearInterval(oInt);
+      oInt = setInterval('hideTheLikeBox()', 1000);
+  }
+
+</script>
