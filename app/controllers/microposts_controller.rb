@@ -2,6 +2,7 @@ class MicropostsController < ApplicationController
   before_filter :authenticate_user!, only: [:create, :new, :destroy, :update, :edit]
   before_action :correct_user, only: :destroy
   before_action :set_micropost, only: [:edit, :new, :update, :destroy, :show]
+  before_action :follow, only: :show
 
   respond_to :html, :js
 
@@ -86,6 +87,11 @@ class MicropostsController < ApplicationController
 
   def set_micropost
     @micropost = Micropost.find(params[:id])
+  end
+
+  def follow
+    @followers = @micropost.user.followers.sample(3)
+    @following = @micropost.user.following.sample(3)
   end
 
 end
