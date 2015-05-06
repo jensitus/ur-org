@@ -37,22 +37,11 @@
         <span id="likes_count-<%= micropost.id %>" onmouseover="like(<%= micropost.id %>);" onmouseout="hideTheLikeBox(<%= micropost.id %>);">
             <%= pluralize micropost.likers(User).count, 'like' %>
         </span>
-        <% if micropost.likers(User).count != 0 %>
-        <span id="likeBox-<%= micropost.id %>">
-
-                <% micropost.likers(User).each do |l| %>
-
-                        <ul id="like">
-                          <li>
-                            <%= l.name %>
-                          </li>
-                        </ul>
 
 
-                <% end %>
-
+        <span id="the_likers_count-<%= micropost.id %>">
+            <%= render partial: 'likes/the_likers_count', locals: { micropost: micropost } %>
         </span>
-        <% end %>
 
       </small>
 
@@ -69,13 +58,17 @@
         top: 0px;
         left: 10px;
         background: #ffc;
-        margin-left: 250px;
+        margin-left: 80%;
         border: 1px solid #a6e1ec;
         border-radius: 5px;
     }
 
     #likeBox-<%= micropost.id %> ul {
         list-style: none;
+        color: #000;
+        border: 0px;
+        padding: 0px;
+        padding-left: 10px;
     }
 
 </style>
