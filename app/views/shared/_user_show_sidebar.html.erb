@@ -3,16 +3,16 @@
   <%= render 'shared/post_avatar' %>
   <h4><%= @user.name %></h4>
 </section>
-<section class="sidebar_kasten">
-  <% if user_signed_in? %>
-      <%= render 'users/follow_form' %>
-  <% end %>
-</section>
+<% if user_signed_in? %>
+    <section class="sidebar_kasten">
+        <%= render 'users/follow_form' %>
+    </section>
+<% end %>
 <section class="sidebar_kasten">
   <%= render 'shared/stats' %>
 </section>
-<section class="sidebar_kasten">
-  <% if user_signed_in? %>
-      <%= render 'shared/sendmessage' %>
-  <% end %>
-</section>
+<% if user_signed_in? %>
+    <section class="sidebar_kasten">
+        <%= render 'shared/sendmessage' %>
+    </section>
+<% end %>
