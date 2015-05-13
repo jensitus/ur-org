@@ -94,6 +94,8 @@ gem 'devise'
 gem 'jquery-atwho-rails'
 gem 'socialization', :git => 'https://github.com/HackerPartie/socialization.git'
 
+gem 'pingback'
+
 
 gem 'omniauth-twitter'
 # Use Capistrano for deployment

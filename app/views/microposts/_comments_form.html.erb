@@ -1,11 +1,11 @@
-<%= form_for(@comment, html: { multipart: true}, remote: true ) do |f| %>
+<%= form_for(@comment, html: { multipart: true, name: 'the_comment_form'}, remote: true ) do |f| %>
     <div class="form-group">
       <%= render 'shared/error_messages', object: f.object  %>
 
       <div class="field">
         <span class="glyphicon glyphicon-comment"></span>
         <%= f.label :comment %><br>
-        <%= f.text_area :body, class: 'form-control' %>
+        <%= f.text_area :body, id: 'himmel', class: 'form-control', onkeyup: 'checkform()' %>
       </div>
       <div>
 
@@ -13,12 +13,12 @@
 
       </div>
       <div class="actions">
-        <%= f.submit 'Hopp', class: 'btn btn-default' %>
+        <%= f.submit 'Hopp', id: 'submit', class: 'btn btn-default' %>
       </div>
     </div>
 <% end %>
 
-<script>
+<script type="text/javascript">
     $(function(){
         data = [];
         <% User.find_each do |user| %>
@@ -26,4 +26,30 @@
         <% end %>
         $('textarea').atwho({at:"@", 'data':data});
     });
+
+    $("#himmel").keydown(function(event) {
+        if(event.keyCode == 13) {
+            if (event.shiftKey) {
+                return true;
+            } else {
+                $("#submit").click();
+                return false;
+            }
+        }
+    });
+
+    function checkform() {
+        var f = document.forms["the_comment_form"].elements;
+        var cansubmit = true;
+        for (var i = 0; i < f.length; i++) {
+            if ("value" in f[i] && f[i].value.length == 0) {
+                cansubmit = false;
+            }
+        }
+        document.getElementById("submit").disabled = !cansubmit;
+    }
+
+    window.onload = checkform();
+
 </script>
+
