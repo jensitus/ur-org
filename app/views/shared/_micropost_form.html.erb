@@ -1,6 +1,6 @@
 
   <div class="">
-    <%= form_for(@micropost, html: { multipart: true }) do |f| %>
+    <%= form_for(@micropost, html: { multipart: true, name: '' }) do |f| %>
         <div class="form-group">
           <%= render 'shared/error_messages', object: f.object  %>
           <div class="field">
@@ -21,6 +21,7 @@
                                     expanded: 'false',
                                     controls: 'collapseExample'
                                 }
+
                 %>
                 <div class="collapse" id="collapseExample">
 
@@ -32,7 +33,7 @@
 
                     </span>
 
-                    <%= f.submit 'Post', class: 'btn btn-success' %>
+                    <%= f.submit 'Post', id: 'submit', class: 'btn btn-success' %>
                   <hr>
                 </div>
             </div>
@@ -77,5 +78,7 @@
        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 15);
        this.rows = minRows + rows;
    });
+
+   window.onload = checkform();
 
 </script>
