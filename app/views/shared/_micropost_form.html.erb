@@ -1,6 +1,6 @@
 
   <div class="">
-    <%= form_for(@micropost, html: { multipart: true, name: '' }) do |f| %>
+    <%= form_for(@micropost, html: { multipart: true, name: 'the_post_form' }) do |f| %>
         <div class="form-group">
           <%= render 'shared/error_messages', object: f.object  %>
           <div class="field">
@@ -10,6 +10,8 @@
                 <%= f.text_area :content,
                                 :rows => '1',
                                 id: 'content_field',
+                                #name: 'content',
+                                onkeyup: 'check_the_post_form()',
                                 placeholder: @placeholder,
                                 class: 'form-control',
                                 :data => {
@@ -33,7 +35,7 @@
 
                     </span>
 
-                    <%= f.submit 'Post', id: 'submit', class: 'btn btn-success' %>
+                    <%= f.submit 'Post', id: 'submit', class: 'btn btn-success', data: { disable_with: 'Please wait ...' } %>
                   <hr>
                 </div>
             </div>
@@ -79,6 +81,18 @@
        this.rows = minRows + rows;
    });
 
-   window.onload = checkform();
+    function check_the_post_form() {
+        var f = document.forms["the_post_form"].elements;
+        var cansubmit = true;
+        var whitespace = /\S/;
+        if (whitespace.test(f[2].value)) {
+            cansubmit = true;
+        } else {
+            cansubmit = false;
+        }
+        document.getElementById("submit").disabled = !cansubmit;
+    }
+
+    window.onload = check_the_post_form();
 
 </script>
