@@ -82,10 +82,11 @@
    });
 
     function check_the_post_form() {
-        var f = document.forms["the_post_form"].elements;
+        //var f = document.forms["the_post_form"].elements;
+        var f = document.getElementById('content_field').value;
         var cansubmit = true;
-        var whitespace = /\S/;
-        if (whitespace.test(f[2].value)) {
+        var non_whitespace = /\S/;
+        if (non_whitespace.test( f )) {
             cansubmit = true;
         } else {
             cansubmit = false;
