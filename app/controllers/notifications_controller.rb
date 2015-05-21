@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
   before_action :mailbox
 
   def index
-    @notifications ||= @mailbox.notifications.page(params[:page]).per(5)
+    @notifications ||= @mailbox.notifications.page(params[:page]).per(10)
     # @mailbox.notifications(read: false).each do |unread|
     #   unread.mark_as_read current_user
     # end

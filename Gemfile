@@ -96,6 +96,8 @@ gem 'socialization', :git => 'https://github.com/HackerPartie/socialization.git'
 
 gem 'pingback'
 
+gem 'scalpel'
+
 
 gem 'omniauth-twitter'
 # Use Capistrano for deployment

@@ -20,7 +20,7 @@ class Answer < ActiveRecord::Base
     Mailboxer::Notification.notify_all(
         recipients,
         comment.user.name + ' commented:',
-        '"' + comment.body + '"' + "<br><a href='/#{micropost.user.slug}/#{micropost.id}'>right here</a>",
+        '"' + comment.body + '"' + "<br><a href='/#{micropost.user.slug}/#{micropost.id}'>ist-ur.org/#{micropost.user.slug}/#{micropost.id}</a> <small> maybe it is further below</small>",
         self
     )
   end
