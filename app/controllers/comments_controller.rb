@@ -59,7 +59,6 @@ class CommentsController < ApplicationController
 
     def answer_params
       p = params.require(:comment).permit(:micropost_id)
-      #byebug
       p[:micropost_id].to_i
     end
 

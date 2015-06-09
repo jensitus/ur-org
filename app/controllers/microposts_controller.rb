@@ -4,8 +4,6 @@ class MicropostsController < ApplicationController
   before_action :set_micropost, only: [:edit, :new, :update, :destroy, :show]
   before_action :follow, only: :show
 
-  respond_to :html, :js
-
   def new
     @micropost = Micropost.new
     respond_with(@micropost)
@@ -32,7 +30,8 @@ class MicropostsController < ApplicationController
       @liked_by_current_user = @micropost.liked_by?(current_user)
     end
     @comments = @micropost.comments
-    fresh_when etag: [@comments, @micropost, current_user]
+    #fresh_when etag: [@comments, @micropost, current_user]
+    respond_with [micropost: @micropost, comment: @comments]
   end
 
   def edit
