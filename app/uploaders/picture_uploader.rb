@@ -7,6 +7,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
   include CarrierWave::MiniMagick
   process resize_to_limit: [600, 600]
+  process :fix_exif_rotation
 
   if Rails.env.production?
     storage :fog
@@ -48,6 +49,12 @@ class PictureUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+
+  def fix_exif_rotation
+    manipulate! do |img|
+      img.tap(&:auto_orient)
+    end
   end
 
   # Override the filename of the uploaded files:

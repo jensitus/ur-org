@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :prepare_unobtrusive_flash
 
+  respond_to :html, :json
+
   def after_sign_in_path_for(resource)
     home_path
   end
