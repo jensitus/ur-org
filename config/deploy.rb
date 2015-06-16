@@ -1,4 +1,5 @@
 require 'pg_search'
+require 'app/models/user'
 # config valid only for current version of Capistrano
 lock '3.3.5'
 
