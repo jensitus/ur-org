@@ -98,6 +98,8 @@ gem 'pingback'
 
 gem 'scalpel'
 
+gem 'pg_search'
+
 
 gem 'omniauth-twitter'
 # Use Capistrano for deployment

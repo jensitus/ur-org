@@ -1,0 +1,37 @@
+
+<% @search.each do |s| %>
+    <% if s.searchable_type == 'User' %>
+        <% u = User.find_by_name(s.content) %>
+        <div>
+        <%= link_to single_user_path(u.slug) do %>
+            <div class="result_box">
+                <% if u.avatar_url.nil? %>
+                    <%= image_tag u.gravatar_url, width: 30, class: 'img-rounded' %>
+                <% else %>
+                    <%= image_tag u.avatar.thumb, width: 30, class: 'img-rounded' %>
+                <% end %>
+                <%= u.name %><br>
+                <%#= s.searchable_type %>
+            </div>
+        <% end %>
+        </div>
+    <% end %>
+<%	 end %>
+<% @search.each do |s| %>
+    <% if s.searchable_type == 'Micropost' %>
+        <div>
+        <a href="/<%= Micropost.find(s.searchable_id).user.name %>/<%= s.searchable_id %>" style="text-decoration: none; color: #000;">
+            <div class="result_box">
+            <% Scalpel.cut(s.content).each do |scalpel| %>
+
+              <%= '... ' + scalpel if scalpel.downcase.include?(@q.downcase) %>
+            <% end %>
+
+            <%#= s.searchable_id %>
+
+            <%#= s.searchable_type %>
+            </div>
+        </a>
+        </div>
+    <% end %>
+<% end %>

@@ -115,3 +115,26 @@ span.picture {
   border-radius: 5px;
   padding: 10px;
 }
+
+/* search results */
+
+#search_results_div {
+  width: 410px;
+  z-index: 50;
+  position: absolute;
+  top: 60px;
+  left: 330px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 0px;
+  opacity: 0.92;
+}
+
+.result_box {
+  border: 1px solid #eee;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #000;
+  box-shadow: 2px 2px 0px #aaa;
+}

@@ -1,0 +1,73 @@
+
+<%= form_tag home_path, method: 'get', id: 'ur_org_search' do %>
+    <%= text_field_tag :query,
+                       params[:query],
+                       class: 'form-control',
+                       placeholder: 'search user or content',
+                       data: {
+                               toggle: 'popover',
+                               title: 'he du Arsch',
+                               target: '#search_results_div',
+                               placement: 'top'
+                       }
+    %>
+    <%#= submit_tag 'search', name: nil, class: 'btn btn-danger', toggle: "popover", title: 'Titel vom Kapitel', content: "And here's some amazing content. It's very engaging. Right?" %>
+<% end %>
+
+<script>
+
+//  $(function() {
+//      $('#ur_org_search input').keyup(function() {
+//          $('input[type="text"]').popover({
+//              html: true,
+//              container: 'body',
+//              content: function() {
+//                  return $("#search_results_div").html();
+//              }
+//          })
+//      })
+//  });
+
+  $(function() {
+      $("#ur_org_search input").keyup(function() {
+          $.get($("#ur_org_search").attr("action"), $("#ur_org_search").serialize(), null, "script");
+          return false;
+          $('input[type="text"]').popover({
+              html: true,
+              content: function() {
+                  //var content = $(this).data('content-target');
+                  //try {
+                  //    content = $(content).html()
+                  //} catch(e) {
+                      /* Ignore */
+                  //}
+                  return $('#search_results_div').html(); // content;
+              }
+          })
+      });
+
+  });
+
+/* just for popover test */
+  //$('[data-toggle="popover"]').popover({
+//    $('input[type="text"]').popover({
+//      html: true,
+//      content: function() {
+//          var content = $(this).data('content-target');
+//          try {
+//              content = $(content).html()
+//          } catch(e) {
+//              /* Ignore */
+//          }
+//          return $('#search_results_div').html(); // content;
+//      }
+//  });
+/*
+   end this shit
+*/
+</script>
+<style type="text/css">
+  #ur_org_search {
+      margin-top: 10px;
+  }
+</style>

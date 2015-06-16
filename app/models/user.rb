@@ -1,11 +1,15 @@
 class User < ActiveRecord::Base
 
   include Gravtastic
+  include PgSearch
+
   gravtastic :secure => true,
              :filetype => :jpg,
              :size => 120
 
   mount_uploader :avatar, AvatarUploader
+
+  multisearchable :against => [:name]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
