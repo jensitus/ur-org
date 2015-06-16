@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
 
+  respond_to :js
+
   def home
     if user_signed_in?
       @micropost = current_user.microposts.build
@@ -14,8 +16,46 @@ class StaticPagesController < ApplicationController
       @static_page_image = Micropost.where('picture IS NOT NULL').sample(1)[0].picture.url
       @microposts = Micropost.where('picture IS NULL AND group_id IS NULL').sample(3)
     end
+    @q = params[:query]
+    @search = PgSearch.multisearch(params[:query])
   end
 
   def about
   end
+
+  private
+
+  def the_search
+    s = PgSearch.multisearch(params[:query])
+    q = params[:query]
+    puts '###################################################'
+    q = q.strip if !q.nil?
+    puts '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+    puts s.class
+    puts s.inspect
+    puts '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+    puts 'q'
+    puts q.inspect
+    the_search = {}
+    s.each do |s|
+      search = Scalpel.cut s.content
+      search.each do |se|
+        puts '::::::::::::::::::::::'
+        puts se if se.downcase.include?(q.downcase)
+        @se = se if se.downcase.include?(q.downcase)
+        puts '@se: ' + @se
+        puts se.downcase.include?(q.downcase)
+        puts se.inspect
+        puts ':::::::::::::::::::::::::::::::::::::'
+        the_search = {s: s, se: se}
+      end
+      puts 'the_search:'
+      puts the_search
+      the_search
+    end
+
+
+    puts '##### ##############################################'
+  end
+
 end

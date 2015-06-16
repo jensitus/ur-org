@@ -1,4 +1,6 @@
 class Micropost < ActiveRecord::Base
+  include PgSearch
+  multisearchable :against => :content
   belongs_to :user
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
@@ -25,6 +27,9 @@ class Micropost < ActiveRecord::Base
     link # :target => '_blank', :rel => 'nofollow'
     simple_format
   end
+
+
+
 
   private
 
