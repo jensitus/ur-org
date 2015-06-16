@@ -75,3 +75,11 @@ end
 after 'deploy:starting', 'sidekiq:quiet'
 after 'deploy:reverted', 'sidekiq:restart'
 after 'deploy:published', 'sidekiq:restart'
+
+# the search
+namespace :pgs do
+  desc 'reindex that shitty DB'
+  task :reindex do
+    PgSearch::Multisearch.rebuild(User)
+  end
+end
