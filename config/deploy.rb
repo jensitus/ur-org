@@ -1,5 +1,4 @@
 require 'pg_search'
-require 'app/models/user'
 # config valid only for current version of Capistrano
 lock '3.3.5'
 
@@ -79,9 +78,9 @@ after 'deploy:reverted', 'sidekiq:restart'
 after 'deploy:published', 'sidekiq:restart'
 
 # the search
-namespace :pgs do
-  desc 'reindex that shitty DB'
-  task :reindex do
-    PgSearch::Multisearch.rebuild(User)
+namespace :deploy do
+  desc 'Invoke rake task'
+  task :invoke do
+    run "cd '#{current_path}' && #{rake} #{ENV['task']} RAILS_ENV=#{rails_env}"
   end
 end
