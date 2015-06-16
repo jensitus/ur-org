@@ -84,7 +84,7 @@ namespace :pgs do
     on roles(:app) do
       within "#{current_path}" do
         with rails_env: :production do
-          execute :rake, 'pg_search:multisearch:rebuild[User]'
+          execute :rake, 'pg_search:multisearch:rebuild[Micropost]'
         end
       end
     end
