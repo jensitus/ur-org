@@ -78,9 +78,17 @@ after 'deploy:reverted', 'sidekiq:restart'
 after 'deploy:published', 'sidekiq:restart'
 
 # the search
-namespace :deploy do
-  desc 'Invoke rake task'
+namespace :pgs do
+  desc 'Invoke pg_search task'
   task :invoke do
-    run "cd '#{current_path}' && #{rake} #{ENV['task']} RAILS_ENV=#{rails_env}"
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, 'pg_search:multisearch:rebuild[User]'
+        end
+      end
+    end
   end
 end
+
+after 'deploy:published', 'pgs:invoke'
