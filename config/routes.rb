@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'search/index'
+
   get 'notifications/index'
   get 'notifications/:id' => 'notifications#show', as: 'notification'
   get 'notifications/render_read'

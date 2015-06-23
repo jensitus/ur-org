@@ -16,8 +16,7 @@ class StaticPagesController < ApplicationController
       @static_page_image = Micropost.where('picture IS NOT NULL').sample(1)[0].picture.url
       @microposts = Micropost.where('picture IS NULL AND group_id IS NULL').sample(3)
     end
-    @q = params[:query]
-    @search = PgSearch.multisearch(params[:query])
+
   end
 
   def about
