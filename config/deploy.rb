@@ -78,17 +78,17 @@ after 'deploy:reverted', 'sidekiq:restart'
 after 'deploy:published', 'sidekiq:restart'
 
 # the search
-namespace :pgs do
-  desc 'Invoke pg_search task'
-  task :invoke do
-    on roles(:app) do
-      within "#{current_path}" do
-        with rails_env: :production do
-          execute :rake, 'pg_search:multisearch:rebuild[Micropost]'
-        end
-      end
-    end
-  end
-end
-
-after 'deploy:published', 'pgs:invoke'
+# namespace :pgs do
+#   desc 'Invoke pg_search task'
+#   task :invoke do
+#     on roles(:app) do
+#       within "#{current_path}" do
+#         with rails_env: :production do
+#           execute :rake, 'pg_search:multisearch:rebuild[Micropost]'
+#         end
+#       end
+#     end
+#   end
+# end
+#
+# after 'deploy:published', 'pgs:invoke'

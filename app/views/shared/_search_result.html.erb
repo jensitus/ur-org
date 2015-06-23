@@ -4,7 +4,7 @@
         <% u = User.find_by_name(s.content) %>
         <div>
         <%= link_to single_user_path(u.slug) do %>
-            <div class="result_box">
+            <li class="list-group-item">
                 <% if u.avatar_url.nil? %>
                     <%= image_tag u.gravatar_url, width: 30, class: 'img-rounded' %>
                 <% else %>
@@ -12,25 +12,28 @@
                 <% end %>
                 <%= u.name %><br>
                 <%#= s.searchable_type %>
-            </div>
+            </li>
         <% end %>
         </div>
     <% end %>
 <%	 end %>
 <% @search.each do |s| %>
     <% if s.searchable_type == 'Micropost' %>
+        <% m = Micropost.find_by(id: s.searchable_id) %>
+        <% u = m.user %>
         <div>
-        <a href="/<%= Micropost.find(s.searchable_id).user.name %>/<%= s.searchable_id %>" style="text-decoration: none; color: #000;">
-            <div class="result_box">
+        <a href="/<%= u.slug %>/<%= s.searchable_id %>" style="text-decoration: none; color: #000;">
+            <li class="list-group-item">
             <% Scalpel.cut(s.content).each do |scalpel| %>
 
               <%= '... ' + scalpel if scalpel.downcase.include?(@q.downcase) %>
-            <% end %>
-
+            <% end %><br>
+            <small>
+              <%= u.name %> on <%= m.created_at.strftime('%d %B %Y') %>
+            </small>
             <%#= s.searchable_id %>
-
             <%#= s.searchable_type %>
-            </div>
+            </li>
         </a>
         </div>
     <% end %>

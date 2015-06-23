@@ -1,0 +1,11 @@
+<div class="col-md-6">
+    <ul class="list-group">
+      <%= render 'shared/search_result' %>
+      <% if @search.empty? %>
+          <li class="list-group-item">
+            <%= 'no results for ' %><b><%= @q %></b><%= ', sorry for that disaster' %>
+          </li>
+      <% end %>
+    </ul>
+</div>
+
