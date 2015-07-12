@@ -28,12 +28,13 @@
                 <div class="collapse" id="collapseExample">
 
                     <span id="content_count">0</span> chars<br><br>
-                    <span class="picture">
-                        <%= f.label :picture %>
-                        <span class="glyphicon glyphicon-picture"></span>
-                      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'well well-sm' %>
-
-                    </span>
+                    <!--<span class="picture"> -->
+                      <%= f.fields_for :photos do |p| %>
+                            <%= p.label :picture %><br>
+                            <%= p.file_field :picture, multiple: true, name: 'photos[picture][]', class: 'well well-sm' %>
+                            <!-- accept: 'image/jpeg,image/gif,image/png', -->
+                      <% end %>
+                    <!--</span>-->
 
                     <%= f.submit 'Post', id: 'submit', class: 'btn btn-success', data: { disable_with: 'Please wait ...' } %>
                   <hr>

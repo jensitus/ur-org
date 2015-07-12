@@ -8,10 +8,12 @@ class Micropost < ActiveRecord::Base
   validates :content, presence: true,
             :length => { maximum: 2480, :too_long => '%{count} characters is the maximum allowed'},
             :allow_nil => false
-  validate :picture_size
+  # validate :picture_size
 
   has_many :answers
   has_many :comments, through: :answers
+  has_many :photos
+  accepts_nested_attributes_for :photos
 
   has_one :group
 
@@ -34,11 +36,11 @@ class Micropost < ActiveRecord::Base
   private
 
   # Validates the size of an uploaded picture
-  def picture_size
-    if picture.size > 5.megabytes
-      errors.add(:picture, 'should be less than 5MB')
-    end
-  end
+  # def picture_size
+  #   if picture.size > 5.megabytes
+  #     errors.add(:picture, 'should be less than 5MB')
+  #   end
+  # end
 
   def notify_user
     if !group_id.nil?
