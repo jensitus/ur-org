@@ -5,14 +5,24 @@ class MicropostsController < ApplicationController
   before_action :follow, only: :show
 
   def new
-    @micropost = Micropost.new
-    respond_with(@micropost)
+    #@micropost = Micropost.new
+    @photo = @micropost.photos.build
+    # respond_with(@micropost)
   end
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
     mentions = Mention.get_the_mention(@micropost.content)
     if @micropost.save
+      if params[:photos].nil?
+        puts '#################################'
+        puts 'yessssss'
+        puts '#################################'
+      else
+        params[:photos]['picture'].each do |p|
+          @photo = @micropost.photos.create!(:picture => p, :micropost_id => @micropost.id)
+        end
+      end
       Mention.mention_it(mentions, @micropost)
       flash[:success] = '<b>jesus christ, you did it!!</b>'.html_safe
       redirect_to root_url
@@ -25,6 +35,7 @@ class MicropostsController < ApplicationController
   def show
     @comment = Comment.new
     @micropost = Micropost.find(params[:id])
+    @photos = @micropost.photos.all
     #@likes = @micropost.likers(User)
     if !current_user.nil?
       @liked_by_current_user = @micropost.liked_by?(current_user)
@@ -76,7 +87,7 @@ class MicropostsController < ApplicationController
   private
 
   def micropost_params
-    params.require(:micropost).permit(:content, :picture, :group_id)
+    params.require(:micropost).permit(:content, :group_id, photos_attributes: [:id, :micropost_id, :picture])
   end
 
   def correct_user

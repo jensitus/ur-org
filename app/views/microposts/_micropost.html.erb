@@ -12,6 +12,12 @@
       <%#= mention_link simple_format(auto_link(strip_tags(micropost.content))) %>
       <%= mention_link micropost.content_html %>
       <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
+      <%#= micropost.picture? %>
+      <%#= micropost.picture.url %>
+      <% micropost.photos.each do |photo| %>
+        <%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %>
+        <%#= photo.picture %>
+      <% end %>
     </span>
     <span class="timestamp">
       <small>
