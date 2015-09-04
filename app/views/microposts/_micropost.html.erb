@@ -14,7 +14,13 @@
       <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
       <%#= micropost.picture? %>
       <%#= micropost.picture.url %>
+      <% if micropost.photos.count > 1 %>
+          <%= true %>
+      <% else %>
+          <%= false %>
+      <% end %>
       <% micropost.photos.each do |photo| %>
+
         <%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %>
         <%#= photo.picture %>
       <% end %>
@@ -59,8 +65,8 @@
 <style type="text/css">
     #likeBox-<%= micropost.id %> {
         display: none;
-        z-index: 150;
-        position: inherit;
+        z-index: 50;
+        position: absolute;
         top: 0px;
         left: 10px;
         background: #ffc;

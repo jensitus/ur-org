@@ -17,6 +17,7 @@ class StaticPagesController < ApplicationController
       fresh_when :etag => [@feed_items, current_user]
     else
       @static_page_image = Micropost.where('picture IS NOT NULL').sample(1)[0].picture
+      # @static_page_image = Photo.all.sample(1)[0].picture
       @microposts = Micropost.where('picture IS NULL AND group_id IS NULL').sample(3)
     end
 

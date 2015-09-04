@@ -1,0 +1,103 @@
+
+<div class="edit_the_post">
+  <div class="the_photos_of_the_post">
+    <%= render 'photos/micropost_photos' %>
+  </div>
+
+  <%= form_for(@micropost, html: { multipart: true, name: 'the_post_form' }) do |f| %>
+      <div class="form-group">
+        <%= render 'shared/error_messages', object: f.object  %>
+        <div class="field">
+          <%= f.hidden_field :group_id, :value => @group.id unless @group.nil? %>
+
+          <div style="">
+            <%= f.text_area :content,
+                            :rows => '10',
+                            id: 'content_field',
+                            #name: 'content',
+                            #onkeyup: 'check_the_post_form()',
+                            class: 'form-control',
+                            :data => {
+                                    'min-rows' => 10
+                            #        toggle: 'collapse',
+                            #        target: '#collapseExample'
+                            }
+                            #:aria => {
+                            #        expanded: 'false',
+                            #        controls: 'collapseExample'
+                            #}
+
+            %>
+            <!--<div class="collapse" id="collapseExample">-->
+            <div>
+
+              <span id="content_count">0</span> chars<br><br>
+              <!--<span class="picture"> -->
+              <input class="well well-sm" type="file" name="photos[picture][]" multiple="multiple">
+
+                  <!-- accept: 'image/jpeg,image/gif,image/png', -->
+
+              <!--</span>-->
+
+              <%= f.submit 'Post', id: 'submit', class: 'btn btn-success', data: { disable_with: 'Please wait ...' } %>
+              <hr>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+  <% end %>
+</div>
+
+
+<script type="text/javascript">
+    $('#micropost_picture').bind('change', function() {
+        size_in_megabytes = this.files[0].size/1024/1024;
+        if (size_in_megabytes > 5) {
+            alert('it must be smaller than 5MB');
+        }
+    });
+
+    $('#content_field').on('keyup', function(){
+        length = $(this).val().length;
+        $('#content_count').html(length);
+    });
+
+    $(function(){
+        data = [];
+          <% User.find_each do |user| %>
+            data.push('<%= user.slug %>');
+          <% end %>
+        $('textarea').atwho({at:"@", 'data':data});
+    });
+
+    $(document).one('focus.textarea', '#content_field', function() {
+        var savedValue = this.value;
+        this.value = '';
+        this.baseScrollHeight = this.scrollHeight;
+        this.value = savedValue;
+    }).on('input.textarea', '#content_field', function() {
+        var minRows = this.getAttribute('data-min-rows')| 0, rows;
+        this.rows = minRows;
+        console.log(this.scrollHeight, this.baseScrollHeight);
+        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 15);
+        this.rows = minRows + rows;
+    });
+
+    function check_the_post_form() {
+        //var f = document.forms["the_post_form"].elements;
+        var f = document.getElementById('content_field').value;
+        var cansubmit = true;
+        var non_whitespace = /\S/;
+        if (non_whitespace.test( f )) {
+            cansubmit = true;
+        } else {
+            cansubmit = false;
+        }
+        document.getElementById("submit").disabled = !cansubmit;
+    }
+
+    window.onload = check_the_post_form();
+
+</script>

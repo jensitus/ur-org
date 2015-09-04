@@ -1,0 +1,9 @@
+<% @micropost.photos.each do |ph| %>
+    <% if !ph.id.nil? %>
+    <div class="the_single_photo-<%= ph.id %>">
+        <%= image_tag ph.picture.url, class: 'img-thumbnail', size: '40' %>
+        <%= link_to 'delete', photo_path(ph.id), method: :delete, remote: true, data: {confirm: true} %>
+    </div>
+    <% end %>
+    <br>
+<% end %>
