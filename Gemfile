@@ -100,6 +100,7 @@ gem 'scalpel'
 
 gem 'pg_search'
 
+gem 'owlcarousel-rails'
 
 gem 'omniauth-twitter'
 # Use Capistrano for deployment
