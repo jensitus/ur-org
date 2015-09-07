@@ -77,4 +77,6 @@ Rails.application.routes.draw do
 
   get '/:id' => 'users#show', as: 'single_user'
 
+  resources :photos, only: :destroy
+
 end

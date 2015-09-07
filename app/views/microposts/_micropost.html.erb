@@ -14,11 +14,23 @@
       <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
       <%#= micropost.picture? %>
       <%#= micropost.picture.url %>
-      <% micropost.photos.each do |photo| %>
-        <%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %>
-        <%#= photo.picture %>
+      <% if micropost.photos.count > 1 %>
+          <%= true %>
+          <div id="owl-demo-<%= micropost.id %>" class="owl-carousel">
+
+            <% micropost.photos.each do |photo| %>
+                <div><%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %></div>
+            <% end %>
+          </div>
+      <% else %>
+          <%= false %>
+          <% micropost.photos.each do |photo| %>
+                <div><%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %></div>
+            <% end %>
       <% end %>
+
     </span>
+
     <span class="timestamp">
       <small>
         Posted <%= time_ago_in_words(micropost.created_at) %> ago |
@@ -59,8 +71,8 @@
 <style type="text/css">
     #likeBox-<%= micropost.id %> {
         display: none;
-        z-index: 150;
-        position: inherit;
+        z-index: 50;
+        position: absolute;
         top: 0px;
         left: 10px;
         background: #ffc;
@@ -75,6 +87,23 @@
         border: 0px;
         padding: 0px;
         padding-left: 10px;
+    }
+
+/*
+ * the owl css
+ *
+ */
+
+    #owl-demo-<%= micropost.id %> .owl-item div{
+        padding:5px;
+    }
+    #owl-demo-<%= micropost.id %> .owl-item img{
+        display: block;
+        max-width: 100%;
+        height: auto;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
     }
 
 </style>
@@ -96,5 +125,34 @@
       clearInterval(oInt);
       oInt = setInterval('hideTheLikeBox()', 1000);
   }
+
+  /*
+   *
+   * the owl carousel
+   *
+   * */
+
+
+
+  $(document).ready(function() {
+
+      $("#owl-demo-<%= micropost.id %>").owlCarousel({
+          autoPlay: 3000,
+          navigation : true, // Show next and prev buttons
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          singleItem:true,
+          autoHeight: true
+          // "singleItem:true" is a shortcut for:
+          // items : 1,
+          // itemsDesktop : false,
+          // itemsDesktopSmall : false,
+          // itemsTablet: false,
+          // itemsMobile : false
+
+      });
+
+  });
+
 
 </script>

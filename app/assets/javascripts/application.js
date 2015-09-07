@@ -20,6 +20,7 @@
 //= require unobtrusive_flash_bootstrap
 //= require chat
 //= require ur-org
+//= require owl.carousel
 //= require turbolinks
 //= require_tree .
 

@@ -48,6 +48,7 @@ class MicropostsController < ApplicationController
   def edit
     if current_user == @micropost.user
       @micropost = Micropost.find(params[:id])
+      @photo = @micropost.photos.build
     else
       flash[:alert] = "you don't have the permission to do that, we are dreadfully sorry "
       redirect_to request.referrer || root_url
@@ -58,6 +59,15 @@ class MicropostsController < ApplicationController
     # respond_to do |format|
     if current_user == @micropost.user
       if @micropost.update(micropost_params)
+        if params[:photos].nil?
+          puts '#################################'
+          puts 'yessssss the fucking edit'
+          puts '#################################'
+        else
+          params[:photos]['picture'].each do |p|
+            @photo = @micropost.photos.create!(:picture => p, :micropost_id => @micropost.id)
+          end
+        end
         flash[:success] = 'yeah!!'
         redirect_to user_post_path :slug => @micropost.user.slug, :id => @micropost.id
         #flash[:success] = 'yeah!!'

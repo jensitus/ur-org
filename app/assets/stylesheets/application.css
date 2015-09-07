@@ -13,6 +13,8 @@
   require bootstrap
  *= require custom
  *= require jquery.atwho
+ *= require owl.carousel
+ *= require owl.theme
  *= require_tree .
  *= require_self
  */
