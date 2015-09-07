@@ -19,11 +19,14 @@
       <% else %>
           <%= false %>
       <% end %>
-      <% micropost.photos.each do |photo| %>
 
-        <%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %>
-        <%#= photo.picture %>
-      <% end %>
+
+
+                <% micropost.photos.each do |photo| %>
+                  <%= image_tag photo.picture %> <%#, class: 'uploaded_image' if photo.picture? %>
+                <% end %>
+
+
     </span>
     <span class="timestamp">
       <small>
@@ -102,5 +105,9 @@
       clearInterval(oInt);
       oInt = setInterval('hideTheLikeBox()', 1000);
   }
+
+  $('.carousel').carousel({
+      interval: 2000
+  })
 
 </script>
