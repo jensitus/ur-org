@@ -15,7 +15,7 @@
       <%#= micropost.picture? %>
       <%#= micropost.picture.url %>
       <% if micropost.photos.count > 1 %>
-          <%= true %>
+
           <div id="owl-demo-<%= micropost.id %>" class="owl-carousel">
 
             <% micropost.photos.each do |photo| %>
@@ -23,7 +23,7 @@
             <% end %>
           </div>
       <% else %>
-          <%= false %>
+
           <% micropost.photos.each do |photo| %>
                 <div><%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %></div>
             <% end %>
