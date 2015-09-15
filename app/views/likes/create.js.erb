@@ -1,3 +1,3 @@
 $('#like-<%= @micropost_id %>').html('<%= escape_javascript(render 'microposts/unlike', m_id: @micropost_id) %>');
-$('#likes_count-<%= @micropost_id %>').html('<%= render 'likes/likes_count' %>');
-$('#the_likers_count-<%= @micropost.id %>').html('<%= escape_javascript (render 'likes/the_likers', micropost: @micropost) %>');
+//$('#likes_count-<%#= @micropost_id %>').html('<#%= escape_javascript (render 'likes/likes_count', micropost: @micropost) %>');
+$('#likes_count-<%= @micropost.id %>').html('<%= escape_javascript (render 'likes/the_likers', micropost: @micropost) %>');

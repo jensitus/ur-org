@@ -53,12 +53,13 @@
         <% end %>
         |
         <span id="likes_count-<%= micropost.id %>"> <!--onmouseover="like(<%#= micropost.id %>);" onmouseout="hideTheLikeBox(<%#= micropost.id %>);">-->
-            <%= pluralize micropost.likers(User).count, 'like' %>
+            <%#= pluralize micropost.likers(User).count, 'like' %>
+          <%= render 'likes/the_likers', micropost: micropost %>
         </span>
 
 
         <span id="the_likers_count-<%= micropost.id %>">
-            <%= render partial: 'likes/the_likers', locals: { micropost: micropost } %>
+            <%#= render partial: 'likes/the_likers', locals: { micropost: micropost } %>
         </span>
 
 
