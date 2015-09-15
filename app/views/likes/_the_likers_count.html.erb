@@ -1,7 +1,0 @@
-<% if micropost.likers(User).count != 0 %>
-    <span id="likeBox-<%= micropost.id %>">
-
-                    <%= render partial: 'likes/show_likers', locals: { m: micropost} %>
-
-                </span>
-<% end %>

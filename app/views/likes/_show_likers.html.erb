@@ -1,7 +1,5 @@
 <% m.likers(User).each do |l| %>
-    <ul id="like">
-      <li>
-        <%= l.name %>
-      </li>
-    </ul>
+    <small>
+      <%= l.name %><br>
+    </small>
 <% end %>
