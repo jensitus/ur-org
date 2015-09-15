@@ -6,7 +6,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   include CarrierWave::MiniMagick
-  process resize_to_limit: [600, 600]
+  process resize_to_limit: [2000, 2000]
   process :fix_exif_rotation
 
   if Rails.env.production?

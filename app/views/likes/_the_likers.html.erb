@@ -1,0 +1,18 @@
+<% if micropost.likers(User).count != 0 %>
+    <%= link_to '...', '#',
+                data: {
+                        toggle: 'popover',
+                        placement: 'top',
+                        html: 'true',
+                        trigger: 'hover',
+                        content: (render partial: 'likes/show_likers', locals: { m: micropost})
+                }
+
+    %>
+<% end %>
+
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover();
+    })
+</script>

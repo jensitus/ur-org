@@ -52,14 +52,15 @@
 
         <% end %>
         |
-        <span id="likes_count-<%= micropost.id %>" onmouseover="like(<%= micropost.id %>);" onmouseout="hideTheLikeBox(<%= micropost.id %>);">
+        <span id="likes_count-<%= micropost.id %>"> <!--onmouseover="like(<%#= micropost.id %>);" onmouseout="hideTheLikeBox(<%#= micropost.id %>);">-->
             <%= pluralize micropost.likers(User).count, 'like' %>
         </span>
 
 
         <span id="the_likers_count-<%= micropost.id %>">
-            <%= render partial: 'likes/the_likers_count', locals: { micropost: micropost } %>
+            <%= render partial: 'likes/the_likers', locals: { micropost: micropost } %>
         </span>
+
 
       </small>
 
@@ -69,25 +70,26 @@
 <% end %>
 
 <style type="text/css">
-    #likeBox-<%= micropost.id %> {
-        display: none;
-        z-index: 50;
-        position: absolute;
-        top: 0px;
-        left: 10px;
+/*    #likeBox-<%#= micropost.id %> {
+        display: block;
+        width: 400px;
+        position: relative;
+        /!*right: 500px;*!/
         background: #ffc;
         margin-left: 80%;
         border: 1px solid #a6e1ec;
         border-radius: 5px;
+        opacity: 0.92;
     }
 
-    #likeBox-<%= micropost.id %> ul {
-        list-style: none;
+    #likeBox-<%#= micropost.id %> ul {
+
+        list-style: circle;
         color: #000;
         border: 0px;
-        padding: 0px;
         padding-left: 10px;
-    }
+        padding-right: 10px;
+    }*/
 
 /*
  * the owl css
@@ -110,7 +112,7 @@
 
 <script>
 
-  var oInt;
+/*  var oInt;
 
   function like(iX) {
       clearInterval(oInt);
@@ -124,7 +126,7 @@
   function hideBox(iX) {
       clearInterval(oInt);
       oInt = setInterval('hideTheLikeBox()', 1000);
-  }
+  }*/
 
   /*
    *
