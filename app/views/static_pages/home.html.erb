@@ -16,30 +16,26 @@
 
     </div>
 <% else %>
+
     <div class="row">
-      <!-- style="background-image: url(<%#= @static_page_image %>);">-->
+      <div>
 
           <div class="col-md-6">
 
-              <span>
-              welcome to ist - ur . org
-              <p>
-                This is the further development of a<br>
-                former course and examination project<br>
-                of the <%= link_to 'HackerPartie', 'https://github.com/HackerPartie' %>
+              <p class="description">
+                orge Sachen<br>
+                in kleinen Happen<br>
               </p>
-              <p></p>
-              <%= link_to 'sign up', new_user_registration_path, class: 'btn btn-warning' %>
-              &nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
-              <%= link_to 'sign in', new_user_session_path, class: 'btn btn-success' %>
-              <br>
-              </span>
+              <p>
+                <%= render 'devise/sessions/new_session_static_home' %>
+              </p>
+              <p>
 
-            <br><br>
+              </p>
 
             <div class="row">
               <div class="col-md-12">
-                <%= image_tag @static_page_image, class: 'uploaded_image' %>
+                <%#= image_tag @static_page_image, class: 'uploaded_image' %>
               </div>
             </div>
           </div>
@@ -49,16 +45,24 @@
                 <%= render @microposts %>
             </ol>
           </div>
-
+       </div>
     </div>
 
 
 <% end %>
 
-<script>
-//    $(function () {
-//        $('[data-toggle="popover"]').popover()
-//    });
+<style>
 
+  .description {
+      font-size: 25px;
+  }
 
-</script>
+  .static_home_login {
+      color: #000;
+  }
+
+  .static_home_login a {
+      color: #05f;
+  }
+
+</style>

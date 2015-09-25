@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title yield(:title) %></title>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta content="<%= user_signed_in? ? current_user.id : '' %>" name="user-id" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style>
+      body {
+          margin: 0;
+          margin-top: 100px;
+          /*background-image: url('http://birgittwagner.de/pictures/high_wall.jpg');*/
+          background: url('<%= @static_page_image %>') no-repeat center fixed;
+          background-size: cover;
+          /*background-size: 100%;
+          background-repeat: repeat-x;*/
+          color: #fff;
+      }
+          a {
+              color: #fff;
+          }
+  </style>
+
+</head>
+<body>
+<%= render 'shared/nav' %>
+<div class="container">
+  <div class="row">
+    <div class="unobtrusive-flash-container col-md-4"></div>
+  </div>
+  <div>
+    <ul id="search_results_div" class="list-group"></ul>
+  </div>
+  <%= yield %>
+</div>
+
+<hr>
+
+<div class="container text-center">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+          © 2015 |
+          <%= link_to 'about us', about_path %> |
+          <%= link_to 'contact us', new_contact_path %>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+          <li></li>
+
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+
+
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <hr>
+  <!--<div class="row">
+    <div class="col-lg-12">
+      <ul class="nav nav-pills nav-justified">
+        <li><a href="/">© 2013</a></li>
+        &lt;!&ndash;
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy</a></li>
+        &ndash;&gt;
+      </ul>
+    </div>
+  </div>-->
+</div>
+
+</body>
+
+</html>

@@ -1,8 +1,8 @@
 <%	 provide :title, 'register yourself' %>
 <div class="rows">
-  <div class="col-md-5">
+  <div class="col-md-5 background_class">
 
-<h3>Sign up</h3>
+<h4>Connect yourself to the ur-org universe</h4>
 
 <!--
     = form_for(resource, :as => resource_name,
@@ -48,3 +48,17 @@
 <%= render "devise/shared/links" %>
     </div>
 </div>
+
+<style>
+
+  .background_class {
+      background: #eee;
+      border-radius: 5px;
+      color: #000;
+  }
+
+  .background_class a {
+      color: #05f;
+  }
+
+</style>

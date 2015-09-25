@@ -16,49 +16,20 @@ class StaticPagesController < ApplicationController
       @followers = current_user.followers.sample(3)
       fresh_when :etag => [@feed_items, current_user]
     else
-      @static_page_image = Micropost.where('picture IS NOT NULL').sample(1)[0].picture
+      if Rails.env.development?
+        @static_page_image = Photo.find(60).picture
+      elsif Rails.env.production?
+        @static_page_image = Photo.find(35).picture
+      end
+      #@static_page_image = Micropost.where('picture IS NOT NULL').sample(1)[0].picture
       # @static_page_image = Photo.all.sample(1)[0].picture
       @microposts = Micropost.where('picture IS NULL AND group_id IS NULL').sample(3)
+      render :layout => 'not_signed_in'
     end
 
   end
 
   def about
   end
-
-  private
-
-  # def the_search
-  #   s = PgSearch.multisearch(params[:query])
-  #   q = params[:query]
-  #   puts '###################################################'
-  #   q = q.strip if !q.nil?
-  #   puts '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-  #   puts s.class
-  #   puts s.inspect
-  #   puts '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-  #   puts 'q'
-  #   puts q.inspect
-  #   the_search = {}
-  #   s.each do |s|
-  #     search = Scalpel.cut s.content
-  #     search.each do |se|
-  #       puts '::::::::::::::::::::::'
-  #       puts se if se.downcase.include?(q.downcase)
-  #       @se = se if se.downcase.include?(q.downcase)
-  #       puts '@se: ' + @se
-  #       puts se.downcase.include?(q.downcase)
-  #       puts se.inspect
-  #       puts ':::::::::::::::::::::::::::::::::::::'
-  #       the_search = {s: s, se: se}
-  #     end
-  #     puts 'the_search:'
-  #     puts the_search
-  #     the_search
-  #   end
-  #
-  #
-  #   puts '##### ##############################################'
-  # end
 
 end

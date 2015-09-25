@@ -1,0 +1,24 @@
+<div class="col-md-6 well well-sm static_home_login">
+    <%= form_for(:user, url: session_path(:user)) do |f| %>
+        <div class="form-group">
+
+          <%#= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, placeholder: 'email', class: 'form-control' %>
+
+          <%#= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: 'off', placeholder: 'password', class: 'form-control' %>
+
+          <%= f.check_box :remember_me, :checked => true %>
+          <%= f.label :remember_me, color: 'black' %>
+
+          <div class="actions">
+            <%= f.submit "Log in", class: 'btn btn-success' %>
+          </div>
+
+        </div>
+    <% end %>
+
+    Neu hier?<br>
+    <b><%= link_to 'Registriere Dich!', new_user_registration_path %></b>
+
+</div>
