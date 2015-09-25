@@ -36,7 +36,6 @@ class MicropostsController < ApplicationController
     @comment = Comment.new
     @micropost = Micropost.find(params[:id])
     @photos = @micropost.photos.all
-    #@likes = @micropost.likers(User)
     if !current_user.nil?
       @liked_by_current_user = @micropost.liked_by?(current_user)
     end
