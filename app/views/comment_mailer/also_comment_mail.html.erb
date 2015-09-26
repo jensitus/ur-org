@@ -1,12 +1,13 @@
-<h4><%= @answer.comment.user.name %> hat auch noch so einen verdammten kommentar geschrieben</h4>
 
-<div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
-  <b>from:</b>  <%= @answer.comment.user.name %>
+<div style="font-family: sans-serif; font-size: 16px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
+  <%= @answer.comment.body %>
 </div>
 
 <div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
-  <b>comment:</b> <%= @answer.comment.body %>
+  sagt <b><%= @answer.comment.user.name %></b> <span>in noch so einem verdammten Kommentar</span>
 </div>
+
+
 
 <div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
   <b>visit:</b> <a href="https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>">klick</a>
