@@ -1,17 +1,13 @@
-<div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
-  <b>There is a new comment:</b>
+<div style="font-family: sans-serif; font-size: 16px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
+  <%= @answer.comment.body %>
 </div>
 
 <div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
-  <b>from:</b>  <%= @answer.comment.user.name %>
+  sagt <b><%= @answer.comment.user.name %></b> <span>in so einem verdammten Kommentar</span>
 </div>
 
 <div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
   <b>visit:</b> <a href="https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>">klick</a>
-</div>
-
-<div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
-  <b>comment:</b>           <%= @answer.comment.body %>
 </div>
 
 <div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
