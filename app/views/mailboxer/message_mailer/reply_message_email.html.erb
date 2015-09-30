@@ -9,17 +9,17 @@
       subject: <b><%= @subject %></b>
     </p>
 
+    <p style="background: #eee; padding: 10px; font-size: 14px; border-radius: 5px; max-width: 300px;">
+      <%= raw @message.body %>
+    </p>
+
     <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
       from: <b><%= @message.sender.name %></b>
     </p>
 
-    <blockquote>
-      <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
-        <%= raw @message.body %>
-      </p>
-    </blockquote>
     <p>
-      Visit <%= link_to messages_url, messages_url %> and go to your inbox for more info.
+      Visit
+      <%= link_to conversation_url(@message.conversation.id), conversation_url(@message.conversation.id) %>
     </p>
   </body>
 </html>

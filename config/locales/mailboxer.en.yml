@@ -1,0 +1,5 @@
+en:
+  mailboxer:
+    message_mailer:
+      subject_new: '[ist-ur.org] you have a new message!!'
+      subject_reply: "[ist-ur.org] you've got a reply!!"
