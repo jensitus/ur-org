@@ -39,7 +39,7 @@ class MicropostsController < ApplicationController
     if !current_user.nil?
       @liked_by_current_user = @micropost.liked_by?(current_user)
     end
-    @comments = @micropost.comments
+    @comments = @micropost.comments.order(:id)
     #fresh_when etag: [@comments, @micropost, current_user]
     respond_with [micropost: @micropost, comment: @comments]
   end
