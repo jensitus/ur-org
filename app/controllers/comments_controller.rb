@@ -48,7 +48,6 @@ class CommentsController < ApplicationController
           puts 'redirect_to'
           puts
           respond_with @comment.micropost
-
           #format.html { redirect_to @comment, notice: 'successfully' }
           #format.json { render :show, status: :ok, location: @comment }
         else
