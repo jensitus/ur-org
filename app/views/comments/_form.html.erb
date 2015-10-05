@@ -1,0 +1,19 @@
+<%= form_for(@comment, html: { multipart: true} ) do |f| %>
+    <div class="form-group">
+      <%= render 'shared/error_messages', object: f.object  %>
+
+      <div class="field">
+        <%= f.text_area :body, class: 'form-control' %>
+      </div>
+      <div>
+        <%#= @micropost.id %>
+        <%#= f.hidden_field :micropost_id, :value => @micropost.id %>
+        <%#= current_user.id %> <%#= @comment.user.id %> <%#= @comment.user.name %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'update this fucking comment', id: 'submit', class: 'btn btn-sm btn-success' %>
+      </div>
+    </div>
+<% end %>
+<%= button_to 'escape', @comment.micropost, id: 'escape', class: 'btn btn-sm btn-danger', method: :get %>
+
