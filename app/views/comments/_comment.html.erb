@@ -12,7 +12,7 @@
     </span>
     <span class="timestamp">
         <small>
-          <%= comment.id %>
+          <%#= comment.id %>
           <%= link_to comment.user.name, comment.user %> am
           <%= comment.created_at.strftime('%d.%m.') %> um
           <%= comment.created_at.strftime('%H:%M') %> |
@@ -22,7 +22,7 @@
                     <%= link_to 'edit', edit_comment_path(comment.id), remote: true %>
                 </span>
             <% else %>
-                <%= 'say no' %>
+                <%= 'edit' %>
             <% end %>
 
 
