@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @comment %> |
-<%= link_to 'Back', comments_path %>
+<%= link_to 'Show', user_post_path(slug: @comment.micropost.user.slug, id: @comment.micropost.id) %> |
+<%= link_to 'Back', root_path %>
