@@ -71,6 +71,10 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+
+  resources :invites, only: [:new, :create]
+  get 'invites/dele' => 'invites#dele', as: 'dele'
+
   resources :microposts
   get '/:slug/:id' => 'microposts#show', as: 'user_post'
   resources :relationships, only: [:create, :destroy]

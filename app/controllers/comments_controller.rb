@@ -27,6 +27,9 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.build(comment_params)
+    puts '+++++++++++++++++++++++++++++++++++++++++'
+    puts @comment.inspect
+    puts '+++++++++++++++++++++++++++++++++++++++++'
     mentions = Mention.get_the_mention(@comment.body)
     if @comment.save
       @answer = Answer.create!(:micropost_id => answer_params,
