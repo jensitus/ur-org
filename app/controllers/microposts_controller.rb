@@ -10,6 +10,11 @@ class MicropostsController < ApplicationController
     # respond_with(@micropost)
   end
 
+  def new_user_post
+    @micropost = Micropost.new
+    @photo = @micropost.photos.build
+  end
+
   def create
     @micropost = current_user.microposts.build(micropost_params)
     mentions = Mention.get_the_mention(@micropost.content)

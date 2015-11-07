@@ -31,11 +31,11 @@
                     <!--<span class="picture"> -->
                       <%= f.fields_for :photos do |p| %>
                             <%= p.label :picture %><br>
-                            <%= p.file_field :picture, multiple: true, name: 'photos[picture][]', class: 'well well-sm' %>
+                            <%= p.file_field :picture, id: 'files', multiple: true, name: 'photos[picture][]', class: 'well well-sm' %>
                             <!-- accept: 'image/jpeg,image/gif,image/png', -->
                       <% end %>
                     <!--</span>-->
-
+                      <div id="list"></div>
                     <%= f.submit 'Post', id: 'submit', class: 'btn btn-success', data: { disable_with: 'Please wait ...' } %>
                   <hr>
                 </div>
@@ -98,3 +98,5 @@
     window.onload = check_the_post_form();
 
 </script>
+
+

@@ -94,6 +94,8 @@ gem 'devise'
 gem 'jquery-atwho-rails'
 gem 'socialization', :git => 'https://github.com/HackerPartie/socialization.git'
 
+#gem 'jquery-fileupload-rails'
+
 gem 'pingback'
 
 gem 'scalpel'
