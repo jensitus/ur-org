@@ -5,7 +5,7 @@
       <div class="field">
         <span class="glyphicon glyphicon-comment"></span>
         <%= f.label :comment %><br>
-        <%= f.text_area :body, id: 'himmel', class: 'form-control', onkeyup: 'checkform()' %>
+        <%= f.text_area :body, id: 'himmel', class: 'form-control', rows: 1, onkeyup: 'checkform()', data: { 'min-rows' => 1 } %>
       </div>
       <div>
 
@@ -36,6 +36,19 @@
                 return false;
             }
         }
+    });
+
+    $(document).one('focus.textarea', '#himmel', function() {
+        var savedValue = this.value;
+        this.value = '';
+        this.baseScrollHeight = this.scrollHeight;
+        this.value = savedValue;
+    }).on('input.textarea', '#himmel', function() {
+        var minRows = this.getAttribute('data-min-rows')| 0, rows;
+        this.rows = minRows;
+        console.log(this.scrollHeight, this.baseScrollHeight);
+        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 15);
+        this.rows = minRows + rows;
     });
 
     window.onload = checkform();

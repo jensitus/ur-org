@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
       @photo = @micropost.photos.build
       ########
       @placeholder = 'Compose your message to the world ...'
-      @feed_items = current_user.feed.page(params[:page]).per(5)
+      @feed_items = current_user.feed.page(params[:page]).per(8)
       @likes = @micropost.likers(User)
       @liked_by_current_user = @micropost.liked_by?(current_user)
       @following = current_user.following.sample(3)
