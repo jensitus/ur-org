@@ -1,0 +1,102 @@
+
+    <%= form_for(@micropost, html: { multipart: true, id: 'fileupload', name: 'the_post_form', enctype: 'multipart/form-data' }) do |f| %>
+        <div class="form-group">
+          <%= render 'shared/error_messages', object: f.object  %>
+          <div class="field">
+            <%= f.hidden_field :group_id, :value => @group.id unless @group.nil? %>
+
+                  <%= f.text_area :content,
+                              autofocus: false,
+                              :rows => '1',
+                              id: 'content_field',
+                              #onclick: 'toggle()',
+                              #name: 'content',
+                              onkeyup: 'check_the_post_form()',
+                              placeholder: @placeholder,
+                              class: 'form-control expandable',
+                              :data => {
+                                      'min-rows' => 1,
+                                      #toggle: 'collapse',
+                                      #target: '#collapseExample'
+                              },
+                              :aria => {
+                                      #expanded: 'true'
+                              }
+
+              %>
+
+            <div class="collapse" id="collapseExample">
+
+
+              <span id="content_count">0</span> chars<br><br>
+              <!--<span class="picture"> -->
+              <%= f.fields_for :photos do |p| %>
+                  <span id="the_etwas_box">
+                    <span id="etwas"></span>
+                  </span>
+                    <span class="btn btn-xs btn-primary fileinput-button" id="add_images">
+                      <span>Add images ...</span>
+                        <div id="next_image">
+                          <%#= p.file_field :picture, id: "files-0", multiple: true, name: 'photos[picture][]', onclick: 'theFileInput()' %>
+                          <input id="files-0" type="file" name="photos[picture][]" onchange="disappear()" style="display: block;" accept="image/jpeg,image/gif,image/png">
+                          <!-- accept: 'image/jpeg,image/gif,image/png', -->
+                        </div>
+                    </span>
+
+              <% end %><br>
+              <!--</span>-->
+              <br>
+
+              <table id="preview_table" class="table"><tbody id="preview_tbody"></tbody></table>
+
+              <%= f.submit 'Post', id: 'submit', class: 'btn btn-success', data: { disable_with: 'Please wait ...' } %>
+              <span id="leave" class="btn btn-default">leave</span>
+              <hr>
+              <div id="log"></div>
+            </div>
+          </div>
+        </div>
+
+    <% end %>
+
+    <style>
+        .thumb {
+            margin: 2px;
+            max-height: 50px;
+        }
+
+        .fileinput-button {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .fileinput-button input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+            direction: ltr;
+            cursor: pointer;
+        }
+
+    </style>
+
+<script>
+    $(function(){
+        data = [];
+        <% User.find_each do |user| %>
+        data.push('<%= user.slug %>');
+        <% end %>
+        $('textarea').atwho({at:"@", 'data':data});
+    });
+
+    $(document).ready(function() {
+//            console.log('ready');
+        init();
+    });
+
+    window.onload = check_the_post_form();
+</script>
