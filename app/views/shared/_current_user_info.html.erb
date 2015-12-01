@@ -6,7 +6,7 @@
 <%#= link_to 'view my profile', current_user %>
 <b><%#= 'My Groups:' %></b><br>
 
-<% if !@galleries.nil? %>
+<% if !@galleries.empty? %>
     <section class="sidebar_kasten">
       <span class="glyphicon glyphicon-picture"></span>
       My Galleries:<br>
