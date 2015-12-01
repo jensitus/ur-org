@@ -43,6 +43,8 @@ class User < ActiveRecord::Base
 
   has_many :group_maintainers
 
+  has_and_belongs_to_many :photo_galleries
+
   acts_as_messageable
   acts_as_mentionable
   acts_as_liker

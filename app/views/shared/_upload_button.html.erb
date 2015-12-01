@@ -1,0 +1,14 @@
+<span id="the_etwas_box">
+    <span id="etwas"></span>
+</span>
+<span class="btn btn-xs btn-primary fileinput-button" id="add_images">
+  <span>Add images ...</span>
+    <div id="next_image">
+      <%#= p.file_field :picture, id: "files-0", multiple: true, name: 'photos[picture][]', onclick: 'theFileInput()' %>
+      <input id="files-0" type="file" name="photos[picture][]" onchange="disappear()" style="display: block;" accept="image/jpeg,image/gif,image/png">
+      <!-- accept: 'image/jpeg,image/gif,image/png', -->
+    </div>
+</span>
+<br><br>
+
+<table id="preview_table" class="table"><tbody id="preview_tbody"></tbody></table>

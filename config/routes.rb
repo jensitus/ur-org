@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :photo_galleries
+
   get 'search/index'
 
   get 'notifications/index'
@@ -72,12 +74,13 @@ Rails.application.routes.draw do
     end
   end
   resources :microposts
+  resources :photos, only: [:destroy, :show]
   get '/:slug/:id' => 'microposts#show', as: 'user_post'
   get 'new' => 'microposts#new_user_post', as: 'new_user_post'
   resources :relationships, only: [:create, :destroy]
 
   get '/:id' => 'users#show', as: 'single_user'
 
-  resources :photos, only: :destroy
+
 
 end

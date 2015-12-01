@@ -3,6 +3,18 @@
   <%= render 'shared/post_avatar' %>
   <h4><%= @user.name %></h4>
 </section>
+
+<% if !@galleries.nil? %>
+    <section class="sidebar_kasten">
+      <span class="glyphicon glyphicon-picture"></span>
+      galleries:<br>
+      <% @galleries.each do |gallery| %>
+          <%= link_to gallery.title, photo_gallery_path(gallery) %>
+      <% end %>
+    </section>
+<% end %>
+
+
 <% if user_signed_in? %>
     <section class="sidebar_kasten">
         <%= render 'users/follow_form' %>

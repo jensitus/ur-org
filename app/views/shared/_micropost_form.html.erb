@@ -28,34 +28,12 @@
                 <div class="collapse" id="collapseExample">
 
                     <span id="content_count">0</span> chars<br><br>
-                    <!--<span class="picture"> -->
-                      <%= f.fields_for :photos do |p| %>
-
-                      <!-- the etwas form    -->
-
-                        <span id="the_etwas_box">
-                            <span id="etwas"></span>
-                        </span>
-                        <span class="btn btn-xs btn-primary fileinput-button" id="add_images">
-                          <span>Add images ...</span>
-                            <div id="next_image">
-                              <%#= p.file_field :picture, id: "files-0", multiple: true, name: 'photos[picture][]', onclick: 'theFileInput()' %>
-                              <input id="files-0" type="file" name="photos[picture][]" onchange="disappear()" style="display: block;" accept="image/jpeg,image/gif,image/png">
-                              <!-- accept: 'image/jpeg,image/gif,image/png', -->
-                            </div>
-                        </span>
-
-                      <!-- the older form    -->
-                            <%#= p.label :picture %><br>
-                            <%#= p.file_field :picture, id: 'files', multiple: true, name: 'photos[picture][]', class: 'well well-sm' %>
-
-                            <!-- accept: 'image/jpeg,image/gif,image/png', -->
-                      <% end %><br>
-                    <!--</span>-->
-                        <table id="preview_table" class="table"><tbody id="preview_tbody"></tbody></table>
+                    <%= render 'shared/upload_button' %>
                     <%= f.submit 'Post', id: 'submit', class: 'btn btn-success', data: { disable_with: 'Please wait ...' } %>
                     <span id="leave" class="btn btn-default">leave</span>
-                  <hr>
+                    <%= link_to 'Create Gallery', new_photo_gallery_path, class: 'btn btn-info' %>
+
+                    <hr>
                 </div>
             </div>
           </div>
@@ -65,30 +43,7 @@
     <% end %>
   </div>
 
-  <style>
-      .thumb {
-          margin: 2px;
-          max-height: 50px;
-      }
 
-      .fileinput-button {
-          position: relative;
-          overflow: hidden;
-          display: inline-block;
-      }
-      .fileinput-button input {
-          position: absolute;
-          top: 0;
-          right: 0;
-          margin: 0;
-          opacity: 0;
-          -ms-filter: 'alpha(opacity=0)';
-          font-size: 200px;
-          direction: ltr;
-          cursor: pointer;
-      }
-
-  </style>
 
 
 <script type="text/javascript">

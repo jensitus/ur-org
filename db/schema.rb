@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623105748) do
+ActiveRecord::Schema.define(version: 20151124134849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,22 @@ ActiveRecord::Schema.define(version: 20150623105748) do
     t.datetime "updated_at"
     t.text     "description"
   end
+
+  create_table "invite_counts", force: true do |t|
+    t.integer  "invite_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "deleted",    default: false
+  end
+
+  create_table "invites", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invites", ["email"], name: "index_invites_on_email", unique: true, using: :btree
 
   create_table "likes", force: true do |t|
     t.string   "liker_type"
@@ -193,11 +209,27 @@ ActiveRecord::Schema.define(version: 20150623105748) do
 
   add_index "pg_search_documents", ["searchable_id", "searchable_type"], name: "index_pg_search_documents_on_searchable_id_and_searchable_type", using: :btree
 
+  create_table "photo_galleries", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "photo_galleries_users", id: false, force: true do |t|
+    t.integer "photo_gallery_id", null: false
+    t.integer "user_id",          null: false
+  end
+
+  add_index "photo_galleries_users", ["photo_gallery_id", "user_id"], name: "index_photo_galleries_users_on_photo_gallery_id_and_user_id", using: :btree
+  add_index "photo_galleries_users", ["user_id", "photo_gallery_id"], name: "index_photo_galleries_users_on_user_id_and_photo_gallery_id", using: :btree
+
   create_table "photos", force: true do |t|
     t.integer  "micropost_id"
     t.string   "picture"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "photo_gallery_id"
   end
 
   create_table "relationships", force: true do |t|

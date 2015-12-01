@@ -78,6 +78,7 @@ function theFileInput() {
             var extra = document.createElement('span');
             extra.setAttribute('id', 'etwas');
             document.getElementById('the_etwas_box').appendChild(extra);
+            //console.log(document.getElementsByClassName('the_etwas_box'));
             document.getElementById('add_images').style.display = '';
         }
 
@@ -290,6 +291,19 @@ function check_the_post_form() {
     }
     document.getElementById("submit").disabled = !cansubmit;
 }
+
+//$($document).ready(function() {
+//    $('#only_photo_upload').attr('disabled', true);
+//    $('input:file').change(
+//        function() {
+//            if ($(this).val()) {
+//                $('#only_photo_upload').removeAttr('disabled');
+//            }  else {
+//                $('#only_photo_upload').attr('disabled', true)
+//            }
+//        }
+//    )
+//});
 
 //window.onload = check_the_post_form();
 
