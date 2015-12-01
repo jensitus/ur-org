@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @microposts = @user.microposts.page(params[:page]).per(10)
+    @galleries = @user.photo_galleries
     fresh_when :last_modified => @microposts.maximum(:updated_at)
   end
 

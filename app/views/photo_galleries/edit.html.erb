@@ -1,0 +1,15 @@
+<h5>Editing <b><%= @photo_gallery.title %></b></h5>
+
+<div class="row">
+    <% @photos.each do |photo| %>
+        <div class="col-md-1 the_single_photo-<%= photo.id %>">
+          <%= image_tag photo.picture.thumb, width: 50 %>
+          <%= link_to 'delete', photo_path(photo.id), method: :delete, remote: true, data: { confirm: 'Sicher? Das war es dann ...' } %>
+        </div>
+    <% end %>
+</div>
+<br>
+<%= render 'form' %>
+
+<%= link_to 'Show', @photo_gallery %> |
+<%= link_to 'Back', request.referer %>

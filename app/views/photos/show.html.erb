@@ -1,0 +1,68 @@
+<div class="overlay">
+
+    <%= image_tag @photo.picture, class: 'modus' %>
+
+</div>
+
+<div class="row">
+  <p class="text-center">
+
+        <%= link_to 'previous', photo_path(@previous) unless @previous.nil? %>
+        <a data-overlay-trigger="" href="#!">
+            <%= image_tag @photo.picture, class: 'single_photo' %>
+        </a>
+        <%= link_to 'next', photo_path(@next) unless @next.nil? %>
+
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <%= link_to @photo.photo_gallery.title, photo_gallery_path(@photo.photo_gallery) %><br>
+    <% @photo_users.each do |user| %>
+        <%= image_tag user.avatar.thumb, class: 'img-rounded', width: 32 %>
+        <%= user.name %>
+    <% end %>                        <br>
+
+  </div>
+  <div class="col-md-6">
+  <% @gallery.each do |photo| %>
+
+        <%= link_to photo_path(photo) do %>
+            <%= image_tag photo.picture.thumb, class: 'thumb_line' %>
+        <% end %>
+
+  <% end %>
+  </div>
+</div>
+
+<style>
+  .single_photo {
+      max-width: 50%;
+  }
+
+    .sp {
+        max-width: 500px;
+    }
+
+    .thumb_line {
+        width: 29px;
+        -moz-transition: 0.3s ease-out;
+    }
+
+        .thumb_line:hover {
+            width: 53px;
+        }
+
+</style>
+
+<script>
+    $(document).ready(function() {
+        $('.overlay').overlay();
+    })
+</script>

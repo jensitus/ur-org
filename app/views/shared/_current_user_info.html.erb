@@ -6,6 +6,17 @@
 <%#= link_to 'view my profile', current_user %>
 <b><%#= 'My Groups:' %></b><br>
 
+<% if !@galleries.nil? %>
+    <section class="sidebar_kasten">
+      <span class="glyphicon glyphicon-picture"></span>
+      My Galleries:<br>
+      <% @galleries.each do |gallery| %>
+
+        <%= link_to gallery.title, photo_gallery_path(gallery) %><br>
+      <% end %>
+    </section>
+<% end %>
+
 <section class="sidebar_kasten">
   <a href="/messages" style="color: #000;">
     <span class="glyphicon glyphicon-envelope"></span>
