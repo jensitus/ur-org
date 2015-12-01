@@ -4,27 +4,27 @@
   <h4><%= @user.name %></h4>
 </section>
 
-<% if !@galleries.nil? %>
+<% if user_signed_in? %>
+    <section class="sidebar_kasten">
+      <%= render 'users/follow_form' %>
+    </section>
+<% end %>
+
+<% if !@galleries.empty? %>
     <section class="sidebar_kasten">
       <span class="glyphicon glyphicon-picture"></span>
       galleries:<br>
       <% @galleries.each do |gallery| %>
-          <%= link_to gallery.title, photo_gallery_path(gallery) %>
+          <%= link_to gallery.title, photo_gallery_path(gallery) %><br>
       <% end %>
     </section>
 <% end %>
 
-
 <% if user_signed_in? %>
     <section class="sidebar_kasten">
-        <%= render 'users/follow_form' %>
+      <%= render 'shared/sendmessage' %>
     </section>
 <% end %>
 <section class="sidebar_kasten">
   <%= render 'shared/stats' %>
 </section>
-<% if user_signed_in? %>
-    <section class="sidebar_kasten">
-        <%= render 'shared/sendmessage' %>
-    </section>
-<% end %>
