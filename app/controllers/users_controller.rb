@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :require_admin, only: :index
   before_action :get_user
   before_action :follow
+  before_action :photo_galleries, except: :index
 
   def index
     @users = User.where.not('id = ?', current_user.id).order('created_at DESC')
@@ -10,7 +11,6 @@ class UsersController < ApplicationController
 
   def show
     @microposts = @user.microposts.page(params[:page]).per(10)
-    @galleries = @user.photo_galleries
     fresh_when :last_modified => @microposts.maximum(:updated_at)
   end
 
@@ -42,6 +42,10 @@ class UsersController < ApplicationController
   def follow
     @followers = @user.followers.sample(3)
     @following = @user.following.sample(3)
+  end
+
+  def photo_galleries
+    @galleries = @user.photo_galleries
   end
 
 end

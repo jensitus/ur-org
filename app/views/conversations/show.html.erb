@@ -5,49 +5,54 @@
 
     <div class="col-md-7">
 
+
       <% @conversation.participants.each do |participant| %>
         <% if participant != current_user %>
           conversation with: <b><%= participant.name %></b>
         <% end %>
       <% end %>
+      <div id="scroll_box" class="conversation_box">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th></th>
+          <th><%= @conversation.subject %></th>
+        </tr>
+        </thead>
 
 
-      <h3><%= @conversation.subject %></h3>
+        <tbody>
+          <%= content_tag_for(:div, @conversation.receipts_for(current_user).order(:created_at => :asc)) do |receipt| %>
+            <% message = receipt.message %>
 
-      <div class="conversation_box">
 
-      <%= content_tag_for(:div, @conversation.receipts_for(current_user).order(:created_at => :desc)) do |receipt| %>
-        <% message = receipt.message %>
-          <div class="conversation_content">
-            <div class="row">
+                    <tr>
+                      <% if message.sender.avatar_url.nil? %>
+                          <td><%= image_tag message.sender.gravatar_url, width: '25', class: 'img-circle' %></td>
+                      <% else %>
+                          <td><%= image_tag message.sender.avatar.thumb, width: '25', class: 'img-circle' %></td>
+                      <% end %>
+                      <td>
+                        <%= simple_format(auto_link(strip_tags(message.body))) %>
+                        <small>
+                          <b><%= link_to message.sender.name, message.sender %></b>
+                          &nbsp;&nbsp;&nbsp;<%= message.created_at.strftime('%e.%m. at %H:%M') %>
+                        </small>
+                      </td>
+                    </tr>
 
-              <div class="gravatar col-md-1">
-                    <% if message.sender.avatar_url.nil? %>
-                        <%= image_tag message.sender.gravatar_url, width: '25', class: 'img-circle' %>
-                    <% else %>
-                        <%= image_tag message.sender.avatar.thumb, width: '25', class: 'img-circle' %>
-                    <% end %>
-              </div>
-              <div class="col-md-8">
-                    <small>
-                        <b><%= link_to message.sender.name, message.sender %></b>
-                        &nbsp;&nbsp;&nbsp;<%= message.created_at.strftime('%e.%m. at %H:%M') %>
-                    </small>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="gravatar col-md-1"></div>
-              <div class="col-md-8">
-                  <%= simple_format(auto_link(strip_tags(message.body))) %>
-              </div>
+          <% end %>
 
-            </div>
-          </div>
-      <% end %>
-    </div>
-      <br><br>
+        </tbody>
+
+      </table>
+      </div>
       <%= render 'messages/form', :conversation => @conversation %>
 
     </div>
 </div>
+
+<script>
+    $('#scroll_box').scrollTop($('#scroll_box')[0].scrollHeight);
+</script>
