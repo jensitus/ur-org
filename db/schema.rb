@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124134849) do
+ActiveRecord::Schema.define(version: 20151210105538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: true do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "answers", force: true do |t|
     t.integer  "comment_id"
@@ -199,6 +216,24 @@ ActiveRecord::Schema.define(version: 20151124134849) do
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
   add_index "microposts", ["user_id"], name: "index_microposts_on_user_id", using: :btree
 
+  create_table "notices", force: true do |t|
+    t.text     "description"
+    t.integer  "user_id"
+    t.string   "picture"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "photo_gallery_id"
+    t.integer  "count",            default: 0
+  end
+
+  create_table "notices_photos", id: false, force: true do |t|
+    t.integer "notice_id", null: false
+    t.integer "photo_id",  null: false
+  end
+
+  add_index "notices_photos", ["notice_id", "photo_id"], name: "index_notices_photos_on_notice_id_and_photo_id", using: :btree
+  add_index "notices_photos", ["photo_id", "notice_id"], name: "index_notices_photos_on_photo_id_and_notice_id", using: :btree
+
   create_table "pg_search_documents", force: true do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -214,6 +249,7 @@ ActiveRecord::Schema.define(version: 20151124134849) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "last_updated_by_id"
   end
 
   create_table "photo_galleries_users", id: false, force: true do |t|

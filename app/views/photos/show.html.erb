@@ -23,15 +23,7 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <%= link_to @photo.photo_gallery.title, photo_gallery_path(@photo.photo_gallery) %><br>
-    <% @photo_users.each do |user| %>
-        <% if user.avatar_url.nil? %>
-            <%= image_tag user.gravatar_url, width: 32, class: 'img-rounded' %>
-        <% else %>
-            <%= image_tag user.avatar.thumb, class: 'img-rounded', width: 32 %>
-        <% end %>
-        <%= link_to user.name, single_user_path(user) %>
-    <% end %>                        <br>
+
 
   </div>
   <div class="col-md-6">
@@ -42,6 +34,23 @@
         <% end %>
 
   <% end %>
+  </div>
+</div>
+<hr class="haer">
+<div class="row">
+
+  <div class="col-md-1">
+    <% @photo_users.each do |user| %>
+        <% if user.avatar_url.nil? %>
+            <%= image_tag user.gravatar_url, width: 32, class: 'img-rounded' %><br>
+        <% else %>
+            <%= image_tag user.avatar.thumb, class: 'img-rounded', width: 32 %><br>
+        <% end %>
+        <small><%= link_to user.name, single_user_path(user) %></small>
+    <% end %>
+  </div>
+  <div class="col-md-5">
+    <b><%= link_to @photo.photo_gallery.title, photo_gallery_path(@photo.photo_gallery), class: 'special_link_color' %></b>
   </div>
 </div>
 
@@ -61,6 +70,14 @@
 
         .thumb_line:hover {
             width: 53px;
+        }
+
+        .special_link_color {
+            color: #000;
+        }
+
+        hr.haer {
+            border-top: 1px solid #eff;
         }
 
 </style>

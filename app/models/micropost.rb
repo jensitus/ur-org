@@ -1,5 +1,7 @@
 class Micropost < ActiveRecord::Base
   include PgSearch
+  include PublicActivity::Model
+  tracked owner: Proc.new{|controller, model| controller.current_user}
   multisearchable :against => :content
   belongs_to :user
   default_scope -> { order(created_at: :desc) }

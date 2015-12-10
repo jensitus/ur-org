@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  devise  :omniauthable, :omniauth_providers => [:twitter]
+  # devise  :omniauthable, :omniauth_providers => [:twitter]
 
   validates_uniqueness_of :name
   #validates_presence_of :avatar
@@ -55,27 +55,37 @@ class User < ActiveRecord::Base
     super.gsub('-', '_')
   end
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.id).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name
-      user.avatar = auth.info.image
-    end
-  end
-
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session['devise.twitter_data'] && session["devise.twitter_data"]["extra"]["raw_info"]
-        user.email = data['email'] if user.email.blank?
-      end
-    end
-  end
+  # def self.from_omniauth(auth)
+  #   where(provider: auth.provider, uid: auth.id).first_or_create do |user|
+  #     user.email = auth.info.email
+  #     user.password = Devise.friendly_token[0,20]
+  #     user.name = auth.info.name
+  #     user.avatar = auth.info.image
+  #   end
+  # end
+  #
+  # def self.new_with_session(params, session)
+  #   super.tap do |user|
+  #     if data = session['devise.twitter_data'] && session["devise.twitter_data"]["extra"]["raw_info"]
+  #       user.email = data['email'] if user.email.blank?
+  #     end
+  #   end
+  # end
 
   def feed
+
+  end
+
+  def get_the_microposts
     following_ids = 'select followed_id from relationships where follower_id = :user_id'
     group_or_not = 'select group_id from group_memberships where user_id = :user_id'
     Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id).where(group_id: nil)
+  end
+
+  def get_the_activities
+    following_ids = 'select followed_id from relationships where follower_id = :user_id'
+    #PublicActivity::Activity.order('created_at desc').where(owner_id: self.following, owner_type: 'User')
+    PublicActivity::Activity.order('created_at desc').where("owner_id in (#{following_ids}) OR owner_id = :user_id", user_id: id, owner_type: 'User')
   end
 
   # connect a user

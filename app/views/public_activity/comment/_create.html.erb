@@ -1,0 +1,5 @@
+<small>commented on</small>
+<%# if activity.trackable %>
+    <small><%#= link_to 'this post', user_post_path(slug: activity.trackable.answer.micropost.user.slug, id: activity.trackable.answer.micropost) %></small>
+<%# else %>
+<%# end %>

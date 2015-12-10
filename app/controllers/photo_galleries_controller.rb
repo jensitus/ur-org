@@ -55,6 +55,7 @@ class PhotoGalleriesController < ApplicationController
           @photo = @photo_gallery.photos.create!(picture: photo, photo_gallery_id: @photo_gallery.id)
         end
       end
+
       flash[:success] = 'jepp'
     end
     respond_with(@photo_gallery)
@@ -72,7 +73,7 @@ class PhotoGalleriesController < ApplicationController
     end
 
     def photo_gallery_params
-      params.require(:photo_gallery).permit(:title, :description, photos_attributes: [:id, :photo_gallery_id, :picture])
+      params.require(:photo_gallery).permit(:title, :description, :last_updated_by_id, photos_attributes: [:id, :photo_gallery_id, :picture])
     end
 
     def photo_gallery_user
