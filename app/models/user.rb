@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   def get_the_microposts
     following_ids = 'select followed_id from relationships where follower_id = :user_id'
     group_or_not = 'select group_id from group_memberships where user_id = :user_id'
-    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id).where(group_id: nil)
+    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id AND id < 356", user_id: id).where(group_id: nil)
   end
 
   def get_the_activities
