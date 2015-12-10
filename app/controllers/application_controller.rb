@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  include PublicActivity::StoreController
   around_action :catch_not_found
   protect_from_forgery with: :null_session #, if: Proc.new { |c| c.request.format == 'application/json' } #:exception
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -15,6 +16,8 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource)
     request.referrer
   end
+
+  # hide_action :current_user
 
   protected
 

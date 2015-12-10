@@ -1,0 +1,16 @@
+<% @activities.each do |activity| %>
+    <% if activity.trackable_type == 'Micropost' %>
+        <%= render_activity activity %>
+    <% else %>
+        <div class="activity" style="border: 1px solid #eee; border-radius: 3px; padding: 5px;">
+          <small>
+            <%= link_to activity.owner.name, activity.owner if activity.owner %>
+          </small>
+          <%= render_activity activity %>
+
+          <small>
+            <%= time_tag activity.created_at %>
+          </small>
+        </div>
+    <% end %>
+<% end %>

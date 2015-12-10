@@ -1,4 +1,3 @@
-<!--<li id="micropost-<%#= micropost.id %>">-->
 <%= content_tag_for :li, micropost do %>
     <span class="gravatar">
       <% if micropost.user.avatar_url.nil? %>
@@ -10,7 +9,7 @@
     <span class="user"><small><%= link_to micropost.user.name, single_user_path(micropost.user) %></small></span>
     <span class="content">
       <%#= mention_link simple_format(auto_link(strip_tags(micropost.content))) %>
-      <%= mention_link micropost.content_html %>
+      <%= mention_link(micropost.content_html) %>
       <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
       <%#= micropost.picture? %>
       <%#= micropost.picture.url %>

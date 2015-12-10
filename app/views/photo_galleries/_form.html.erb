@@ -19,6 +19,7 @@
           <%= f.text_field :title, class: 'form-control', placeholder: 'Title must not be blank' %>
         </div>
         <div class="form-group">
+          <%= f.hidden_field :last_updated_by_id, :value => current_user.id %>
           <%= f.text_area :description, class: 'form-control', placeholder: 'Description' %>
         </div>
         <%#= f.file_field :picture, multiple: true, name: 'photos[picture][]' %>

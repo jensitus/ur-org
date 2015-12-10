@@ -1,0 +1,13 @@
+<small>updated gallery</small>
+<% if activity.trackable %>
+    <small><%= link_to activity.trackable.photo_gallery.title, photo_gallery_path(activity.trackable.photo_gallery_id) %></small>
+    <div>
+        <% activity.trackable.photos.each do |photo| %>
+          <%= link_to photo_path(photo) do %>
+              <%= image_tag photo.picture.thumb, width: 50 %>
+          <% end %>
+        <% end %>
+    </div>
+<% else %>
+    oh no, it isn't up to date anymore
+<% end %>

@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'notices/new'
+
+  get 'notices/create'
+
+  if Rails.env.development?
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resources :photo_galleries
 
   get 'search/index'
@@ -26,7 +35,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get 'about' => 'static_pages#about'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks'}
+  devise_for :users #, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks'}
   # root 'public#index'
 
   authenticated :user do
