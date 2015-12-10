@@ -20,11 +20,10 @@ module CreateUpdateQueue
       count = @notice.count
     end
     puts @notice.inspect
-    # puts Time.now.to_time.to_i - @notice.updated_at.to_time.to_i
     if @notice.nil?
       create_photo_gallery_notice(p.id)
     else
-      if Time.now.to_i - @notice.updated_at.to_time.to_i > 200
+      if Time.now.to_i - @notice.updated_at.to_time.to_i > 1200
         count += 1
         puts count
         @notice.update!(user_id: p.last_updated_by_id, description: p.title, count: count)
