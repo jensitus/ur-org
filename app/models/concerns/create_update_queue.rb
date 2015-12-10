@@ -14,9 +14,13 @@ module CreateUpdateQueue
     updating_user = User.find(p.last_updated_by_id)
     description = p.title
     @notice = p.notice
-    count = @notice.count
+    if @notice.nil?
+      count = 0
+    else
+      count = @notice.count
+    end
     puts @notice.inspect
-    puts Time.now.to_time.to_i - @notice.updated_at.to_time.to_i
+    # puts Time.now.to_time.to_i - @notice.updated_at.to_time.to_i
     if @notice.nil?
       create_photo_gallery_notice(p.id)
     else
