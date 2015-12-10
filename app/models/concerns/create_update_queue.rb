@@ -59,7 +59,8 @@ module CreateUpdateQueue
     @notice = Notice.create(
         user_id: user_id,
         description: description,
-        photo_gallery_id: photo_gallery_id
+        photo_gallery_id: photo_gallery_id,
+        count: 0
     )
   end
 
