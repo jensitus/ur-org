@@ -8,7 +8,7 @@ namespace :track do
 
     end
     trackable_id_array = trackable_id_array.uniq
-    puts trackable_id_array
+    puts trackable_id_array.inspect
 
     Micropost.all.each do |micropost|
       puts trackable_id_array.include?(micropost.id.to_s)
