@@ -22,3 +22,5 @@ config/secrets.yml
 config/database.yml
 
 latest.dump
+
+/lib/capistrano/tasks/admin.rake
