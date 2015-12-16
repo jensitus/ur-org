@@ -18,7 +18,7 @@ set :deploy_to, '/home/jens/receta'
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :debug
 
 # Default value for :pty is false
 set :pty, false
@@ -32,7 +32,9 @@ set :linked_files, %w{config/database.yml} #fetch(:linked_files, []).push('confi
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system} # fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+#set :default_env, { path: '~/.rvm/bin/rvm' }  # { path: "/opt/ruby/bin:$PATH" }
+#set :stage, :production
+#set :rails_env, 'production'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
@@ -76,6 +78,18 @@ end
 after 'deploy:starting', 'sidekiq:quiet'
 after 'deploy:reverted', 'sidekiq:restart'
 after 'deploy:published', 'sidekiq:restart'
+
+namespace :rake do
+  task :sake do
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, 'sake'
+        end
+      end
+    end
+  end
+end
 
 # the search
 # namespace :pgs do
