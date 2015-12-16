@@ -17,6 +17,8 @@ set :deploy_to, '/home/jens/receta'
 # Default value for :format is :pretty
 # set :format, :pretty
 
+set :use_sudo, true
+
 # Default value for :log_level is :debug
 set :log_level, :debug
 
