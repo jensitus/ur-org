@@ -6,9 +6,27 @@
           <%= render 'shared/micropost_form' %>
         </section>
         <section class="activities microposts">
-          <%= render 'shared/activities' %>
+          <%#= render 'shared/activities' %>
         </section>
-        <%= render 'shared/feed' %>
+        <%#= render 'shared/feed' %>
+
+        <% @the_real_feed.each do |feed_element| %>
+            <% if feed_element.class == Micropost %>
+              <section class="microposts">
+                <%= render 'microposts/micropost', micropost: feed_element %>
+              </section>
+            <% elsif feed_element.trackable_type != 'Micropost' %>
+              <section>
+                <%= render 'shared/activities', activity: feed_element %>
+              </section>
+            <% end %>
+
+
+            <% end %>
+        <small>
+        <%= paginate @the_real_feed %>
+        </small>
+
       </div>
 
       <div class="col-md-4 col-md-pull-6">

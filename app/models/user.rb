@@ -55,37 +55,20 @@ class User < ActiveRecord::Base
     super.gsub('-', '_')
   end
 
-  # def self.from_omniauth(auth)
-  #   where(provider: auth.provider, uid: auth.id).first_or_create do |user|
-  #     user.email = auth.info.email
-  #     user.password = Devise.friendly_token[0,20]
-  #     user.name = auth.info.name
-  #     user.avatar = auth.info.image
-  #   end
-  # end
-  #
-  # def self.new_with_session(params, session)
-  #   super.tap do |user|
-  #     if data = session['devise.twitter_data'] && session["devise.twitter_data"]["extra"]["raw_info"]
-  #       user.email = data['email'] if user.email.blank?
-  #     end
-  #   end
-  # end
-
   def feed
-
+    (get_the_microposts + get_the_activities).sort_by(&:created_at).reverse
   end
 
   def get_the_microposts
     following_ids = 'select followed_id from relationships where follower_id = :user_id'
     group_or_not = 'select group_id from group_memberships where user_id = :user_id'
-    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id AND id < 356", user_id: id).where(group_id: nil)
+    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id).where(group_id: nil)
   end
 
   def get_the_activities
     following_ids = 'select followed_id from relationships where follower_id = :user_id'
     #PublicActivity::Activity.order('created_at desc').where(owner_id: self.following, owner_type: 'User')
-    PublicActivity::Activity.order('created_at desc').where("owner_id in (#{following_ids}) OR owner_id = :user_id", user_id: id, owner_type: 'User')
+    PublicActivity::Activity.where("owner_id in (#{following_ids}) OR owner_id = :user_id", user_id: id, owner_type: 'User').where("trackable_type != 'Micropost'")
   end
 
   # connect a user
@@ -113,8 +96,8 @@ class User < ActiveRecord::Base
 
   private
 
-  def create_default_conversation
-    Conversation.create(sender_id: 1, recipient_id: self.id) unless self.id == 1
-  end
+  # def create_default_conversation
+  #   Conversation.create(sender_id: 1, recipient_id: self.id) unless self.id == 1
+  # end
 
 end
