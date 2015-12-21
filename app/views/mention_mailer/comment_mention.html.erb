@@ -8,7 +8,7 @@
 
   <p style="align-content: center; width: 500px; background: #eee; padding: 10px; border-radius: 5px; font-size: 13px; font-family: sans-serif;">
     Hi, <%= @user.name %>,
-    <%= @post_writer.name %>
+    <%= @mentioner.user.name %>
     mentioned you in a comment:<br>
     <a href="<%= root_url %><%= @post_writer.slug %>/<%= @post.id %>"><%= root_url %><%= @post_writer.slug %>/<%= @post.id %></a>
   </p>

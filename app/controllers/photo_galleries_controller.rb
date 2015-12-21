@@ -73,7 +73,7 @@ class PhotoGalleriesController < ApplicationController
     end
 
     def photo_gallery_params
-      params.require(:photo_gallery).permit(:title, :description, :last_updated_by_id, photos_attributes: [:id, :photo_gallery_id, :picture])
+      params.require(:photo_in_gallery).permit(:title, :description, :last_updated_by_id, photos_attributes: [:id, :photo_gallery_id, :picture])
     end
 
     def photo_gallery_user
