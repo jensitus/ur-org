@@ -6,13 +6,18 @@ class MentionMailer < ActionMailer::Base
   #
   #   en.mention_mailer.comment_mention.subject
   #
-  def comment_mention(user, mentioner)
+  def comment_mention(user, mentioner, post_writer, post)
+    puts 'now we are in MentionMailer class * * * * * * ** * * * * * *'
+    puts user
+    puts user.email
+    puts post_writer.inspect
+    puts post
     @greeting = 'Hi'
     @mentioner = mentioner
     @user = user
-    @post_writer = mentioner.micropost.user
-    @post = mentioner.micropost
-    mail to: user.email, :subject => mentioner.user.name + ' mentioned you'
+    @post_writer = post_writer
+    @post = post
+    mail to: user.email, :subject => '[ur.org] ' + mentioner.user.name + ' mentioned you'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

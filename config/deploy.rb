@@ -81,19 +81,19 @@ after 'deploy:starting', 'sidekiq:quiet'
 after 'deploy:reverted', 'sidekiq:restart'
 after 'deploy:published', 'sidekiq:restart'
 
-namespace :adm do
-  task :sake do
-    on roles(:app) do
-      within "#{current_path}" do
-        with rails_env: :production do
-          execute :rake, 'admin:the_user'
-        end
-      end
-    end
-  end
-end
-
-after 'deploy:published', 'adm:sake'
+# namespace :adm do
+#   task :sake do
+#     on roles(:app) do
+#       within "#{current_path}" do
+#         with rails_env: :production do
+#           execute :rake, 'admin:the_user'
+#         end
+#       end
+#     end
+#   end
+# end
+#
+# after 'deploy:published', 'adm:sake'
 
 # the search
 # namespace :pgs do

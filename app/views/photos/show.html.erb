@@ -5,58 +5,42 @@
 </div>
 
 <div class="row">
-  <p class="text-center">
-
-        <%= link_to 'previous', photo_path(@previous) unless @previous.nil? %>
-        <a data-overlay-trigger="" href="#!">
-            <%= image_tag @photo.picture, class: 'single_photo' %>
-        </a>
-        <%= link_to 'next', photo_path(@next) unless @next.nil? %>
-
-  </p>
-</div>
-
-<div class="row">
-  <div class="col-md-4">
-
+  <div class="col-md-8">
+    <div>
+      <%= link_to 'previous', photo_path(@previous) unless @previous.nil? %>
+      <%= link_to 'next', photo_path(@next), class: 'next' unless @next.nil? %>
+    </div>
+    <a data-overlay-trigger="" href="#!">
+        <%= image_tag @photo.picture, class: 'single_photo' %>
+    </a>
+    <%= render 'photos/photo_footer' %>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
+  <div class="col-md-1"></div>
+  <div id="scroll_box" class="col-md-3 comment_box">
+    <% @photo_comments.each do |photo_comment| %>
+        <span class="photo_comments">
+            <%= render 'comments/comment', comment: photo_comment %>
+        </span>
 
-
-  </div>
-  <div class="col-md-6">
-  <% @gallery.each do |photo| %>
-
-        <%= link_to photo_path(photo) do %>
-            <%= image_tag photo.picture.thumb, class: 'thumb_line' %>
-        <% end %>
-
-  <% end %>
-  </div>
-</div>
-<hr class="haer">
-<div class="row">
-
-  <div class="col-md-1">
-    <% @photo_users.each do |user| %>
-        <% if user.avatar_url.nil? %>
-            <%= image_tag user.gravatar_url, width: 32, class: 'img-rounded' %><br>
-        <% else %>
-            <%= image_tag user.avatar.thumb, class: 'img-rounded', width: 32 %><br>
-        <% end %>
-        <small><%= link_to user.name, single_user_path(user) %></small>
     <% end %>
-  </div>
-  <div class="col-md-5">
-    <b><%= link_to @photo.photo_gallery.title, photo_gallery_path(@photo.photo_gallery), class: 'special_link_color' %></b>
+    <div id="new-comment" class="photo_comments"></div>
+    <div>
+      <% if user_signed_in? %>
+        <%= render 'photo_comment' %>
+      <% else %>
+        <%= link_to 'sign in', new_user_session_path %>
+        or
+        <%= link_to 'sign up', new_user_registration_path %>
+      <% end %>
+    </div>
   </div>
 </div>
+
 
 <style>
   .single_photo {
-      max-width: 50%;
+      max-width: 100%;
+      max-height: 700px;
   }
 
     .sp {
@@ -66,6 +50,15 @@
     .thumb_line {
         width: 29px;
         -moz-transition: 0.3s ease-out;
+    }
+
+    .next {
+        float: right;
+    }
+
+    .comment_box {
+        max-height: 600px;
+        overflow-y: auto;
     }
 
         .thumb_line:hover {
@@ -78,7 +71,10 @@
 
         hr.haer {
             border-top: 1px solid #eff;
+            margin-top: 15px;
+            margin-bottom: 15px;
         }
+
 
 </style>
 
@@ -86,4 +82,6 @@
     $(document).ready(function() {
         $('.overlay').overlay();
     })
+
+    $('#scroll_box').scrollTop($('#scroll_box')[0].scrollHeight);
 </script>

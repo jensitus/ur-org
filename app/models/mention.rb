@@ -12,8 +12,13 @@ class Mention < Socialization::ActiveRecordStores::Mention
   end
 
   def self.mention_it(mentionables, mentioner)
+    puts '********** mention it ************'
+    puts mentionables.inspect
+    puts mentioner.inspect
     @mentioner = mentioner
     mentionables.each do |mentionable|
+      puts ''
+      puts mentionable.inspect
       user = User.find_by_slug mentionable
       mentioner.mention! user
       inform_the_mentionable(user, mentioner)
@@ -26,11 +31,30 @@ class Mention < Socialization::ActiveRecordStores::Mention
 
     if mentioner.class == Comment
       cut_text = Scalpel.cut(mentioner.body)
-      MentionMailer.delay.comment_mention(user, mentioner)
-      user.notify(
-          'you were mentioned by ' + mentioner.user.name,
-          cut_text[0].to_s + ' '  + cut_text[1].to_s + ' ... ' + "<br> <a href='/#{mentioner.micropost.user.slug}/#{mentioner.micropost.id}'>ist-ur.org/#{mentioner.micropost.user.slug}/#{mentioner.micropost.id}</a>! <small>Scroll down a bit!</small>"
-      )
+
+      puts '???????????????????????????????????????'
+      puts user.inspect
+      ma = get_mentioner_asso(mentioner)
+      puts ma.inspect
+      if mentioner.micropost.nil?
+        mentioner.photo.photo_gallery.users.each do |mentioner_user|
+          post_writer = mentioner_user
+          post = mentioner.photo
+          MentionMailer.delay.comment_mention(user, mentioner, post_writer, post)
+          puts '######## # # # # user ##################'
+          puts user.inspect
+          user.notify(
+              'you were mentioned by ' + mentioner_user.name,
+              cut_text[0].to_s + ' '  + cut_text[1].to_s + ' ... ' + "<br> <a href='/photos/#{mentioner.photo.id}'>ist-ur.org/photos/#{mentioner.photo.id}</a>! <small>Scroll down a bit!</small>"
+          )
+        end
+      else
+        user.notify(
+            'you were mentioned by ' + mentioner.user.name,
+            cut_text[0].to_s + ' '  + cut_text[1].to_s + ' ... ' + "<br> <a href='/#{mentioner.micropost.user.slug}/#{mentioner.micropost.id}'>ist-ur.org/#{mentioner.micropost.user.slug}/#{mentioner.micropost.id}</a>! <small>Scroll down a bit!</small>"
+        )
+      end
+
     elsif mentioner.class == Micropost
       #the_cutted_mention_text = Fillet_This::Fillet.cut_the_text(mentioner.content)
       cut_text = Scalpel.cut(mentioner.content)
@@ -41,6 +65,14 @@ class Mention < Socialization::ActiveRecordStores::Mention
       )
     end
 
+  end
+
+  private
+
+  def self.get_mentioner_asso(mentioner)
+    if mentioner.micropost.nil?
+      mentioner.photo.photo_gallery.users
+    end
   end
 
 end
