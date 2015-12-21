@@ -52,7 +52,8 @@ class CommentsController < ApplicationController
           puts
           puts 'redirect_to'
           puts
-          redirect_to user_post_path(slug: @comment.micropost.user.slug, id: @comment.micropost.id)
+          redirect_to request.referer
+          #redirect_to user_post_path(slug: @comment.micropost.user.slug, id: @comment.micropost.id)
           # respond_with @comment.micropost
           #format.html { redirect_to @comment, notice: 'successfully' }
           #format.json { render :show, status: :ok, location: @comment }

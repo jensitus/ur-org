@@ -71,6 +71,11 @@ class User < ActiveRecord::Base
     PublicActivity::Activity.where("owner_id in (#{following_ids}) OR owner_id = :user_id", user_id: id, owner_type: 'User').where("trackable_type != 'Micropost'")
   end
 
+  def latest_photo_comments
+    following_ids = 'select followed_id from relationships where follower_id = :user_id'
+    PublicActivity::Activity.where("owner_id in (#{following_ids}) OR owner_id = :user_id", user_id: id, owner_type: 'User').where("trackable_type = 'PhotoComment'")
+  end
+
   # connect a user
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)

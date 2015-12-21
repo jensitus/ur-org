@@ -2,9 +2,18 @@
 <%= render 'shared/avatar_profile' %>
 
 <h3><%= current_user.name %></h3>
+
 </section>
 <%#= link_to 'view my profile', current_user %>
 <b><%#= 'My Groups:' %></b><br>
+
+<% if !@latest_photo_comments.nil? %>
+    <section class="sidebar_kasten">
+      <% @latest_photo_comments.each do |latest_comment|%>
+          <%= render 'public_activity/photo_comment/create', activity: latest_comment %>
+      <% end %>
+    </section>
+<% end %>
 
 <% if !@galleries.empty? %>
     <section class="sidebar_kasten">

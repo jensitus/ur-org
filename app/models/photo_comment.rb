@@ -2,6 +2,10 @@ class PhotoComment < ActiveRecord::Base
   belongs_to :photo
   belongs_to :comment
 
-  after_create
+  include PhotoCommentObserver
+  include PublicActivity::Model
+  tracked owner: Proc.new{|controller, model| controller.current_user}
+
+  after_create :something_coming
 
 end

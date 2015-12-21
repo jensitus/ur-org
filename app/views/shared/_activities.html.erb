@@ -5,16 +5,22 @@
         <%#= render 'microposts/micropost', micropost: activity %>
         <%#= 'do nothing' %>
     <%# else %>
+<% if activity.trackable_type != 'PhotoComment' %>
         <div class="activity" style="border: 1px solid #eee; border-radius: 3px; padding: 5px;">
           <small>
             <%= link_to activity.owner.name, activity.owner if activity.owner %>
           </small>
-          <%= render_activity activity %>
+
+
+            <%= render_activity activity %>
 
           <small>
             <%= time_tag activity.created_at %>
           </small>
         </div>
+<% elsif activity.trackable_type == 'PhotoComment' %>
+    <% render 'public_activity/photo_comment/create', activity: activity %>
+<% end %>
     <%# end %>
 <%# end %>
 <%#= paginate @activities %>
