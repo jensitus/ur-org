@@ -13,6 +13,7 @@ class StaticPagesController < ApplicationController
       #@feed_items = current_user.get_the_microposts.page(params[:page]).per(8)
       the_real_feed = current_user.feed
       @the_real_feed = Kaminari.paginate_array(the_real_feed).page(params[:page]).per(13)
+      @latest_photo_comments = current_user.latest_photo_comments.limit(10)
       @likes = @micropost.likers(User)
       @liked_by_current_user = @micropost.liked_by?(current_user)
       @following = current_user.following.sample(3)
