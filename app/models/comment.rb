@@ -10,6 +10,9 @@ class Comment < ActiveRecord::Base
   has_one :answer
   has_one :micropost, through: :answer
 
+  has_one :photo_comment
+  has_one :photo, through: :photo_comment
+
   acts_as_mentioner
 
   auto_html_for :body do

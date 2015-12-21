@@ -143,7 +143,45 @@ span.picture {
 /*   the images     */
 
 img.resize{
-  max-width: 400px;
+  max-width:  400px;
   height: auto
 }
 
+/*  *  *  *  photo comments   *  *  *  *  */
+
+.photo_comments {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  li {
+    padding: 10px 0px 0px 0px;
+    font-size: small;
+    border-bottom: 1px solid #e8e8e8;
+    &:first-child.photo_comments {
+      border-top: 0px solid #eee;
+      border-bottom: 0px;
+    }
+  }
+  .user {
+    margin-top: 5em;
+    padding-top: 0px;
+  }
+  .content {
+    display: block;
+    margin-left: 30px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+  .timestamp {
+    color: #777;
+    display: block;
+    margin-left: 30px;
+  }
+  .gravatar {
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+  }
+}

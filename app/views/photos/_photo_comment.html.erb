@@ -1,0 +1,54 @@
+<%= form_for(@comment, html: { multipart: true, name: 'the_comment_form'}, remote: true ) do |f| %>
+    <div class="form-group">
+      <%= render 'shared/error_messages', object: f.object  %>
+
+      <div class="field">
+        <%= f.text_area :body, id: 'photoComment', class: 'form-control expandable', rows: 1, onkeyup: 'check_the_photo_comment_form()', data: { 'min-rows' => 1 } %>
+      </div>
+      <div>
+        <%#= @micropost.id %>
+        <%= f.hidden_field :photo_or_answer, :value => 'photo' %>
+        <%= f.hidden_field :photo_id, value: @photo.id %>
+        <%#= current_user.id %> <%#= @comment.user.id %> <%#= @comment.user.name %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'comment', id: 'submit', class: 'btn btn-default' %>
+      </div>
+    </div>
+<% end %>
+
+<script>
+    $(function(){
+        data = [];
+        <% User.find_each do |user| %>
+        data.push('<%= user.slug %>');
+        <% end %>
+        $('textarea').atwho({at:"@", 'data':data});
+    });
+
+    $("#photoComment").keydown(function(event) {
+        if(event.keyCode == 13) {
+            if (event.shiftKey) {
+                return true;
+            } else {
+                $("#submit").click();
+                return false;
+            }
+        }
+    });
+
+    function check_the_photo_comment_form() {
+        //var f = document.forms["the_post_form"].elements;
+        var f = document.getElementById('photoComment').value;
+        var cansubmit = true;
+        var non_whitespace = /\S/;
+        if (non_whitespace.test( f )) {
+            cansubmit = true;
+        } else {
+            cansubmit = false;
+        }
+        document.getElementById("submit").disabled = !cansubmit;
+    }
+
+    window.onload = check_the_photo_comment_form();
+</script>

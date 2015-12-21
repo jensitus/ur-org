@@ -8,7 +8,9 @@ class PhotosController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
     @photo_users = @photo.photo_gallery.users
+    @photo_comments = @photo.comments
     @gallery = @photo.photo_gallery.photos
     @gallery.each_with_index { |ph, i|
       if @photo == ph

@@ -22,19 +22,27 @@
   </div>
 </div>
 <hr>
-<div class="row">
+<div class="container-fluid">
+  <div class="row">
 
     <% i = 0 %>
 
     <% @photos.each do |photo| %>
         <% i = i +1 %>
         <% inti = i.to_s %>
-            <%= link_to photo_path(photo) do %>
-                <%= image_tag(photo.picture, id: 'image' + inti, class: 'img') %>
-            <% end %>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+          <%= link_to photo_path(photo) do %>
+              <%= image_tag(photo.picture, id: 'image' + inti, class: 'img') %>
+              <br>
+              <small><%= pluralize(photo.comments.count, 'comment') %></small>
+          <% end %>
+
+        </div>
     <% end %>
 
+  </div>
 </div>
+
 
 <hr>
 
@@ -48,11 +56,12 @@
         margin:auto !important;
     }
 
-        .img {
-            max-height: 150px;
-            margin: 15px;
+    .img {
+        max-width: 100%;
+        max-height: 300px;
+        margin: 15px;
 
-        }
+    }
 </style>
 
 <script>
