@@ -18,10 +18,10 @@ class PhotoGalleriesControllerTest < ActionController::TestCase
 
   test "should create photo_gallery" do
     assert_difference('PhotoGallery.count') do
-      post :create, photo_gallery: { description: @photo_gallery.description, title: @photo_gallery.title }
+      post :create, photo_in_gallery: { description: @photo_gallery.description, title: @photo_gallery.title }
     end
 
-    assert_redirected_to photo_gallery_path(assigns(:photo_gallery))
+    assert_redirected_to photo_gallery_path(assigns(:photo_in_gallery))
   end
 
   test "should show photo_gallery" do
@@ -35,8 +35,8 @@ class PhotoGalleriesControllerTest < ActionController::TestCase
   end
 
   test "should update photo_gallery" do
-    patch :update, id: @photo_gallery, photo_gallery: { description: @photo_gallery.description, title: @photo_gallery.title }
-    assert_redirected_to photo_gallery_path(assigns(:photo_gallery))
+    patch :update, id: @photo_gallery, photo_in_gallery: { description: @photo_gallery.description, title: @photo_gallery.title }
+    assert_redirected_to photo_gallery_path(assigns(:photo_in_gallery))
   end
 
   test "should destroy photo_gallery" do
