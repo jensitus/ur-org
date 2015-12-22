@@ -7,8 +7,9 @@
 <%#= link_to 'view my profile', current_user %>
 <b><%#= 'My Groups:' %></b><br>
 
-<% if !@latest_photo_comments.nil? %>
+<% if !@latest_photo_comments.empty? %>
     <section class="sidebar_kasten">
+      <b>Newsfeed</b>
       <% @latest_photo_comments.each do |latest_comment|%>
           <%= render 'public_activity/photo_comment/create', activity: latest_comment %>
       <% end %>
