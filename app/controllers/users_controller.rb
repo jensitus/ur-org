@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :get_user
   before_action :follow
   before_action :photo_galleries, except: :index
+  before_action :latest_photo_comments, except: :index
 
   def index
     @users = User.where.not('id = ?', current_user.id).order('created_at DESC')
@@ -46,6 +47,10 @@ class UsersController < ApplicationController
 
   def photo_galleries
     @galleries = @user.photo_galleries
+  end
+
+  def latest_photo_comments
+    @latest_photo_comments = @user.latest_photo_comments.limit(10)
   end
 
 end
