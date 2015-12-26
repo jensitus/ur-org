@@ -10,7 +10,7 @@
             <%= comm[0].split.each_slice(1).map{|a|a.join ' '}[2] %>
         <% end %>
         ...
-        <%= activity.trackable.comment.user.name %>
+        <%= link_to activity.trackable.comment.user.name, single_user_path(activity.trackable.comment.user) %>
         <%= activity.created_at.strftime('%H:%M %d.%m.') %>
       </div>
     </small>
