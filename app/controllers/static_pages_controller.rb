@@ -18,7 +18,7 @@ class StaticPagesController < ApplicationController
       @liked_by_current_user = @micropost.liked_by?(current_user)
       @following = current_user.following.sample(3)
       @followers = current_user.followers.sample(3)
-      @galleries = current_user.photo_galleries
+      # @galleries = current_user.photo_galleries
       fresh_when :etag => [@feed_items, current_user]
     else
       if Rails.env.development?

@@ -10,11 +10,21 @@
     </section>
 <% end %>
 
-<% if !@galleries.empty? %>
+<% if !latest_photo_comments(@user).empty? %>
+    <section class="sidebar_kasten">
+      <b>Newsfeed</b>
+      <%# latest_photo_comments(current_user).inspect %>
+      <% latest_photo_comments(@user).each do |latest_comment|%>
+          <%= render 'public_activity/photo_comment/create', activity: latest_comment %>
+      <% end %>
+    </section>
+<% end %>
+
+<% if !user_photo_galleries(@user).empty? %>
     <section class="sidebar_kasten">
       <span class="glyphicon glyphicon-picture"></span>
       galleries:<br>
-      <% @galleries.each do |gallery| %>
+      <% user_photo_galleries(@user).each do |gallery| %>
           <%= link_to gallery.title, photo_gallery_path(gallery) %><br>
       <% end %>
     </section>

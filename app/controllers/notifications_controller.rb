@@ -4,8 +4,8 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications ||= @mailbox.notifications.page(params[:page]).per(10)
-    @galleries = current_user.photo_galleries
-    @latest_photo_comments = current_user.latest_photo_comments.limit(10)
+    # @galleries = current_user.photo_galleries
+    #@latest_photo_comments = current_user.latest_photo_comments.limit(10)
     # @mailbox.notifications(read: false).each do |unread|
     #   unread.mark_as_read current_user
     # end
