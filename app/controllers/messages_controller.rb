@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
     @message = current_user.messages.new
     @followers = @user.followers.sample(3)
     @following = @user.following.sample(3)
+    @galleries = @user.photo_galleries
   end
 
   def create

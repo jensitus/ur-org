@@ -3,7 +3,7 @@
       <%= render 'shared/error_messages', object: f.object  %>
 
       <div class="field">
-        <%= f.text_area :body, class: 'form-control' %>
+        <%= f.text_area :body, class: 'form-control expandable' %>
       </div>
       <div>
         <%#= @micropost.id %>
@@ -11,9 +11,9 @@
         <%#= current_user.id %> <%#= @comment.user.id %> <%#= @comment.user.name %>
       </div>
       <div class="actions">
-        <%= f.submit 'update this fucking comment', id: 'submit', class: 'btn btn-sm btn-success' %>
+        <%= f.submit 'update this', id: 'submit', class: 'btn btn-sm btn-success', data: { disable_with: 'Please wait ...' } %>
       </div>
     </div>
 <% end %>
-<%= button_to 'escape', user_post_path(slug: @comment.micropost.user.slug, id: @comment.micropost.id), id: 'escape', class: 'btn btn-sm btn-danger', method: :get %>
+<%#= button_to 'escape', user_post_path(slug: @comment.micropost.user.slug, id: @comment.micropost.id), id: 'escape', class: 'btn btn-sm btn-danger', method: :get %>
 

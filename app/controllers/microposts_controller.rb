@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-  before_filter :authenticate_user!, only: [:create, :new, :destroy, :update, :edit]
+  before_filter :authenticate_user!, only: [:create, :new, :new_user_post, :destroy, :update, :edit]
   before_action :correct_user, only: :destroy
   before_action :set_micropost, only: [:edit, :new, :update, :destroy, :show]
   before_action :follow, only: :show
@@ -8,6 +8,11 @@ class MicropostsController < ApplicationController
     #@micropost = Micropost.new
     @photo = @micropost.photos.build
     # respond_with(@micropost)
+  end
+
+  def new_user_post
+    @micropost = Micropost.new
+    @photo = @micropost.photos.build
   end
 
   def create
@@ -48,6 +53,7 @@ class MicropostsController < ApplicationController
     if current_user == @micropost.user
       @micropost = Micropost.find(params[:id])
       @photo = @micropost.photos.build
+      @galleries = current_user.photo_galleries
     else
       flash[:alert] = "you don't have the permission to do that, we are dreadfully sorry "
       redirect_to request.referrer || root_url

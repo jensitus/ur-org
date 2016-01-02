@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'notices/new'
+
+  get 'notices/create'
+
+  if Rails.env.development?
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  resources :photo_galleries
+
   get 'search/index'
 
   get 'notifications/index'
@@ -24,7 +35,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get 'about' => 'static_pages#about'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks'}
+  devise_for :users #, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks'}
   # root 'public#index'
 
   authenticated :user do
@@ -76,11 +87,13 @@ Rails.application.routes.draw do
   get 'invites/dele' => 'invites#dele', as: 'dele'
 
   resources :microposts
+  resources :photos, only: [:destroy, :show]
   get '/:slug/:id' => 'microposts#show', as: 'user_post'
+  get 'new' => 'microposts#new_user_post', as: 'new_user_post'
   resources :relationships, only: [:create, :destroy]
 
   get '/:id' => 'users#show', as: 'single_user'
 
-  resources :photos, only: :destroy
+
 
 end

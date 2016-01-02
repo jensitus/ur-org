@@ -1,0 +1,89 @@
+<% provide(:image, @photo.picture.url) %>
+<% provide(:title, @photo.photo_gallery.title) %>
+<div class="overlay">
+
+    <%= image_tag @photo.picture, class: 'modus' %>
+
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div>
+      <%= link_to 'previous', photo_path(@previous) unless @previous.nil? %>
+      <%= link_to 'next', photo_path(@next), class: 'next' unless @next.nil? %>
+    </div>
+    <a data-overlay-trigger="" href="#!">
+        <%= image_tag @photo.picture, class: 'single_photo' %>
+    </a>
+    <%= render 'photos/photo_footer' %>
+  </div>
+  <div class="col-md-1"></div>
+  <div id="scroll_box" class="col-md-3 comment_box">
+    <% @photo_comments.each do |photo_comment| %>
+        <span class="photo_comments">
+            <%= render 'comments/comment', comment: photo_comment %>
+        </span>
+
+    <% end %>
+    <div id="new-comment" class="photo_comments"></div>
+    <div>
+      <% if user_signed_in? %>
+        <%= render 'photo_comment' %>
+      <% else %>
+        <%= link_to 'sign in', new_user_session_path %>
+        or
+        <%= link_to 'sign up', new_user_registration_path %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .single_photo {
+      max-width: 100%;
+      max-height: 700px;
+  }
+
+    .sp {
+        max-width: 500px;
+    }
+
+    .thumb_line {
+        width: 29px;
+        -moz-transition: 0.3s ease-out;
+    }
+
+    .next {
+        float: right;
+    }
+
+    .comment_box {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+
+        .thumb_line:hover {
+            width: 53px;
+        }
+
+        .special_link_color {
+            color: #000;
+        }
+
+        hr.haer {
+            border-top: 1px solid #eff;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+
+</style>
+
+<script>
+    $(document).ready(function() {
+        $('.overlay').overlay();
+    })
+
+    $('#scroll_box').scrollTop($('#scroll_box')[0].scrollHeight);
+</script>

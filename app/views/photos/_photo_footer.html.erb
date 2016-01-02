@@ -1,0 +1,32 @@
+<hr class="haer">
+<div class="row">
+  <div class="col-md-12">
+    <% @gallery.each do |photo| %>
+        <%= link_to photo_path(photo) do %>
+            <%= image_tag photo.picture.thumb, class: 'thumb_line' %>
+        <% end %>
+    <% end %>
+
+    <section>
+
+    </section>
+
+  </div>
+</div>
+<hr class="haer">
+<div class="row">
+
+  <div class="col-md-1">
+    <% @photo_users.each do |user| %>
+        <% if user.avatar_url.nil? %>
+            <%= image_tag user.gravatar_url, width: 32, class: 'img-rounded' %><br>
+        <% else %>
+            <%= image_tag user.avatar.thumb, class: 'img-rounded', width: 32 %><br>
+        <% end %>
+        <small><%= link_to user.name, single_user_path(user) %></small>
+    <% end %>
+  </div>
+  <div class="col-md-5">
+    <b><%= link_to @photo.photo_gallery.title, photo_gallery_path(@photo.photo_gallery), class: 'special_link_color' %></b>
+  </div>
+</div>

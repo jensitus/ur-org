@@ -9,11 +9,16 @@ class StaticPagesController < ApplicationController
       @photo = @micropost.photos.build
       ########
       @placeholder = 'Compose your message to the world ...'
-      @feed_items = current_user.feed.page(params[:page]).per(5)
+      #@activities = current_user.get_the_activities #.page(params[:page]).per(9)
+      #@feed_items = current_user.get_the_microposts.page(params[:page]).per(8)
+      the_real_feed = current_user.feed
+      @the_real_feed = Kaminari.paginate_array(the_real_feed).page(params[:page]).per(13)
+      @latest_photo_comments = current_user.latest_photo_comments.limit(10)
       @likes = @micropost.likers(User)
       @liked_by_current_user = @micropost.liked_by?(current_user)
       @following = current_user.following.sample(3)
       @followers = current_user.followers.sample(3)
+      # @galleries = current_user.photo_galleries
       fresh_when :etag => [@feed_items, current_user]
     else
       if Rails.env.development?

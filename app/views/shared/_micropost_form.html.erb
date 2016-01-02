@@ -13,31 +13,27 @@
                                 #name: 'content',
                                 onkeyup: 'check_the_post_form()',
                                 placeholder: @placeholder,
-                                class: 'form-control',
+                                class: 'form-control expandable',
                                 :data => {
                                     'min-rows' => 1,
-                                    toggle: 'collapse',
-                                    target: '#collapseExample'
+                                    #toggle: 'collapse',
+                                    #target: '#collapseExample'
                                 },
                                 :aria => {
-                                    expanded: 'false',
-                                    controls: 'collapseExample'
+                                    #expanded: 'false',
+                                    #controls: 'collapseExample'
                                 }
 
                 %>
                 <div class="collapse" id="collapseExample">
 
                     <span id="content_count">0</span> chars<br><br>
-                    <!--<span class="picture"> -->
-                      <%= f.fields_for :photos do |p| %>
-                            <%= p.label :picture %><br>
-                            <%= p.file_field :picture, multiple: true, name: 'photos[picture][]', class: 'well well-sm' %>
-                            <!-- accept: 'image/jpeg,image/gif,image/png', -->
-                      <% end %>
-                    <!--</span>-->
-
+                    <%= render 'shared/upload_button' %>
                     <%= f.submit 'Post', id: 'submit', class: 'btn btn-success', data: { disable_with: 'Please wait ...' } %>
-                  <hr>
+                    <span id="leave" class="btn btn-default">leave</span>
+                    <%= link_to 'Create Gallery', new_photo_gallery_path, class: 'btn btn-info' %>
+
+                    <hr>
                 </div>
             </div>
           </div>
@@ -46,6 +42,8 @@
         </div>
     <% end %>
   </div>
+
+
 
 
 <script type="text/javascript">
@@ -69,32 +67,35 @@
         $('textarea').atwho({at:"@", 'data':data});
     });
 
-   $(document).one('focus.textarea', '#content_field', function() {
-       var savedValue = this.value;
-       this.value = '';
-       this.baseScrollHeight = this.scrollHeight;
-       this.value = savedValue;
-   }).on('input.textarea', '#content_field', function() {
-       var minRows = this.getAttribute('data-min-rows')| 0, rows;
-       this.rows = minRows;
-       console.log(this.scrollHeight, this.baseScrollHeight);
-       rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 15);
-       this.rows = minRows + rows;
-   });
+//   $(document).one('focus.textarea', '#content_field', function() {
+//       var savedValue = this.value;
+//       this.value = '';
+//       this.baseScrollHeight = this.scrollHeight;
+//       this.value = savedValue;
+//   }).on('input.textarea', '#content_field', function() {
+//       var minRows = this.getAttribute('data-min-rows')| 0, rows;
+//       this.rows = minRows;
+//       console.log(this.scrollHeight, this.baseScrollHeight);
+//       rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 15);
+//       this.rows = minRows + rows;
+//   });
 
-    function check_the_post_form() {
-        //var f = document.forms["the_post_form"].elements;
-        var f = document.getElementById('content_field').value;
-        var cansubmit = true;
-        var non_whitespace = /\S/;
-        if (non_whitespace.test( f )) {
-            cansubmit = true;
-        } else {
-            cansubmit = false;
-        }
-        document.getElementById("submit").disabled = !cansubmit;
-    }
+//    function check_the_post_form() {
+//        //var f = document.forms["the_post_form"].elements;
+//        var f = document.getElementById('content_field').value;
+//        var cansubmit = true;
+//        var non_whitespace = /\S/;
+//        if (non_whitespace.test( f )) {
+//            cansubmit = true;
+//        } else {
+//            cansubmit = false;
+//        }
+//        document.getElementById("submit").disabled = !cansubmit;
+//    }
 
     window.onload = check_the_post_form();
+    window.onload = init();
 
 </script>
+
+

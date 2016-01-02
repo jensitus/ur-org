@@ -14,11 +14,9 @@
   </div>
   <div class="col-md-5">
 
-
     <h4>inbox:</h4>
 
     <% @conversations.each do |conversation| %>
-
 
         <% if conversation.is_read?(current_user) %>
              <%= link_to conversation.subject, conversation_path(conversation) %>

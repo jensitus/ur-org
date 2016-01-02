@@ -41,9 +41,11 @@ gem 'mailboxer'
 
 gem 'sidekiq'
 
+
 group :development do
   gem 'byebug'
   gem 'capistrano-secrets-yml'
+  gem 'sinatra'
 end
 
 group :production do
@@ -94,6 +96,8 @@ gem 'devise'
 gem 'jquery-atwho-rails'
 gem 'socialization', :git => 'https://github.com/HackerPartie/socialization.git'
 
+#gem 'jquery-fileupload-rails'
+
 gem 'pingback'
 
 gem 'scalpel'
@@ -102,7 +106,9 @@ gem 'pg_search'
 
 gem 'owlcarousel-rails'
 
-gem 'omniauth-twitter'
+gem 'public_activity'
+
+# gem 'omniauth-twitter'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

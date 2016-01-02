@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  # include PublicActivity::Model
+  # tracked owner: Proc.new{|controller, model| controller.current_user}
   belongs_to :user, :touch => true
   validates :user_id, presence: true
   validates :body, presence: true,
@@ -7,6 +9,9 @@ class Comment < ActiveRecord::Base
 
   has_one :answer
   has_one :micropost, through: :answer
+
+  has_one :photo_comment
+  has_one :photo, through: :photo_comment
 
   acts_as_mentioner
 
