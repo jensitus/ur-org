@@ -13,7 +13,7 @@ class Invite < ActiveRecord::Base
     #puts self.inspect
     # puts '**********************************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
     puts '**********************************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-    InviteMailer.delay.invite_mail(self).deliver
+    InviteMailer.delay.invite_mail(self)
   end
 
 end

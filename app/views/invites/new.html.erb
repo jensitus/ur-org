@@ -4,6 +4,6 @@
       <%= button_to 'Ask God', {action: 'dele'}, method: 'get', class: 'btn btn-default' %>
   <% elsif @invite_count > 0 %>
       <%= render 'form' %>
-      Du kannst noch <b><%= @invite_count %></b> andere Menschen hierher einladen!
+      Du kannst noch <b><%= pluralize(@invite_count, 'Mensch', plural='Menschen') %></b>  hierher einladen!
   <% end %><br>
 </div>
