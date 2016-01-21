@@ -1,0 +1,42 @@
+
+  <div class="general">
+    Hey <%= @invite.email %><br>
+
+    <%= link_to @invite.user.name, single_user_url(@invite.user) %>
+    hat dich eingeladen, zu <%= link_to 'ist-ur.org', root_url %> zu kommen
+    <% if @invite.letter != '' %>
+        <br>
+        und zwar mit den Worten:
+        <p class="invitation_letter">
+          <%= @invite.letter %>
+        </p>
+    <% end %>
+    <p>
+      Hopp hopp, hier geht's lang:
+      <%= link_to 'Klick', new_user_registration_url %>
+    </p>
+
+  </div>
+
+<style>
+
+  .general {
+      max-width: 600px;
+      padding: 20px;
+      border: 1px solid #999;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 1.7em;
+      margin: 0px auto;
+      font-family: verdana, arial, helvetica, sans-serif;
+  }
+
+  a {
+      text-decoration: none;
+      color: #0055ff;
+  }
+
+  .invitation_letter {
+      color: #e0f;
+  }
+</style>

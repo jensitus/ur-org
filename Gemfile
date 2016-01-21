@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 ruby '2.1.4'
@@ -46,6 +45,7 @@ group :development do
   gem 'byebug'
   gem 'capistrano-secrets-yml'
   gem 'sinatra'
+  gem 'letter_opener'
 end
 
 group :production do

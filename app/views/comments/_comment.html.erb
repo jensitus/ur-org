@@ -13,7 +13,7 @@
     <span class="timestamp">
         <small>
           <%#= comment.id %>
-          <%= link_to comment.user.name, comment.user %> am
+          <%= link_to comment.user.name, single_user_path(comment.user) %> am
           <%= comment.created_at.strftime('%d.%m.') %> um
           <%= comment.created_at.strftime('%H:%M') %> |
 

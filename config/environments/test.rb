@@ -34,6 +34,12 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # for test reasons
+  config.active_record.maintain_test_schema = false
+
+  # config.allow_concurrency = false
+  # config.middleware.delete Rack::Lock
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

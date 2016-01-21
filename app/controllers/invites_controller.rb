@@ -20,7 +20,7 @@ class InvitesController < ApplicationController
       )
       flash[:success] = 'they will never be invited'
     else
-      flash[:warning] = 'this emailaddress is already invited'
+      flash[:warning] = 'maybe this emailaddress is already invited or something different is wrong'
     end
     redirect_to request.referrer || root_path
   end
@@ -39,7 +39,7 @@ class InvitesController < ApplicationController
   end
 
   def invite_params
-    params.require(:invite).permit(:email)
+    params.require(:invite).permit(:email, :letter)
   end
 
   def invite_count_params

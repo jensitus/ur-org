@@ -1,9 +1,9 @@
 <%= content_tag_for :li, micropost do %>
     <span class="gravatar">
       <% if micropost.user.avatar_url.nil? %>
-        <%= link_to image_tag(micropost.user.gravatar_url, width: 50), micropost.user %>
+        <%= link_to image_tag(micropost.user.gravatar_url, width: 50), single_user_path(micropost.user) %>
       <% else %>
-        <%= link_to image_tag(micropost.user.avatar, width: 50), micropost.user %>
+        <%= link_to image_tag(micropost.user.avatar, width: 50), single_user_path(micropost.user) %>
       <% end %>
     </span>
     <span class="user"><small><%= link_to micropost.user.name, single_user_path(micropost.user) %></small></span>
