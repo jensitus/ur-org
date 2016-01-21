@@ -14,10 +14,10 @@ class InvitesController < ApplicationController
     puts @invite.inspect
     puts '+++++++++++++++++++++++++++++++++++++++++++++++'
     if @invite.save
-      @invite_count = InviteCount.create!(
-          :user_id => current_user.id,
-          :invite_id => @invite.id
-      )
+      # @invite_count = InviteCount.create!(
+      #     :user_id => current_user.id,
+      #     :invite_id => @invite.id
+      # )
       flash[:success] = 'they will never be invited'
     else
       flash[:warning] = 'maybe this emailaddress is already invited or something different is wrong'
