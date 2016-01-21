@@ -1,0 +1,14 @@
+<%= form_for(@invite) do |f| %>
+    <div class="form-group">
+      <%#= current_user.id %><br>
+      <%= f.email_field :email, placeholder: 'email' , class: 'form-control' %><br>
+      <%= f.text_area :letter,
+                      placeholder: 'Please write a short Letter of Invitation, e.g.: »Dear Mrs./Mr. xyz, I would be delighted to have the opportunity to welcome you soon to this very nasty whatever« or something like that',
+                      class: 'form-control',
+                      rows: 7
+      %>
+      <br>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.submit 'invite this', class: 'btn btn-info' %>
+    </div>
+<% end %>

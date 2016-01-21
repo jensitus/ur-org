@@ -38,9 +38,10 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_relationships, source: :follower
 
   has_many :comments
+  has_many :invite_counts
+  has_many :invites, :through => :invite_counts
   has_many :group_memberships
   has_many :groups, through: :group_memberships
-
   has_many :group_maintainers
 
   has_and_belongs_to_many :photo_galleries

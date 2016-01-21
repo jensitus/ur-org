@@ -26,6 +26,9 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.build(comment_params)
+    puts '+++++++++++++++++++++++++++++++++++++++++'
+    puts @comment.inspect
+    puts '+++++++++++++++++++++++++++++++++++++++++'
     mentions = Mention.get_the_mention(@comment.body)
     if @comment.save
       if photo_or_answer_params[:photo_or_answer] == 'photo'

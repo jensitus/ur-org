@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  email: jens@open-lab.org
+  letter: come on, take part
+
+two:
+  id: 2
+  email: jens@ist-ur.org
+  letter: please feel yourself invited

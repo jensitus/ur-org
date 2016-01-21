@@ -43,6 +43,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     ansi (1.4.3)
     arel (5.0.1.20140414130214)
     auto_html (1.6.4)
@@ -215,6 +216,10 @@ GEM
     kaminari-bootstrap (3.0.1)
       kaminari (>= 0.13.0)
       rails
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     listen (2.8.4)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -396,6 +401,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   kaminari-bootstrap
+  letter_opener
   mailboxer
   mini_backtrace
   mini_magick

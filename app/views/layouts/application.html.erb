@@ -9,6 +9,10 @@
   <meta name="author" content="">
   <meta property="og:title" content="<%= yield(:title) %>">
   <meta property="og:image" content="<%= image_url yield(:image) %>">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="ist-ur.org">
+  <meta name="twitter:title" content="<%= yield(:title) %>">
+  <meta name="twitter:image" content="<%= image_url yield(:image) %>">
   <meta content="<%= user_signed_in? ? current_user.id : '' %>" name="user-id" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>

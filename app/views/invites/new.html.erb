@@ -1,0 +1,9 @@
+<div class="col-md-6">
+  <% if @invite_count <= 0 %>
+      <%= 'Sorry, you have to ask the Lord for five more invitations' %><br><br>
+      <%= button_to 'Ask God', {action: 'dele'}, method: 'get', class: 'btn btn-default' %>
+  <% elsif @invite_count > 0 %>
+      <%= render 'form' %>
+      Du kannst noch <b><%= @invite_count %></b> andere Menschen hierher einladen!
+  <% end %><br>
+</div>
