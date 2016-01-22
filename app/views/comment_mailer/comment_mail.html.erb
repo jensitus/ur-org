@@ -1,16 +1,55 @@
-<div style="font-family: sans-serif; font-size: 16px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
-  <%= @answer.comment.body %>
+<div class="container">
+  <div class="general">
+    <span>Unfassbar, </span><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %><span> hat auf deinen Beitrag geantwortet</span>
+  </div>
+
+  <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) do %>
+      <div class="general comment_body">
+        <%= @answer.comment.body %>
+      </div>
+  <% end %>
+
+
+  <div class="general">
+    <b>visit:</b> <a href="https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>">klick</a>
+  </div>
+
+  <div class="general">
+    <% original_posting = Scalpel.cut(@answer.micropost.content) %>
+    <b>original posting:</b>  <%= original_posting[0][0..60] + '...' %>
+  </div>
 </div>
 
-<div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
-  sagt <b><%= @answer.comment.user.name %></b> <span>in so einem verdammten Kommentar</span>
-</div>
 
-<div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
-  <b>visit:</b> <a href="https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>">klick</a>
-</div>
+<style>
 
-<div style="font-family: sans-serif; font-size: 12px; padding: 15px; background: #eee; border-radius: 5px; margin: 5px; width: 300px;">
-  <b>original posting:</b>  <%= @answer.micropost.content %>
-</div>
+    .container {
+        max-width: 500px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        margin: 0px auto;
+    }
 
+    .general {
+        padding: 20px;
+        text-align: center;
+        line-height: 1.6em;
+        font-family: verdana, arial, helvetica, sans-serif;
+        font-size: 1.0em;
+    }
+
+    a {
+        text-decoration: none;
+        color: #0055ff;
+    }
+
+    .comment_body {
+        background-color: #eee;
+        color: #333;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        font-family: arial, helvetica, sans-serif;
+        font-size: 1.3em;
+    }
+
+</style>

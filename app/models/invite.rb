@@ -9,10 +9,6 @@ class Invite < ActiveRecord::Base
   private
 
   def invite_someone
-    #puts '**********************************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-    #puts self.inspect
-    # puts '**********************************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-    puts '**********************************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
     InviteMailer.delay.invite_mail(self)
   end
 
