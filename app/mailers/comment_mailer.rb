@@ -5,7 +5,7 @@ class CommentMailer < ActionMailer::Base
     a = Scalpel.cut(@answer.comment.body)
     sub = the_subject_string(a)
     mail(:to => @answer.micropost.user.email,
-         :subject => '[' + 'ist-ur.org' + '] ' + sub.join(' ') + ' ...' )
+         :subject => @answer.comment.user.name + ': ' + sub.join(' ') + ' ...' )
   end
 
   def also_comment_mail(answer, ua)
@@ -13,7 +13,7 @@ class CommentMailer < ActionMailer::Base
     a = Scalpel.cut @answer.comment.body
     sub = the_subject_string(a)
     mail(:to => ua,
-         subject: '[' + 'ist-ur.org' + '] ' +  sub.join(' ') + ' ...' )
+         subject: @answer.comment.user.name + ': ' +  sub.join(' ') + ' ...' )
   end
 
   private
