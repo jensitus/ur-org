@@ -2,7 +2,7 @@
   <div class="general">
     Man glaubt es kaum,
     <b><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %></b> <span>
-    gibt auch noch seinen Senf dazu</span>
+    kann auch nicht anders</span>
   </div>
 
   <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) do %>
