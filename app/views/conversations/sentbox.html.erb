@@ -22,7 +22,7 @@
         <br>an:
         <% conversation.participants.each do |p| %>
             <% if p != current_user %>
-                <%= link_to p.name, single_user_path(p.name) %>
+                <%= link_to p.name, single_user_path(p) %>
             <% end %>
         <% end %>
         <small>
@@ -32,6 +32,9 @@
             <br><br>
 
     <% end %>
-    <%= paginate @sentbox %>
+    <small>
+      <%= paginate @sentbox %>
+    </small>
+
   </div>
 </div>

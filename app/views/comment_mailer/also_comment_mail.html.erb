@@ -1,8 +1,8 @@
 <div class="container">
   <div class="general">
-    Als hätte man nicht schon genug Sorgen, kommt
-    <%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %></b> <span>
-    jetzt auch noch mit so einem verdammten Kommentar daher</span>
+    Man glaubt es kaum,
+    <b><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %></b> <span>
+    gibt auch noch seinen Senf dazu</span>
   </div>
 
   <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) do %>
