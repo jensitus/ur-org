@@ -9,7 +9,9 @@
     <span class="user"><small><%= link_to micropost.user.name, single_user_path(micropost.user) %></small></span>
     <span class="content">
       <%#= mention_link simple_format(auto_link(strip_tags(micropost.content))) %>
-      <%= mention_link(micropost.content_html) %>
+      <span id="text-<%= micropost.id %>">
+        <%= mention_link(micropost.content_html) %>
+      </span>
       <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
       <%#= micropost.picture? %>
       <%#= micropost.picture.url %>
@@ -28,7 +30,14 @@
             <% end %>
       <% end %>
 
+      <div id="pre-box-<%= micropost.id %>">
+        <div id="pre-title-<%= micropost.id %>"></div>
+        <div id="pre-description-<%= micropost.id %>"></div>
+      </div>
+
     </span>
+
+
 
     <span class="timestamp">
       <small>
@@ -66,10 +75,17 @@
 
     </span>
 
+
 <!--</li>-->
 <% end %>
 
 <style type="text/css">
+
+  .pre-box {
+      padding: 10px;
+      border: 1px solid #000;
+  }
+
 /*    #likeBox-<%#= micropost.id %> {
         display: block;
         width: 400px;
@@ -112,29 +128,66 @@
 
 <script>
 
-/*  var oInt;
+/*
+ *  this is the extracted url
+ *
+ * */
 
-  function like(iX) {
-      clearInterval(oInt);
-      document.getElementById('likeBox-' + iX ).style.display = 'block';
-  }
+function get_the_fucking_link() {
+    if (document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0] == undefined) {
+        console.log('undefined + <%= micropost.id %>' )
+    } else {
+        var text = document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0].getAttribute('href');
+        console.log(text);
+        get_the_result(text);
+    }
+}
 
-  function hideTheLikeBox(iX) {
-      document.getElementById('likeBox-' + iX).style.display = 'none';
-  }
+function get_the_result(text) {
+    var result = $.ajax({
+        type: 'GET',
+        url: 'http://link-thumbnailer-api.herokuapp.com/thumbnails/new',
+        dataType: 'JSONP',
+        data: {
+            url: text,
+            options: {
+                image_stats: false,
+                image_limit: 3,
+                attributes: ['title', 'favicon', 'description'],
+                redirect_limit: 5,
+                description_min_length: 100
+            }
+        }
+    });
+    console.log(result);
+    result.done(function(data){
+        console.log(data.description);
 
-  function hideBox(iX) {
-      clearInterval(oInt);
-      oInt = setInterval('hideTheLikeBox()', 1000);
-  }*/
+        var pre_box = document.getElementById('pre-box-<%= micropost.id %>');
+        pre_box.setAttribute('class', 'panel panel-default');
+        var pre_title_div = document.createElement('div');
+        var pre_description_div = document.createElement('div');
+
+        pre_title_div.innerHTML = '<b>' + data.title + '</b>';
+        pre_title_div.setAttribute('class', 'panel-heading');
+
+        pre_description_div.innerHTML = data.description;
+        pre_description_div.setAttribute('class', 'panel-body');
+
+        pre_box.appendChild(pre_title_div);
+        pre_box.appendChild(pre_description_div);
+
+    });
+
+}
+
+window.onload = get_the_fucking_link();
 
   /*
    *
    * the owl carousel
    *
    * */
-
-
 
   $(document).ready(function() {
 
