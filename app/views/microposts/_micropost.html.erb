@@ -174,6 +174,7 @@ function get_the_result(text) {
     console.log(result);
     result.done(function(data){
         console.log(data.url);
+        console.log(data.images);
         console.log(data.description);
         var image_tag = get_the_images(data.images);
         console.log(image_tag);
@@ -212,7 +213,7 @@ function get_the_images(images) {
         var pre_image_tag = document.createElement('img');
         pre_image_tag.setAttribute('src', images[0].src);
         pre_image_tag.setAttribute('class', 'img-rounded');
-        pre_image_tag.setAttribute('width', '100%');
+        pre_image_tag.setAttribute('style', 'max-width: 100%');
     }
     return pre_image_tag;
 }
