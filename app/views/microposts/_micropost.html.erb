@@ -30,10 +30,13 @@
             <% end %>
       <% end %>
 
-      <div id="pre-box-<%= micropost.id %>">
-        <div id="pre-title-<%= micropost.id %>"></div>
-        <div id="pre-description-<%= micropost.id %>"></div>
-      </div>
+      <a id="pre_url-<%= micropost.id %>">
+        <div id="pre-box-<%= micropost.id %>">
+          <div id="pre-title-<%= micropost.id %>"></div>
+          <div id="pre-description-<%= micropost.id %>"></div>
+        </div>
+      </a>
+
 
     </span>
 
@@ -84,6 +87,15 @@
   .pre-box {
       padding: 10px;
       border: 1px solid #000;
+  }
+
+  .pre_url {
+      color: #333;
+      text-decoration: none;
+  }
+  .pre_url:hover {
+      color: #333;
+      text-decoration: none;
   }
 
 /*    #likeBox-<%#= micropost.id %> {
@@ -153,7 +165,7 @@ function get_the_result(text) {
             options: {
                 image_stats: false,
                 image_limit: 3,
-                attributes: ['title', 'favicon', 'description'],
+                attributes: ['title', 'favicon', 'description', 'images'],
                 redirect_limit: 5,
                 description_min_length: 100
             }
@@ -161,24 +173,48 @@ function get_the_result(text) {
     });
     console.log(result);
     result.done(function(data){
+        console.log(data.url);
         console.log(data.description);
-
+        var image_tag = get_the_images(data.images);
+        console.log(image_tag);
         var pre_box = document.getElementById('pre-box-<%= micropost.id %>');
         pre_box.setAttribute('class', 'panel panel-default');
-        var pre_title_div = document.createElement('div');
+
         var pre_description_div = document.createElement('div');
-
-        pre_title_div.innerHTML = '<b>' + data.title + '</b>';
-        pre_title_div.setAttribute('class', 'panel-heading');
-
-        pre_description_div.innerHTML = data.description;
         pre_description_div.setAttribute('class', 'panel-body');
-
-        pre_box.appendChild(pre_title_div);
+        pre_description_div.innerHTML = '<b>'
+                + data.title
+                + '</b>'
+                + '<br>' + data.description
+                + '<br>' + '';
+        if (image_tag == undefined) {
+            console.log(true);
+        } else {
+            console.log(false);
+            pre_description_div.appendChild(image_tag);
+        }
+        var pre_url_a = document.getElementById('pre_url-<%= micropost.id %>');
+        pre_url_a.setAttribute('href', data.url);
+        pre_url_a.setAttribute('class', 'pre_url');
+        //pre_description_div.appendChild(pre_url_a);
         pre_box.appendChild(pre_description_div);
-
     });
 
+}
+
+function get_the_images(images) {
+    console.log('get_the_images');
+    console.log(images[0].src);
+    if (images[0].src == 'http://derstandard.at/img/dot_clear.gif') {
+        console.log(true);
+    } else {
+        console.log(false);
+        var pre_image_tag = document.createElement('img');
+        pre_image_tag.setAttribute('src', images[0].src);
+        pre_image_tag.setAttribute('class', 'img-rounded');
+        pre_image_tag.setAttribute('width', '100%');
+    }
+    return pre_image_tag;
 }
 
 window.onload = get_the_fucking_link();
