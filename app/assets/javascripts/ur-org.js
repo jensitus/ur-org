@@ -316,28 +316,44 @@ $(document).ready(function() {
     });
 });
 
-//        function toggle() {
-//            if (document.getElementById('collapse').style.display == 'none') {
-//                var collapseIn = document.getElementById('collapse');
-//                collapseIn.style.opacity = 1;
-//                setTimeout(function(){collapseIn.style.display = 'block';}, 600);
-//                var x = document.createElement('div');
-//                x.setAttribute('id', 'leave_button');
-//                x.setAttribute('class', 'btn btn-default');
-//                x.innerHTML = 'leave';
-//                x.addEventListener('click', toggleOut, false);
-//                document.getElementById('leave').appendChild(x);
-//            }
-//            //document.getElementById('fileupload').addEventListener('onfocusout', close, false);
-//        }
-//
-//        function toggleOut(){
-//            var leave = document.getElementById('leave');
-//            var leave_button = document.getElementById('leave_button');
-//            leave.removeChild(leave_button);
-//            var collapse = document.getElementById('collapse');
-//            collapse.style.opacity = 0;
-//            leave.addEventListener('click', theFileInput, false);
-//            setTimeout(function(){collapse.style.display = 'none';}, 600);
-//        }
+/* * * * * * * * * * * * * * * *
+ *  the register multiplication
+ * * * * * * * * * * * * * * * */
 
+function register_multiply() {
+    var v = document.getElementById('register_multiplication').value;
+    var can_register = false;
+    //document.getElementById('register_submit').disabled = !can_register;
+    //console.log('v');
+    //var x = Math.floor((Math.random() * 10 ) + 1);
+    //var y = Math.floor((Math.random() * 10 ) + 1);
+    //console.log(x);
+    //console.log(y);
+    //var res = x * y;
+    //console.log(res);
+    //console.log(document.getElementById('register_submit').disabled);
+    //document.getElementById('multiply').innerHTML = x + ' times ' + y;
+    //get_result(res);
+}
+
+function get_result(res) {
+    var get_the_result = res;
+    //console.log('get_the_result: ');
+    //console.log(get_the_result);
+    return get_the_result;
+}
+
+function register_multiply_result() {
+    var result = document.getElementById('register_multiplication').value;
+    //console.log(result);
+    //var submit_button = document.getElementById('register_submit').disabled;
+    //console.log(submit_button);
+    if (result == '42') {
+        document.getElementById('register_submit').disabled = false;
+    } else {
+        document.getElementById('register_submit').disabled = true;
+    }
+    //var the_result = get_result();
+    //console.log('the_result ********');
+    //console.log(the_result);
+}

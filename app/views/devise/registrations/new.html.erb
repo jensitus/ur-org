@@ -34,17 +34,30 @@
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
 
-
-
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+
+    <br>
+    <b>
+      What the hell is the result of 6 times 7?
+      <!--<span id="multiply"></span>?-->
+    </b>
+
+
+    <input id="register_multiplication" class="form-control" onkeyup="register_multiply_result()">
+
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up", class: 'btn btn-success' %>
+    <%= f.submit "Sign up", id: 'register_submit',  class: 'btn btn-success', disabled: true %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
     </div>
 </div>
+
+<script>
+    window.onload = register_multiply();
+</script>
+
