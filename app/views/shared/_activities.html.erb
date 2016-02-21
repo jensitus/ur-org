@@ -20,6 +20,8 @@
         </div>
 <% elsif activity.trackable_type == 'PhotoComment' %>
     <% render 'public_activity/photo_comment/create', activity: activity %>
+<% elsif activity.trackable_type == 'Comment' %>
+
 <% end %>
     <%# end %>
 <%# end %>

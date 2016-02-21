@@ -1,5 +1,9 @@
-<small>commented on</small>
-<%# if activity.trackable %>
-    <small><%#= link_to 'this post', user_post_path(slug: activity.trackable.answer.micropost.user.slug, id: activity.trackable.answer.micropost) %></small>
-<%# else %>
-<%# end %>
+
+<% if activity.trackable %>
+    <small>
+        <%= link_to activity.owner.name, activity.owner if activity.owner %>
+        commented
+    </small>
+    <small><%= link_to 'this', user_post_path(slug: activity.trackable.answer.micropost.user.slug, id: activity.trackable.answer.micropost) %></small>
+<% else %>
+<% end %>

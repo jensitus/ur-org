@@ -7,13 +7,16 @@
 <%#= link_to 'view my profile', current_user %>
 <b><%#= 'My Groups:' %></b><br>
 
-<% if !latest_photo_comments(current_user).empty? %>
+<% if !sidebar_activities(current_user).empty? %>
     <section class="sidebar_kasten">
       <b>Newsfeed</b>
-      <%# latest_photo_comments(current_user).inspect %>
-      <% latest_photo_comments(current_user).each do |latest_comment|%>
-          <%= render 'public_activity/photo_comment/create', activity: latest_comment %>
-      <% end %>
+      <br>
+      <%= render 'shared/sidebar_activities', sidebar_activities: sidebar_activities(current_user) %>
+
+      <%#latest_photo_comments(current_user).inspect %>
+      <%# latest_photo_comments(current_user).each do |latest_comment|%>
+          <%#= render 'public_activity/photo_comment/create', activity: latest_comment %>
+      <%# end %>
     </section>
 <% end %>
 

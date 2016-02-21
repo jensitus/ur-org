@@ -1,0 +1,10 @@
+<% if activity.trackable %>
+    <%#= activity.trackable.inspect %>
+
+    <small>
+      <%= link_to activity.trackable.follower.name, single_user_path(activity.trackable.follower) %>
+      <b>connected</b>
+      <%= link_to activity.trackable.followed.name, single_user_path(activity.trackable.followed) %>
+    </small>
+
+<% end %>

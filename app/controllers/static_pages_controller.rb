@@ -9,11 +9,11 @@ class StaticPagesController < ApplicationController
       @photo = @micropost.photos.build
       ########
       @placeholder = 'Compose your message to the world ...'
-      #@activities = current_user.get_the_activities #.page(params[:page]).per(9)
+      @sidebar_activities = current_user.newsfeed.first(10) # PublicActivity::Activity.order('created_at desc') #current_user.get_the_gallery_activities #.page(params[:page]).per(9)
       #@feed_items = current_user.get_the_microposts.page(params[:page]).per(8)
       the_real_feed = current_user.feed
       @the_real_feed = Kaminari.paginate_array(the_real_feed).page(params[:page]).per(13)
-      @latest_photo_comments = current_user.latest_photo_comments.limit(10)
+      #@latest_photo_comments = current_user.newsfeed
       @likes = @micropost.likers(User)
       @liked_by_current_user = @micropost.liked_by?(current_user)
       @following = current_user.following.sample(3)
@@ -31,7 +31,6 @@ class StaticPagesController < ApplicationController
       @microposts = Micropost.where('picture IS NULL AND group_id IS NULL').sample(3)
       render :layout => 'not_signed_in'
     end
-
   end
 
   def about
