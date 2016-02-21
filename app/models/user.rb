@@ -57,24 +57,36 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    (get_the_microposts + get_the_activities).sort_by(&:created_at).reverse
+    (get_the_microposts + get_the_gallery_activities).sort_by(&:created_at).reverse
+  end
+
+  def newsfeed
+    (latest_photo_comments + following_activities).sort_by(&:created_at).reverse
   end
 
   def get_the_microposts
-    following_ids = 'select followed_id from relationships where follower_id = :user_id'
+    #following_ids = 'select followed_id from relationships where follower_id = :user_id'
     group_or_not = 'select group_id from group_memberships where user_id = :user_id'
     Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id).where(group_id: nil)
   end
 
-  def get_the_activities
-    following_ids = 'select followed_id from relationships where follower_id = :user_id'
+  def get_the_gallery_activities
+
     #PublicActivity::Activity.order('created_at desc').where(owner_id: self.following, owner_type: 'User')
-    PublicActivity::Activity.where("owner_id in (#{following_ids}) OR owner_id = :user_id", user_id: id, owner_type: 'User').where("trackable_type != 'Micropost'")
+    PublicActivity::Activity.where("owner_id in (#{following_ids}) OR owner_id = :user_id", user_id: id, owner_type: 'User').where("trackable_type = 'Notice'")
+  end
+
+  def following_activities
+    PublicActivity::Activity.where("trackable_type = 'Relationship'")
   end
 
   def latest_photo_comments
-    following_ids = 'select followed_id from relationships where follower_id = :user_id'
+    #following_ids = 'select followed_id from relationships where follower_id = :user_id'
     PublicActivity::Activity.where("owner_id in (#{following_ids}) OR owner_id = :user_id", user_id: id, owner_type: 'User').where("trackable_type = 'PhotoComment'")
+  end
+
+  def latest_comments_on_postings
+    PublicActivity::Activity.where("owner_id in (#{following_ids}) OR owner_id = :user_id", user_id: id, owner_type: 'User').where("trackable_type = 'Comment'")
   end
 
   # connect a user
@@ -101,6 +113,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def following_ids
+    following_ids = 'select followed_id from relationships where follower_id = :user_id'
+  end
 
   # def create_default_conversation
   #   Conversation.create(sender_id: 1, recipient_id: self.id) unless self.id == 1
