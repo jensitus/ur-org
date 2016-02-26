@@ -346,8 +346,8 @@ function get_result(res) {
 function register_multiply_result() {
     var result = document.getElementById('register_multiplication').value;
     //console.log(result);
-    //var submit_button = document.getElementById('register_submit').disabled;
-    //console.log(submit_button);
+    var submit_button = document.getElementById('register_submit').disabled;
+    console.log(submit_button);
     if (result == '42') {
         document.getElementById('register_submit').disabled = false;
     } else {
