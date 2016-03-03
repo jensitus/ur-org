@@ -15,7 +15,7 @@
               <%= c[0].split.each_slice(1).map{|a|a.join ' '}[2] %>
           <% end %>
       <% end %>
-      <%= activity.created_at.strftime('%d.%m. %H') + ' Uhr nochwas' %>
+      <%= activity.created_at.strftime('%d.%m. %H:%M') %>
     </small>
 <% else %>
 <% end %>
