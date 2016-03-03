@@ -4,7 +4,7 @@ class PhotoComment < ActiveRecord::Base
 
   include PhotoCommentObserver
   include PublicActivity::Model
-  tracked owner: Proc.new{|controller, model| controller.current_user}
+  #tracked owner: Proc.new{|controller, model| controller.current_user}
 
   after_create :something_coming
 
