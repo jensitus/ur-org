@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   end
 
   def newsfeed
-    (latest_photo_comments + following_activities).sort_by(&:created_at).reverse
+    (latest_photo_comments + following_activities + latest_comments_on_postings).sort_by(&:created_at).reverse
   end
 
   def get_the_microposts

@@ -34,10 +34,12 @@ class CommentsController < ApplicationController
       if photo_or_answer_params[:photo_or_answer] == 'photo'
         @photo_comment = PhotoComment.create!(photo_id: photo_id, comment_id: @comment.id)
         Mention.mention_it(mentions, @comment)
+        @photo_comment.create_activity :create, owner: current_user
       else
         @answer = Answer.create!(:micropost_id => answer_params,
                                  :comment_id => @comment.id)
         Mention.mention_it(mentions, @comment)
+        @comment.create_activity :create, owner: current_user
       end
 
       #flash[:success] = '<b>cool, ein neuer kommentar</b>'.html_safe

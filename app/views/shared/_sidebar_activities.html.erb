@@ -1,6 +1,6 @@
 <% sidebar_activities.each do |side_activity| %>
     <small>
-      <%#= link_to side_activity.owner.name, side_activity.owner if side_activity.owner %>
+      <%# side_activity.inspect %>
     </small>
     <% if side_activity.trackable_type == 'Relationship' %>
         <%#= render_activities @sidebar_activities %>
@@ -9,9 +9,13 @@
             <br>
         <% end %>
     <% elsif side_activity.trackable_type == 'Comment' %>
-        <%#= render_activity side_activity %>
+
+
+        <%= render_activity side_activity if side_activity.key == 'comment.create' %><br>
     <% elsif side_activity.trackable_type == 'PhotoComment' %>
-        <%= render_activity side_activity %>
+
+
+        <%= render_activity side_activity if side_activity.key == 'photo_comment.create' %>
     <% end %>
     <small>
 
