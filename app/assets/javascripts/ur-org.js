@@ -345,10 +345,24 @@ function get_result(res) {
 
 function register_multiply_result() {
     var result = document.getElementById('register_multiplication').value;
-    //console.log(result);
+    console.log(result.substring(0,2));
+    var r = result.slice(2,15);
+    var r_sorted = r.split('').slice().sort();
+    console.log(r_sorted);
+    var jepp = false;
+    for (var i = 0; i < r_sorted.length -1; i++) {
+        if (r_sorted[i +1] == r_sorted[i]) {
+            jepp = true;
+        }
+    }
+    if (r_sorted.length == 4) {
+        console.log('Hellau');
+    }
+    console.log(r_sorted.length);
+    console.log(jepp);
     var submit_button = document.getElementById('register_submit').disabled;
     console.log(submit_button);
-    if (result == '39') {
+    if (result.substring(0,2) == '42' && jepp == false && r_sorted.length == 11) {
         document.getElementById('register_submit').disabled = false;
     } else {
         document.getElementById('register_submit').disabled = true;
