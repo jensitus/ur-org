@@ -26,6 +26,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :avatar
     devise_parameter_sanitizer.for(:sign_up) << :name           # {|u| u.permit(:name)} #, :avatar, :avatar_cache)}
     devise_parameter_sanitizer.for(:sign_up) << :avatar
+    devise_parameter_sanitizer.for(:accept_invitation) do |u|
+      u.permit(:name, :password, :password_confirmation, :invitation_token, :avatar)
+    end
   end
 
   def catch_not_found

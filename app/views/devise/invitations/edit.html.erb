@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-4">
+    <h4><%= t 'devise.invitations.edit.header' %></h4>
+    <br>
+    <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="form-group">
+          <%= f.hidden_field :invitation_token %>
+
+          <p>
+            <!--<%#=	f.label :username %> (<em>3 characters minimum</em>)br>-->
+            <%=	f.text_field :name, autofocus: true, onkeyup: 'activate_accept_invitation()', class: 'form-control', placeholder: 'username (3 characters minimum)' %>
+          </p>
+
+          <p>
+            <!--<%#= f.label :password %> (<em>8 characters minimum</em>) <br />-->
+            <%= f.password_field :password, class: 'form-control', placeholder: 'password (8 characters minimum)' %></p>
+
+          <p>
+            <!--<%#= f.label :password_confirmation %><br />-->
+            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'password confirmation' %></p>
+
+          <p><%= f.submit t("devise.invitations.edit.submit_button"), class: 'btn btn-default' , id: 'user_submit', disabled: true %></p>
+        </div>
+
+    <% end %>
+  </div>
+</div>
+
+
+
+<script>
+  function activate_accept_invitation() {
+      var user_name = document.getElementById('user_name').value;
+      var user_submit = document.getElementById('user_submit').disabled;
+      console.log(user_name);
+      console.log(user_submit);
+      if (user_name.length >= 3) {
+          console.log('true');
+          document.getElementById('user_submit').disabled = false;
+      } else {
+          document.getElementById('user_submit').disabled = true;
+      }
+  }
+</script>

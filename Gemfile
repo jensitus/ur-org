@@ -92,6 +92,8 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'devise'
 
+gem 'devise_invitable'
+
 # gem 'twitter-text'
 gem 'jquery-atwho-rails'
 gem 'socialization', :git => 'https://github.com/HackerPartie/socialization.git'

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get 'about' => 'static_pages#about'
 
-  devise_for :users #, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks'}
+  devise_for :users, :controllers => { :invitations=> 'users/invitations'}
   # root 'public#index'
 
   authenticated :user do
