@@ -41,3 +41,28 @@ end
 class ActionController::TestCase
   include Devise::TestHelpers
 end
+
+class Mock < Struct
+  module DefaultAttribute
+    attr_reader :defaults
+  end
+
+  def self.new(defaults)
+    attributes = defaults.keys
+    klass = super(*attributes)
+    klass.extend DefaultAttribute
+    klass.instance_variable_set :@defaults, defaults
+    klass.include Constructor
+    klass
+  end
+
+  module Constructor
+    def initialize(attrs = {})
+      attrs = self.class.defaults.merge(attrs)
+      super()
+      attrs.each do |key, value|
+        self.send "#{key}=", value
+      end
+    end
+  end
+end
