@@ -404,6 +404,7 @@ DEPENDENCIES
   mailboxer
   mini_backtrace
   mini_magick
+  minitest
   minitest-reporters
   owlcarousel-rails
   pg
