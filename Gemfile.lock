@@ -276,9 +276,8 @@ GEM
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
-    puma (2.10.2)
-      rack (>= 1.1, < 2.0)
-    rack (1.5.2)
+    puma (3.2.0)
+    rack (1.5.5)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.2)
@@ -409,6 +408,7 @@ DEPENDENCIES
   mailboxer
   mini_backtrace
   mini_magick
+  minitest
   minitest-reporters
   owlcarousel-rails
   pg
