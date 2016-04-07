@@ -35,7 +35,12 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get 'about' => 'static_pages#about'
 
-  devise_for :users, :controllers => { :invitations=> 'users/invitations'}
+  get 'invitation_required' => 'static_pages#invitation_required'
+
+  devise_for :users, :controllers => {
+                       :registrations => 'users/registrations',
+                       :invitations => 'users/invitations'
+                   }
   # root 'public#index'
 
   authenticated :user do

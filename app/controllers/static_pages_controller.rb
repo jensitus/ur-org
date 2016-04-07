@@ -36,4 +36,8 @@ class StaticPagesController < ApplicationController
   def about
   end
 
+  def invitation_required
+
+  end
+
 end
