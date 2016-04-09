@@ -1,8 +1,5 @@
 <div class="container">
   <div class="general">
-    Man glaubt es kaum,
-    <b><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %></b> <span>
-    kann auch nicht anders</span>
   </div>
 
   <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) do %>
@@ -12,8 +9,8 @@
   <% end %>
 
   <div class="general">
-    Regards<br>
-    <a href="http://ist-ur.org">ist-ur.org</a>
+    <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id), user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) %><br>
+    <b><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %></b>
   </div>
 </div>
 
