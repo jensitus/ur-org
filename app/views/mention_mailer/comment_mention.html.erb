@@ -1,21 +1,57 @@
-<div style="width: 100%;">
+<div class="container">
 
-  <p style="align-content: center; width: 500px; background: #eee; padding: 10px; border-radius: 5px;">
-      <h5>
-        Sie wurden erwähnt, wohoo!!
-      </h5>
-  </p>
+  <div class="general">
+      <b>
+        Sie wurden erwähnt
+      </b>
+  </div>
 
-  <p style="align-content: center; width: 500px; background: #eee; padding: 10px; border-radius: 5px; font-size: 13px; font-family: sans-serif;">
+  <div class="general">
     Hi, <%= @user.name %>,
     <%= @mentioner.user.name %>
-    mentioned you in a comment:<br>
+    mentioned you in a comment
+
+  </div>
+  <div class="general">
     <a href="<%= root_url %><%= @post_writer.slug %>/<%= @post.id %>"><%= root_url %><%= @post_writer.slug %>/<%= @post.id %></a>
-  </p>
-  <p style="align-content: center; width: 500px; background: #eee; padding: 10px; border-radius: 5px; font-size: 13px; font-family: sans-serif;">
+  </div>
+  <div class="comment_body">
     <%= @mentioner.body %>
-  </p>
+  </div>
 
 </div>
 
+
+<style>
+
+    .container {
+        max-width: 500px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        margin: 0px auto;
+    }
+
+    .general {
+        padding: 20px;
+        text-align: center;
+        line-height: 1.6em;
+        font-family: verdana, arial, helvetica, sans-serif;
+        font-size: 1.0em;
+    }
+
+    a {
+        text-decoration: none;
+        color: #0055ff;
+    }
+
+    .comment_body {
+        background-color: #eee;
+        color: #333;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        font-family: arial, helvetica, sans-serif;
+        font-size: 1.3em;
+    }
+
+</style>
 

@@ -34,6 +34,8 @@ class Mention < Socialization::ActiveRecordStores::Mention
 
       puts '???????????????????????????????????????'
       puts user.inspect
+      puts '???????????????????????????????????????'
+      puts mentioner.inspect
       ma = get_mentioner_asso(mentioner)
       puts ma.inspect
       if mentioner.micropost.nil?
@@ -53,6 +55,12 @@ class Mention < Socialization::ActiveRecordStores::Mention
             'you were mentioned by ' + mentioner.user.name,
             cut_text[0].to_s + ' '  + cut_text[1].to_s + ' ... ' + "<br> <a href='/#{mentioner.micropost.user.slug}/#{mentioner.micropost.id}'>ist-ur.org/#{mentioner.micropost.user.slug}/#{mentioner.micropost.id}</a>! <small>Scroll down a bit!</small>"
         )
+        post_writer = mentioner.user
+        post = mentioner.micropost
+        puts post_writer.inspect
+        puts post
+        puts '############################################'
+        MentionMailer.delay.comment_mention(user, mentioner, post_writer, post)
       end
 
     elsif mentioner.class == Micropost
