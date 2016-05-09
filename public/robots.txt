@@ -4,3 +4,4 @@
 User-agent: *
 Disallow: /users/*
 Disallow: /
+Allow: /jensitus

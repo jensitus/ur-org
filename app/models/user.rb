@@ -57,11 +57,16 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    (get_the_microposts + get_the_gallery_activities).sort_by(&:created_at).reverse
+    (get_the_microposts + get_the_gallery_activities + get_the_org_posts).uniq.sort_by(&:created_at).reverse
   end
 
   def newsfeed
     (latest_photo_comments + following_activities + latest_comments_on_postings).sort_by(&:created_at).reverse
+  end
+
+  def get_the_org_posts
+    # select * from microposts m, likes l, relationships r where m.id = likeable_id and r.follower_id = 4 and r.followed_id = l.liker_id
+    Micropost.find_by_sql(['select m.* from microposts m, likes l, relationships r where m.id = likeable_id and r.follower_id = ? and r.followed_id = l.liker_id', id])
   end
 
   def get_the_microposts
@@ -118,8 +123,12 @@ class User < ActiveRecord::Base
     following_ids = 'select followed_id from relationships where follower_id = :user_id'
   end
 
-  # def create_default_conversation
-  #   Conversation.create(sender_id: 1, recipient_id: self.id) unless self.id == 1
-  # end
+  def get_the_org
+    org_ids = []
+    following_ids.each do |f_id|
+      org_ids << "select likeable_id from likes where liker_id = #{f_id}"
+    end
+    org_ids
+  end
 
 end
