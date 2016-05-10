@@ -41,10 +41,9 @@
     </span>
 
 
-
     <span class="timestamp">
       <small>
-        Posted <%= time_ago_in_words(micropost.created_at) %> ago |
+        <%= (micropost.created_at).strftime('%H:%M %d.%m.%y') %> |
         <% if current_user == micropost.user %>
             <%= link_to 'edit', edit_micropost_path(micropost.id) %> |
             <%= link_to 'delete', micropost, method: :delete, data: { confirm: 'you sure?' } %> |
@@ -62,7 +61,7 @@
             </span>
 
         <% end %>
-        |
+
         <span id="likes_count-<%= micropost.id %>"> <!--onmouseover="like(<%#= micropost.id %>);" onmouseout="hideTheLikeBox(<%#= micropost.id %>);">-->
             <%#= pluralize micropost.likers(User).count, 'like' %>
           <%= render 'likes/the_likers', micropost: micropost %>
