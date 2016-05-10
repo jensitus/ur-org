@@ -1,5 +1,5 @@
-<%# if micropost.likers(User).count != 0 %>
-    <%= link_to pluralize(micropost.likers(User).count, 'org'), '#',
+<% if micropost.likers(User).count != 0 %>
+    <%= link_to pluralize(micropost.likers(User).count, ''), '#',
                 data: {
                         toggle: 'popover',
                         placement: 'top',
@@ -9,7 +9,7 @@
                 }
 
     %>
-<%# end %>
+<% end %>
 
 <script>
     $(document).ready(function() {
