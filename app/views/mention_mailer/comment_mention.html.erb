@@ -7,7 +7,7 @@
   </div>
 
   <div class="general">
-    Hi, <%= @user.name %>,
+    Hi <b><%= @user.name %></b>,
     <%= @mentioner.user.name %>
     mentioned you in a comment
 
@@ -15,7 +15,7 @@
   <div class="general">
     <a href="<%= root_url %><%= @post_writer.slug %>/<%= @post.id %>"><%= root_url %><%= @post_writer.slug %>/<%= @post.id %></a>
   </div>
-  <div class="comment_body">
+  <div class="general comment_body">
     <%= @mentioner.body %>
   </div>
 
