@@ -1,20 +1,53 @@
-<div style="font-family: sans-serif; font-size: 12px; width: 290px;">
-    <p style="padding: 15px; border-radius: 5px; background: #eee;">
+<div class="container">
+    <div class="general">
         <b><%= @user.follower.name %> is your new relationship</b>
-    </p>
-    <p style="padding: 15px; border-radius: 5px; background: #eee;">
+    </div>
+    <div class="general">
         Hi, <%= @user.followed.name %>! <br>
         You've got a new connection!      <br>
         Don't worry, it's just <%= @user.follower.name %>.  <br>
-    </p>
+    </div>
 
-    <p style="padding: 15px; border-radius: 5px; background: #eee;">
+    <div class="general">
         checkout what <%= @user.follower.name %> has to say: <br>
         <a href="<%= root_url %><%= @user.follower.slug %>"><%= root_url %><%= @user.follower.slug %></a>
-    </p>
+    </div>
 
-    <p style="padding: 15px; border-radius: 5px; background: #eee;">
+    <div class="general">
         Kind regards <br>
         <b>ist-ur.org</b>
-    </p>
+    </div>
 </div>
+
+<style>
+
+    .container {
+        max-width: 500px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        margin: 0px auto;
+    }
+
+    .general {
+        padding: 20px;
+        text-align: center;
+        line-height: 1.6em;
+        font-family: verdana, arial, helvetica, sans-serif;
+        font-size: 1.0em;
+    }
+
+    a {
+        text-decoration: none;
+        color: #0055ff;
+    }
+
+    .comment_body {
+        background-color: #eee;
+        color: #333;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        font-family: arial, helvetica, sans-serif;
+        font-size: 1.3em;
+    }
+
+</style>
