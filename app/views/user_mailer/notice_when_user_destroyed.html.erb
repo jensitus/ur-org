@@ -1,0 +1,10 @@
+<h4>
+  <%= @user.name %> is destroyed
+</h4>
+
+<div>
+  <%= @user.name %>                 <br>
+  <%= @user.email %>                <br>
+  <%= @user.slug %>                 <br>
+  <%= link_to @user.name, single_user_url(@user) %>
+</div>

@@ -3,24 +3,60 @@
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
-  <body style="font-family: sans-serif; font-size: 12px;">
-    <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
+  <body>
+  <div class="container">
+    <div class="general">
       subject: <%= @subject %>
-    </p>
+    </div>
 
 
     <blockquote>
-      <p style="background: #eee; font-size: 14px; padding: 10px; border-radius: 5px; max-width: 300px;">
+      <div class="general comment_body">
         <%= raw @message.body %>
-      </p>
+      </div>
     </blockquote>
 
-    <p style="background: #eee; padding: 10px; border-radius: 5px; max-width: 300px;">
+    <div class="general">
       from: <b><%= @message.sender.name %></b>
-    </p>
+    </div>
 
-    <p>
+    <div class="general">
       Visit <%= link_to conversation_url(@message.conversation.id), conversation_url(@message.conversation.id) %> and have a look!!
-    </p>
+    </div>
+  </div>
+
   </body>
 </html>
+
+<style>
+
+    .container {
+        max-width: 500px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        margin: 0px auto;
+    }
+
+    .general {
+        padding: 20px;
+        text-align: center;
+        line-height: 1.6em;
+        font-family: verdana, arial, helvetica, sans-serif;
+        font-size: 1.0em;
+    }
+
+    a {
+        text-decoration: none;
+        color: #0055ff;
+    }
+
+    .comment_body {
+        background-color: #eee;
+        color: #333;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        font-family: arial, helvetica, sans-serif;
+        font-size: 1.3em;
+    }
+
+</style>

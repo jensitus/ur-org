@@ -3,5 +3,6 @@
 # To ban all spiders from the entire site uncomment the next two lines:
 User-agent: *
 Allow: /jensitus
+Allow: /about
 Disallow: /users/*
 Disallow: /
