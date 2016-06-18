@@ -7,12 +7,12 @@
         <%= render 'shared/user_show_sidebar' %>
     <% end %>
   </aside>
-  <div class="col-md-8">
+  <div class="row">
     <h4><%= @title %></h4>
     <% if @users.any? %>
-        <ul class="users follow">
+        <div class="col-md-4">
           <%= render @users %>
-        </ul>
+        </div>
         <%= paginate @users %>
     <% end %>
   </div>
