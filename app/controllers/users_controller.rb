@@ -17,13 +17,13 @@ class UsersController < ApplicationController
 
   def following
     @title = 'I am connected with:'
-    @users = @user.following.page(params[:page]).per(5)
+    @users = @user.following.page(params[:page]).per(15)
     render 'show_follow'
   end
 
   def followers
     @title = 'They connected me:'
-    @users = @user.followers.page(params[:page]).per(5)
+    @users = @user.followers.page(params[:page]).per(15)
     render 'show_follow'
   end
 
