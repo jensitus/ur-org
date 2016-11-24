@@ -7,7 +7,7 @@
     </small>
     <small>
       <%#= activity.trackable.answer.inspect %>
-      <% if activity.trackable.answer.nil? %>
+      <% if activity.trackable.answer.nil? || activity.trackable.answer.micropost.nil? %>
       <% else %>
           <%= link_to user_post_path(slug: activity.trackable.answer.micropost.user.slug, id: activity.trackable.answer.micropost) do %>
               <%= c[0].split.each_slice(1).map{|a|a.join ' '}[0] %>
