@@ -21,11 +21,12 @@ public/uploads/
 config/secrets.yml
 config/database.yml
 
-#<<<<<<< HEAD
+
 # ignore all the dumps
 *.dump
-#=======
+/dump/
+
 latest.dump
 
 /lib/capistrano/tasks/admin.rake
-#>>>>>>> photos
+
