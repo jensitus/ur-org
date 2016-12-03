@@ -27,6 +27,10 @@ class MentionMailer < ActionMailer::Base
   #
   def micropost_mention(user, mentioner) #(mention)
 
+    puts ' ~ ~ ~ ~ ~ ~ ~  micropost_mention  ~ ~ ~ ~ ~ ~ ~ ~ ~'
+    puts user.inspect
+
+
     @mentioner = mentioner
     @user = user
     @greeting = 'Hi'
