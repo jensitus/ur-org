@@ -13,6 +13,8 @@ class CommentMailer < ActionMailer::Base
   end
 
   def also_comment_mail(answer, ua)
+    puts ' ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  CommentMailer.also_comment_mail ~ ~ ~ ~ ~  ~  ~ ~ ~  '
+    puts ua
     @answer = answer
     a = Scalpel.cut @answer.comment.body
     sub = the_subject_string(a)
