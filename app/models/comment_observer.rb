@@ -3,12 +3,17 @@ class CommentObserver < ActiveRecord::Observer
   def after_save(answer)
 
     ua = get_user_array(answer)
+    puts ' ~ ~ ~ ~ ~~ ~   comment_observer comment_mail ~  ~ ~ ~ ~ ~ ~ ~ ~ ~'
+    puts 'ua: ' + ua.inspect
     ua.each do |u_a|
+      puts 'u_a ' + u_a
       CommentMailer.delay.also_comment_mail(answer, u_a)
     end
     #Mailboxer::Notification.notify_all(ua, 'new comment', answer.to_s, self)
 
     if !ua.include?(answer.micropost.user.email) && answer.comment.user.email != answer.micropost.user.email
+      puts ' ~ ~ ~ ~ ~~ ~   comment_observer comment_mail ~  ~ ~ ~ ~ ~ ~ ~ ~ ~'
+      puts 'answer: ' + answer.inspect
       CommentMailer.delay.comment_mail(answer)
     end
 
