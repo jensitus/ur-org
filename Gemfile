@@ -39,6 +39,7 @@ gem 'unobtrusive_flash'
 gem 'mailboxer'
 
 gem 'sidekiq'
+gem 'sinatra'
 
 
 group :development do
