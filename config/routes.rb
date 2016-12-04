@@ -4,10 +4,12 @@ Rails.application.routes.draw do
 
   get 'notices/create'
 
-  if Rails.env.development?
+#  if Rails.env.development?
     require 'sidekiq/web'
+  authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
   end
+#  end
 
   resources :photo_galleries
 
