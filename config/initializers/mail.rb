@@ -3,18 +3,16 @@
 #     port: 587,
 #     domain: "service-b.org",
 #     user_name: "info@service-b.org",
-#     password: "zenturio",
+#     password: "******",
 #     authentication: :plain,
 #     enable_starttls_auto: true
 # }
 ActionMailer::Base.smtp_settings = {
-    #address: 'posteo.de',
     address: 'smtprelaypool.ispgateway.de',
     port: 587,
     domain: 'ist-ur.org',
-    #user_name: 'info-ist-ur-org@posteo.de',
     user_name: 'info@ist-ur.org',
-    password: 'Capitano01!',
+    password: Rails.application.secrets.mail_pw,
     authentication: :plain,
     enable_starttls_auto: true
 }

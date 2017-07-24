@@ -22,7 +22,7 @@ Rails.application.configure do
   #     port: 587,
   #     domain: 'ist-ur.org',
   #     user_name: 'info-ist-ur-org@posteo.de',
-  #     password: 'Option09',
+  #     password: '*****',
   #     authentication: :plain,
   #     enable_starttls_auto: true
   # }
