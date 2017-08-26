@@ -4,7 +4,7 @@ updated gallery
     <%= link_to activity.trackable.title, activity.trackable %>
     <br>
     <%= link_to photo_path(activity.trackable.photos.last) do %>
-        <%= image_tag activity.trackable.photos.last.picture, width: 70 %>
+        <%= image_tag activity.trackable.photos.last.picture, width: 170 %>
     <% end %>
     <%# activity.trackable.photos.each do |photo| %>
         <%#= link_to photo_path(photo) do %>

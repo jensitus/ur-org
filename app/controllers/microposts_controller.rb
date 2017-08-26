@@ -20,9 +20,7 @@ class MicropostsController < ApplicationController
     mentions = Mention.get_the_mention(@micropost.content)
     if @micropost.save
       if params[:photos].nil?
-        puts '#################################'
-        puts 'yessssss'
-        puts '#################################'
+        puts 'no photo'
       else
         params[:photos]['picture'].each do |p|
           @photo = @micropost.photos.create!(:picture => p, :micropost_id => @micropost.id)

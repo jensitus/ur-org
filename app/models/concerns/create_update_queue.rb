@@ -6,34 +6,17 @@ module CreateUpdateQueue
   end
 
   def trigger_the_update_queue
-    PhotoGalleryUpdateWorkers.perform_in(20.seconds, self.id)
+    PhotoGalleryUpdateWorkers.perform_in(6.seconds, self.id)
   end
 
   def update_photo_gallery_notice(photo_gallery_id)
     p = PhotoGallery.find(photo_gallery_id)
     updating_user = User.find(p.last_updated_by_id)
     description = p.title
-    @notice = p.notice
-    if @notice.nil?
-      count = 0
-    else
-      count = @notice.count
-    end
+    create_notice(updating_user.id, description, photo_gallery_id)
+    associate_some_photos(p)
     puts @notice.inspect
-    if @notice.nil?
-      create_photo_gallery_notice(p.id)
-    else
-      if Time.now.to_i - @notice.updated_at.to_time.to_i > 1200
-        count += 1
-        puts count
-        @notice.update!(user_id: p.last_updated_by_id, description: p.title, count: count)
-        associate_some_photos(p)
-        puts @notice.inspect
-        @notice.create_activity :update, owner: updating_user
-      else
-        puts 'nothing to do'
-      end
-    end
+    @notice.create_activity :update, owner: updating_user
   end
 
   def create_photo_gallery_notice(photo_gallery_id)
@@ -48,11 +31,15 @@ module CreateUpdateQueue
   private
 
   def associate_some_photos(p)
+    pn = []
+    p.notices.each do |n|
+      n.photos.each do |photonotice|
+        pn << photonotice
+      end
+    end
+    pn.uniq!
     p.photos.each do |photo|
-      if photo.created_at.to_date != Date.today
-        puts 'na geh'
-      elsif photo.created_at.to_date == Date.today
-        puts 'jepp'
+      if !pn.include?(photo)
         @notice.photos << photo unless @notice.photos.include?(photo)
       end
     end

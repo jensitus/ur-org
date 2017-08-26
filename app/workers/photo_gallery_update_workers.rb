@@ -6,6 +6,7 @@ class PhotoGalleryUpdateWorkers
     puts '**********  photo_gallery_id     *****************'
     puts photo_gallery_id
     update_photo_gallery_notice(photo_gallery_id)
+
   end
 
 end
