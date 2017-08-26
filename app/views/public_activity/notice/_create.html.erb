@@ -2,13 +2,65 @@
 
 <% if activity.trackable %>
     <small><%= link_to activity.trackable.photo_gallery.title, photo_gallery_path(activity.trackable.photo_gallery_id) %></small>
-    <div>
-    <% activity.trackable.photos.each do |photo| %>
-        <%= link_to photo_path(photo) do %>
-            <%= image_tag photo.picture.thumb, width: 70 %>
-        <% end %>
-    <% end %>
-        </div>
+    <div style="margin-top: 10px; margin-bottom: 10px; margin-left: 65px;">
+      <% if activity.trackable.photos.count > 1 %>
+
+          <div id="owl-demo-<%= activity.trackable.id %>" class="owl-carousel">
+            <% activity.trackable.photos.each do |photo| %>
+                <%= link_to photo_path(photo) do %>
+                    <div><%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %></div>
+                <% end %>
+            <% end %>
+          </div>
+      <% else %>
+          <% activity.trackable.photos.each do |photo| %>
+              <%= link_to photo_path(photo) do %>
+                  <div><%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %></div>
+              <% end %>
+          <% end %>
+      <% end %>
+    </div>
 <% else %>
     which isn't up to date anymore. sorry
 <% end %>
+
+<style>
+  /*
+ * the owl css
+ *
+ */
+
+  #owl-demo-<%= activity.trackable.id %> .owl-item div{
+    padding:5px;
+  }
+  #owl-demo-<%= activity.trackable.id %> .owl-item img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
+</style>
+
+<script>
+    $(document).ready(function() {
+
+        $("#owl-demo-<%= activity.trackable.id %>").owlCarousel({
+            autoPlay: 6000,
+            navigation : true, // Show next and prev buttons
+            slideSpeed : 300,
+            paginationSpeed : 400,
+            singleItem:true,
+            autoHeight: true
+            // "singleItem:true" is a shortcut for:
+            // items : 1,
+            // itemsDesktop : false,
+            // itemsDesktopSmall : false,
+            // itemsTablet: false,
+            // itemsMobile : false
+
+        });
+
+    });
+</script>

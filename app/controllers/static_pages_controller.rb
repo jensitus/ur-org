@@ -21,11 +21,11 @@ class StaticPagesController < ApplicationController
       # @galleries = current_user.photo_galleries
       fresh_when :etag => [@feed_items, current_user]
     else
-      if Rails.env.development?
-        @static_page_image = Photo.find(60).picture
-      elsif Rails.env.production?
-        @static_page_image = Photo.find(35).picture
-      end
+      # if Rails.env.development?
+      #   @static_page_image = Photo.find(60).picture
+      # elsif Rails.env.production?
+      #   @static_page_image = Photo.find(35).picture
+      # end
       #@static_page_image = Micropost.where('picture IS NOT NULL').sample(1)[0].picture
       # @static_page_image = Photo.all.sample(1)[0].picture
       @microposts = Micropost.where('picture IS NULL AND group_id IS NULL').sample(3)

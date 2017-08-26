@@ -2,7 +2,6 @@
 <h4>notifications</h4>
 <% @notifications.each do |notification| %>
 
-
     <% if notification.is_unread?(current_user) %>
         <div id="notification_box" onmouseout="<%= notification.mark_as_read current_user %>" style="background: #eee; padding: 10px; padding-left: 15px; border: 1px solid #ccc; border-radius: 5px;">
             <small><%= notification.subject %></small><br>
@@ -17,6 +16,5 @@
         <small><%= notification.created_at.strftime('%d.%m.%y %H:%M') %></small><br>
         </div>
     <% end %>
-
 
 <% end %>

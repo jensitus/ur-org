@@ -1,28 +1,41 @@
 <%# activities.each do |activity| %>
-    <%# if activity.trackable_type == 'Micropost' %>
-    <%# if activity.class == Micropost %>
-        <%#= render_activity activity %>
-        <%#= render 'microposts/micropost', micropost: activity %>
-        <%#= 'do nothing' %>
-    <%# else %>
+<%# if activity.trackable_type == 'Micropost' %>
+<%# if activity.class == Micropost %>
+<%#= render_activity activity %>
+<%#= render 'microposts/micropost', micropost: activity %>
+<%#= 'do nothing' %>
+<%# else %>
 <% if activity.trackable_type != 'PhotoComment' %>
-        <div class="activity" style="border: 1px solid #eee; border-radius: 3px; padding: 5px;">
+    <div class="activity" style="border-bottom: 1px solid #eee; border-radius: 3px; padding: 5px;">
+      <span class="gravatar">
+        <% if activity.owner.avatar_url.nil? %>
+            <%= link_to image_tag(activity.owner.gravatar_url, width: 50) %>
+        <% else %>
+            <%= link_to image_tag(activity.owner.avatar, width: 50) %>
+        <% end %>
+      </span>
+      <div>
+        <div>
           <small>
             <%= link_to activity.owner.name, activity.owner if activity.owner %>
           </small>
-
-
+          <span>
             <%= render_activity activity %>
-
-          <small>
-            <%= time_tag activity.created_at %>
-          </small>
+          </span>
         </div>
+      </div>
+      <span class="timestamp" style="margin-left: 55px;">
+        <small>
+          <%= time_tag activity.created_at %>
+        </small>
+      </span>
+
+    </div>
 <% elsif activity.trackable_type == 'PhotoComment' %>
     <% render 'public_activity/photo_comment/create', activity: activity %>
 <% elsif activity.trackable_type == 'Comment' %>
 
 <% end %>
-    <%# end %>
+<%# end %>
 <%# end %>
 <%#= paginate @activities %>

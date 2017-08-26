@@ -4,7 +4,8 @@ class PhotoGallery < ActiveRecord::Base
   has_many :photos
   accepts_nested_attributes_for :photos
   has_and_belongs_to_many :users
-  has_one :notice, dependent: :destroy
+  # has_one :notice, dependent: :destroy
+  has_many :notices
   validates :title, presence: true
 
   after_create :trigger_the_create_queue

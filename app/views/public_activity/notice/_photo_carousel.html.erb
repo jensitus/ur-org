@@ -1,0 +1,18 @@
+<div style="margin-top: 10px; margin-bottom: 10px; margin-left: 65px;">
+  <% if activity.trackable.photos.count > 1 %>
+
+      <div id="owl-demo-<%= activity.trackable.id %>" class="owl-carousel">
+        <% activity.trackable.photos.each do |photo| %>
+            <%= link_to photo_path(photo) do %>
+                <div><%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %></div>
+            <% end %>
+        <% end %>
+      </div>
+  <% else %>
+      <% activity.trackable.photos.each do |photo| %>
+          <%= link_to photo_path(photo) do %>
+              <div><%= image_tag photo.picture, class: 'uploaded_image' if photo.picture? %></div>
+          <% end %>
+      <% end %>
+  <% end %>
+</div>
