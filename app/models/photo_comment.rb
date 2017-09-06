@@ -1,6 +1,6 @@
 class PhotoComment < ActiveRecord::Base
   belongs_to :photo
-  belongs_to :comment
+  belongs_to :comment, dependent: :destroy
 
   include PhotoCommentObserver
   include PublicActivity::Model
