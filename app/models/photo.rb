@@ -7,6 +7,8 @@ class Photo < ActiveRecord::Base
   has_many :photo_comments, dependent: :destroy
   has_many :comments, through: :photo_comments
 
+  belongs_to :user
+
   before_destroy :delete_notice
 
   private

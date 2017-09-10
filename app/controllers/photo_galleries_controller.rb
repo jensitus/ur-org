@@ -36,7 +36,8 @@ class PhotoGalleriesController < ApplicationController
         puts 'the fucking photo params are not what they are expected'
       else
         params[:photos]['picture'].each do |photo|
-          @photo = @photo_gallery.photos.create!(picture: photo, photo_gallery_id: @photo_gallery.id)
+          puts current_user.inspect
+          @photo = @photo_gallery.photos.create!(picture: photo, photo_gallery_id: @photo_gallery.id, user_id: current_user.id)
         end
       end
     end
@@ -52,7 +53,7 @@ class PhotoGalleriesController < ApplicationController
         puts '++++++++++++++++++++++++++++++++'
         puts params[:photos]
         params[:photos]['picture'].each do |photo|
-          @photo = @photo_gallery.photos.create!(picture: photo, photo_gallery_id: @photo_gallery.id)
+          @photo = @photo_gallery.photos.create!(picture: photo, photo_gallery_id: @photo_gallery.id, user_id: current_user.id)
         end
       end
 

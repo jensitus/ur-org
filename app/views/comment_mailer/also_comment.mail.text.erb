@@ -1,10 +1,15 @@
-<%= @answer.comment.user.name %> hat auch noch so einen verdammten kommentar geschrieben
+<%= @answer.comment.user.name %> has also written such a god damn comment
 
 
   from:  <%= @answer.comment.user.name %>
 
   comment: <%= @answer.comment.body %>
-  visit: https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>
+  <% if @answer.is_a?(Answer) %>
+    visit: https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>
+  <% elsif @answer.is_a?(PhotoComment) %>
+    visit: https://ist-ur.org/photos/<%= @answer.photo.id %>
+  <% end %>
+
 
   Regards
   http://ist-ur.org

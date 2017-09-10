@@ -1,16 +1,28 @@
 <div class="container">
   <div class="general">
   </div>
-
-  <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) do %>
+  <% if @answer.is_a?(Answer) %>
+    <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) do %>
       <div class="general comment_body">
-            <%= @answer.comment.body %>
+        <%= @answer.comment.body %>
       </div>
+    <% end %>
+  <% elsif @answer.is_a?(PhotoComment) %>
+      <%= link_to photo_url(id: @answer.photo.id) do %>
+          <div class="general comment_body">
+            <%= @answer.comment.body %>
+          </div>
+      <% end %>
   <% end %>
 
   <div class="general">
-    <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id), user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) %><br>
-    <b><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %></b>
+    <% if @answer.is_a?(Answer) %>
+      <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id), user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) %><br>
+      <b><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %></b>
+    <% elsif @answer.is_a?(PhotoComment) %>
+        <%= link_to photo_url(id: @answer.photo.id), photo_url(id: @answer.photo.id) %><br>
+        <b><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %></b>
+    <% end %>
   </div>
 </div>
 

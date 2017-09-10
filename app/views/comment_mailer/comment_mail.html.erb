@@ -1,23 +1,37 @@
 <div class="container">
   <div class="general">
-    <span>Unfassbar, </span><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %><span> hat auf deinen Beitrag geantwortet</span>
+    <span>Unbelievable, </span><%= link_to @answer.comment.user.name, single_user_url(@answer.comment.user) %><span> drafted a response</span>
   </div>
 
-  <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) do %>
-      <div class="general comment_body">
-        <%= @answer.comment.body %>
-      </div>
+  <% if @answer.is_a?(Answer) %>
+    <%= link_to user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) do %>
+        <div class="general comment_body">
+          <%= @answer.comment.body %>
+        </div>
+    <% end %>
+  <% elsif @answer.is_a?(PhotoComment) %>
+      <%= link_to photo_url(id: @answer.photo.id) do %>
+          <div class="general comment_body">
+            <%= @answer.comment.body %>
+          </div>
+      <% end %>
   <% end %>
 
 
-  <div class="general">
-    <b>visit:</b> <a href="https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>">klick</a>
-  </div>
+  <% if @answer.is_a?(Answer) %>
+    <div class="general">
+      <b>visit:</b> <%= link_to 'klick', user_post_url(slug: @answer.micropost.user.slug, id: @answer.micropost.id) %>
+    </div>
 
-  <div class="general">
-    <% original_posting = Scalpel.cut(@answer.micropost.content) %>
-    <b>original posting:</b>  <%= original_posting[0][0..60] + '...' %>
-  </div>
+    <div class="general">
+      <% original_posting = Scalpel.cut(@answer.micropost.content) %>
+      <b>original posting:</b>  <%= original_posting[0][0..60] + '...' %>
+    </div>
+  <% elsif @answer.is_a?(PhotoComment) %>
+      <div class="general">
+        <b>visit:</b> <%= link_to 'klick', photo_url(id:@answer.photo.id) %>
+      </div>
+  <% end %>
 </div>
 
 
