@@ -1,34 +1,47 @@
 class CommentObserver < ActiveRecord::Observer
-  observe :answer
-  def after_save(answer)
+  observe :answer, :photo_comment
+  def after_save(comment_join_object)
 
-    ua = get_user_array(answer)
-    puts ' ~ ~ ~ ~ ~~ ~   comment_observer comment_mail ~  ~ ~ ~ ~ ~ ~ ~ ~ ~'
+    ua = get_user_array(comment_join_object)
     puts 'ua: ' + ua.inspect
     ua.each do |u_a|
       puts 'u_a ' + u_a
-      CommentMailer.delay.also_comment_mail(answer, u_a)
+      CommentMailer.delay.also_comment_mail(comment_join_object, u_a)
     end
-    #Mailboxer::Notification.notify_all(ua, 'new comment', answer.to_s, self)
 
-    if !ua.include?(answer.micropost.user.email) && answer.comment.user.email != answer.micropost.user.email
-      puts ' ~ ~ ~ ~ ~~ ~   comment_observer comment_mail ~  ~ ~ ~ ~ ~ ~ ~ ~ ~'
-      puts 'answer: ' + answer.inspect
-      CommentMailer.delay.comment_mail(answer)
+    if comment_join_object.is_a?(Answer)
+      if !ua.include?(comment_join_object.micropost.user.email) && comment_join_object.comment.user.email != comment_join_object.micropost.user.email
+        puts 'answer: ' + comment_join_object.inspect
+        CommentMailer.delay.comment_mail(comment_join_object)
+      end
+    elsif comment_join_object.is_a?(PhotoComment)
+      if !ua.include?(comment_join_object.photo.user.email) && comment_join_object.comment.user.email != comment_join_object.photo.user.email
+        puts 'answer: ' + comment_join_object.inspect
+        CommentMailer.delay.comment_mail(comment_join_object)
+      end
     end
 
   end
 
   private
 
-  def get_user_array(answer)
+  def get_user_array(comment_join_object)
     user_array = []
-    also_answer = answer.micropost.comments
-    also_answer.each do |aa|
-      user_array << aa.user.email
+
+    if comment_join_object.is_a?(Answer)
+      also_answer = comment_join_object.micropost.comments
+      also_answer.each do |aa|
+        user_array << aa.user.email
+      end
+    elsif comment_join_object.is_a?(PhotoComment)
+      also_answer = comment_join_object.photo.comments
+      also_answer.each do |aa|
+        user_array << aa.user.email
+      end
     end
+
     user_array = user_array.uniq
-    user_array.delete(answer.comment.user.email)
+    user_array.delete(comment_join_object.comment.user.email)
     user_array
   end
 

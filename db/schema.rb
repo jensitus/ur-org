@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325113807) do
+ActiveRecord::Schema.define(version: 20170909164720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(version: 20160325113807) do
 
   add_index "comments", ["user_id", "created_at"], name: "index_comments_on_user_id_and_created_at", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "comments_photo_galleries", id: false, force: true do |t|
+    t.integer "photo_gallery_id", null: false
+    t.integer "comment_id",       null: false
+  end
+
+  add_index "comments_photo_galleries", ["comment_id", "photo_gallery_id"], name: "comment_photo_gallery_index", using: :btree
+  add_index "comments_photo_galleries", ["photo_gallery_id", "comment_id"], name: "photo_gallery_comment_index", using: :btree
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -268,12 +276,20 @@ ActiveRecord::Schema.define(version: 20160325113807) do
   add_index "photo_galleries_users", ["photo_gallery_id", "user_id"], name: "index_photo_galleries_users_on_photo_gallery_id_and_user_id", using: :btree
   add_index "photo_galleries_users", ["user_id", "photo_gallery_id"], name: "index_photo_galleries_users_on_user_id_and_photo_gallery_id", using: :btree
 
+  create_table "photo_gallery_comments", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comment_id"
+    t.integer  "photo_gallery_id"
+  end
+
   create_table "photos", force: true do |t|
     t.integer  "micropost_id"
     t.string   "picture"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "photo_gallery_id"
+    t.integer  "user_id"
   end
 
   create_table "relationships", force: true do |t|

@@ -23,7 +23,7 @@ class MicropostsController < ApplicationController
         puts 'no photo'
       else
         params[:photos]['picture'].each do |p|
-          @photo = @micropost.photos.create!(:picture => p, :micropost_id => @micropost.id)
+          @photo = @micropost.photos.create!(:picture => p, :micropost_id => @micropost.id, :user_id => @micropost.user_id)
         end
       end
       Mention.mention_it(mentions, @micropost)
@@ -68,7 +68,7 @@ class MicropostsController < ApplicationController
           puts '#################################'
         else
           params[:photos]['picture'].each do |p|
-            @photo = @micropost.photos.create!(:picture => p, :micropost_id => @micropost.id)
+            @photo = @micropost.photos.create!(:picture => p, :micropost_id => @micropost.id, :user_id => current_user.id)
           end
         end
         flash[:success] = 'yeah!!'

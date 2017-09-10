@@ -4,12 +4,13 @@ class CommentMailer < ActionMailer::Base
     @answer = answer
     a = Scalpel.cut(@answer.comment.body)
     sub = the_subject_string(a)
-    puts '~ ~ ~ ~ ~ ~ CommentMailer.comment_mail ~ ~ ~ ~ ~ '
-    puts '@answer.micropost.user.email'
-    puts @answer.micropost.user
-    puts @answer.micropost.user.email
-    mail(:to => @answer.micropost.user.email,
-         :subject => @answer.comment.user.name + ': ' + sub.join(' ') + ' ...' )
+    if @answer.is_a?(Answer)
+      mail(:to => @answer.micropost.user.email,
+           :subject => @answer.comment.user.name + ': ' + sub.join(' ') + ' ...' )
+    elsif @answer.is_a?(PhotoComment)
+      mail(:to => @answer.photo.user.email,
+           :subject => @answer.comment.user.name + ': ' + sub.join(' ') + ' ...' )
+    end
   end
 
   def also_comment_mail(answer, ua)

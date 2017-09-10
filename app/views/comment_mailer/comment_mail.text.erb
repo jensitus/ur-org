@@ -1,7 +1,14 @@
 from:  <%= @answer.comment.user.name %>
 comment: <%= @answer.comment.body %>
 visit:
-<a href="https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>">
-  https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>
-</a>
-original posting:  <%= @answer.micropost.content %>
+<% if @answer.is_a?(Answer) %>
+    <a href="https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>">
+      https://ist-ur.org/<%= @answer.micropost.user.slug %>/<%= @answer.micropost.id %>
+    </a>
+
+    original posting:  <%= @answer.micropost.content %>
+<% elsif @answer.is_a?(PhotoComment) %>
+    <a href="https://ist-ur.org/photos/<%= @answer.photo.id %>">
+      https://ist-ur.org/photos/<%= @answer.photo.id %>
+    </a>
+<% end %>
