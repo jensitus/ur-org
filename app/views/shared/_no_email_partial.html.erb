@@ -1,0 +1,15 @@
+<%#= form_tag(current_user.no_emails(micropost_id), remote: true) do |f| %>
+    <%#= f.check_box :no_emails %>
+<%# end %>
+
+<%#= form_for(micropost, id: 'no_emails', remote: true) do |f| %>
+    <%#= f.check_box :no_emails, onclick: "$('no_emails').submit()" %>
+<%# end %>
+<%#= check_box_tag 'no_emails', :no_emails, :onchange => "$('no_emails').submit()" %>
+<!--input type="checkbox" onchange="stopInfoMails()"-->
+
+<script>
+  function stopInfoMails() {
+      console.log("no info mails");
+  }
+</script>

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :email_notifications, only: [:create, :update, :delete]
+
   get 'notices/new'
 
   get 'notices/create'

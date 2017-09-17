@@ -33,10 +33,10 @@
             </li>
             <li>
               <%= link_to notifications_index_path, :title => 'notifications' do %>
-                <span style="font-size: 1.2em;" class="glyphicon glyphicon-bell"></span>
-                <% if current_user.mailbox.notifications(:read => false ).count != 0 %>
+                  <span style="font-size: 1.2em;" class="glyphicon glyphicon-bell"></span>
+                  <% if current_user.mailbox.notifications(:read => false ).count != 0 %>
                     <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
-                <% end %>
+                  <% end %>
               <% end %>
             </li>
             <li><%= link_to current_user.name, edit_user_registration_path %></li>

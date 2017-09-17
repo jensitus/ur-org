@@ -1,19 +1,19 @@
 <div class="row">
   <div class="col-md-4">
-        <%#= render 'shared/single_post_avatar' %>
+    <%#= render 'shared/single_post_avatar' %>
     <!--<%# if user_signed_in? %>-->
-        <!--<%#= render 'shared/sidebar' %>-->
+    <!--<%#= render 'shared/sidebar' %>-->
     <!--<%# else %>-->
-        <!--<section class="sidebar_kasten">-->
-            <!--<%# if @micropost.user.avatar_url.nil? %>-->
-                <!--<%#= image_tag(@micropost.user.gravatar_url, width: 80, class: 'img-rounded') %>-->
-            <!--<%# else %>-->
-                <!--<%#= image_tag(@micropost.user.avatar, width: 80, class: 'img-rounded') %>-->
-            <!--<%# end %>-->
-        <!--</section>-->
-        <!--<section class="sidebar_kasten">-->
-          <!--<%#= render partial: 'microposts/stats', locals: { user: @micropost.user } %>-->
-        <!--</section>-->
+    <!--<section class="sidebar_kasten">-->
+    <!--<%# if @micropost.user.avatar_url.nil? %>-->
+    <!--<%#= image_tag(@micropost.user.gravatar_url, width: 80, class: 'img-rounded') %>-->
+    <!--<%# else %>-->
+    <!--<%#= image_tag(@micropost.user.avatar, width: 80, class: 'img-rounded') %>-->
+    <!--<%# end %>-->
+    <!--</section>-->
+    <!--<section class="sidebar_kasten">-->
+    <!--<%#= render partial: 'microposts/stats', locals: { user: @micropost.user } %>-->
+    <!--</section>-->
     <!--<%# end %>-->
   </div>
 
@@ -29,6 +29,13 @@
         <ol class="create_comment">
           <%= render 'comments_form' %>
         </ol>
+        <div id="email_notification">
+          <% if @email_notification.id.nil? %>
+              <%= render partial: 'email_notifications/create', locals: {micropost_id: @micropost.id} %>
+          <% else %>
+              <%= render partial: 'email_notifications/update', locals: {micropost_id: @micropost.id} %>
+          <% end %>
+        </div>
     <% else %>
         <ol class="">
           <%= link_to 'sign in', new_user_session_path %>
@@ -39,3 +46,7 @@
     <% end %>
   </div>
 </div>
+
+<style>
+
+</style>

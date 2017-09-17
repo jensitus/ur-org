@@ -43,6 +43,12 @@ class MicropostsController < ApplicationController
       @liked_by_current_user = @micropost.liked_by?(current_user)
     end
     @comments = @micropost.comments.order(:id)
+    if user_signed_in?
+      @email_notification = EmailNotification.find_by(micropost_id: @micropost.id, user_id: current_user.id)
+    end
+    if @email_notification.nil?
+      @email_notification = EmailNotification.new
+    end
     #fresh_when etag: [@comments, @micropost, current_user]
     respond_with [micropost: @micropost, comment: @comments]
   end

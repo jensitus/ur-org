@@ -27,22 +27,27 @@ class CommentObserver < ActiveRecord::Observer
 
   def get_user_array(comment_join_object)
     user_array = []
-
     if comment_join_object.is_a?(Answer)
       also_answer = comment_join_object.micropost.comments
       also_answer.each do |aa|
-        user_array << aa.user.email
+        user_array << aa.user
       end
     elsif comment_join_object.is_a?(PhotoComment)
       also_answer = comment_join_object.photo.comments
       also_answer.each do |aa|
-        user_array << aa.user.email
+        user_array << aa.user
       end
     end
-
     user_array = user_array.uniq
-    user_array.delete(comment_join_object.comment.user.email)
-    user_array
+    user_array.delete(comment_join_object.comment.user)
+    email_array = []
+    user_array.each do |user|
+      email_notification = EmailNotification.find_by(micropost_id: comment_join_object.micropost.id, user_id: user.id)
+      if email_notification.nil? || email_notification.emails == true
+        email_array << user.email
+      end
+    end
+    email_array
   end
 
 end
