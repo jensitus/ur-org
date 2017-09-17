@@ -1,0 +1,3 @@
+<%= form_for(@email_notification, id: 'no_emails', remote: true) do |f| %>
+    <%= f.check_box :no_emails, checked: true, onclick: "$('no_emails').submit()" %>
+<% end %>

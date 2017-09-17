@@ -1,0 +1,12 @@
+<%= form_for(@email_notification, remote: true, class: 'form-group')  do |f| %>
+    <div class="row checkbox-row">
+      <div class="col-xs-12">
+        <div class="checkbox-inline">
+          <%= f.check_box :emails, checked: @email_notification.emails, onclick: "$('#email_notification_emails').submit()" %>
+          <%= f.label 'check or uncheck for turning on or off email notifications for comments on this posting', class: 'checkbox-inline' %>
+          <%= f.hidden_field :micropost_id, value: micropost_id%>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+        </div>
+      </div>
+    </div>
+<% end %>

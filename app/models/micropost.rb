@@ -1,14 +1,14 @@
 class Micropost < ActiveRecord::Base
   include PgSearch
   include PublicActivity::Model
-  tracked owner: Proc.new{|controller, model| controller.current_user}
+  tracked owner: Proc.new {|controller, model| controller.current_user}
   multisearchable :against => :content
   belongs_to :user
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> {order(created_at: :desc)}
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
   validates :content, presence: true,
-            :length => { maximum: 10000, :too_long => '%{count} characters is the maximum allowed'},
+            :length => {maximum: 10000, :too_long => '%{count} characters is the maximum allowed'},
             :allow_nil => false
   # validate :picture_size
 
@@ -32,8 +32,9 @@ class Micropost < ActiveRecord::Base
     simple_format
   end
 
-
-
+  def no_emails(user_id)
+    puts 'NO EMAILS IN MICROPOSTCONTROLLER ' + user_id.to_s
+  end
 
   private
 
@@ -54,7 +55,7 @@ class Micropost < ActiveRecord::Base
       end
       Mailboxer::Notification.notify_all(
           recipients,
-          sender.name + ' schrieb in ' + group.name + ':' ,
+          sender.name + ' schrieb in ' + group.name + ':',
           content + "<br><a href='/groups/#{group_id}'>view</a>",
           self
       )

@@ -1,0 +1,12 @@
+<%= form_for(@email_notification, remote: true) do |f| %>
+    <div class="row checkbox-row">
+      <div class="col-xs-12">
+        <div class="checkbox-inline">
+          <%= f.check_box :emails, checked: true, onclick: "$('#email_notification_emails').submit()" %>
+          <%= f.label "please uncheck if you'd like to disable email notifications for new comments", class: 'checkbox-inline' %>
+          <%= f.hidden_field :micropost_id, value: micropost_id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+        </div>
+      </div>
+    </div>
+<% end %>

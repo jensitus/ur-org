@@ -1,0 +1,14 @@
+<%#= link_to notifications_index_path, :title => 'notifications', data: {
+                  container: 'body',
+                  toggle: 'popover',
+                  trigger: 'focus',
+                  placement: 'bottom',
+                  content: @notifications.inspect
+              } do %>
+<a href="#" data-toggle="popover" data-placement="bottom" data-container="body" data-content="<%= current_user.mailbox.notifications.inspect %>">
+  <span style="font-size: 1.2em;" class="glyphicon glyphicon-bell"></span>
+  <% if current_user.mailbox.notifications(:read => false ).count != 0 %>
+      <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
+  <% end %>
+</a>
+<%# end %>

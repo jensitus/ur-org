@@ -19,9 +19,6 @@ class User < ActiveRecord::Base
   # devise  :omniauthable, :omniauth_providers => [:twitter]
 
   validates_uniqueness_of :name
-  #validates_presence_of :avatar
-  #validates_integrity_of :avatar
-  #validates_processing_of :avatar
 
   extend FriendlyId
   friendly_id :name, use: :slugged, :sequence_separator => '_'
@@ -115,6 +112,10 @@ class User < ActiveRecord::Base
      else
        email
      end
+  end
+
+  def no_emails(micropost_id)
+    puts 'NO MAIL TODAY MY LOVE IS GONE AWAY ' + micropost_id.to_s
   end
 
   private
