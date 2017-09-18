@@ -25,7 +25,7 @@ $(document).ready(function() {
  *
  * * * * * * * * * * * * * * * */
 
-UnobtrusiveFlash.flashOptions['timeout'] = 4000;
+UnobtrusiveFlash.flashOptions['timeout'] = 6000;
 
 
 /*******************************
