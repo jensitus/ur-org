@@ -1,5 +1,6 @@
 class EmailNotificationsController < ApplicationController
   before_action :set_email_notification, only: :update
+  after_action :prepare_unobtrusive_flash
 
   def new
     @email_notification = EmailNotification.new
