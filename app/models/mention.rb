@@ -29,8 +29,6 @@ class Mention < Socialization::ActiveRecordStores::Mention
     user
     mentioner
 
-    puts 'inform: ' + user.username
-
     if mentioner.class == Comment
       cut_text = Scalpel.cut(mentioner.body)
 
