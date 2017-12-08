@@ -23,7 +23,7 @@ set :use_sudo, true
 set :log_level, :debug
 
 # Default value for :pty is false
-set :pty, false
+set :pty, true
 
 
 
