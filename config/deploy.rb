@@ -1,6 +1,6 @@
 require 'pg_search'
 # config valid only for current version of Capistrano
-lock '3.3.5'
+lock '3.10.1'
 
 set :application, 'receta' # 'my_app_name'
 set :repo_url, 'https://github.com/jensitus/ur-org.git'
