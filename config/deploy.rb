@@ -85,8 +85,13 @@ namespace :deploy do
   #     # end
   #   end
   # end
-  after :publishing, 'deploy:restart'
-  after :finishing, 'deploy:cleanup'
+  before :starting,  :check_revision
+  after  :finishing, :compile_assets
+  after  :finishing, :cleanup
+  after  :finishing, :restart
+
+  # after :publishing, 'deploy:restart'
+  # after :finishing, 'deploy:cleanup'
 
 end
 
@@ -105,7 +110,7 @@ namespace :sidekiq do
   end
 end
 
-after 'deploy:starting', 'sidekiq:quiet'
+# after 'deploy:starting', 'sidekiq:quiet'
 after 'deploy:reverted', 'sidekiq:restart'
 after 'deploy:published', 'sidekiq:restart'
 
