@@ -41,7 +41,7 @@ gem 'mailboxer'
 
 gem 'sidekiq'
 gem 'sinatra'
-
+gem 'sshkit-sudo'
 
 group :development do
   gem 'byebug'
