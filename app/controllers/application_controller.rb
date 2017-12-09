@@ -22,11 +22,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update) << :name    # {|u| u.permit (:name)} #, :avatar, :avatar_cache) }
-    devise_parameter_sanitizer.permit(:account_update) << :avatar
-    devise_parameter_sanitizer.permit(:sign_up) << :name           # {|u| u.permit(:name)} #, :avatar, :avatar_cache)}
-    devise_parameter_sanitizer.permit(:sign_up) << :avatar
-    devise_parameter_sanitizer.for(:accept_invitation) do |u|
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])      # {|u| u.permit (:name)} #, :avatar, :avatar_cache) }
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])         # {|u| u.permit(:name)} #, :avatar, :avatar_cache)}
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:avatar])
+    devise_parameter_sanitizer.permit(:accept_invitation) do |u|
       u.permit(:name, :password, :password_confirmation, :invitation_token, :avatar)
     end
   end
