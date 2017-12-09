@@ -26,7 +26,7 @@ set :use_sudo, true
 set :log_level, :debug
 
 # Default value for :pty is false
-set :pty, true
+set :pty, false
 
 set :puma_bind, "unix:///home/jens/receta/shared/tmp/sockets/receta-puma.sock"
 set :puma_state, "home/jens/receta/shared/tmp/pids/puma.state"
