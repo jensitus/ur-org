@@ -1,9 +1,12 @@
 require 'pg_search'
 # config valid only for current version of Capistrano
-lock '3.10.0'
+lock '3.3.5'
 
 set :application, 'receta' # 'my_app_name'
 set :repo_url, 'https://github.com/jensitus/ur-org.git'
+
+set :puma_threads, [4, 16]
+set :puma_workers, 0
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -25,6 +28,16 @@ set :log_level, :debug
 # Default value for :pty is false
 set :pty, true
 
+set :puma_bind, "unix:///home/jens/receta/shared/tmp/sockets/receta-puma.sock"
+set :puma_state, "home/jens/receta/shared/tmp/pids/puma.state"
+set :puma_pid, "home/jens/receta/shared/tmp/pids/puma.pid"
+# set :puma_access_log, "#{release_path}/log/puma.error.log"
+# set :puma_error_log, "#{release_path}/log/puma.puma.access.log"
+set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
+set :puma_preload_app, true
+set :puma_worker_timeout, nil
+set :puma_init_active_record, true
+
 
 
 # Default value for :linked_files is []
@@ -41,12 +54,27 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+# # # # # # # # # # # # # # # #
+namespace :puma do
+  desc 'Create Directories for Puma Pids and Socket'
+  task :make_dirs do
+    on roles(:app) do
+      execute "mkdir home/jens/receta/shared/tmp/sockets -p"
+      execute "mkdir home/jens/receta/shared/tmp/pids -p"
+    end
+  end
+
+  before :start, :make_dirs
+end
+# # # # # # # # # # # # # # # #
+
 namespace :deploy do
 
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
+      # execute :touch, release_path.join('tmp/restart.txt')
+      invoke 'puma:restart'
     end
   end
   # after :restart, :clear_cache do
@@ -72,14 +100,14 @@ namespace :sidekiq do
   end
   task :restart do
     on roles(:app) do
-      execute :initctl, :restart, :workers
+      execute :sudo, :initctl, :restart, :workers
     end
   end
 end
 
-# after 'deploy:starting', 'sidekiq:quiet'
-# after 'deploy:reverted', 'sidekiq:restart'
-# after 'deploy:published', 'sidekiq:restart'
+after 'deploy:starting', 'sidekiq:quiet'
+after 'deploy:reverted', 'sidekiq:restart'
+after 'deploy:published', 'sidekiq:restart'
 
 # namespace :adm do
 #   task :sake do
