@@ -33,7 +33,7 @@ set :puma_state, "home/jens/receta/shared/tmp/pids/puma.state"
 set :puma_pid, "home/jens/receta/shared/tmp/pids/puma.pid"
 # set :puma_access_log, "#{release_path}/log/puma.error.log"
 # set :puma_error_log, "#{release_path}/log/puma.puma.access.log"
-set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
+# set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
@@ -128,7 +128,7 @@ namespace :sidekiq do
   end
 end
 
-# after 'deploy:starting', 'sidekiq:quiet'
+after 'deploy:starting', 'sidekiq:quiet'
 after 'deploy:reverted', 'sidekiq:restart'
 after 'deploy:published', 'sidekiq:restart'
 
