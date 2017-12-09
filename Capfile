@@ -6,6 +6,7 @@ require 'capistrano/rails'
 require 'capistrano/rvm'
 # require 'capistrano/passenger'
 require 'capistrano/puma'
+install_plugin Capistrano::Puma
 require 'capistrano/secrets_yml'
 require 'capistrano/sidekiq'
 require 'capistrano/sidekiq/monit'
