@@ -1,2 +1,2 @@
-class EmailNotification < ActiveRecord::Base
+class EmailNotification < ApplicationRecord
 end

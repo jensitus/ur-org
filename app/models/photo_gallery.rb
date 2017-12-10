@@ -1,4 +1,4 @@
-class PhotoGallery < ActiveRecord::Base
+class PhotoGallery < ApplicationRecord
   include CreateUpdateQueue
   #tracked owner: ->(controller, model) { controller && controller.current_user}
   has_many :photos

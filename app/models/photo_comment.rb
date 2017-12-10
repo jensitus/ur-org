@@ -1,4 +1,4 @@
-class PhotoComment < ActiveRecord::Base
+class PhotoComment < ApplicationRecord
   belongs_to :photo
   belongs_to :comment, dependent: :destroy
 

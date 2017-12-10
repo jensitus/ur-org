@@ -1,4 +1,4 @@
-class Invite < ActiveRecord::Base
+class Invite < ApplicationRecord
   has_one :invite_count
   has_one :user, through: :invite_count
   validates_uniqueness_of :email

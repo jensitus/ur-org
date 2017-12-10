@@ -1,4 +1,4 @@
-class GroupMaintainer < ActiveRecord::Base
+class GroupMaintainer < ApplicationRecord
   belongs_to :group
   belongs_to :user
 

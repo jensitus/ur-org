@@ -1,4 +1,4 @@
-class Photo < ActiveRecord::Base
+class Photo < ApplicationRecord
   belongs_to :micropost
   mount_uploader :picture, PictureUploader
   belongs_to :photo_gallery
