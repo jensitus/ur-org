@@ -1,4 +1,4 @@
-if Rails.env.production?
+# if Rails.env.production?
   CarrierWave.configure do |config|
     config.fog_credentials = {
         # Configuration for Amazon AWS
@@ -9,4 +9,4 @@ if Rails.env.production?
     }
     config.fog_directory = Rails.application.secrets.s3_bucket              # ENV['S3_BUCKET']
   end
-end
+# end
