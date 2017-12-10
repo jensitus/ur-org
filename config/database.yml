@@ -21,8 +21,8 @@ test:
 
 production:
   <<: *default
-  database: receta <%= ENV["IST_UR_ORG_PROD_DB"] %>
-  username: receta <%= ENV["IST_UR_ORG_PROD_USR"] %>
-  password: RecetA <%= ENV["IST_UR_ORG_PROD_PW"] %>
+  database: <%= ENV["IST_UR_ORG_PROD_DB"] %>
+  username: <%= ENV["IST_UR_ORG_PROD_USR"] %>
+  password: <%= ENV["IST_UR_ORG_PROD_PW"] %>
   host: localhost
   port: 5432
