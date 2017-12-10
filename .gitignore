@@ -19,7 +19,7 @@
 public/uploads/
 
 config/secrets.yml
-config/database.yml
+# config/database.yml
 
 
 # ignore all the dumps

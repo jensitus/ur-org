@@ -1,0 +1,28 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: receta
+  username: receta
+  password: receta
+  host: localhost
+  port: 5432
+
+test:
+  <<: *default
+  database: receta_test
+  username: receta
+  password: receta
+  host: localhost
+  port: 5432
+
+production:
+  <<: *default
+  database: receta <%= ENV["IST_UR_ORG_PROD_DB"] %>
+  username: receta <%= ENV["IST_UR_ORG_PROD_USR"] %>
+  password: RecetA <%= ENV["IST_UR_ORG_PROD_PW"] %>
+  host: localhost
+  port: 5432

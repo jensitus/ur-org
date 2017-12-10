@@ -1,6 +1,8 @@
 # Load DSL and set up stages
 require 'sshkit/sudo'
 require 'capistrano/deploy'
+require "capistrano/scm/git"
+install_plugin Capistrano::SCM::Git
 require 'capistrano/setup'
 require 'capistrano/bundler'
 require 'capistrano/rails'
