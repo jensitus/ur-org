@@ -7,7 +7,8 @@ class CommentObserver < ActiveRecord::Observer
     puts 'ua: ' + ua.inspect
     ua.each do |u_a|
       puts 'u_a ' + u_a
-      CommentMailer.delay.also_comment_mail(comment_join_object, u_a)
+      # CommentMailer.delay.also_comment_mail(comment_join_object, u_a)
+      MailAfterAlsoCommentJob.perform_later(comment_join_object, u_a)
     end
 
     if comment_join_object.is_a?(Answer)
@@ -15,13 +16,15 @@ class CommentObserver < ActiveRecord::Observer
         en = EmailNotification.find_by(micropost_id: comment_join_object.micropost.id, user_id: comment_join_object.micropost.user.id)
         if en.nil? || en.emails == true
           puts 'answer: ' + comment_join_object.inspect
-          CommentMailer.delay.comment_mail(comment_join_object)
+          # CommentMailer.delay.comment_mail(comment_join_object)
+          MailAfterCommentJob.perform_later(comment_join_object)
         end
       end
     elsif comment_join_object.is_a?(PhotoComment)
       if !ua.include?(comment_join_object.photo.user.email) && comment_join_object.comment.user.email != comment_join_object.photo.user.email
         puts 'answer: ' + comment_join_object.inspect
-        CommentMailer.delay.comment_mail(comment_join_object)
+        # CommentMailer.delay.comment_mail(comment_join_object)
+        MailAfterCommentJob.perform_later(comment_join_object)
       end
     end
 
