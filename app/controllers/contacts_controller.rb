@@ -25,8 +25,8 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
     if @contact.save
-      ContactMailer.confirmation(@contact).deliver
-      ContactMailer.inquiry(@contact).deliver
+      ContactMailer.confirmation(@contact).deliver_later
+      ContactMailer.inquiry(@contact).deliver_later
       flash[:success] = 'We got a message from you, we appreciate that!!'
       redirect_to root_url
     else

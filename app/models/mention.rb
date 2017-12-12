@@ -32,7 +32,6 @@ class Mention < Socialization::ActiveRecordStores::Mention
     if mentioner.class == Comment
       cut_text = Scalpel.cut(mentioner.body)
 
-
       puts mentioner.inspect
       ma = get_mentioner_asso(mentioner)
       puts ma.inspect
@@ -40,8 +39,7 @@ class Mention < Socialization::ActiveRecordStores::Mention
         mentioner.photo.photo_gallery.users.each do |mentioner_user|
           post_writer = mentioner_user
           post = mentioner.photo
-          MentionMailer.delay.comment_mention(user, mentioner, post_writer, post)
-          puts '######## # # # # user ##################'
+          MentionMailer.comment_mention(user, mentioner, post_writer, post).deliver_later
           puts user.inspect
           user.notify(
               'you were mentioned by ' + mentioner_user.name,
@@ -57,14 +55,13 @@ class Mention < Socialization::ActiveRecordStores::Mention
         post = mentioner.micropost
         puts post_writer.inspect
         puts post
-        puts '############################################'
-        MentionMailer.delay.comment_mention(user, mentioner, post_writer, post)
+        MentionMailer.comment_mention(user, mentioner, post_writer, post).deliver_later
       end
 
     elsif mentioner.class == Micropost
       #the_cutted_mention_text = Fillet_This::Fillet.cut_the_text(mentioner.content)
       cut_text = Scalpel.cut(mentioner.content)
-      MentionMailer.delay.micropost_mention(user, mentioner)
+      MentionMailer.micropost_mention(user, mentioner).deliver_later
       user.notify(
           mentioner.user.name + ' mentioned you in this posting:',
           cut_text[0] + ' ' + cut_text[1].to_s + ' ... ' + "<br> <a href='/#{mentioner.user.slug}/#{mentioner.id}'>ist-ur.org/#{mentioner.user.slug}/#{mentioner.id}</a>! It is so amazing"

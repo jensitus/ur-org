@@ -9,7 +9,7 @@ class Invite < ApplicationRecord
   private
 
   def invite_someone
-    InviteMailer.delay.invite_mail(self)
+    InviteMailer.invite_mail(self).deliver_later
   end
 
 end

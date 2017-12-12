@@ -32,7 +32,6 @@ class PhotoGalleriesController < ApplicationController
     @photo_gallery.users << current_user
     if @photo_gallery.save
       if params[:photos].nil?
-        puts '??????????????????????????????????????????'
         puts 'the fucking photo params are not what they are expected'
       else
         params[:photos]['picture'].each do |photo|
@@ -47,10 +46,8 @@ class PhotoGalleriesController < ApplicationController
   def update
     if @photo_gallery.update(photo_gallery_params)
       if params[:photos].nil?
-        puts '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
         puts 'the photos is nil'
       else
-        puts '++++++++++++++++++++++++++++++++'
         puts params[:photos]
         params[:photos]['picture'].each do |photo|
           @photo = @photo_gallery.photos.create!(picture: photo, photo_gallery_id: @photo_gallery.id, user_id: current_user.id)
