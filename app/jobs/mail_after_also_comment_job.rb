@@ -1,4 +1,4 @@
-class MailAfterAlsoCommentJob < ActiveJob::Base
+class MailAfterAlsoCommentJob < ApplicationJob
   queue_as :default
 
   def perform(comment_join_object, u_a)

@@ -25,7 +25,7 @@ module Receta
     # Include the authenticity token in remote form
     config.action_view.embed_authenticity_token_in_remote_forms = true
 
-    config.active_record.observers = :user_observer, :relationship_observer, :comment_observer
+    # config.active_record.observers = :user_observer, :relationship_observer, :comment_observer
 
   end
 end

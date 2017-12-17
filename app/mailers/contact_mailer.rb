@@ -1,4 +1,4 @@
-class ContactMailer < ActionMailer::Base
+class ContactMailer < ApplicationMailer
   default from: 'info@ist-ur.org'
 
   # Subject can be set in your I18n file at config/locales/en.yml
