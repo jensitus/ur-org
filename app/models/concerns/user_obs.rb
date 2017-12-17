@@ -9,6 +9,10 @@ module UserObs
     after_update(self)
   end
 
+  def obs_destroy_the_user
+    after_destroy(self)
+  end
+
   def after_create(user)
     #Notifications.user('jens@ist-ur.org', 'New User Signed Up', user).deliver
     UserMailer.registration_mail(user).deliver_later

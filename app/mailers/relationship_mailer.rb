@@ -1,4 +1,4 @@
-class RelationshipMailer < ActionMailer::Base
+class RelationshipMailer < ApplicationMailer
   default from: 'info@ist-ur.org'
 
   def relationship_mail(user)

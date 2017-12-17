@@ -1,4 +1,4 @@
-class CommentMailer < ActionMailer::Base
+class CommentMailer < ApplicationMailer
   default from: 'info@ist-ur.org'
   def comment_mail(answer)
     @answer = answer

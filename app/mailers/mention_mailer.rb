@@ -1,4 +1,4 @@
-class MentionMailer < ActionMailer::Base
+class MentionMailer < ApplicationMailer
   default from: 'info@ist-ur.org'
 
   # Subject can be set in your I18n file at config/locales/en.yml

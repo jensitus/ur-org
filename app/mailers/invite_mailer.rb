@@ -1,4 +1,4 @@
-class InviteMailer < ActionMailer::Base
+class InviteMailer < ApplicationMailer
   default from: 'info@ist-ur.org'
 
   def invite_mail(invite)

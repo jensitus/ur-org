@@ -1,4 +1,4 @@
-class UserMailer < ActionMailer::Base
+class UserMailer < ApplicationMailer
   default from: 'info@ist-ur.org'
 
   def registration_mail(user)

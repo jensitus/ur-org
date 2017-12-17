@@ -51,6 +51,7 @@ class User < ApplicationRecord
   #after_create :create_default_conversation
   after_create :obs_create_the_user
   after_update :obs_update_the_user
+  before_destroy :obs_destroy_the_user
 
   def normalize_friendly_id(string)
     super.gsub('-', '_')
