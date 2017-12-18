@@ -1,7 +1,7 @@
 class Photo < ApplicationRecord
-  belongs_to :micropost
+  belongs_to :micropost, optional: true
   mount_uploader :picture, PictureUploader
-  belongs_to :photo_gallery
+  belongs_to :photo_gallery, optional: true
 
   has_and_belongs_to_many :notices
   has_many :photo_comments, dependent: :destroy
