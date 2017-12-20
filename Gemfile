@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
-ruby '2.3.5'
+ruby '2.4.2'
 
 # Use sqlite3 as the database for Active Record
 
@@ -103,7 +103,7 @@ gem 'socialization', :git => 'https://github.com/HackerPartie/socialization.git'
 
 #gem 'jquery-fileupload-rails'
 
-gem 'pingback'
+# gem 'pingback'
 
 gem 'scalpel'
 
