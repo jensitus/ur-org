@@ -60,7 +60,7 @@ GEM
     auto_html (1.6.4)
       redcarpet (~> 3.1)
       rinku (~> 1.5.0)
-    autoprefixer-rails (7.2.2)
+    autoprefixer-rails (7.2.3)
       execjs
     bcrypt (3.1.11)
     bootstrap-sass (3.3.5)
@@ -82,9 +82,9 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    capistrano-secrets-yml (1.0.0)
-      capistrano (>= 3.1)
-      sshkit (>= 1.2.0)
+    capistrano-secrets-yml (1.1.0)
+      capistrano (~> 3.10)
+      sshkit (~> 1.15)
     capistrano3-puma (3.1.1)
       capistrano (~> 3.7)
       capistrano-bundler
@@ -113,7 +113,7 @@ GEM
       actionmailer (>= 4.1.0)
       devise (>= 4.0.0)
     erubis (2.7.0)
-    excon (0.59.0)
+    excon (0.60.0)
     execjs (2.7.0)
     faker (1.8.5)
       i18n (~> 0.9.1)
@@ -347,9 +347,6 @@ GEM
       activerecord (>= 4.2)
       activesupport (>= 4.2)
       arel (>= 6)
-    pingback (1.1.0)
-      nokogiri
-      rack
     public_activity (1.5.0)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
@@ -375,8 +372,8 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.8)
-      activesupport (>= 4.2.0.beta, < 5.0)
+    rails-dom-testing (1.0.9)
+      activesupport (>= 4.2.0, < 5.0)
       nokogiri (~> 1.6)
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
@@ -453,7 +450,7 @@ GEM
     turbolinks-source (5.0.3)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    uglifier (4.0.1)
+    uglifier (4.0.2)
       execjs (>= 0.3.0, < 3)
     unobtrusive_flash (3.3.1)
       railties
@@ -499,7 +496,6 @@ DEPENDENCIES
   owlcarousel-rails
   pg (~> 0.20.0)
   pg_search
-  pingback
   public_activity
   puma
   rails (= 4.2.10)
@@ -519,7 +515,7 @@ DEPENDENCIES
   unobtrusive_flash
 
 RUBY VERSION
-   ruby 2.3.5p376
+   ruby 2.4.2p198
 
 BUNDLED WITH
    1.16.0

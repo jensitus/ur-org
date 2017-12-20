@@ -33,7 +33,9 @@ class ApplicationController < ActionController::Base
 
   def catch_not_found
     yield
-  rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound => e
+    puts 'Record Not Found: '
+    puts e.to_s
     flash[:danger] = 'muss das sein?'
     redirect_to request.referrer || root_url
   end
