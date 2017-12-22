@@ -28,7 +28,8 @@ class StaticPagesController < ApplicationController
       # end
       #@static_page_image = Micropost.where('picture IS NOT NULL').sample(1)[0].picture
       # @static_page_image = Photo.all.sample(1)[0].picture
-      @microposts = Micropost.where('picture IS NULL AND group_id IS NULL').sample(3)
+      microposts = Micropost.where('picture IS NULL AND group_id IS NULL')
+      @microposts = Kaminari.paginate_array(microposts).page(params[:page]).per(5)
       render :layout => 'not_signed_in'
     end
   end

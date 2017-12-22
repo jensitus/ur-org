@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index]
   before_action :require_admin, only: :index
   before_action :get_user
   before_action :follow
