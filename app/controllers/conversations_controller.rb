@@ -1,5 +1,5 @@
 class ConversationsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   helper_method :mailbox, :conversation
   before_action :mailbox
   before_action :inbox_trash_count

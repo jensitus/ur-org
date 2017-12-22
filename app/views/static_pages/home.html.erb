@@ -43,6 +43,9 @@
           <ol class="microposts">
             <%= render @microposts %>
           </ol>
+          <small>
+            <%= paginate @microposts %>
+          </small>
         </div>
           <div class="col-md-4 col-md-pull-6">
               <p>
