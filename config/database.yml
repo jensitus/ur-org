@@ -5,17 +5,17 @@ default: &default
 
 development:
   <<: *default
-  database: receta
-  username: receta
-  password: receta
+  database: <%= ENV["IST_UR_ORG_DEV_DB"] %>
+  username: <%= ENV["IST_UR_ORG_DEV_USR"] %>
+  password: <%= ENV["IST_UR_ORG_DEV_PW"] %>
   host: localhost
   port: 5432
 
 test:
   <<: *default
-  database: receta_test
-  username: receta
-  password: receta
+  database: <%= ENV["IST_UR_ORG_TEST_DB"] %>
+  username: <%= ENV["IST_UR_ORG_DEV_USR"] %>
+  password: <%= ENV["IST_UR_ORG_DEV_PW"] %>
   host: localhost
   port: 5432
 
