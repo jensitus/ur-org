@@ -3,7 +3,7 @@ server '84.39.96.50', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:jensitus/ur-org.git'
 set :application,     'receta'
-set :user,            'deploy'
+set :user,            'urorg'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
