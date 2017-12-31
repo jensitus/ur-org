@@ -89,8 +89,8 @@ namespace :sidekiq do
   task :quiet do
     on roles(:app) do
       # Horrible hack to get PID without having to use terrible PID files
-      # puts capture("kill -USR1 $(sudo initctl status workers | grep /running | awk '{print $NF}') || :")
-      puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
+      puts capture("kill -USR1 $(sudo initctl status workers | grep /running | awk '{print $NF}') || :")
+      # puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
     end
   end
   task :restart do
