@@ -18,7 +18,7 @@ require 'capistrano/sidekiq/monit'
 
 
 set :rvm_type, :user
-set :rvm_ruby_version, '2.3.5'
+set :rvm_ruby_version, '2.4.2'
 
 # Include tasks from other gems included in your Gemfile
 #
