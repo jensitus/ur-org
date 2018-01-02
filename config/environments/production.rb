@@ -23,7 +23,7 @@ Rails.application.configure do
   # this seems to be too old:
   # config.serve_static_files = true
   # the rails 5 approach maybe is this:
-  config.public_file_server.enabled = true
+  config.public_file_server.enabled = false
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
