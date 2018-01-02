@@ -12,3 +12,9 @@ function addForm() {
     document.getElementById("ans").style.display = 'none';
 
 }
+
+/**
+ *
+ * Eine kleine Anpassung, die hoffentlich großes bewirkt
+ *
+ */
