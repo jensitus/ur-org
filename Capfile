@@ -14,6 +14,9 @@ require 'capistrano/secrets_yml'
 require 'capistrano/sidekiq'
 require 'capistrano/sidekiq/monit'
 
+require 'capistrano/rails/migrations'
+require 'capistrano/rails/assets'
+
 # Include default deployment tasks
 
 
