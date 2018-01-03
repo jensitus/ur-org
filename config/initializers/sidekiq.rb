@@ -8,6 +8,6 @@ Sidekiq.configure_client do |config|
 end
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: ENV["REDIS_PROVIDER"]}
-  # config.redis = { url: 'redis://localhost:6379' }
+  # config.redis = { url: ENV["REDIS_PROVIDER"]}
+  config.redis = { url: 'redis://localhost:6379' }
 end
