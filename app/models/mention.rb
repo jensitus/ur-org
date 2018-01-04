@@ -21,7 +21,8 @@ class Mention < Socialization::ActiveRecordStores::Mention
       puts mentionable.inspect
       user = User.find_by_slug mentionable
       mentioner.mention! user
-      inform_the_mentionable(user, mentioner)
+      MentionMailJob.set(wait: 30.seconds).perform_later(user, mentioner)
+      # inform_the_mentionable(user, mentioner)
     end
   end
 
@@ -55,13 +56,14 @@ class Mention < Socialization::ActiveRecordStores::Mention
         post = mentioner.micropost
         puts post_writer.inspect
         puts post
-        MentionMailer.comment_mention(user, mentioner, post_writer, post).deliver_later
+        MentionMailer.comment_mention(user, mentioner, post_writer, post).deliver_now
+        # (user, mentioner, post_writer, post)
       end
 
     elsif mentioner.class == Micropost
       #the_cutted_mention_text = Fillet_This::Fillet.cut_the_text(mentioner.content)
       cut_text = Scalpel.cut(mentioner.content)
-      MentionMailer.micropost_mention(user, mentioner).deliver_later
+      MentionMailer.micropost_mention(user, mentioner).deliver_now
       user.notify(
           mentioner.user.name + ' mentioned you in this posting:',
           cut_text[0] + ' ' + cut_text[1].to_s + ' ... ' + "<br> <a href='/#{mentioner.user.slug}/#{mentioner.id}'>ist-ur.org/#{mentioner.user.slug}/#{mentioner.id}</a>! It is so amazing"

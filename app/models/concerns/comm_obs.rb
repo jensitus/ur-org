@@ -16,8 +16,8 @@ module CommObs
     puts 'ua: ' + ua.inspect
     ua.each do |u_a|
       puts 'u_a ' + u_a
-      CommentMailer.also_comment_mail(comment_join_object, u_a).deliver_later
-      # MailAfterAlsoCommentJob.perform_later(comment_join_object, u_a)
+      # CommentMailer.also_comment_mail(comment_join_object, u_a).deliver_later
+      MailAfterAlsoCommentJob.set(wait: 1.minute).perform_later(comment_join_object, u_a)
     end
 
     if comment_join_object.is_a?(Answer)
@@ -25,15 +25,15 @@ module CommObs
         en = EmailNotification.find_by(micropost_id: comment_join_object.micropost.id, user_id: comment_join_object.micropost.user.id)
         if en.nil? || en.emails == true
           puts 'answer: ' + comment_join_object.inspect
-          CommentMailer.comment_mail(comment_join_object).deliver_later
-          # MailAfterCommentJob.perform_later(comment_join_object)
+          # CommentMailer.comment_mail(comment_join_object).deliver_later
+          MailAfterCommentJob.set(wait: 1.minute).perform_later(comment_join_object)
         end
       end
     elsif comment_join_object.is_a?(PhotoComment)
       if !ua.include?(comment_join_object.photo.user.email) && comment_join_object.comment.user.email != comment_join_object.photo.user.email
         puts 'answer: ' + comment_join_object.inspect
-        CommentMailer.comment_mail(comment_join_object).deliver_later
-        # MailAfterCommentJob.perform_later(comment_join_object)
+        # CommentMailer.comment_mail(comment_join_object).deliver_later
+        MailAfterCommentJob.set(wait: 1.minute).perform_later(comment_join_object)
       end
     end
   end
