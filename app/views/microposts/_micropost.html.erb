@@ -149,8 +149,15 @@ function get_the_fucking_link() {
         console.log('undefined + <%= micropost.id %>' )
     } else {
         var text = document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0].getAttribute('href');
+        var linkText = document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0].innerHTML;
+        if (linkText.includes("@")) {
+            console.log("ZUM DONNER ABER AUCH");
+        } else {
+            console.log('nope');
+            get_the_result(text);
+        }
         console.log(text);
-        get_the_result(text);
+
     }
 }
 
