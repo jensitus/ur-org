@@ -410,7 +410,7 @@ GEM
     record_tag_helper (1.0.0)
       actionview (~> 5.x)
     redcarpet (3.4.0)
-    redis (4.0.1)
+    redis (3.3.5)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -520,6 +520,7 @@ DEPENDENCIES
   rails_12factor
   rails_autolink
   record_tag_helper
+  redis (~> 3.2)
   sass-rails
   scalpel
   sdoc (~> 0.4.0)

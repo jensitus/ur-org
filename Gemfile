@@ -118,6 +118,8 @@ gem 'coffee-rails'
 
 gem 'record_tag_helper'
 
+gem 'redis', '~> 3.2'
+
 # gem 'omniauth-twitter'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

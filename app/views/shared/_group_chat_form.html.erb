@@ -1,0 +1,68 @@
+
+<div class="">
+  <%= form_for(@micropost, html: { multipart: true, name: 'the_group_chat__form', remote: true }) do |f| %>
+    <div class="form-group">
+      <%= render 'shared/error_messages', object: f.object  %>
+      <div class="field">
+        <%= f.hidden_field :group_id, :value => @group.id unless @group.nil? %>
+
+        <div style="">
+          <%= f.text_area :content,
+                          :rows => '1',
+                          id: 'content_field',
+                          #name: 'content',
+                          onkeyup: 'check_the_post_form()',
+                          placeholder: @placeholder,
+                          class: 'form-control expandable',
+                          :data => {
+                              'min-rows' => 1,
+                              #toggle: 'collapse',
+                              #target: '#collapseExample'
+                          },
+                          :aria => {
+                              #expanded: 'false',
+                              #controls: 'collapseExample'
+                          }
+
+          %>
+
+            <span id="content_count">0</span> chars<br><br>
+            <%= render 'shared/upload_button' %>
+            <%= f.submit 'Post', id: 'submit', class: 'btn btn-success', data: { disable_with: 'Please wait ...' } %>
+
+            <hr>
+        </div>
+      </div>
+
+
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+    $('#micropost_picture').bind('change', function() {
+        size_in_megabytes = this.files[0].size/1024/1024;
+        if (size_in_megabytes > 5) {
+            alert('it must be smaller than 5MB');
+        }
+    });
+
+    $('#content_field').on('keyup', function(){
+        length = $(this).val().length;
+        $('#content_count').html(length);
+    });
+
+    $(function(){
+        data = [];
+        <% User.find_each do |user| %>
+        data.push('<%= user.slug %>');
+        <% end %>
+        $('textarea').atwho({at:"@", 'data':data});
+    });
+
+    window.onload = check_the_post_form();
+    window.onload = init();
+
+</script>
+
+

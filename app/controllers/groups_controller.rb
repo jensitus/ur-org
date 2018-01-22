@@ -11,9 +11,13 @@ class GroupsController < ApplicationController
 
   def show
     @micropost = Micropost.new # current_user.microposts.build(micropost_params)
-    @microposts = @group.microposts.page(params[:page]).per(8)
+    @microposts = @group.microposts.reorder(id: :asc)
     @placeholder = 'Schreib der Gruppe, was dir am Herzen liegt'
-    respond_with(@group)
+    # respond_with(@group)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new

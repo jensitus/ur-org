@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount ActionCable.server => '/cable'
+
   resources :email_notifications, only: [:create, :update, :delete]
 
   get 'notices/new'

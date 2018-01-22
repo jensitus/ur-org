@@ -16,6 +16,8 @@ class MicropostsController < ApplicationController
   end
 
   def create
+    puts 'micropost_params'
+    puts micropost_params[:group_id]
     @micropost = current_user.microposts.build(micropost_params)
     mentions = Mention.get_the_mention(@micropost.content)
     if @micropost.save
@@ -26,9 +28,18 @@ class MicropostsController < ApplicationController
           @photo = @micropost.photos.create!(:picture => p, :micropost_id => @micropost.id, :user_id => @micropost.user_id)
         end
       end
-      Mention.mention_it(mentions, @micropost)
-      flash[:success] = '<b>jesus christ, you did it!!</b>'.html_safe
-      redirect_to root_url
+      if !micropost_params[:group_id].nil?
+        group_id = micropost_params[:group_id]
+        # GroupChatJob.perform_later(@micropost)
+        ActionCable.server.broadcast "group_#{@micropost.group_id}_channel", message: render_posting(@micropost)
+        respond_to do |format|
+          format.js
+        end
+      else
+        Mention.mention_it(mentions, @micropost)
+        flash[:success] = '<b>jesus christ, you did it!!</b>'.html_safe
+        redirect_to root_url
+      end
     else
       @feed_items = []
       render 'static_pages/home'
@@ -94,7 +105,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     if current_user == @micropost.user
-    @micropost.destroy
+      @micropost.destroy
       flash[:success] = "Oh no, it's deleted"
       redirect_to request.referrer || root_url
     else
@@ -121,6 +132,13 @@ class MicropostsController < ApplicationController
   def follow
     @followers = @micropost.user.followers.sample(3)
     @following = @micropost.user.following.sample(3)
+  end
+
+  def render_posting(posting)
+    puts '-----------------------------------------'
+    puts posting.inspect
+    puts '_________________________________________'
+    GroupsController.render partial: 'microposts/micropost', locals: {micropost: posting}
   end
 
 end
