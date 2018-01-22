@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-md-1">
+        <span class="gravatar">
+          <% if micropost.user.avatar_url.nil? %>
+          <%= link_to image_tag(micropost.user.gravatar_url, width: 40), single_user_path(micropost.user) %>
+          <% else %>
+          <%= link_to image_tag(micropost.user.avatar, width: 40), single_user_path(micropost.user) %>
+          <% end %>
+        </span>
+      </div>
+      <div class="col-md-10 content">
+        <p class="card-text">
+          <span class="text-muted">
+            <small>
+              <%= micropost.user.name %> at <%= (micropost.created_at).strftime('%H:%M %d.%m.%y') %>
+            </small>
+          </span><br>
+          <%= micropost.content %>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>

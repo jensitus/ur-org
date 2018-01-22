@@ -10,7 +10,7 @@
         </span>
         <br>
         <span id="group_form">
-            <%= render 'shared/micropost_form' %>
+            <%= render 'shared/group_chat_form' %>
         </span>
         <span class="join_group">
             <%= render 'groups/unjoin' %>
@@ -20,13 +20,17 @@
         </span>
       </div>
       <div class="col-md-6">
+        <div id="infinite-scrolling">
+          <%#= paginate @microposts, :outer_window => 3 %>
+        </div>
         <span id="group_postings">
             <b><%= @group.name %></b><br>
             <ol class="microposts">
-                <%= render @microposts %>
+              <div id="group_posts" data-channel="new_group" data-group-id="<%= @group.id %>">
+                <%= render @group.microposts.reorder(id: :asc) %>
+              </div>
             </ol>
         </span>
-        <%= paginate @microposts %>
       </div>
     <% else %>
         <span class="join_group">
@@ -35,3 +39,11 @@
     <% end %>
     </div>
 </div>
+
+<style>
+  #group_posts {
+    max-height: 450px;
+    overflow-y: auto;
+  }
+
+</style>

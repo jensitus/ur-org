@@ -1,0 +1,7 @@
+$('#my-posts').append('<%= j render @microposts %>');
+<% if @microposts.next_page %>
+$('.pagination').replaceWith('<%= j paginate @microposts %>');
+<% else %>
+$(window).off('scroll');
+$('.pagination').remove();
+<% end %>

@@ -1,21 +1,29 @@
 <%= content_tag_for :li, micropost do %>
-    <span class="gravatar">
+  <span class="gravatar">
+    <% if micropost.group_id.nil? %>
       <% if micropost.user.avatar_url.nil? %>
         <%= link_to image_tag(micropost.user.gravatar_url, width: 50), single_user_path(micropost.user) %>
       <% else %>
         <%= link_to image_tag(micropost.user.avatar, width: 50), single_user_path(micropost.user) %>
       <% end %>
+    <% elsif !micropost.group_id.nil? %>
+      <% if micropost.user.avatar_url.nil? %>
+        <%= link_to image_tag(micropost.user.gravatar_url, width: 32, class: 'img-rounded'), single_user_path(micropost.user) %>
+      <% else %>
+        <%= link_to image_tag(micropost.user.avatar, width: 32, class: 'img-rounded'), single_user_path(micropost.user) %>
+      <% end %>
+    <% end %>
     </span>
-    <span class="user"><small><%= link_to micropost.user.name, single_user_path(micropost.user) %></small></span>
-    <span class="content">
+  <span class="user"><small><%= link_to micropost.user.name, single_user_path(micropost.user) %></small></span>
+  <span class="content">
       <%#= mention_link simple_format(auto_link(strip_tags(micropost.content))) %>
-      <span id="text-<%= micropost.id %>">
+    <span id="text-<%= micropost.id %>">
         <%= mention_link(micropost.content_html) %>
       </span>
-      <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
-      <%#= micropost.picture? %>
-      <%#= micropost.picture.url %>
-      <% if micropost.photos.count > 1 %>
+    <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
+    <%#= micropost.picture? %>
+    <%#= micropost.picture.url %>
+    <% if micropost.photos.count > 1 %>
 
           <div id="owl-demo-<%= micropost.id %>" class="owl-carousel">
 
@@ -30,7 +38,7 @@
             <% end %>
       <% end %>
 
-      <a id="pre_url-<%= micropost.id %>">
+    <a id="pre_url-<%= micropost.id %>">
         <div id="pre-box-<%= micropost.id %>">
           <div id="pre-title-<%= micropost.id %>"></div>
           <div id="pre-description-<%= micropost.id %>"></div>
@@ -40,13 +48,13 @@
 
     </span>
 
-
+  <% if micropost.group_id.nil? %>
     <span class="timestamp">
       <small>
         <%= (micropost.created_at).strftime('%H:%M %d.%m.%y') %> |
         <% if current_user == micropost.user %>
             <%= link_to 'edit', edit_micropost_path(micropost.id) %> |
-            <%= link_to 'delete', micropost, method: :delete, data: { confirm: 'you sure?' } %> |
+          <%= link_to 'delete', micropost, method: :delete, data: {confirm: 'you sure?'} %> |
 
         <% end %>
 
@@ -54,16 +62,19 @@
         <% if user_signed_in? %>
             <span id="like-<%= micropost.id %>">
                 <% if micropost.liked_by?(current_user) == true %>
-                    <%= render partial: 'microposts/unlike', locals: { m_id: micropost.id } %>
+                    <%= render partial: 'microposts/unlike', locals: {m_id: micropost.id} %>
                 <% else %>
-                    <%= render partial: 'microposts/like', locals: { m_id: micropost.id } %>
+                    <%= render partial: 'microposts/like', locals: {m_id: micropost.id} %>
                 <% end %>
             </span>
-
+        <% else %>
+          <span id="like-<%= micropost.id %>">
+            | org
+          </span>
         <% end %>
 
         <span id="likes_count-<%= micropost.id %>"> <!--onmouseover="like(<%#= micropost.id %>);" onmouseout="hideTheLikeBox(<%#= micropost.id %>);">-->
-            <%#= pluralize micropost.likers(User).count, 'like' %>
+          <%#= pluralize micropost.likers(User).count, 'like' %>
           <%= render 'likes/the_likers', micropost: micropost %>
         </span>
 
@@ -77,180 +88,198 @@
 
     </span>
 
-
-<!--</li>-->
+  <% end %>
+  <!--</li>-->
 <% end %>
 
 <style type="text/css">
 
   .pre-box {
-      padding: 10px;
-      border: 1px solid #000;
+    padding: 10px;
+    border: 1px solid #000;
   }
 
   .pre_url {
-      color: #333;
-      text-decoration: none;
+    color: #333;
+    text-decoration: none;
   }
+
   .pre_url:hover {
-      color: #444;
-      text-decoration: none;
+    color: #444;
+    text-decoration: none;
   }
 
-/*    #likeBox-<%#= micropost.id %> {
-        display: block;
-        width: 400px;
-        position: relative;
-        /!*right: 500px;*!/
-        background: #ffc;
-        margin-left: 80%;
-        border: 1px solid #a6e1ec;
-        border-radius: 5px;
-        opacity: 0.92;
-    }
+  /*    #likeBox-
 
-    #likeBox-<%#= micropost.id %> ul {
 
-        list-style: circle;
-        color: #000;
-        border: 0px;
-        padding-left: 10px;
-        padding-right: 10px;
-    }*/
 
-/*
- * the owl css
- *
- */
+  <%#= micropost.id %>
 
-    #owl-demo-<%= micropost.id %> .owl-item div{
-        padding:5px;
-    }
-    #owl-demo-<%= micropost.id %> .owl-item img{
-        display: block;
-        max-width: 100%;
-        height: auto;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
+
+
+         {
+                display: block;
+                width: 400px;
+                position: relative;
+                /!*right: 500px;*!/
+                background: #ffc;
+                margin-left: 80%;
+                border: 1px solid #a6e1ec;
+                border-radius: 5px;
+                opacity: 0.92;
+            }
+
+            #likeBox-
+
+
+
+  <%#= micropost.id %>
+
+
+
+         ul {
+
+                list-style: circle;
+                color: #000;
+                border: 0px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }*/
+
+  /*
+   * the owl css
+   *
+   */
+
+  #owl-demo-<%= micropost.id %> .owl-item div {
+    padding: 5px;
+  }
+
+  #owl-demo-<%= micropost.id %> .owl-item img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
 
 </style>
 
 <script>
 
-/*
- *  this is the extracted url
- *
- * */
+    /*
+     *  this is the extracted url
+     *
+     * */
 
-function get_the_fucking_link() {
-    if (document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0] == undefined) {
-        console.log('undefined + <%= micropost.id %>' )
-    } else {
-        var text = document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0].getAttribute('href');
-        var linkText = document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0].innerHTML;
-        if (linkText.includes("@")) {
-            console.log("ZUM DONNER ABER AUCH");
+    function get_the_fucking_link() {
+        if (document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0] == undefined) {
+            console.log('undefined + <%= micropost.id %>')
         } else {
-            console.log('nope');
-            get_the_result(text);
-        }
-        console.log(text);
-
-    }
-}
-
-function get_the_result(text) {
-    var result = $.ajax({
-        type: 'GET',
-        url: 'https://link-thumbnailer-api.herokuapp.com/thumbnails/new',
-        dataType: 'JSONP',
-        data: {
-            url: text,
-            options: {
-                image_stats: false,
-                image_limit: 3,
-                attributes: ['title', 'favicon', 'description', 'images'],
-                redirect_limit: 5,
-                description_min_length: 100
+            var text = document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0].getAttribute('href');
+            var linkText = document.getElementById('text-<%= micropost.id %>').getElementsByTagName('a')[0].innerHTML;
+            if (linkText.includes("@")) {
+                console.log("ZUM DONNER ABER AUCH");
+            } else {
+                console.log('nope');
+                get_the_result(text);
             }
-        }
-    });
-    console.log(result);
-    result.done(function(data){
-        console.log(data.url);
-        console.log(data.images);
-        console.log(data.description);
-        var image_tag = get_the_images(data.images);
-        console.log(image_tag);
-        var pre_box = document.getElementById('pre-box-<%= micropost.id %>');
-        pre_box.setAttribute('class', 'panel panel-default');
+            console.log(text);
 
-        var pre_description_div = document.createElement('div');
-        pre_description_div.setAttribute('class', 'panel-body');
-        pre_description_div.innerHTML = '<b>'
+        }
+    }
+
+    function get_the_result(text) {
+        var result = $.ajax({
+            type: 'GET',
+            url: 'https://link-thumbnailer-api.herokuapp.com/thumbnails/new',
+            dataType: 'JSONP',
+            data: {
+                url: text,
+                options: {
+                    image_stats: false,
+                    image_limit: 3,
+                    attributes: ['title', 'favicon', 'description', 'images'],
+                    redirect_limit: 5,
+                    description_min_length: 100
+                }
+            }
+        });
+        console.log(result);
+        result.done(function (data) {
+            console.log(data.url);
+            console.log(data.images);
+            console.log(data.description);
+            var image_tag = get_the_images(data.images);
+            console.log(image_tag);
+            var pre_box = document.getElementById('pre-box-<%= micropost.id %>');
+            pre_box.setAttribute('class', 'panel panel-default');
+
+            var pre_description_div = document.createElement('div');
+            pre_description_div.setAttribute('class', 'panel-body');
+            pre_description_div.innerHTML = '<b>'
                 + data.title
                 + '</b>'
                 + '<br>' + data.description
                 + '<br>' + '';
-        if (image_tag == undefined) {
+            if (image_tag == undefined) {
+                console.log(true);
+            } else {
+                console.log(false);
+                pre_description_div.appendChild(image_tag);
+            }
+            var pre_url_a = document.getElementById('pre_url-<%= micropost.id %>');
+            pre_url_a.setAttribute('href', data.url);
+            pre_url_a.setAttribute('class', 'pre_url');
+            //pre_description_div.appendChild(pre_url_a);
+            pre_box.appendChild(pre_description_div);
+        });
+
+    }
+
+    function get_the_images(images) {
+        console.log('get_the_images');
+        console.log(images[0].src);
+        if (images[0].src == 'http://derstandard.at/img/dot_clear.gif') {
             console.log(true);
         } else {
             console.log(false);
-            pre_description_div.appendChild(image_tag);
+            var pre_image_tag = document.createElement('img');
+            pre_image_tag.setAttribute('src', images[0].src);
+            pre_image_tag.setAttribute('class', 'img-rounded');
+            pre_image_tag.setAttribute('style', 'max-width: 100%');
         }
-        var pre_url_a = document.getElementById('pre_url-<%= micropost.id %>');
-        pre_url_a.setAttribute('href', data.url);
-        pre_url_a.setAttribute('class', 'pre_url');
-        //pre_description_div.appendChild(pre_url_a);
-        pre_box.appendChild(pre_description_div);
-    });
-
-}
-
-function get_the_images(images) {
-    console.log('get_the_images');
-    console.log(images[0].src);
-    if (images[0].src == 'http://derstandard.at/img/dot_clear.gif') {
-        console.log(true);
-    } else {
-        console.log(false);
-        var pre_image_tag = document.createElement('img');
-        pre_image_tag.setAttribute('src', images[0].src);
-        pre_image_tag.setAttribute('class', 'img-rounded');
-        pre_image_tag.setAttribute('style', 'max-width: 100%');
+        return pre_image_tag;
     }
-    return pre_image_tag;
-}
 
-window.onload = get_the_fucking_link();
+    window.onload = get_the_fucking_link();
 
-  /*
-   *
-   * the owl carousel
-   *
-   * */
+    /*
+     *
+     * the owl carousel
+     *
+     * */
 
-  $(document).ready(function() {
+    $(document).ready(function () {
 
-      $("#owl-demo-<%= micropost.id %>").owlCarousel({
-          autoPlay: 6000,
-          navigation : true, // Show next and prev buttons
-          slideSpeed : 300,
-          paginationSpeed : 400,
-          singleItem:true,
-          autoHeight: true
-          // "singleItem:true" is a shortcut for:
-          // items : 1,
-          // itemsDesktop : false,
-          // itemsDesktopSmall : false,
-          // itemsTablet: false,
-          // itemsMobile : false
+        $("#owl-demo-<%= micropost.id %>").owlCarousel({
+            autoPlay: 6000,
+            navigation: true, // Show next and prev buttons
+            slideSpeed: 300,
+            paginationSpeed: 400,
+            singleItem: true,
+            autoHeight: true
+            // "singleItem:true" is a shortcut for:
+            // items : 1,
+            // itemsDesktop : false,
+            // itemsDesktopSmall : false,
+            // itemsTablet: false,
+            // itemsMobile : false
 
-      });
+        });
 
-  });
+    });
 
 
 </script>
