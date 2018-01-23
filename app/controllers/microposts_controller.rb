@@ -61,7 +61,11 @@ class MicropostsController < ApplicationController
       @email_notification = EmailNotification.new
     end
     #fresh_when etag: [@comments, @micropost, current_user]
-    respond_with [micropost: @micropost, comment: @comments]
+    if @micropost.group_id.nil?
+      respond_with [micropost: @micropost, comment: @comments]
+    else
+      redirect_to :root
+    end
   end
 
   def edit
