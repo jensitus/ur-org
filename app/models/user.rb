@@ -123,7 +123,9 @@ class User < ApplicationRecord
   end
 
   def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
+    CustomDeviseMailer.send(notification, self, *args).deliver_now
+    # devise_mailer.send(notification, self, *args).deliver_later
+    # DeviseJobJob.set(wait: 10.seconds).perform_later(notification)
   end
 
   private
