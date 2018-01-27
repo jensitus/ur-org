@@ -122,6 +122,10 @@ class User < ApplicationRecord
     puts 'NO MAIL TODAY MY LOVE IS GONE AWAY ' + micropost_id.to_s
   end
 
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
+
   private
 
   def following_ids

@@ -21,6 +21,7 @@ class Mention < Socialization::ActiveRecordStores::Mention
       puts mentionable.inspect
       user = User.find_by_slug mentionable
       mentioner.mention! user
+      # Mention.inform_the_mentionable(user, mentioner)
       MentionMailJob.set(wait: 30.seconds).perform_later(user, mentioner)
       # inform_the_mentionable(user, mentioner)
     end
