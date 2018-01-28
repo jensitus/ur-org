@@ -127,7 +127,7 @@ class User < ApplicationRecord
     puts *args.inspect
     if notification.to_s.match 'reset_password_instructions'
       puts "yes, notification == :reset_password_instructions"
-      ResetPasswordInstructionsMailer.reset_password_instructions(self, *args).deliver_now
+      ResetInstructionsJob.set(wait: 10.seconds).perform_later(self, *args)
     else
       puts "no, it is not the same"
     end
