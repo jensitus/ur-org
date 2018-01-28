@@ -123,7 +123,15 @@ class User < ApplicationRecord
   end
 
   def send_devise_notification(notification, *args)
-    CustomDeviseMailer.send(notification, self, *args).deliver_now
+    puts notification.inspect
+    puts *args.inspect
+    if notification.to_s.match 'reset_password_instructions'
+      puts "yes, notification == :reset_password_instructions"
+      ResetPasswordInstructionsMailer.reset_password_instructions(self, *args).deliver_now
+    else
+      puts "no, it is not the same"
+    end
+    # CustomDeviseMailer.send(notification, self, *args).deliver_now
     # devise_mailer.send(notification, self, *args).deliver_later
     # DeviseJobJob.set(wait: 10.seconds).perform_later(notification)
   end
