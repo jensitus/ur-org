@@ -133,11 +133,13 @@ class User < ApplicationRecord
       logger.debug "notification == :invitation_instructions"
       logger.debug self
       InvitationInstructionJob.set(wait: 5.seconds).perform_later(self, *args)
+    elsif notification.to_s.match 'confirmation_instructions'
+      DeviseJob.set(wait: 5.seconds).perform_later(self, *args)
     end
     puts '* * * * * * * * send_devise_notification * ** * ** * ** *'
     # CustomDeviseMailer.send(notification, self, *args).deliver_now
     # devise_mailer.send(notification, self, *args).deliver_later
-    # DeviseJobJob.set(wait: 10.seconds).perform_later(notification)
+    # DeviseJob.set(wait: 10.seconds).perform_later(notification)
   end
 
   private

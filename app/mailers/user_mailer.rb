@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
 
   def notice_when_invitation_accepted(user)
     @user = user
-    mail to: 'jens@ist-ur.org', subject: @user.name + ' accepted'
+    mail to: 'jens@ist-ur.org', subject: @user.email + ' accepted'
   end
 
   def notice_when_user_destroyed(user)
