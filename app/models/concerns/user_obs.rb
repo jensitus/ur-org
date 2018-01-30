@@ -2,15 +2,18 @@ module UserObs
   extend ActiveSupport::Concern
 
   def obs_create_the_user
-    after_create(self)
+    what_user_action = 'create'
+    UserJob.set(wait: 5.seconds).perform_later(self, what_user_action)
   end
 
   def obs_update_the_user
-    after_update(self)
+    what_user_action = 'update'
+    UserJob.set(wait: 5.seconds).perform_later(self, what_user_action)
   end
 
   def obs_destroy_the_user
-    after_destroy(self)
+    what_user_action = 'destroy'
+    UserJob.set(wait: 5.seconds).perform_later(self, what_user_action)
   end
 
   def after_create(user)
