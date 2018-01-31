@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @microposts = @user.microposts.page(params[:page]).per(10)
+    @microposts = @user.microposts.where(group_id: nil).page(params[:page]).per(10)
     fresh_when :last_modified => @microposts.maximum(:updated_at)
   end
 
