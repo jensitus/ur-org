@@ -4,6 +4,7 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications ||= @mailbox.notifications.page(params[:page]).per(10)
+    @all_notifications_count ||= @mailbox.notifications(read: false).count
     # @galleries = current_user.photo_galleries
     #@latest_photo_comments = current_user.latest_photo_comments.limit(10)
     # @mailbox.notifications(read: false).each do |unread|
@@ -19,9 +20,11 @@ class NotificationsController < ApplicationController
   end
 
   def render_read
+    puts '+ + + + + + B R E A K I N G + + + + + + +'
     @mailbox.notifications(read: false).each do |unread|
       unread.mark_as_read current_user
     end
+    redirect_to root_url
   end
 
   private

@@ -6,7 +6,7 @@ module ObsRelationship
   end
 
   def after_create(relationship)
-    RelationshipMailer.relationship_mail(relationship).deliver_later
+    RelationshipJob.set(wait: 5.seconds).perform_later(relationship)
   end
 
 end

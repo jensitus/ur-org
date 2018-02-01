@@ -3,6 +3,11 @@
     <%= render 'shared/current_user_info' %>
   </div>
   <div class="col-md-6">
+
+    <% if @all_notifications_count != 0 %>
+      <%= link_to 'Mark all ' + @all_notifications_count.to_s + ' as read', notifications_render_read_path, remote: true, class: 'btn btn-info' %>
+    <% end %>
+
     <%= render 'notifications' %>
     <%= paginate @notifications %>
   </div>

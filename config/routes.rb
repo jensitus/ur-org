@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   get 'search/index'
 
   get 'notifications/index'
-  get 'notifications/:id' => 'notifications#show', as: 'notification'
   get 'notifications/render_read'
+  get 'notifications/:id' => 'notifications#show' # , as: 'notification'
 
   resources 'group_maintainers', only: [:create, :destroy]
   #get 'group_maintainers/create'

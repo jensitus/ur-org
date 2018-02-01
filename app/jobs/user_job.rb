@@ -5,7 +5,7 @@ class UserJob < ApplicationJob
    if what_user_action == 'create'
      after_create(user)
    elsif what_user_action == 'update'
-     after_update(user)
+     # after_update(user)
    elsif what_user_action == 'destroy'
      after_destroy(user)
    end
