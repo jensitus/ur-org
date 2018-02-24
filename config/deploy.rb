@@ -81,6 +81,19 @@ namespace :deploy do
   after  :finishing,    :restart
 end
 
+namespace :custom do
+  desc 'get custom appearance for everyone'
+  task :appearance do
+    on roles(:all) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'custom:appearance'
+        end
+      end
+    end
+  end
+end
+
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
@@ -104,3 +117,5 @@ end
 # after 'deploy:starting', 'sidekiq:quiet'
 # after 'deploy:reverted', 'sidekiq:restart'
 # after 'deploy:published', 'sidekiq:restart'
+
+after 'deploy:published', 'custom:appearance'

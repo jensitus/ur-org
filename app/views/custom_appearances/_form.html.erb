@@ -1,0 +1,32 @@
+<% b = '#fff' %>
+<% t = '#777' %>
+<% l = '#337ab7' %>
+<% if @hintergrund %>
+  <% b = @hintergrund.navbar unless @hintergrund.navbar.nil? %>
+  <% t = @hintergrund.navtext unless @hintergrund.navtext.nil? %>
+  <% l = @hintergrund.linkcolor unless @hintergrund.linkcolor.nil? %>
+<% end %>
+
+<%= form_tag custom_appearances_change_color_path, remote: true do %>
+  <%# :navbar %><br>
+  <%# text_field_tag :navbar, class: 'form-control' %>
+
+  <div class="form-group">
+    <label>Background-Color:</label>
+    <input type="color" name="hintergrund" value="<%= b %>" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Text-Color:</label>
+    <input type="color" name="navtext" value="<%= t %>" class="form-control">
+  </div>
+  <!--<div class="form-group">-->
+    <!--<label>Link-Color:</label>-->
+    <!--<input type="color" name="linkcolor" value="<%= l %>" class="form-control">-->
+  <!--</div>-->
+  <div class="form-group">
+
+    <%#= text_field_tag :blogroll, '', placeholder: 'http://', class: 'form-control' %>
+  </div>
+  <%= hidden_field_tag :user_id, user_id: current_user.id %>
+  <%= submit_tag :submit, class: 'btn btn-danger' %>
+<% end %>

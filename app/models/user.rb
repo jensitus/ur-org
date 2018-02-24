@@ -41,8 +41,11 @@ class User < ApplicationRecord
   has_many :group_memberships
   has_many :groups, through: :group_memberships
   has_many :group_maintainers
+  has_one :custom_appearance
 
   has_and_belongs_to_many :photo_galleries
+
+  accepts_nested_attributes_for :custom_appearance
 
   acts_as_messageable
   acts_as_mentionable
@@ -52,6 +55,8 @@ class User < ApplicationRecord
   after_create :obs_create_the_user
   after_update :obs_update_the_user
   before_destroy :obs_destroy_the_user
+  before_create :build_custom_appearance
+  after_update :show_what_happens_after_update
 
   def normalize_friendly_id(string)
     super.gsub('-', '_')
@@ -154,6 +159,14 @@ class User < ApplicationRecord
       org_ids << "select likeable_id from likes where liker_id = #{f_id}"
     end
     org_ids
+  end
+
+  def show_what_happens_after_update
+    puts '+  +  +  +  +  +  +  +  +  +  +  +  +  +'
+    puts self.inspect
+    puts '+  +  +  +  +  +  +  +  +  +  +  +  +  +'
+    # puts self.methods
+    puts '+  +  +  +  +  +  +  +  +  +  +  +  +  +'
   end
 
 end

@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  # get 'custom_appearances/index'
+  #
+  # get 'custom_appearances/edit'
+  #
+  # get 'custom_appearances/new'
+  #
+  # post 'custom_appearances/create'
+  #
+  # get 'custom_appearances/update'
+  #
+  # get 'custom_appearances/show'
+
   mount ActionCable.server => '/cable'
 
   resources :email_notifications, only: [:create, :update, :delete]
@@ -47,6 +59,8 @@ Rails.application.routes.draw do
                        :registrations => 'users/registrations',
                        :invitations => 'users/invitations'
                    }
+  resource :custom_appearance, only: [:show, :update]
+  post 'custom_appearances/change_color'
   # root 'public#index'
 
   authenticated :user do

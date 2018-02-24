@@ -1,29 +1,32 @@
-
 <% @search.each do |s| %>
-    <% if s.searchable_type == 'User' %>
-        <% u = User.find_by_name(s.content) %>
-        <div>
+  <% if s.searchable_type == 'User' %>
+    <% u = User.find_by_name(s.content) %>
+    <% if !u.nil? %>
+      <div>
         <%= link_to single_user_path(u.slug) do %>
-            <li class="list-group-item">
-                <% if u.avatar_url.nil? %>
-                    <%= image_tag u.gravatar_url, width: 30, class: 'img-rounded' %>
-                <% else %>
-                    <%= image_tag u.avatar.thumb, width: 30, class: 'img-rounded' %>
-                <% end %>
-                <%= u.name %><br>
-                <%#= s.searchable_type %>
-            </li>
+          <li class="list-group-item">
+            <% if u.avatar_url.nil? %>
+              <%= image_tag u.gravatar_url, width: 30, class: 'img-rounded' %>
+            <% else %>
+              <%= image_tag u.avatar.thumb, width: 30, class: 'img-rounded' %>
+            <% end %>
+            <%= u.name %><br>
+            <%#= s.searchable_type %>
+          </li>
         <% end %>
-        </div>
+      </div>
     <% end %>
-<%	 end %>
+  <% end %>
+<% end %>
 <% @search.each do |s| %>
-    <% if s.searchable_type == 'Micropost' %>
-        <% m = Micropost.find_by(id: s.searchable_id) %>
-        <% u = m.user %>
-        <div>
+  <% if s.searchable_type == 'Micropost' %>
+    <% m = Micropost.find_by(id: s.searchable_id) %>
+    <% u = m.user %>
+    <% if u.nil? %>
+    <% else %>
+      <div>
         <a href="/<%= u.slug %>/<%= s.searchable_id %>" style="text-decoration: none; color: #000;">
-            <li class="list-group-item">
+          <li class="list-group-item">
             <% Scalpel.cut(s.content).each do |scalpel| %>
 
               <%= '... ' + scalpel if scalpel.downcase.include?(@q.downcase) %>
@@ -33,8 +36,9 @@
             </small>
             <%#= s.searchable_id %>
             <%#= s.searchable_type %>
-            </li>
+          </li>
         </a>
-        </div>
+      </div>
     <% end %>
+  <% end %>
 <% end %>
