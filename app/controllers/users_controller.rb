@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @microposts = @user.microposts.where(group_id: nil).page(params[:page]).per(10)
+    @hintergrund = @user.custom_appearance
     fresh_when :last_modified => @microposts.maximum(:updated_at)
   end
 

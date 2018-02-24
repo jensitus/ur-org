@@ -8,12 +8,14 @@ module UserObs
 
   def obs_update_the_user
     what_user_action = 'update'
+    puts self.inspect
     # UserJob.set(wait: 5.seconds).perform_later(self, what_user_action)
   end
 
   def obs_destroy_the_user
     what_user_action = 'destroy'
-    UserJob.set(wait: 5.seconds).perform_later(self, what_user_action)
+    user = self
+    UserJob.set(wait: 5.seconds).perform_later(user.id, user.name, user.email, user.slug, what_user_action)
   end
 
   def after_create(user)

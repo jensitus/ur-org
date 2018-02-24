@@ -61,6 +61,7 @@ class MicropostsController < ApplicationController
       @email_notification = EmailNotification.new
     end
     #fresh_when etag: [@comments, @micropost, current_user]
+    @hintergrund = @micropost.user.custom_appearance
     if @micropost.group_id.nil?
       respond_with [micropost: @micropost, comment: @comments]
     else

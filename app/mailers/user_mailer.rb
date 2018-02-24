@@ -11,9 +11,12 @@ class UserMailer < ApplicationMailer
     mail to: 'jens@ist-ur.org', subject: @user.email + ' accepted'
   end
 
-  def notice_when_user_destroyed(user)
-    @user = user
-    mail to: 'jens@ist-ur.org', subject: @user.name + ' destroyed'
+  def notice_when_user_destroyed(id, name, email, slug)
+        @id = id
+        @name = name
+        @email = email
+        @slug = slug
+    mail to: 'jens@ist-ur.org', subject: @name + ' destroyed'
   end
 
 end

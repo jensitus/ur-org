@@ -1,4 +1,24 @@
-<div class="navbar navbar-default navbar-fixed-top" style="background: #fff; border-bottom: 1px solid #bbb;">
+<% if @hintergrund %>
+  <% b = @hintergrund.navbar %>
+  <% t = @hintergrund.navtext %>
+<% else %>
+  <% b = '#fff' %>
+  <% t = '#777' %>
+<% end %>
+<style>
+  .navbar-default {
+    background: <%= b %>;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+    color: <%= t %>;
+  }
+
+  .navbar-header .navbar-brand {
+    color: <%= t %>
+  }
+</style>
+<div class="navbar navbar-default navbar-fixed-top" style="border-bottom: 1px solid #bbb;">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -18,33 +38,34 @@
 
         <li>
           <%= link_to home_path, :title => 'home' do %>
-              <span style="font-size: 1.2em;" class="glyphicon glyphicon-home"></span>
+            <span style="font-size: 1.2em;" class="glyphicon glyphicon-home"></span>
           <% end %>
         </li>
         <% if user_signed_in? %>
 
-<!--            <li>
+          <!--            <li>
               <%= link_to messages_path, :title => 'messages' do %>
                 <span style="font-size: 1.2em;" class="glyphicon glyphicon-envelope"></span>
                 <% if current_user.mailbox.inbox({:read => false}).count != 0 %>
-                    <span class="badge"><%= current_user.mailbox.inbox({ :read => false }).count.to_s %></span>
+                    <span class="badge"><%= current_user.mailbox.inbox({:read => false}).count.to_s %></span>
                 <% end %>
               <% end %>
             </li>-->
-            <li>
-              <%= link_to notifications_index_path, :title => 'notifications' do %>
-                  <span style="font-size: 1.2em;" class="glyphicon glyphicon-bell"></span>
-                  <% if current_user.mailbox.notifications(:read => false ).count != 0 %>
-                    <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
-                  <% end %>
+          <li>
+            <%= link_to notifications_index_path, :title => 'notifications' do %>
+              <span style="font-size: 1.2em;" class="glyphicon glyphicon-bell"></span>
+              <% if current_user.mailbox.notifications(:read => false).count != 0 %>
+                <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
               <% end %>
-            </li>
-            <li><%= link_to current_user.name, edit_user_registration_path %></li>
-            <li><%= link_to 'logout', destroy_user_session_path, :method => :delete %> </li>
-            <li class="user_avatar"><%= render 'shared/avatar_nav' %></li>
+            <% end %>
+          </li>
+          <li><%= link_to current_user.name, edit_user_registration_path %></li>
+          <li><%= link_to 'appearance', custom_appearance_path %></li>
+          <li><%= link_to 'logout', destroy_user_session_path, :method => :delete %> </li>
+          <li class="user_avatar"><%= render 'shared/avatar_nav' %></li>
         <% else %>
-            <li><%= link_to 'login', new_user_session_path %></li>
-            <li><%= link_to 'register', new_user_registration_path %></li>
+          <li><%= link_to 'login', new_user_session_path %></li>
+          <li><%= link_to 'register', new_user_registration_path %></li>
         <% end %>
       </ul>
     </div>

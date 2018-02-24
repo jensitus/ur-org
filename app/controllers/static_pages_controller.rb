@@ -20,6 +20,7 @@ class StaticPagesController < ApplicationController
       @followers = current_user.followers.sample(3)
       # @galleries = current_user.photo_galleries
       fresh_when :etag => [@the_real_feed, current_user]
+      @hintergrund = current_user.custom_appearance
     else
       # if Rails.env.development?
       #   @static_page_image = Photo.find(60).picture
