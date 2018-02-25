@@ -1,7 +1,7 @@
 <section class="sidebar_kasten">
-<%= render 'shared/avatar_profile' %>
+  <%= render 'shared/avatar_profile' %>
 
-<h3><%= current_user.name %></h3>
+  <h3><%= current_user.name %></h3>
 
 </section>
 
@@ -9,31 +9,42 @@
   <%= link_to 'invite', new_user_invitation_path %> someone
 </section>
 
-<%#= link_to 'view my profile', current_user %>
-<b><%#= 'My Groups:' %></b><br>
+<% if @hintergrund.blogrolls.count > 0 %>
+  <section class="sidebar_kasten">
+    <b>Blogroll</b>
+    <% @hintergrund.blogrolls.each do |b| %>
+      <div>
+        <small>
+          <%= link_to b.url, b.url %>
+        </small>
+      </div>
+    <% end %>
+  </section>
+<% end %>
+<br>
 
 <% if !sidebar_activities(current_user).empty? %>
-    <section class="sidebar_kasten">
-      <b>Newsfeed</b>
-      <br>
-      <%= render 'shared/sidebar_activities', sidebar_activities: sidebar_activities(current_user) %>
+  <section class="sidebar_kasten">
+    <b>Newsfeed</b>
+    <br>
+    <%= render 'shared/sidebar_activities', sidebar_activities: sidebar_activities(current_user) %>
 
-      <%#latest_photo_comments(current_user).inspect %>
-      <%# latest_photo_comments(current_user).each do |latest_comment|%>
-          <%#= render 'public_activity/photo_comment/create', activity: latest_comment %>
-      <%# end %>
-    </section>
+    <%#latest_photo_comments(current_user).inspect %>
+    <%# latest_photo_comments(current_user).each do |latest_comment|%>
+    <%#= render 'public_activity/photo_comment/create', activity: latest_comment %>
+    <%# end %>
+  </section>
 <% end %>
 
 <% if !user_photo_galleries(current_user).empty? %>
-    <section class="sidebar_kasten">
-      <span class="glyphicon glyphicon-picture"></span>
-      My Galleries:<br>
-      <% user_photo_galleries(current_user).each do |gallery| %>
+  <section class="sidebar_kasten">
+    <span class="glyphicon glyphicon-picture"></span>
+    My Galleries:<br>
+    <% user_photo_galleries(current_user).each do |gallery| %>
 
-        <%= link_to gallery.title, photo_gallery_path(gallery) %><br>
-      <% end %>
-    </section>
+      <%= link_to gallery.title, photo_gallery_path(gallery) %><br>
+    <% end %>
+  </section>
 <% end %>
 
 <section class="sidebar_kasten">
@@ -41,7 +52,7 @@
     <span class="glyphicon glyphicon-envelope"></span>
     messages
     <% if current_user.mailbox.inbox({:read => false}).count != 0 %>
-        <span class="badge"><%= current_user.mailbox.inbox({ :read => false }).count.to_s %></span>
+      <span class="badge"><%= current_user.mailbox.inbox({:read => false}).count.to_s %></span>
     <% end %>
   </a>
 </section>
@@ -50,8 +61,8 @@
   <span class="glyphicon glyphicon-bell"></span>
   <%= link_to notifications_index_path, style: 'color: #000' do %>
     notifications
-    <% if current_user.mailbox.notifications(:read => false ).count != 0 %>
-        <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
+    <% if current_user.mailbox.notifications(:read => false).count != 0 %>
+      <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
     <% end %>
   <% end %>
 </section>
@@ -59,7 +70,7 @@
 <!--
 <section class="well well-sm">
   <%# current_user.groups.each do |my_group| %>
-      <%#= link_to my_group.name, group_path(my_group) %><br>
+<%#= link_to my_group.name, group_path(my_group) %><br>
   <%# end %>
 </section>
 -->
