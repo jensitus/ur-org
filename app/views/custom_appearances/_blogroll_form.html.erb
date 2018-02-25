@@ -1,0 +1,15 @@
+<%= form_tag custom_appearances_blogroll_path, remote: true do %>
+
+  <br>
+
+  <div class="form-group">
+    <label> url: </label>
+    <%= text_field_tag :url, '', placeholder: 'http://...', class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label>description:</label>
+    <%= text_area_tag :description, '', placeholder: 'This is my favourite ... ', rows: 1, class: 'form-control' %>
+  </div>
+  <%= hidden_field_tag :custom_appearance_id, @custom_appearance.id %>
+  <%= submit_tag :submit, class: 'btn btn-success' %>
+<% end %>

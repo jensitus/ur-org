@@ -8,8 +8,8 @@
 <% end %>
 
 <%= form_tag custom_appearances_change_color_path, remote: true do %>
-  <%# :navbar %><br>
-  <%# text_field_tag :navbar, class: 'form-control' %>
+
+  <br>
 
   <div class="form-group">
     <label>Background-Color:</label>
@@ -24,8 +24,6 @@
     <!--<input type="color" name="linkcolor" value="<%= l %>" class="form-control">-->
   <!--</div>-->
   <div class="form-group">
-
-    <%#= text_field_tag :blogroll, '', placeholder: 'http://', class: 'form-control' %>
   </div>
   <%= hidden_field_tag :user_id, user_id: current_user.id %>
   <%= submit_tag :submit, class: 'btn btn-danger' %>

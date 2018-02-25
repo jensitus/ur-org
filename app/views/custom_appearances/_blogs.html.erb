@@ -1,0 +1,17 @@
+<br>
+
+<label>Blogroll:</label>
+<% @blogrolls.each do |b| %>
+  <div class="row">
+    <div class="col-lg-10">
+      <%= form_tag custom_appearances_delete_blog_path, method: :delete, remote: true do %>
+        <%= hidden_field_tag :blogroll_id, b.id %>
+        <%= link_to b.url, b.url %>
+        <%= submit_tag :delete, class: 'btn btn-xs btn-link' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div id="blogr"></div>
+

@@ -61,6 +61,8 @@ Rails.application.routes.draw do
                    }
   resource :custom_appearance, only: [:show, :update]
   post 'custom_appearances/change_color'
+  post 'custom_appearances/blogroll'
+  delete 'custom_appearances/delete_blog'
   # root 'public#index'
 
   authenticated :user do
