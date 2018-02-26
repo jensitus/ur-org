@@ -514,6 +514,7 @@ DEPENDENCIES
   pg (~> 0.20.0)
   pg_search
   public_activity
+  public_suffix
   puma
   rails (= 5.1.4)
   rails-observers
