@@ -120,6 +120,8 @@ gem 'record_tag_helper'
 
 gem 'redis', '~> 3.2'
 
+gem 'public_suffix'
+
 # gem 'omniauth-twitter'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
