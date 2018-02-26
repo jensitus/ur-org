@@ -3,6 +3,7 @@ class MicropostsController < ApplicationController
   before_action :correct_user, only: :destroy
   before_action :set_micropost, only: [:edit, :new, :update, :destroy, :show]
   before_action :follow, only: :show
+  before_action :set_custom_appearance, only: [:show, :edit]
 
   def new
     #@micropost = Micropost.new
@@ -62,7 +63,7 @@ class MicropostsController < ApplicationController
       @email_notification = EmailNotification.new
     end
     #fresh_when etag: [@comments, @micropost, current_user]
-    @hintergrund = @micropost.user.custom_appearance
+
     if @micropost.group_id.nil?
       respond_with [micropost: @micropost, comment: @comments]
     else
@@ -141,10 +142,11 @@ class MicropostsController < ApplicationController
   end
 
   def render_posting(posting)
-    puts '-----------------------------------------'
-    puts posting.inspect
-    puts '_________________________________________'
     GroupsController.render partial: 'microposts/micropost', locals: {micropost: posting}
+  end
+
+  def set_custom_appearance
+    @hintergrund = @micropost.user.custom_appearance
   end
 
 end
