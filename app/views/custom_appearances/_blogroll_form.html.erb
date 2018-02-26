@@ -8,8 +8,8 @@
   </div>
   <div class="form-group">
     <label>description:</label>
-    <%= text_area_tag :description, '', placeholder: 'This is my favourite ... ', rows: 1, class: 'form-control' %>
+    <%= text_field_tag :description, '', placeholder: 'This is my favourite ... ', rows: 1, class: 'form-control' %>
   </div>
   <%= hidden_field_tag :custom_appearance_id, @custom_appearance.id %>
-  <%= submit_tag :submit, class: 'btn btn-success' %>
+  <%= submit_tag :bumm, class: 'btn btn-success' %>
 <% end %>
