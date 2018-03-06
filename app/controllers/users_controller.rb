@@ -11,6 +11,9 @@ class UsersController < ApplicationController
   def show
     # @microposts = @user.microposts.where(group_id: nil).page(params[:page]).per(10)
     if user_signed_in? && current_user == @user
+      @micropost = current_user.microposts.build
+      @photo = @micropost.photos.build
+      @placeholder = 'Compose your message to the world ...'
       the_real_feed = current_user.feed
       @feed = Kaminari.paginate_array(the_real_feed).page(params[:page]).per(13)
     else
