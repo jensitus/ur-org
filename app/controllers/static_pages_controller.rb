@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
 
   def home
     if user_signed_in?
+      redirect_to single_user_url(current_user)
       @micropost = current_user.microposts.build
       ########
       @photo = @micropost.photos.build

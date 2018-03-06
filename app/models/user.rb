@@ -42,6 +42,7 @@ class User < ApplicationRecord
   has_many :groups, through: :group_memberships
   has_many :group_maintainers
   has_one :custom_appearance
+  has_many :read_posts
 
   has_and_belongs_to_many :photo_galleries
 
@@ -51,12 +52,10 @@ class User < ApplicationRecord
   acts_as_mentionable
   acts_as_liker
 
-  #after_create :create_default_conversation
   after_create :obs_create_the_user
   after_update :obs_update_the_user
   before_destroy :obs_destroy_the_user
   before_create :build_custom_appearance
-  after_update :show_what_happens_after_update
 
   def normalize_friendly_id(string)
     super.gsub('-', '_')
@@ -64,6 +63,10 @@ class User < ApplicationRecord
 
   def feed
     (get_the_microposts + get_the_gallery_activities + get_the_org_posts).uniq.sort_by(&:created_at).reverse
+  end
+
+  def visitors_feed
+  (get_user_posts_for_visitors + get_gallery_for_visitors + get_org_posts_for_visitors).uniq.sort_by(&:created_at).reverse
   end
 
   def newsfeed
@@ -128,11 +131,7 @@ class User < ApplicationRecord
   end
 
   def send_devise_notification(notification, *args)
-    puts '* * * * * * * * send_devise_notification * ** * ** * ** *'
-    puts notification.inspect
-    puts *args.inspect
     if notification.to_s.match 'reset_password_instructions'
-      puts "yes, notification == :reset_password_instructions"
       ResetInstructionsJob.set(wait: 10.seconds).perform_later(self, *args)
     elsif notification.to_s.match 'invitation_instructions'
       logger.debug "notification == :invitation_instructions"
@@ -141,10 +140,6 @@ class User < ApplicationRecord
     elsif notification.to_s.match 'confirmation_instructions'
       DeviseJob.set(wait: 5.seconds).perform_later(self, *args)
     end
-    puts '* * * * * * * * send_devise_notification * ** * ** * ** *'
-    # CustomDeviseMailer.send(notification, self, *args).deliver_now
-    # devise_mailer.send(notification, self, *args).deliver_later
-    # DeviseJob.set(wait: 10.seconds).perform_later(notification)
   end
 
   private
@@ -161,12 +156,16 @@ class User < ApplicationRecord
     org_ids
   end
 
-  def show_what_happens_after_update
-    puts '+  +  +  +  +  +  +  +  +  +  +  +  +  +'
-    puts self.inspect
-    puts '+  +  +  +  +  +  +  +  +  +  +  +  +  +'
-    # puts self.methods
-    puts '+  +  +  +  +  +  +  +  +  +  +  +  +  +'
+  def get_org_posts_for_visitors
+    Micropost.find_by_sql(['select m.* from microposts m, likes l where m.id = likeable_id and liker_id = ?', id])
+  end
+
+  def get_user_posts_for_visitors
+    self.microposts.where(group_id: nil)
+  end
+
+  def get_gallery_for_visitors
+    PublicActivity::Activity.where("owner_id = :user_id", user_id: id, owner_type: 'User').where("trackable_type = 'Notice'")
   end
 
 end

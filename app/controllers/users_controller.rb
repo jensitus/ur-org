@@ -3,17 +3,28 @@ class UsersController < ApplicationController
   before_action :require_admin, only: :index
   before_action :get_user
   before_action :follow
-  # before_action :photo_galleries, except: :index
-  # before_action :latest_photo_comments, except: :index
 
   def index
     @users = User.where.not('id = ?', current_user.id).order('created_at DESC')
   end
 
   def show
-    @microposts = @user.microposts.where(group_id: nil).page(params[:page]).per(10)
+    # @microposts = @user.microposts.where(group_id: nil).page(params[:page]).per(10)
+    if user_signed_in? && current_user == @user
+      the_real_feed = current_user.feed
+      @feed = Kaminari.paginate_array(the_real_feed).page(params[:page]).per(13)
+    else
+      micro_array = @user.visitors_feed
+      @feed = Kaminari.paginate_array(micro_array).page(params[:page]).per(10)
+      @feed.each do |fi|
+        puts fi.inspect
+        puts fi.class
+        # puts fi.user.avatar_url
+        puts 'fi fi fi fi fi fi fi fi'
+      end
+    end
     @hintergrund = @user.custom_appearance
-    fresh_when :last_modified => @microposts.maximum(:updated_at)
+    # fresh_when :last_modified => @microposts.maximum(:updated_at)
   end
 
   def following
@@ -45,13 +56,5 @@ class UsersController < ApplicationController
     @followers = @user.followers.sample(3)
     @following = @user.following.sample(3)
   end
-
-  # def photo_galleries
-  #   @galleries = @user.photo_galleries
-  # end
-
-  # def latest_photo_comments
-  #   @latest_photo_comments = @user.latest_photo_comments.limit(10)
-  # end
 
 end

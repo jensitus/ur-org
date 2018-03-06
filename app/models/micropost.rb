@@ -18,6 +18,7 @@ class Micropost < ApplicationRecord
   accepts_nested_attributes_for :photos
 
   has_one :group
+  has_many :read_posts
 
   acts_as_mentioner
   acts_as_likeable
@@ -53,12 +54,13 @@ class Micropost < ApplicationRecord
       group.users.each do |gu|
         recipients << gu
       end
-      Mailboxer::Notification.notify_all(
-          recipients,
-          sender.name + ' schrieb in ' + group.name + ':',
-          content + "<br><a href='/groups/#{group_id}'>view</a>",
-          self
-      )
+      recipients.delete(sender)
+      puts group.inspect
+      puts sender.inspect
+      puts recipients.inspect
+      recipients.each do |r|
+        self.read_posts.create(micropost_id: self.id, user_id: r.id, read: false)
+      end
     end
   end
 

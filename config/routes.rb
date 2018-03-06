@@ -1,17 +1,5 @@
 Rails.application.routes.draw do
 
-  # get 'custom_appearances/index'
-  #
-  # get 'custom_appearances/edit'
-  #
-  # get 'custom_appearances/new'
-  #
-  # post 'custom_appearances/create'
-  #
-  # get 'custom_appearances/update'
-  #
-  # get 'custom_appearances/show'
-
   mount ActionCable.server => '/cable'
 
   resources :email_notifications, only: [:create, :update, :delete]
@@ -21,7 +9,7 @@ Rails.application.routes.draw do
   get 'notices/create'
 
 #  if Rails.env.development?
-    require 'sidekiq/web'
+  require 'sidekiq/web'
   authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
   end
@@ -36,8 +24,6 @@ Rails.application.routes.draw do
   get 'notifications/:id' => 'notifications#show' # , as: 'notification'
 
   resources 'group_maintainers', only: [:create, :destroy]
-  #get 'group_maintainers/create'
-  #get 'group_maintainers/destroy'
 
   resources :groups
 
@@ -50,33 +36,35 @@ Rails.application.routes.draw do
 
   get 'home' => 'static_pages#home'
 
-  root 'static_pages#home'
+  # root 'static_pages#home'
+  # root 'users#show'
   get 'about' => 'static_pages#about'
 
   get 'invitation_required' => 'static_pages#invitation_required'
 
   devise_for :users, :controllers => {
-                       :registrations => 'users/registrations',
-                       :invitations => 'users/invitations'
-                   }
+      :registrations => 'users/registrations',
+      :invitations => 'users/invitations'
+  }
   resource :custom_appearance, only: [:show, :update]
   post 'custom_appearances/change_color'
   post 'custom_appearances/blogroll'
   delete 'custom_appearances/delete_blog'
-  # root 'public#index'
+# root 'public#index'
 
   authenticated :user do
     # root 'users#index'
-    :root
+    # :root
+    root 'static_pages#home'
   end
 
   unauthenticated :user do
     devise_scope :user do
       # get '/' => 'devise/sessions#new'
-      :root
+      # :root
+      root 'static_pages#home'
     end
   end
-
 
   get '/messages' => redirect('/conversations')
   resources :messages do
@@ -98,12 +86,6 @@ Rails.application.routes.draw do
     end
   end
 
-  #get 'conversations/index' => 'conversations#index', as: 'conversations'
-  #get 'conversations/reply_form' => 'conversations#reply_form', :as => 'reply_form'
-  #get 'conversations/:id' => 'conversations#show', as: 'conversation'
-  #put 'conversations/:id' => 'conversations#reply'
-  #get 'conversations/new_release' => 'conversations#new_release', as: 'new_release'
-
   resources :users do
     member do
       get :following, :followers
@@ -120,7 +102,5 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   get '/:id' => 'users#show', as: 'single_user'
-
-
 
 end
