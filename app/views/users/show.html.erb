@@ -9,7 +9,11 @@
 
   </aside>
   <div class="col-md-6">
-
+    <% if user_signed_in? && current_user == @user %>
+      <section class="micropost_form">
+        <%= render 'shared/micropost_form' %>
+      </section>
+    <% end %>
     <%# if @user.microposts.any? %>
     <ol class="microposts">
       <%#= render @microposts %>
