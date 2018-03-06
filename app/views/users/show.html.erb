@@ -2,19 +2,30 @@
 <div class="row">
   <aside class="col-md-4">
     <% if @user == current_user %>
-        <%= render 'shared/sidebar' %>
+      <%= render 'shared/sidebar' %>
     <% else %>
-        <%= render 'shared/user_show_sidebar' %>
+      <%= render 'shared/user_show_sidebar' %>
     <% end %>
 
   </aside>
   <div class="col-md-6">
 
-    <% if @user.microposts.any? %>
-        <ol class="microposts">
-          <%= render @microposts %>
-        </ol>
-        <%= paginate @microposts %>
+    <%# if @user.microposts.any? %>
+    <ol class="microposts">
+      <%#= render @microposts %>
+    </ol>
+    <%#= paginate @microposts %>
+    <%# end %>
+    <% @feed.each do |feed_element| %>
+      <% if feed_element.class == Micropost %>
+        <section class="microposts">
+          <%= render 'microposts/micropost', micropost: feed_element %>
+        </section>
+      <% elsif feed_element.trackable_type != 'Micropost' %>
+        <section>
+          <%= render 'shared/activities', activity: feed_element %>
+        </section>
+      <% end %>
     <% end %>
   </div>
 </div>
