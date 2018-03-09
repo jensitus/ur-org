@@ -55,14 +55,10 @@ class Micropost < ApplicationRecord
         recipients << gu
       end
       recipients.delete(sender)
-      puts group.inspect
-      puts sender.inspect
-      puts recipients.inspect
       recipients.each do |r|
-        self.read_posts.create(micropost_id: self.id, user_id: r.id, read: false)
+        self.read_posts.create(micropost_id: self.id, user_id: r.id, read: false, group_id: group_id)
       end
     end
   end
-
 
 end

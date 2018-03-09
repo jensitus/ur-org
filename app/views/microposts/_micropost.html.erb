@@ -16,13 +16,12 @@
     </span>
   <span class="user"><small><%= link_to micropost.user.name, single_user_path(micropost.user) %></small></span>
   <span class="content">
-      <%#= mention_link simple_format(auto_link(strip_tags(micropost.content))) %>
+
     <span id="text-<%= micropost.id %>">
       <%= mention_link(micropost.content_html) %>
       </span>
     <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
-    <%#= micropost.picture? %>
-    <%#= micropost.picture.url %>
+
     <% if micropost.photos.count > 1 %>
 
           <div id="owl-demo-<%= micropost.id %>" class="owl-carousel">
