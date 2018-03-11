@@ -1,24 +1,5 @@
 <div class="row">
-  <div class="col-md-4">
-    <%#= render 'shared/single_post_avatar' %>
-    <!--<%# if user_signed_in? %>-->
-    <!--<%#= render 'shared/sidebar' %>-->
-    <!--<%# else %>-->
-    <!--<section class="sidebar_kasten">-->
-    <!--<%# if @micropost.user.avatar_url.nil? %>-->
-    <!--<%#= image_tag(@micropost.user.gravatar_url, width: 80, class: 'img-rounded') %>-->
-    <!--<%# else %>-->
-    <!--<%#= image_tag(@micropost.user.avatar, width: 80, class: 'img-rounded') %>-->
-    <!--<%# end %>-->
-    <!--</section>-->
-    <!--<section class="sidebar_kasten">-->
-    <!--<%#= render partial: 'microposts/stats', locals: { user: @micropost.user } %>-->
-    <!--</section>-->
-    <!--<%# end %>-->
-    <%= render 'shared/user_show_sidebar' %>
-  </div>
-
-  <div class="col-md-6">
+  <div class="col-md-6 col-md-push-4">
     <ol class="microposts">
       <%= render @micropost %>
     </ol>
@@ -45,6 +26,9 @@
           for leaving a <span class="glyphicon glyphicon-comment"></span> comment
         </ol>
     <% end %>
+  </div>
+  <div class="col-md-4 col-md-pull-6">
+    <%= render 'shared/user_show_sidebar' %>
   </div>
 </div>
 
