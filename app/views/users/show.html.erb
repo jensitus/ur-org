@@ -1,25 +1,11 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
-    <% if @user == current_user %>
-      <%= render 'shared/sidebar' %>
-    <% else %>
-      <%= render 'shared/user_show_sidebar' %>
-    <% end %>
-
-  </aside>
-  <div class="col-md-6">
+  <div class="col-md-6 col-md-push-4">
     <% if user_signed_in? && current_user == @user %>
       <section class="micropost_form">
         <%= render 'shared/micropost_form' %>
       </section>
     <% end %>
-    <%# if @user.microposts.any? %>
-    <ol class="microposts">
-      <%#= render @microposts %>
-    </ol>
-    <%#= paginate @microposts %>
-    <%# end %>
     <% @feed.each do |feed_element| %>
       <% if feed_element.class == Micropost %>
         <section class="microposts">
@@ -32,4 +18,12 @@
       <% end %>
     <% end %>
   </div>
+  <aside class="col-md-4 col-md-pull-6">
+    <% if @user == current_user %>
+      <%= render 'shared/sidebar' %>
+    <% else %>
+      <%= render 'shared/user_show_sidebar' %>
+    <% end %>
+
+  </aside>
 </div>
