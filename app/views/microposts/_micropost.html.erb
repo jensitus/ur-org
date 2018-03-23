@@ -218,8 +218,9 @@
             console.log(data.url);
             console.log(data.images);
             console.log(data.description);
-            var image_tag = get_the_images(data.images);
-            console.log(image_tag);
+            // var image_tag = get_the_images(data.images);
+            var image_tag;
+            // console.log(image_tag);
             var pre_box = document.getElementById('pre-box-<%= micropost.id %>');
             pre_box.setAttribute('class', 'panel panel-default');
 
@@ -234,7 +235,7 @@
                 console.log(true);
             } else {
                 console.log(false);
-                pre_description_div.appendChild(image_tag);
+                // pre_description_div.appendChild(image_tag);
             }
             var pre_url_a = document.getElementById('pre_url-<%= micropost.id %>');
             pre_url_a.setAttribute('href', data.url);
