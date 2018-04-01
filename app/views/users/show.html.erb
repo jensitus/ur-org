@@ -8,7 +8,7 @@
     <% end %>
     <% @feed.each do |feed_element| %>
       <% if feed_element.class == Micropost %>
-        <section class="microposts">
+        <section class="microposts h-entry">
           <%= render 'microposts/micropost', micropost: feed_element %>
         </section>
       <% elsif feed_element.trackable_type != 'Micropost' %>
