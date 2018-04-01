@@ -13,7 +13,7 @@
 
         <% @the_real_feed.each do |feed_element| %>
             <% if feed_element.class == Micropost %>
-              <section class="microposts">
+              <section class="microposts h-entry">
                 <%= render 'microposts/micropost', micropost: feed_element %>
               </section>
             <% elsif feed_element.trackable_type != 'Micropost' %>
@@ -41,7 +41,7 @@
     <div class="row">
       <div>
         <div class="col-md-6 col-md-push-4">
-          <ol class="microposts">
+          <ol class="microposts h-entry">
             <%= render @microposts %>
           </ol>
           <small>
