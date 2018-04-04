@@ -17,6 +17,7 @@
         </section>
       <% end %>
     <% end %>
+    <%= paginate @feed %>
   </div>
   <aside class="col-md-4 col-md-pull-6">
     <% if @user == current_user %>
