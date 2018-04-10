@@ -1,1 +1,13 @@
-<%= 'tja' %>
+<%= form_with(model: @group, url: {action: 'add_user_to_group'}, method: :post, remote: true) do |form| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= select_tag 'add_user', options_from_collection_for_select(@users, 'id', 'name'), id: 'add_user_select', class: "form-control", include_blank: true %>
+      <%= hidden_field_tag :group_id, @group.id %>
+    </div>
+    <div class="col-md-6">
+      <div class="actions">
+        <%= form.submit :add_user, class: 'btn btn-outline-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>

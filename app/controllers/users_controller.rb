@@ -19,12 +19,6 @@ class UsersController < ApplicationController
     else
       micro_array = @user.visitors_feed
       @feed = Kaminari.paginate_array(micro_array).page(params[:page]).per(10)
-      @feed.each do |fi|
-        puts fi.inspect
-        puts fi.class
-        # puts fi.user.avatar_url
-        puts 'fi fi fi fi fi fi fi fi'
-      end
     end
     @hintergrund = @user.custom_appearance
     # fresh_when :last_modified => @microposts.maximum(:updated_at)

@@ -4,18 +4,25 @@
     <%#= @group.maintainer?(@group.id, current_user) %>
     <%= @group.description %><br>
     <% if @group.membership?(@group, current_user) %>
-        <br>
-        <span>
-          <%#= @group.maintainer?(@group.id, current_user.id).inspect %>
+      <br>
+      <span>
+          <% if @group.maintainer(@group.id, current_user.id) == true %>
+            <%= render 'groups/add_members' %>
+          <% end %>
         </span>
-        <br>
-        <span id="group_form">
+      <br>
+
+      <span id="group_form">
             <%= render 'shared/group_chat_form' %>
         </span>
-        <span class="join_group">
+      <%= render 'groups/users' %>
+      <br>
+      <span id="new_user"></span>
+      <br>
+      <span class="join_group">
             <%= render 'groups/unjoin' %>
         </span>
-        <span id="member_count">
+      <span id="member_count">
             <%= pluralize @group.users.count, 'member' %>
         </span>
       </div>

@@ -31,7 +31,6 @@ class MicropostsController < ApplicationController
       end
       if !micropost_params[:group_id].nil?
         group_id = micropost_params[:group_id]
-        # GroupChatJob.perform_later(@micropost)
         ActionCable.server.broadcast "group_#{@micropost.group_id}_channel", message: render_posting(@micropost)
         respond_to do |format|
           format.js

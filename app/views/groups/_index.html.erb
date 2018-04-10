@@ -1,4 +1,4 @@
-<% @groups.each do |group| %>
+<% @user_groups.each do |group| %>
     <b><%= group.name %></b><br>
     <%= group.description %><br>
     <%= link_to 'details', group_path(group), class: 'btn btn-xs btn-success' %>
