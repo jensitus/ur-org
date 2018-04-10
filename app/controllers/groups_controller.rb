@@ -51,9 +51,8 @@ class GroupsController < ApplicationController
     begin
       GroupMembership.create!(group_id: group_id, user_id: user_id)
     rescue ActiveRecord::RecordNotUnique
-      flash[:success] = 'Oh no, this user is already a member of this group'
+      flash[:warning] = '<b>Yeah, this user is already a member of this group</b>'.html_safe
       logger.warn "Someone tried to add a user twice. We couldn't allow that behavior."
-      redirect_to request.referrer || root_url
     end
   end
 
