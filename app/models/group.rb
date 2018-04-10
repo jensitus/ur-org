@@ -11,9 +11,24 @@ class Group < ApplicationRecord
     group.users.include? current_user
   end
 
-  def maintainer?(group_id, current_user)
-    #s = 'select user_id from group_maintainers where group_id = :group_id and user_id = :user_id'
-    GroupMaintainer.where(group_id: :group_id,user_id: :user_id, group_id: group_id, user_id: current_user.id).first
+  def maintainer(group_id, current_user_id)
+    if GroupMaintainer.where(group_id: group_id, user_id: current_user_id).first.nil?
+      false
+    else
+      true
+    end
+  end
+
+  def public_groups
+
+  end
+
+  private
+
+  def get_public_groups
+    public = where(private: false)
+    userG = current_user.group
+
   end
 
 end

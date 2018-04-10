@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :groups
 
+  post 'groups/add_user_to_group'
+
   resources 'group_memberships', only: [:create, :destroy]
 
   resources 'likes', only: [:create, :destroy]
