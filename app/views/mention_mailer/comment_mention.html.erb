@@ -13,7 +13,7 @@
 
   </div>
   <div class="general">
-    <a href="<%= root_url %><%= @post_writer.slug %>/<%= @post.id %>"><%= root_url %><%= @post_writer.slug %>/<%= @post.id %></a>
+    <a href="<%= root_url %><%= @post.user.slug %>/<%= @post.id %>"><%= root_url %><%= @post.user.slug %>/<%= @post.id %></a>
   </div>
   <div class="general comment_body">
     <%= @mentioner.body %>
