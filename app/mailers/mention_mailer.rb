@@ -8,10 +8,6 @@ class MentionMailer < ApplicationMailer
   #
   def comment_mention(user, mentioner, post_writer, post)
     puts 'now we are in MentionMailer class * * * * * * ** * * * * * *'
-    puts user
-    puts user.email
-    puts post_writer.inspect
-    puts post
     @greeting = 'Hi'
     @mentioner = mentioner
     @user = user
@@ -28,14 +24,11 @@ class MentionMailer < ApplicationMailer
   def micropost_mention(user, mentioner) #(mention)
 
     puts ' ~ ~ ~ ~ ~ ~ ~  micropost_mention  ~ ~ ~ ~ ~ ~ ~ ~ ~'
-    puts user.inspect
-
 
     @mentioner = mentioner
     @user = user
     @greeting = 'Hi'
     @writer = mentioner.user
-
 
     mail to: user.email, :subject => 'hi ' + user.name + ', ' + @writer.name + ' mentioned you'
   end

@@ -19,7 +19,7 @@
 
     <span id="text-<%= micropost.id %>">
       <%= mention_link(micropost.content_html) %>
-      </span>
+    </span>
     <%= image_tag micropost.picture.url, class: 'uploaded_image' if micropost.picture? %>
 
     <% if micropost.photos.count > 1 %>
@@ -38,14 +38,13 @@
       <% end %>
 
     <a id="pre_url-<%= micropost.id %>">
-        <div id="pre-box-<%= micropost.id %>">
-          <div id="pre-title-<%= micropost.id %>"></div>
-          <div id="pre-description-<%= micropost.id %>"></div>
-        </div>
-      </a>
+      <div id="pre-box-<%= micropost.id %>">
+        <div id="pre-title-<%= micropost.id %>"></div>
+        <div id="pre-description-<%= micropost.id %>"></div>
+      </div>
+    </a>
 
-
-    </span>
+  </span>
 
   <% if micropost.group_id.nil? %>
     <span class="timestamp">
