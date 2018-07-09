@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :show, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :new, :create, :edit, :show, :update, :destroy]
   before_action :require_admin, only: [:index, :show, :edit, :update, :destroy]
 
   respond_to :html
