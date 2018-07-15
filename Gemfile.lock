@@ -431,6 +431,8 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    serviceworker-rails (0.5.5)
+      railties (>= 3.1)
     sidekiq (5.0.5)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -525,6 +527,7 @@ DEPENDENCIES
   sass-rails
   scalpel
   sdoc (~> 0.4.0)
+  serviceworker-rails
   sidekiq
   sinatra
   socialization!
