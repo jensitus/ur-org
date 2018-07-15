@@ -1,0 +1,27 @@
+<% icon_sizes = Rails.configuration.serviceworker.icon_sizes %>
+{
+  "name": "ist-ur.org",
+  "short_name": "ur org",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "<%= image_path('urorglogo-382x382.png') %>",
+      "sizes": "382x382",
+      "type": "image/png"
+    },
+    {
+      "src": "<%= image_path('urorglogo-72x72.png') %>",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "<%= image_path('urorglogo-96x96.png') %>",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "orientation": "portrait"
+}

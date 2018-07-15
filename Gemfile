@@ -41,6 +41,8 @@ gem 'sidekiq'
 
 gem 'sshkit-sudo'
 
+gem 'serviceworker-rails'
+
 group :development do
   gem 'byebug'
   gem 'capistrano-secrets-yml'
