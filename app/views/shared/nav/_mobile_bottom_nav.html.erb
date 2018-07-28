@@ -1,0 +1,23 @@
+<% if @hintergrund %>
+  <% b = @hintergrund.navbar %>
+  <% t = @hintergrund.navtext %>
+<% else %>
+  <% b = '#fff' %>
+  <% t = '#777' %>
+<% end %>
+<style>
+  .navbar-default {
+    background: <%= b %>;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+    color: <%= t %>;
+  }
+
+  .navbar-header .navbar-brand {
+    color: <%= t %>
+  }
+</style>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  
+</nav>

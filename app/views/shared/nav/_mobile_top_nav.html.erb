@@ -1,0 +1,28 @@
+<% if @hintergrund %>
+  <% b = @hintergrund.navbar %>
+  <% t = @hintergrund.navtext %>
+<% else %>
+  <% b = '#fff' %>
+  <% t = '#777' %>
+<% end %>
+<style>
+  .navbar-default {
+    background: <%= b %>;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+    color: <%= t %>;
+  }
+
+  .navbar-header .navbar-brand {
+    color: <%= t %>
+  }
+</style>
+
+<div class="navbar navbar-default navbar-fixed-top" style="border-bottom: 1px solid #bbb;">
+  <div class="container">
+    <div class="navbar-header">
+      <b><%= link_to 'ist - ur . org', root_path, class: 'navbar-brand' %></b>
+    </div>
+  </div>
+</div>

@@ -25,11 +25,6 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <style>
-    body {
-        /*margin-top: 100px;*/
-    }
-  </style>
 
 <link rel="manifest" href="/manifest.json" />
 <meta name="apple-mobile-web-app-capable" content="yes"></head>
@@ -37,6 +32,9 @@
 <div id="navigation_id">
   <%= render 'shared/nav' %>
 </div>
+<!--<div id="top-nav-mobile">
+  <%#= render :partial => 'shared/nav/mobile_top_nav' %>
+</div>-->
 <div class="container">
   <div class="row">
     <div class="unobtrusive-flash-container col-md-4"></div>
@@ -47,6 +45,10 @@
   <%= yield %>
 </div>
 
+<div id="bottom-nav">
+<%= render :partial => 'shared/nav/mobile_bottom_nav' %>
+</div>
+<div id="bottom-footer">
 <hr>
 
 <div class="container text-center">
@@ -88,7 +90,7 @@
     </div>
   </div>-->
 </div>
-
+</div>
 </body>
 
 </html>

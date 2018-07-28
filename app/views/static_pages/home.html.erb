@@ -1,61 +1,53 @@
 <%= render 'static_pages/rel_me' %>
 <% if user_signed_in? %>
-    <div class="row">
+  <div class="row">
 
-      <div class="col-md-6 col-md-push-4">
-        <section class="micropost_form">
-          <%= render 'shared/micropost_form' %>
-        </section>
-        <section class="activities microposts">
-          <%#= render 'shared/activities' %>
-        </section>
-        <%#= render 'shared/feed' %>
+    <div class="col-md-6 col-md-push-4">
+      <section class="micropost_form">
+        <%= render 'shared/micropost_form' %>
+      </section>
 
-        <% @the_real_feed.each do |feed_element| %>
-            <% if feed_element.class == Micropost %>
-              <section class="microposts">
-                <%= render 'microposts/micropost', micropost: feed_element %>
-              </section>
-            <% elsif feed_element.trackable_type != 'Micropost' %>
-              <section>
-                <%= render 'shared/activities', activity: feed_element %>
-              </section>
-            <% end %>
-
-
-            <% end %>
-        <small>
+      <% @the_real_feed.each do |feed_element| %>
+        <% if feed_element.class == Micropost %>
+          <section class="microposts">
+            <%= render 'microposts/micropost', micropost: feed_element %>
+          </section>
+        <% elsif feed_element.trackable_type != 'Micropost' %>
+          <section>
+            <%= render 'shared/activities', activity: feed_element %>
+          </section>
+        <% end %>
+      <% end %>
+      <small>
         <%= paginate @the_real_feed %>
-        </small>
-
-      </div>
-
-      <div class="col-md-4 col-md-pull-6">
-
-        <%= render 'shared/sidebar' %>
-      </div>
+      </small>
 
     </div>
+
+    <div class="col-md-4 col-md-pull-6 shared-sidebar">
+
+      <%= render 'shared/sidebar' %>
+    </div>
+
+  </div>
 <% else %>
-
-    <div class="row">
-      <div>
-        <div class="col-md-6 col-md-push-4">
-          <ol class="microposts h-entry">
-            <%= render @microposts %>
-          </ol>
-          <small>
-            <%= paginate @microposts %>
-          </small>
-        </div>
-          <div class="col-md-4 col-md-pull-6">
-              <p>
-                <%= render 'devise/sessions/new_session_static_home' %>
-              </p>
-
-          </div>
-       </div>
+  <div class="row">
+    <div>
+      <div class="col-md-6 col-md-push-4">
+        <ol class="microposts h-entry">
+          <%= render @microposts %>
+        </ol>
+        <small>
+          <%= paginate @microposts %>
+        </small>
+      </div>
+      <div class="col-md-4 col-md-pull-6">
+        <p>
+          <%= render 'devise/sessions/new_session_static_home' %>
+        </p>
+      </div>
     </div>
+  </div>
 
 
 <% end %>
@@ -63,15 +55,15 @@
 <style>
 
   .description {
-      font-size: 25px;
+    font-size: 25px;
   }
 
   .static_home_login {
-      color: #000;
+    color: #000;
   }
 
   .static_home_login a {
-      color: #05f;
+    color: #05f;
   }
 
 </style>
