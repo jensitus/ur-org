@@ -1,0 +1,48 @@
+@media screen and (min-width: 770px) {
+  #bottom-nav {
+    display: none;
+  }
+
+  #top-nav-mobile {
+    display: none;
+  }
+
+/*  #navigation_id {
+    display: block;
+  }*/
+
+  #bottom-footer {
+    display: block;
+  }
+
+  .shared-sidebar {
+    display: compact;
+  }
+}
+
+@media screen and (max-width: 770px) {
+
+  body {
+    padding-bottom: 70px;
+  }
+
+  #bottom-nav {
+    display: block;
+    }
+
+  #top-nav-mobile {
+    display: block;
+  }
+
+/*  #navigation_id {
+    display: none;
+  }*/
+
+  #bottom-footer {
+    display: none;
+  }
+
+  .shared-sidebar {
+    display: none;
+  }
+}

@@ -27,13 +27,19 @@ class UsersController < ApplicationController
   def following
     @title = 'I am connected with:'
     @users = @user.following.page(params[:page]).per(15)
+    @hintergrund = @user.custom_appearance
     render 'show_follow'
   end
 
   def followers
     @title = 'They connected me:'
     @users = @user.followers.page(params[:page]).per(15)
+    @hintergrund = @user.custom_appearance
     render 'show_follow'
+  end
+
+  def show_sidebar
+
   end
 
   private

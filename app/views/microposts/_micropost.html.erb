@@ -80,7 +80,9 @@
         <span id="the_likers_count-<%= micropost.id %>">
             <%#= render partial: 'likes/the_likers', locals: { micropost: micropost } %>
         </span>
-
+        <span class="copy_url_to_clipboard" data-clipboard-demo data-clipboard-action="copy" data-clipboard-text="<%= 'https://ist-ur.org' + user_post_path(slug: micropost.user.slug, id: micropost.id) %>">
+          | share
+        </span>
 
       </small>
 
@@ -113,29 +115,6 @@
 
 
 
-  <%#= micropost.id %>
-
-
-
-
-
-             {
-                    display: block;
-                    width: 400px;
-                    position: relative;
-                    /!*right: 500px;*!/
-                    background: #ffc;
-                    margin-left: 80%;
-                    border: 1px solid #a6e1ec;
-                    border-radius: 5px;
-                    opacity: 0.92;
-                }
-
-                #likeBox-
-
-
-
-
 
   <%#= micropost.id %>
 
@@ -143,14 +122,41 @@
 
 
 
-             ul {
 
-                    list-style: circle;
-                    color: #000;
-                    border: 0px;
-                    padding-left: 10px;
-                    padding-right: 10px;
-                }*/
+               {
+                      display: block;
+                      width: 400px;
+                      position: relative;
+                      /!*right: 500px;*!/
+                      background: #ffc;
+                      margin-left: 80%;
+                      border: 1px solid #a6e1ec;
+                      border-radius: 5px;
+                      opacity: 0.92;
+                  }
+
+                  #likeBox-
+
+
+
+
+
+
+  <%#= micropost.id %>
+
+
+
+
+
+
+               ul {
+
+                      list-style: circle;
+                      color: #000;
+                      border: 0px;
+                      padding-left: 10px;
+                      padding-right: 10px;
+                  }*/
 
   /*
    * the owl css
@@ -261,6 +267,8 @@
     }
 
     window.onload = get_the_fucking_link();
+
+    window.onload = startTheClipboard();
 
     /*
      *

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
+  get 'sidebar' => 'mobile_nav#show_sidebar', as: 'sidebar'
+  get 'stats' => 'mobile_nav#stats', as: 'stats'
+
   resources :email_notifications, only: [:create, :update, :delete]
 
   get 'notices/new'
