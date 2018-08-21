@@ -10,7 +10,7 @@
     background: <%= b %>;
   }
 
-  .navbar-default .navbar-nav > li > a {
+  .navbar-default .navbar-text .navbar-nav > li > a {
     color: <%= t %>;
   }
 
@@ -19,5 +19,32 @@
   }
 </style>
 <nav class="navbar navbar-default navbar-fixed-bottom">
-  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-3 text-center" style="margin-top: 10px">
+        <%= link_to home_path, :title => 'home' do %>
+          <div class="glyphicon glyphicon-home"></div>
+          <div>home</div>
+        <% end %>
+      </div>
+      <div class="col-xs-3 text-center" style="margin-top: 10px">
+        <%= link_to sidebar_path, :title => 'side' do %>
+          <div class="glyphicon glyphicon-record"></div>
+          <div>side</div>
+        <% end %>
+      </div>
+      <div class="col-xs-3 text-center" style="padding-top: 10px">
+        <%= link_to stats_path, :title => 'stats' do %>
+          <div style="font-size: 1.2em;" class="glyphicon glyphicon-adjust"></div>
+          <div>stats</div>
+        <% end %>
+      </div>
+      <div class="col-xs-3 text-center" style="padding-top: 10px">
+        <%= link_to about_path, :title => 'about' do %>
+          <div style="font-size: 1.2em;" class="glyphicon glyphicon-dashboard"></div>
+          <div>about</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </nav>

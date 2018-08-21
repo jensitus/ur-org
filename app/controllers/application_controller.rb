@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session #, if: Proc.new { |c| c.request.format == 'application/json' } #:exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :prepare_unobtrusive_flash
+  before_action :detect_device_variant
 
   respond_to :html, :json
 
@@ -38,6 +39,10 @@ class ApplicationController < ActionController::Base
     puts e.to_s
     flash[:danger] = 'muss das sein?'
     redirect_to request.referrer || root_url
+  end
+
+  def detect_device_variant
+    request.variant = :phone if browser.device.mobile?
   end
 
 end

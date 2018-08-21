@@ -7,8 +7,8 @@
 
 // jQuery
 
-$(document).ready(function() {
-    $("a").click(function() {
+$(document).ready(function () {
+    $("a").click(function () {
         link_host = this.href.split("/")[2];
         document_host = document.location.href.split("/")[2];
 
@@ -37,7 +37,7 @@ function checkform() {
     var f = document.getElementById('himmel').value;
     var can_submit = true;
     var whitespace = /\S/;
-    if (whitespace.test( f )) {
+    if (whitespace.test(f)) {
         can_submit = true;
     } else {
         can_submit = false;
@@ -52,17 +52,18 @@ function checkform() {
 */
 
 
-
-var counter = (function(){
+var counter = (function () {
     var private_counter = 0;
+
     function changeBy(val) {
         private_counter += val;
     }
+
     return {
-        increment: function() {
+        increment: function () {
             changeBy(1);
         },
-        value: function() {
+        value: function () {
             return private_counter
         }
     }
@@ -124,7 +125,7 @@ function blocks_count() {
     var blocks = new Array;
     var elements = document.getElementById('next_image').children;
 
-    for ( var i = 0; i < elements.length; i++) {
+    for (var i = 0; i < elements.length; i++) {
 //                console.log('e: ' + elements[i].tagName);
         if (elements[i].tagName == 'INPUT') {
             var e = elements[i],
@@ -149,8 +150,8 @@ function handleFileSelect(evt) {
             continue;
         }
         var reader = new FileReader();
-        reader.onload = (function(theFile) {
-            return function(e) {
+        reader.onload = (function (theFile) {
+            return function (e) {
 
                 var image_size;
                 if (theFile.size > 1000) {
@@ -181,7 +182,7 @@ function handleFileSelect(evt) {
                 size_title.style.margin = '15px';
                 vorschau.id = 'preview_image-' + id_counter;
                 vorschau.addEventListener('load', theFileInput, false);
-                var the_vorschau_span =  document.createElement('div'); //create_vorschau_span(id_counter);
+                var the_vorschau_span = document.createElement('div'); //create_vorschau_span(id_counter);
                 var delete_x = delete_the_image_button(id_counter);
 
                 var preview_table = document.getElementById('preview_table');
@@ -195,7 +196,7 @@ function handleFileSelect(evt) {
                 var delete_the_row = document.getElementById('preview_row-' + id_counter);
                 delete_x.addEventListener(
                     'click',
-                    function() {
+                    function () {
                         delete_the_row.parentNode.removeChild(delete_the_row)
                     },
                     true
@@ -228,7 +229,7 @@ function delete_the_image_button(id_count) {
     image_delete_button.innerHTML = 'delete';
     image_delete_button.addEventListener(
         'click',
-        function(){
+        function () {
             del_this.parentNode.removeChild(del_this);
         });
     return image_delete_button;
@@ -254,25 +255,25 @@ function init() {
     //first_input_tag.addEventListener('change', theFileInput, false)
 }
 
-$('#micropost_picture').bind('change', function() {
-    size_in_megabytes = this.files[0].size/1024/1024;
+$('#micropost_picture').bind('change', function () {
+    size_in_megabytes = this.files[0].size / 1024 / 1024;
     if (size_in_megabytes > 5) {
         alert('it must be smaller than 5MB');
     }
 });
 
-$('#content_field').on('keyup', function(){
+$('#content_field').on('keyup', function () {
     length = $(this).val().length;
     $('#content_count').html(length);
 });
 
-$(document).one('focus.textarea', '.expandable', function() {
+$(document).one('focus.textarea', '.expandable', function () {
     var savedValue = this.value;
     this.value = '';
     this.baseScrollHeight = this.scrollHeight;
     this.value = savedValue;
-}).on('input.textarea', '.expandable', function() {
-    var minRows = this.getAttribute('data-min-rows')| 0, rows;
+}).on('input.textarea', '.expandable', function () {
+    var minRows = this.getAttribute('data-min-rows') | 0, rows;
     this.rows = minRows;
     console.log(this.scrollHeight, this.baseScrollHeight);
     rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 15);
@@ -284,7 +285,7 @@ function check_the_post_form() {
     var f = document.getElementById('content_field').value;
     var cansubmit = true;
     var non_whitespace = /\S/;
-    if (non_whitespace.test( f )) {
+    if (non_whitespace.test(f)) {
         cansubmit = true;
     } else {
         cansubmit = false;
@@ -307,7 +308,7 @@ function check_the_post_form() {
 
 //window.onload = check_the_post_form();
 
-$(document).ready(function() {
+$(document).ready(function () {
     $("#content_field").click(function () {
         $("#collapseExample").collapse('show');
     });
@@ -345,13 +346,13 @@ function get_result(res) {
 
 function register_multiply_result() {
     var result = document.getElementById('register_multiplication').value;
-    console.log(result.substring(0,2));
-    var r = result.slice(2,15);
+    console.log(result.substring(0, 2));
+    var r = result.slice(2, 15);
     var r_sorted = r.split('').slice().sort();
     console.log(r_sorted);
     var jepp = false;
-    for (var i = 0; i < r_sorted.length -1; i++) {
-        if (r_sorted[i +1] == r_sorted[i]) {
+    for (var i = 0; i < r_sorted.length - 1; i++) {
+        if (r_sorted[i + 1] == r_sorted[i]) {
             jepp = true;
         }
     }
@@ -362,7 +363,7 @@ function register_multiply_result() {
     console.log(jepp);
     var submit_button = document.getElementById('register_submit').disabled;
     console.log(submit_button);
-    if (result.substring(0,2) == '42' && jepp == false && r_sorted.length == 11) {
+    if (result.substring(0, 2) == '42' && jepp == false && r_sorted.length == 11) {
         document.getElementById('register_submit').disabled = false;
     } else {
         document.getElementById('register_submit').disabled = true;
@@ -370,4 +371,27 @@ function register_multiply_result() {
     //var the_result = get_result();
     //console.log('the_result ********');
     //console.log(the_result);
+}
+
+/* * * * * * * * * * * *
+ * The Clipboard!!
+ * * * * * * * * * * * */
+
+function startTheClipboard() {
+
+    var clipboard = new ClipboardJS('.copy_url_to_clipboard');
+
+    clipboard.on('success', function (e) {
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+
+        e.clearSelection();
+    });
+
+    clipboard.on('error', function (e) {
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+    });
+
 }

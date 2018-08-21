@@ -36,3 +36,8 @@ body {
     direction: ltr;
     cursor: pointer;
 }
+
+.copy_url_to_clipboard {
+    cursor: pointer;
+    color: #337ab7;
+}

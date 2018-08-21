@@ -1,0 +1,5 @@
+<% if @user == current_user %>
+  <%= render 'shared/sidebar' %>
+<% else %>
+  <%= render 'shared/user_show_sidebar' %>
+<% end %>

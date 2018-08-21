@@ -1,0 +1,7 @@
+<span class="glyphicon glyphicon-bell"></span>
+<%= link_to notifications_index_path, style: 'color: #000' do %>
+  notifications
+  <% if current_user.mailbox.notifications(:read => false).count != 0 %>
+    <span class="badge"><%= current_user.mailbox.notifications(:read => false).count %></span>
+  <% end %>
+<% end %>

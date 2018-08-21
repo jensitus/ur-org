@@ -43,6 +43,8 @@ gem 'sshkit-sudo'
 
 gem 'serviceworker-rails'
 
+gem 'browser'
+
 group :development do
   gem 'byebug'
   gem 'capistrano-secrets-yml'
