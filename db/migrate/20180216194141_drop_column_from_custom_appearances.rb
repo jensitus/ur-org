@@ -1,4 +1,4 @@
-class DropColumnFromCustomAppearances < ActiveRecord::Migration[5.1]
+class DropColumnFromCustomAppearances < ActiveRecord::Migration[5.2]
   def change
     remove_column :custom_appearances, :blogroll
   end

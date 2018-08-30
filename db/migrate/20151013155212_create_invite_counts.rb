@@ -1,4 +1,4 @@
-class CreateInviteCounts < ActiveRecord::Migration
+class CreateInviteCounts < ActiveRecord::Migration[5.2]
   def change
     create_table :invite_counts do |t|
       t.integer :invite_id

@@ -1,4 +1,4 @@
-class CreateJoinTablePhotoGalleryUser < ActiveRecord::Migration
+class CreateJoinTablePhotoGalleryUser < ActiveRecord::Migration[5.2]
   def change
     create_join_table :photo_galleries, :users do |t|
       t.index [:photo_gallery_id, :user_id]

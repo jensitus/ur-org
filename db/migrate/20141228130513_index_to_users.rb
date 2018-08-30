@@ -1,4 +1,4 @@
-class IndexToUsers < ActiveRecord::Migration
+class IndexToUsers < ActiveRecord::Migration[5.2]
   def change
     add_index :users, :name, unique: true
   end

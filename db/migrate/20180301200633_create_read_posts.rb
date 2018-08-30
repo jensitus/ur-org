@@ -1,4 +1,4 @@
-class CreateReadPosts < ActiveRecord::Migration[5.1]
+class CreateReadPosts < ActiveRecord::Migration[5.2]
   def change
     create_table :read_posts do |t|
       t.integer :micropost_id

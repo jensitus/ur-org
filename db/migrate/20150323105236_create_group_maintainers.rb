@@ -1,4 +1,4 @@
-class CreateGroupMaintainers < ActiveRecord::Migration
+class CreateGroupMaintainers < ActiveRecord::Migration[5.2]
   def change
     create_table :group_maintainers do |t|
       t.integer :group_id

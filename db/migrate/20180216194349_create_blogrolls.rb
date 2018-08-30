@@ -1,4 +1,4 @@
-class CreateBlogrolls < ActiveRecord::Migration[5.1]
+class CreateBlogrolls < ActiveRecord::Migration[5.2]
   def change
     create_table :blogrolls do |t|
       t.string :url
