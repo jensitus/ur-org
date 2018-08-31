@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/seuros/capistrano-sidekiq.git
-  revision: b290994266e695f52b01c0a34db8086f35da476c
-  specs:
-    capistrano-sidekiq (1.0.2)
-      capistrano (>= 3.9.0)
-      sidekiq (>= 3.4)
-
-GIT
   remote: https://github.com/HackerPartie/socialization.git
   revision: 019bdb21b26af46c10022ae49b7f8cd27544b335
   specs:
@@ -89,6 +81,9 @@ GEM
     capistrano-secrets-yml (1.1.1)
       capistrano (~> 3.10)
       sshkit (~> 1.15)
+    capistrano-sidekiq (1.0.2)
+      capistrano (>= 3.9.0)
+      sidekiq (>= 3.4)
     capistrano3-puma (3.1.1)
       capistrano (~> 3.7)
       capistrano-bundler
@@ -491,7 +486,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capistrano-secrets-yml
-  capistrano-sidekiq!
+  capistrano-sidekiq
   capistrano3-puma
   carrierwave
   coffee-rails
