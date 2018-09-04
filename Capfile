@@ -11,11 +11,11 @@ require 'capistrano/rvm'
 require 'capistrano/puma'
 install_plugin Capistrano::Puma
 require 'capistrano/secrets_yml'
-require 'capistrano/sidekiq'
-require 'capistrano/sidekiq/monit'
 
 require 'capistrano/rails/migrations'
 require 'capistrano/rails/assets'
+require 'capistrano/sidekiq'
+require 'capistrano/sidekiq/monit'
 
 # Include default deployment tasks
 
