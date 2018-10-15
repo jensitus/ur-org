@@ -7,15 +7,14 @@ require 'capistrano/setup'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/rvm'
-# require 'capistrano/passenger'
+require 'capistrano/puma'
+install_plugin Capistrano::Puma
 require 'capistrano/secrets_yml'
-
 require 'capistrano/rails/migrations'
 require 'capistrano/rails/assets'
 require 'capistrano/sidekiq'
 require 'capistrano/sidekiq/monit'
-require 'capistrano/puma'
-install_plugin Capistrano::Puma
+
 
 # Include default deployment tasks
 
