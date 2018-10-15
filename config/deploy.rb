@@ -9,7 +9,7 @@ set :puma_workers,    0
 
 # Don't change these unless you know what you're doing
 set :pty,             false
-set :use_sudo,        false
+set :use_sudo,        true
 set :stage,           :production
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
@@ -99,23 +99,23 @@ end
 # kill -s SIGTERM pid   # Stop puma
 #
 # the sidekiq
-# namespace :sidekiq do
-#   task :quiet do
-#     on roles(:app) do
-#       # Horrible hack to get PID without having to use terrible PID files
-#       puts capture("kill -USR1 $(sudo initctl status workers | grep /running | awk '{print $NF}') || :")
-#       # puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
-#     end
-#   end
-#   task :restart do
-#     on roles(:app) do
-#       execute :sudo, :initctl, :restart, :workers
-#     end
-#   end
-# end
-#
-# after 'deploy:starting', 'sidekiq:quiet'
-# after 'deploy:reverted', 'sidekiq:restart'
-# after 'deploy:published', 'sidekiq:restart'
+namespace :sidekiq do
+  task :quiet do
+    on roles(:app) do
+      # Horrible hack to get PID without having to use terrible PID files
+      puts capture("kill -USR1 $(sudo initctl status workers | grep /running | awk '{print $NF}') || :")
+      # puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
+    end
+  end
+  task :restart do
+    on roles(:app) do
+      execute :sudo, :initctl, :restart, :workers
+    end
+  end
+end
+
+after 'deploy:starting', 'sidekiq:quiet'
+after 'deploy:reverted', 'sidekiq:restart'
+after 'deploy:published', 'sidekiq:restart'
 
 # after 'deploy:published', 'custom:appearance'
