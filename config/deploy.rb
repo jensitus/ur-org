@@ -109,7 +109,7 @@ namespace :sidekiq do
   end
   task :restart do
     on roles(:app) do
-      execute :sudo, :initctl, :restart, :workers
+      execute :initctl, :restart, :workers
     end
   end
 end
