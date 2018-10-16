@@ -23,6 +23,7 @@ set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 set :sidekiq_role, :web
+set :sidekiq_monit_use_sudo => true
 
 ## Defaults:
 # set :scm,           :git
