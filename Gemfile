@@ -34,7 +34,7 @@ gem 'capistrano-rvm'
 gem 'capistrano3-puma'
 
 # gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
-gem 'capistrano-sidekiq'
+# gem 'capistrano-sidekiq'
 
 gem 'mailboxer'
 
