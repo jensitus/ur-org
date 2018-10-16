@@ -81,6 +81,9 @@ GEM
     capistrano-secrets-yml (1.1.1)
       capistrano (~> 3.10)
       sshkit (~> 1.15)
+    capistrano-sidekiq (1.0.2)
+      capistrano (>= 3.9.0)
+      sidekiq (>= 3.4)
     capistrano3-puma (3.1.1)
       capistrano (~> 3.7)
       capistrano-bundler
@@ -483,6 +486,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capistrano-secrets-yml
+  capistrano-sidekiq
   capistrano3-puma
   carrierwave
   coffee-rails
