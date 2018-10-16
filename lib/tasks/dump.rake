@@ -16,6 +16,8 @@ namespace :db do
     config.store('dbname', dbname)
     config.store('username', username)
     config.store('password', password)
+    puts config['dbname']
+    puts config['username']
     config
   end
 
