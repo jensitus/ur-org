@@ -41,16 +41,18 @@
             <span style="font-size: 1.2em;" class="glyphicon glyphicon-home"></span>
           <% end %>
         </li>
+
         <% if user_signed_in? %>
 
-          <!--            <li>
-              <%= link_to messages_path, :title => 'messages' do %>
-                <span style="font-size: 1.2em;" class="glyphicon glyphicon-envelope"></span>
-                <% if current_user.mailbox.inbox({:read => false}).count != 0 %>
-                    <span class="badge"><%= current_user.mailbox.inbox({:read => false}).count.to_s %></span>
-                <% end %>
+          <li>
+            <%= link_to messages_path, :title => 'messages' do %>
+              <span style="font-size: 1.2em;" class="glyphicon glyphicon-envelope"></span>
+              <% if current_user.mailbox.inbox({:read => false}).count != 0 %>
+                <span class="badge"><%= current_user.mailbox.inbox({:read => false}).count.to_s %></span>
               <% end %>
-            </li>-->
+            <% end %>
+          </li>
+
           <li>
             <%= link_to notifications_index_path, :title => 'notifications' do %>
               <span style="font-size: 1.2em;" class="glyphicon glyphicon-bell"></span>
@@ -59,6 +61,7 @@
               <% end %>
             <% end %>
           </li>
+          
           <li><%= link_to current_user.name, edit_user_registration_path %></li>
           <li><%= link_to 'appearance', custom_appearance_path %></li>
           <li><%= link_to 'logout', destroy_user_session_path, :method => :delete %> </li>
