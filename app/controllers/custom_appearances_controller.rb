@@ -13,9 +13,6 @@ class CustomAppearancesController < ApplicationController
   end
 
   def change_color
-    puts params[:user_id]
-    puts params[:hintergrund]
-    puts params[:navtext]
     @custom_appearance.update(navbar: params[:hintergrund], navtext: params[:navtext], linkcolor: params[:linkcolor])
     @hintergrund = current_user.custom_appearance
     respond_to do |format|
@@ -24,9 +21,6 @@ class CustomAppearancesController < ApplicationController
   end
 
   def blogroll
-    puts params[:url]
-    puts params[:description]
-    puts params[:custom_appearance_id]
     url_str = params[:url]
     validdom = PublicSuffix.valid?(url_str.sub(/\Ahttps?\:\/\/(www.)?/, ''))
     puts validdom.inspect

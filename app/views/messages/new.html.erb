@@ -13,27 +13,58 @@
         <% end %><br>
         <%= @user.name %>
       </p>
-      <%= form_tag( { :controller => 'messages', :action => 'create' }, method: :post ) do %>
+
+      <%#= form_tag( { :controller => 'messages', :action => 'create' }, method: :post ) do %>
 
           <div>
-            <%= label_tag :subject %><br>
-            <%= text_field_tag :subject, nil, class: 'form-control' %>
+            <%#= label_tag :subject %><br>
+            <%#= text_field_tag :subject, nil, class: 'form-control' %>
           </div>
 
           <div>
-            <%= label :body, 'message text' %><br>
-            <%= text_area_tag :body, nil, class: 'form-control' %>
+            <%#= label :body, 'message text' %><br>
+            <%#= text_area_tag :body, nil, class: 'form-control' %>
           </div>
 
           <div>
-            <%= hidden_field_tag(:user, @user.id) %>
+            <%#= hidden_field_tag(:user, @user.id) %>
           </div>
 
           <div>
-            <%= submit_tag 'vamos!!', class: 'btn btn-primary' %>
+            <%#= submit_tag 'vamos!!', class: 'btn btn-primary' %>
           </div>
 
-      <% end %>
+      <%# end %>
     </section>
-  </div>
+
+  <%= form_tag messages_path, :method => :post , :class => "new_message" do %>
+    <% if @receipt and @receipt.errors.any? %>
+      <div class="error">
+        <h2>
+          <%= pluralize(@receipt.errors.count, "error") %> prohibited this message from being sent:
+        </h2>
+        <ul>
+          <% @receipt.errors.full_messages.each do |msg| %>
+            <li>
+              <%= msg %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%#= label_tag t('mailboxer.form.recipients') %>
+    <%#= label_tag t 'mailboxer.form.recipients' %>
+    <%#= hidden_field :_recipients, @recipient.try(:id), "data-path" => contacts_path(format: :json), "data-recipient-name" => @recipient.try(:name) %>
+    <%= label_tag 'recipients' %><br>
+    <%#= text_field :recipients, @recipients, class: 'form-control' %><br>
+    <%= label_tag 'subject' %><br> <%# = label_tag t('mailboxer.form.subject') %>
+    <%= text_field_tag :subject, nil, class: 'form-control' %><br>
+    <%= label_tag 'body' %> <%#= label_tag ('mailboxer.form.body') %><br>
+      <%= hidden_field_tag(:recipient, @user.id) %>
+    <div id="ck_editor" >
+      <%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :maxlength => 5000, class: 'form-control' %>
+    </div>
+    <%= submit_tag 'Gemma', :name => :send_message, :class => "btn pull-left" %>
+  <% end %>
+</div>
 </div>
