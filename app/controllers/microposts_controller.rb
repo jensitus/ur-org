@@ -86,9 +86,7 @@ class MicropostsController < ApplicationController
     if current_user == @micropost.user
       if @micropost.update(micropost_params)
         if params[:photos].nil?
-          puts '#################################'
-          puts 'yessssss the fucking edit'
-          puts '#################################'
+          # currently there is nothing to do
         else
           params[:photos]['picture'].each do |p|
             @photo = @micropost.photos.create!(:picture => p, :micropost_id => @micropost.id, :user_id => current_user.id)
