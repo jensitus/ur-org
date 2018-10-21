@@ -7,8 +7,10 @@ class ConversationsController < ApplicationController
   def create
     recipient_emails = conversation_params(:recipients).split(',')
     recipients = User.where(email: recipient_emails).all
+    puts 'CONVERSATION CREATED ' + recipient_emails.inspect
     conversation = current_user.
         send_message(recipients, *conversation_params(:body, :subject)).conversation
+    puts "CONVERSATION"
   end
 
   def index
@@ -23,6 +25,7 @@ class ConversationsController < ApplicationController
 
   def reply
     current_user.reply_to_conversation(conversation, params[:body])
+    puts "replay replay replay replay replay replay replay replay replay replay"
     redirect_to conversation_path(@conversation)
   end
 
