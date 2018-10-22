@@ -26,9 +26,6 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.build(comment_params)
-    puts '+++++++++++++++++++++++++++++++++++++++++'
-    puts @comment.inspect
-    puts '+++++++++++++++++++++++++++++++++++++++++'
     mentions = Mention.get_the_mention(@comment.body)
     if @comment.save
       if photo_or_answer_params[:photo_or_answer] == 'photo'
@@ -54,18 +51,9 @@ class CommentsController < ApplicationController
     #respond_to do |format|
       if current_user == @comment.user
         if @comment.update(comment_params)
-          puts
-          puts 'redirect_to'
-          puts
           redirect_to request.referer
-          #redirect_to user_post_path(slug: @comment.micropost.user.slug, id: @comment.micropost.id)
-          # respond_with @comment.micropost
-          #format.html { redirect_to @comment, notice: 'successfully' }
-          #format.json { render :show, status: :ok, location: @comment }
         else
           redirect_to root_path
-          #format.html { render :edit }
-          #format.json { render json: @comment.errors, status: :unprocessable_entity }
         end
       else
         redirect_to root_url

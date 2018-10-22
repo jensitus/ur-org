@@ -63,8 +63,7 @@ module Mailboxer
                                                        :created_at => message_timestamp,
                                                        :updated_at => message_timestamp
                                                    }).build
-        puts "CONVO !!!!!!!!!!!!!!!!!!!!"
-        puts convo.inspect
+
         message = Mailboxer::MessageBuilder.new({
                                                     :sender => self,
                                                     :conversation => convo,
@@ -75,8 +74,7 @@ module Mailboxer
                                                     :created_at => message_timestamp,
                                                     :updated_at => message_timestamp
                                                 }).build
-        puts "MESSAGE !!!!!!!!!!!!!!!!!!!!!"
-        puts message.inspect
+
         message.deliver false, sanitize_text
       end
 

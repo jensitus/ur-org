@@ -20,34 +20,15 @@ class MessagesController < ApplicationController
   def create
     @recipient = User.find(params[:recipient])
     puts " IS THIS REALLY THE ANSWER?"
-    current_user.send_message(@recipient, params[:body], params[:subject])
-    # ReadPost.create(entity_type: m.class, user_id: @recipient.id)
+    m = current_user.send_message(@recipient, params[:body], params[:subject])
+    puts "m m m m m m m m m m m m m m m m m m m m m"
+    puts m
+    puts m.inspect
+    c = m.conversation
+    puts c.inspect
+    ReadPost.create(entity_type: c.class, user_id: @recipient.id, read: false, entity_type_id: c.id)
     flash[:notice] = "message has been sent, isn't it great?"
     redirect_to :conversations
-  end
-
-  private
-
-  def send_message(recipients, msg_body, subject, sanitize_text = true, attachment = nil, message_timestamp = Time.now)
-    convo = Mailboxer::ConversationBuilder.new({
-                                                   :subject => subject,
-                                                   :created_at => message_timestamp,
-                                                   :updated_at => message_timestamp
-                                               }).build
-    puts "convo!"
-    puts convo
-    message = Mailboxer::MessageBuilder.new({
-                                                :sender => self,
-                                                :conversation => convo,
-                                                :recipients => recipients,
-                                                :body => msg_body,
-                                                :subject => subject,
-                                                :attachment => attachment,
-                                                :created_at => message_timestamp,
-                                                :updated_at => message_timestamp
-                                            }).build
-
-    message.deliver false, sanitize_text
   end
 
 end

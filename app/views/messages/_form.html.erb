@@ -1,6 +1,5 @@
 <%= form_tag reply_conversation_path(conversation), method: :post do %>
-
-    <%= text_area_tag :body, nil, col: 2, class: 'form-control', placeholder: 'type your response here', required: true %>
-
-    <%= submit_tag 'vamos!', class: 'btn btn-primary' %>
+  <%= text_area_tag :body, nil, col: 2, class: 'form-control', placeholder: 'type your response here', required: true %>
+  <%= hidden_field_tag :sender_id, current_user.id %>
+  <%= submit_tag 'vamos!', class: 'btn btn-primary' %>
 <% end %>

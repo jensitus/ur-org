@@ -26,6 +26,20 @@ class ConversationsController < ApplicationController
   def reply
     current_user.reply_to_conversation(conversation, params[:body])
     puts "replay replay replay replay replay replay replay replay replay replay"
+    puts conversation.inspect
+    puts 'partizipanten:'
+    puts conversation.participants.inspect
+    puts 'die params: '
+    puts params[:sender_id].inspect
+    participants_ids = []
+    conversation.participants.each do |participant|
+      if participant.id != params[:sender_id]
+        participants_ids.push(participant.id)
+      end
+    end
+    participants_ids.each do |p_id|
+      ReadPost.create(entity_type: conversation.class, user_id: p_id, read: false, entity_type_id: conversation.id)
+    end
     redirect_to conversation_path(@conversation)
   end
 
@@ -36,6 +50,7 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation ||= @mailbox.conversations.find(params[:id])
+    ReadPost.update_read_post_as_read(@conversation.id, current_user.id, @conversation.class)
     conversation.mark_as_read(current_user)
   end
 
