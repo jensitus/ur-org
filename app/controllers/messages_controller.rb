@@ -10,7 +10,6 @@ class MessagesController < ApplicationController
 
   def new
     @user = User.find(params[:user])
-    puts "THIS IS NEW GOD DAMN"
     @message = current_user.messages.new
     @followers = @user.followers.sample(3)
     @following = @user.following.sample(3)
@@ -19,14 +18,9 @@ class MessagesController < ApplicationController
 
   def create
     @recipient = User.find(params[:recipient])
-    puts " IS THIS REALLY THE ANSWER?"
     m = current_user.send_message(@recipient, params[:body], params[:subject])
-    puts "m m m m m m m m m m m m m m m m m m m m m"
-    puts m
-    puts m.inspect
     c = m.conversation
-    puts c.inspect
-    ReadPost.create(entity_type: c.class, user_id: @recipient.id, read: false, entity_type_id: c.id)
+    ReadPost.create(entity_type: c.class, user_id: @recipient.id, read: false, entity_type_id: c.id, user_notified: false)
     flash[:notice] = "message has been sent, isn't it great?"
     redirect_to :conversations
   end

@@ -7,10 +7,8 @@ class ConversationsController < ApplicationController
   def create
     recipient_emails = conversation_params(:recipients).split(',')
     recipients = User.where(email: recipient_emails).all
-    puts 'CONVERSATION CREATED ' + recipient_emails.inspect
     conversation = current_user.
         send_message(recipients, *conversation_params(:body, :subject)).conversation
-    puts "CONVERSATION"
   end
 
   def index
@@ -25,20 +23,15 @@ class ConversationsController < ApplicationController
 
   def reply
     current_user.reply_to_conversation(conversation, params[:body])
-    puts "replay replay replay replay replay replay replay replay replay replay"
-    puts conversation.inspect
-    puts 'partizipanten:'
-    puts conversation.participants.inspect
-    puts 'die params: '
-    puts params[:sender_id].inspect
     participants_ids = []
+    sender_id = params[:sender_id].to_i
     conversation.participants.each do |participant|
-      if participant.id != params[:sender_id]
+      if participant.id != sender_id
         participants_ids.push(participant.id)
       end
     end
     participants_ids.each do |p_id|
-      ReadPost.create(entity_type: conversation.class, user_id: p_id, read: false, entity_type_id: conversation.id)
+      ReadPost.create(entity_type: conversation.class, user_id: p_id, read: false, entity_type_id: conversation.id, user_notified: false)
     end
     redirect_to conversation_path(@conversation)
   end
