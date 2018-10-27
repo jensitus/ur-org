@@ -18,7 +18,9 @@ class MessagesController < ApplicationController
 
   def create
     @recipient = User.find(params[:recipient])
-    current_user.send_message(@recipient, params[:body], params[:subject])
+    m = current_user.send_message(@recipient, params[:body], params[:subject])
+    c = m.conversation
+    ReadPost.create(entity_type: c.class, user_id: @recipient.id, read: false, entity_type_id: c.id, user_notified: false)
     flash[:notice] = "message has been sent, isn't it great?"
     redirect_to :conversations
   end

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="general">
+    Hi, <%= @user.name %>,
+    <br><br>
+<!--    <a href="<%#= root_url %><%#= @writer.slug %>"><%#= @writer.name %></a>-->
+    you've got a new message in:<br>
+    <b><%= @conversation.subject %></b><br>
+    <a href="<%= conversation_url(@conversation) %>"><%= conversation_url(@conversation) %></a>
+  </div>
+  <div class="general comment_body">
+    <%#= @mentioner.content %>
+  </div>
+</div>
+
+
+<style>
+
+  .container {
+    max-width: 500px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin: 0px auto;
+  }
+
+  .general {
+    padding: 20px;
+    text-align: center;
+    line-height: 1.6em;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 1.0em;
+  }
+
+  a {
+    text-decoration: none;
+    color: #0055ff;
+  }
+
+  .comment_body {
+    background-color: #eee;
+    color: #333;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 1.3em;
+  }
+
+</style>

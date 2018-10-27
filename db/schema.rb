@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_10_055630) do
+ActiveRecord::Schema.define(version: 20181023192903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -297,12 +297,18 @@ ActiveRecord::Schema.define(version: 2018_04_10_055630) do
   end
 
   create_table "read_posts", force: :cascade do |t|
-    t.integer "micropost_id"
+    t.integer "entity_type_id"
     t.integer "user_id"
     t.boolean "read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "group_id"
+    t.string "entity_type"
+    t.boolean "user_notified"
+    t.index ["entity_type"], name: "index_read_posts_on_entity_type"
+    t.index ["entity_type_id"], name: "index_read_posts_on_entity_type_id"
+    t.index ["read"], name: "index_read_posts_on_read"
+    t.index ["user_id"], name: "index_read_posts_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|

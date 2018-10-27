@@ -27,11 +27,11 @@ class User < ApplicationRecord
   has_many :conversations, :foreign_key => :sender_id
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name: 'Relationship',
-                                  foreign_key: 'follower_id',
-                                  dependent: :destroy
+           foreign_key: 'follower_id',
+           dependent: :destroy
   has_many :passive_relationships, class_name: 'Relationship',
-                                   foreign_key: 'followed_id',
-                                   dependent: :destroy
+           foreign_key: 'followed_id',
+           dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
@@ -42,7 +42,7 @@ class User < ApplicationRecord
   has_many :groups, through: :group_memberships
   has_many :group_maintainers
   has_one :custom_appearance
-  has_many :read_posts
+  # has_many :read_posts
 
   has_and_belongs_to_many :photo_galleries
 
@@ -66,7 +66,7 @@ class User < ApplicationRecord
   end
 
   def visitors_feed
-  (get_user_posts_for_visitors + get_gallery_for_visitors + get_org_posts_for_visitors).uniq.sort_by(&:created_at).reverse
+    (get_user_posts_for_visitors + get_gallery_for_visitors + get_org_posts_for_visitors).uniq.sort_by(&:created_at).reverse
   end
 
   def newsfeed
@@ -119,11 +119,11 @@ class User < ApplicationRecord
   end
 
   def mailboxer_email(object)
-     if object.class == Mailboxer::Notification
-       nil
-     else
-       email
-     end
+    if object.class == Mailboxer::Notification
+      nil
+    else
+      email
+    end
   end
 
   def no_emails(micropost_id)
