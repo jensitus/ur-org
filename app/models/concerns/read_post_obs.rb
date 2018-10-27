@@ -8,7 +8,7 @@ module ReadPostObs
 
   def start_the_job(readpost)
     puts "START THE JOB"
-    ReadPostJob.set(wait: 5.seconds).perform_later(readpost)
+    ReadPostJob.set(wait: 30.seconds).perform_later(readpost)
   end
 
 end
