@@ -18,6 +18,7 @@ class MicropostsController < ApplicationController
 
   def create
     puts 'micropost_params'
+    logger.debug(" the posting is broadcasted to the channel")
     puts micropost_params[:group_id]
     @micropost = current_user.microposts.build(micropost_params)
     mentions = Mention.get_the_mention(@micropost.content)
