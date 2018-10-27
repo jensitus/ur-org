@@ -56,7 +56,7 @@ class Micropost < ApplicationRecord
       end
       recipients.delete(sender)
       recipients.each do |r|
-        self.read_posts.create(micropost_id: self.id, user_id: r.id, read: false, group_id: group_id)
+        ReadPost.create(entity_type_id: self.id, user_id: r.id, read: false, group_id: group_id, entity_type: self.class)
       end
     end
   end
