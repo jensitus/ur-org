@@ -15,7 +15,7 @@ App.conversations = App.cable.subscriptions.create("ConversationChannel", {
         return this.collection().append(this.renderMessage(data));
     },
     followCurrentMessage: function() {
-        let userId;
+        var userId;
         if (userId = this.collection().data('user-id')) {
             return this.perform('follow', {
                 user_id: userId
