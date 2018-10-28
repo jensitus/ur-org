@@ -22,6 +22,9 @@ class MessagesController < ApplicationController
     c = m.conversation
     ReadPost.create(entity_type: c.class, user_id: @recipient.id, read: false, entity_type_id: c.id, user_notified: false)
     flash[:notice] = "message has been sent, isn't it great?"
+    ActionCable.server.broadcast "conversation_#{@recipient.id}_messages",
+                                 text: "Donner Wetter",
+                                 conversation_id: c.id
     redirect_to :conversations
   end
 
