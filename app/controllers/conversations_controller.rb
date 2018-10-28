@@ -32,6 +32,9 @@ class ConversationsController < ApplicationController
     end
     participants_ids.each do |p_id|
       ReadPost.create(entity_type: conversation.class, user_id: p_id, read: false, entity_type_id: conversation.id, user_notified: false)
+      ActionCable.server.broadcast "conversation_#{p_id}_messages",
+                                   text: "Donner Wetter",
+                                   conversation_id: conversation.id
     end
     redirect_to conversation_path(@conversation)
   end
