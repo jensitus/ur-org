@@ -115,7 +115,7 @@ GEM
       devise (>= 4.6)
     dry-inflector (0.1.2)
     erubi (1.8.0)
-    excon (0.66.0)
+    excon (0.71.0)
     execjs (2.7.0)
     faker (2.4.0)
       i18n (~> 1.6.0)
